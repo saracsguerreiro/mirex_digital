@@ -28,10 +28,9 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
 
 /* ─── MAIN PORTAL ─── */
 .portal-main {
-  width: 1260px;
+  width: 1920px;
   display: flex; flex-direction: column;
   background: var(--surface);
-  border-right: 2px solid var(--line);
 }
 
 /* Institutional header */
@@ -107,7 +106,7 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
 /* Services */
 .services-section { padding: 22px 28px 18px; flex-shrink: 0; }
 .section-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px; }
-.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.services-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
 .service-card {
   background: var(--card); border: 1px solid var(--line); border-radius: 8px;
   padding: 18px 16px; text-align: center;
@@ -125,7 +124,7 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
 
 /* News */
 .news-section { padding: 18px 28px 16px; border-top: 1px solid var(--line); flex-shrink: 0; }
-.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.news-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
 .news-card {
   background: var(--card); border: 1px solid var(--line); border-radius: 8px;
   padding: 14px 16px; display: flex; gap: 12px;
@@ -279,14 +278,8 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 
     <!-- Institutional header -->
     <header class="inst-header">
-      <div class="emblem">
-        <svg width="18" height="18" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg>
-      </div>
-      <div>
-        <div class="header-sub">República de Angola · MIREX</div>
-        <div class="header-module">Portal do Cidadão</div>
-      </div>
-      <div class="lang-sel">
+      <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="36" style="display:block;flex-shrink:0">
+      <div class="lang-sel" style="margin-left:auto">
         <span class="lang-active">PT</span><span>·</span><span>EN</span><span>·</span><span>FR</span>
       </div>
     </header>
@@ -396,6 +389,22 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
           <div class="service-desc">Autenticação e reconhecimento</div>
           <div class="service-link">→ Saber mais</div>
         </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#16263D" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="service-name">Legalizações</div>
+          <div class="service-desc">Apostilha e reconhecimento</div>
+          <div class="service-link">→ Iniciar</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#16263D" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="service-name">Assistência</div>
+          <div class="service-desc">Apoio consular urgente</div>
+          <div class="service-link">→ Contactar</div>
+        </div>
       </div>
     </div>
 
@@ -423,6 +432,17 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
             <div class="news-cat">NOTA INFORMATIVA</div>
             <div class="news-title">Novo procedimento para renovação de passaporte em vigor a partir de Agosto</div>
             <div class="news-excerpt">A partir de 1 de Agosto de 2026, a renovação do passaporte pode ser iniciada integralmente online. Consulte os requisitos e os documentos necessários.</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-date-badge">
+            <span class="news-day">25</span>
+            <span class="news-mon">Jun</span>
+          </div>
+          <div>
+            <div class="news-cat">COMUNICADO</div>
+            <div class="news-title">Lançamento da plataforma MIREX Digital — novo portal de serviços consulares</div>
+            <div class="news-excerpt">A plataforma MIREX Digital entra em operação em todas as embaixadas e consulados. O acesso é feito pelo portal oficial em mirex.gov.ao.</div>
           </div>
         </div>
       </div>
@@ -498,100 +518,6 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
       <span class="footer-copy">MIREX Digital · Portal do Cidadão · Versão 1.0</span>
     </div>
 
-  </div>
-
-  <!-- ═══════════════════════════════════════ COMPARISON SIDE ═══ -->
-  <div class="compare-side">
-    <div class="compare-header">
-      <div class="compare-tag">
-        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1L7.2 4.5H11L8 6.6 9.2 10.1 6 8 2.8 10.1 4 6.6 1 4.5h3.8z" fill="currentColor"/></svg>
-        Padrão replicável · 50+ postos
-      </div>
-      <div class="compare-title">Um padrão, todos os postos</div>
-      <div class="compare-sub">O mesmo portal serve todas as 52 missões. Só o conteúdo é local.</div>
-    </div>
-
-    <!-- Mini Pequim portal -->
-    <div class="mini-portal">
-      <div class="mini-header">
-        <div class="mini-emblem">
-          <svg width="12" height="12" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg>
-        </div>
-        <div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.5)">República de Angola · MIREX</div>
-          <div class="mini-header-text">Portal do Cidadão</div>
-        </div>
-        <div style="margin-left:auto;font-size:8px;color:rgba(255,255,255,0.45)">中 · EN · PT</div>
-      </div>
-      <div class="mini-topbar">
-        <span class="mini-nav a">Serviços</span>
-        <span class="mini-nav">Vistos</span>
-        <span class="mini-nav">Notícias</span>
-        <span class="mini-nav">Contactos</span>
-      </div>
-      <div class="mini-post">Embaixada de Angola em Pequim · 朝阳区亮马桥路14号</div>
-      <div class="mini-hero">
-        <div>
-          <div style="font-size:7px;color:var(--gold-500);font-weight:600;letter-spacing:1px;margin-bottom:4px">PORTAL OFICIAL · SERVIÇOS CONSULARES</div>
-          <div class="mini-hero-text">Embaixada de Angola<br>em Pequim</div>
-        </div>
-        <div class="mini-hero-btn">Agendar atendimento</div>
-      </div>
-      <div class="mini-services">
-        <div class="mini-service">
-          <div class="mini-service-icon"><svg width="10" height="10" viewBox="0 0 14 14"><rect x="2" y="1" width="10" height="12" rx="1" stroke="#16263D" stroke-width="1.2"/><path d="M4 4.5h6M4 6.5h6" stroke="#16263D" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <div class="mini-service-name">Passaportes</div>
-        </div>
-        <div class="mini-service">
-          <div class="mini-service-icon"><svg width="10" height="10" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="1" stroke="#16263D" stroke-width="1.2"/><circle cx="7" cy="7" r="2.5" stroke="#16263D" stroke-width="1"/></svg></div>
-          <div class="mini-service-name">Vistos</div>
-        </div>
-        <div class="mini-service">
-          <div class="mini-service-icon"><svg width="10" height="10" viewBox="0 0 14 14"><circle cx="7" cy="5" r="2" stroke="#16263D" stroke-width="1.2"/><path d="M3 12c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#16263D" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-          <div class="mini-service-name">Reg. Civil</div>
-        </div>
-        <div class="mini-service">
-          <div class="mini-service-icon"><svg width="10" height="10" viewBox="0 0 14 14"><rect x="2" y="1" width="10" height="12" rx="1" stroke="#16263D" stroke-width="1.2"/><circle cx="7" cy="9" r="1" stroke="#16263D" stroke-width="1"/></svg></div>
-          <div class="mini-service-name">Procurações</div>
-        </div>
-      </div>
-      <div class="mini-news">
-        <div class="mini-news-item">
-          <div class="mini-news-date">03 Jul 2026 · AVISO</div>
-          <div class="mini-news-title">Encerramento por feriado nacional — 11 de Novembro</div>
-        </div>
-        <div class="mini-news-item">
-          <div class="mini-news-date">28 Jun 2026 · NOTA</div>
-          <div class="mini-news-title">Actualização de taxas consulares para 2026/2027</div>
-        </div>
-      </div>
-      <div class="mini-footer">
-        +86 10 6532 6968 · 朝阳区亮马桥路14号 · Seg–Sex 09h–16h (CST)
-      </div>
-    </div>
-
-    <!-- What's identical -->
-    <div>
-      <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px">O que é idêntico em todos os postos</div>
-      <div class="pattern-badges">
-        <div class="pattern-badge">
-          <div class="pattern-dot"></div>
-          <div class="pattern-text">Arquitectura de informação e navegação</div>
-        </div>
-        <div class="pattern-badge">
-          <div class="pattern-dot"></div>
-          <div class="pattern-text">Sistema de agendamento e gestão de filas</div>
-        </div>
-        <div class="pattern-badge">
-          <div class="pattern-dot"></div>
-          <div class="pattern-text">Identidade visual e componentes de interface</div>
-        </div>
-        <div class="pattern-badge">
-          <div class="pattern-dot"></div>
-          <div class="pattern-text">Suporte multilíngue (PT · EN · FR + local)</div>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
