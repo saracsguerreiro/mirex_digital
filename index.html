@@ -51,22 +51,22 @@ header {
 .page-title { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
 .page-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
 
-/* Priority section */
-.section-label {
-  font-size: 11px; font-weight: 700; color: var(--muted);
-  text-transform: uppercase; letter-spacing: 1px;
-  margin-bottom: 16px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; gap: 8px;
+/* Module section */
+.module-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px; padding-bottom: 14px;
+  border-bottom: 2px solid var(--line);
 }
-.p-badge {
+.module-num {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; border-radius: 50%;
-  font-size: 10px; font-weight: 700;
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  font-size: 14px; font-weight: 700;
 }
-.p0 { background: var(--navy-900); color: #fff; }
-.p1 { background: rgba(22,38,61,0.12); color: var(--navy-700); }
-.p2 { background: var(--line); color: var(--muted); }
+.m1 { background: var(--navy-900); color: var(--gold-500); }
+.m2 { background: var(--navy-700); color: #fff; }
+.m3 { background: #0D1825; color: #6adc96; }
+.module-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+.module-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
 /* Grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
@@ -176,30 +176,18 @@ footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; 
 </header>
 
 <div class="content">
-  <div class="page-title">Índice de Mockups</div>
-  <div class="page-sub">Clique numa tela para a abrir. Para ver a resolução de apresentação (1920×1080), use Ctrl+Shift+M no Chrome/Edge para activar o modo de dispositivo e definir a dimensão manualmente.</div>
+  <div class="page-title">Mockups MIREX Digital</div>
+  <div class="page-sub">Clique numa tela para a abrir em ecrã completo. A página adapta-se automaticamente ao tamanho do seu ecrã.</div>
 
-  <!-- P0 -->
-  <div class="section-label"><span class="p-badge p0">P0</span> Prioridade máxima · Apresentação principal</div>
+  <!-- MÓDULO 1 -->
+  <div class="module-header">
+    <span class="module-num m1">1</span>
+    <div>
+      <div class="module-title">Portal MIREX para o Cidadão</div>
+      <div class="module-sub">4 telas · Canais digitais de acesso público e serviços consulares para a diáspora</div>
+    </div>
+  </div>
   <div class="grid">
-
-    <a href="B1_dashboard_executivo.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B1">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="64" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="44" width="60" height="28" rx="2" stroke="white" stroke-width="1.5"/><rect x="76" y="44" width="36" height="28" rx="2" stroke="white" stroke-width="1.5"/><path d="M20 72 L30 58 L40 62 L50 48 L60 54" stroke="#D9A21B" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B1</div>
-        <div class="card-format">Desktop 16:9 ★</div>
-        <div class="open-btn">Abrir →</div>
-      </div>
-      <div class="card-body">
-        <div class="card-name">Dashboard Executivo do Ministro</div>
-        <div class="card-desc">Visão da rede inteira num ecrã: 4 KPIs, mapa mundial com 52 postos, gráfico de tendência de vistos e painel de alertas.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-gold">A tela mais importante</span>
-          <span class="card-tag tag-dark">Módulo: Visão da Rede</span>
-        </div>
-      </div>
-    </a>
 
     <a href="A1_portal_embaixada.html" class="card" target="_blank">
       <div class="card-thumb thumb-A1">
@@ -210,10 +198,10 @@ footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; 
         <div class="open-btn">Abrir →</div>
       </div>
       <div class="card-body">
-        <div class="card-name">Portal Público de Embaixada</div>
-        <div class="card-desc">Homepage da Embaixada em Lisboa com painel de comparação ao lado mostrando o mesmo padrão no posto de Pequim.</div>
+        <div class="card-name">Portal Público da Embaixada</div>
+        <div class="card-desc">Homepage da Embaixada em Lisboa com painel de comparação mostrando o mesmo padrão no posto de Pequim.</div>
         <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Portal do Cidadão</span>
+          <span class="card-tag tag-dark">Passaportes · Vistos · Registo Civil</span>
           <span class="card-tag tag-green">Padrão replicável</span>
         </div>
       </div>
@@ -229,10 +217,9 @@ footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; 
       </div>
       <div class="card-body">
         <div class="card-name">Agendamento com Assistente Virtual</div>
-        <div class="card-desc">Duas colunas: conversa com o assistente MIREX à esquerda, resumo da marcação com QR de senha à direita.</div>
+        <div class="card-desc">Assistente MIREX guia o cidadão pelo agendamento e valida documentos; confirmação com QR de senha.</div>
         <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Agendamento</span>
-          <span class="card-tag tag-dark">24/7 · Pré-validação</span>
+          <span class="card-tag tag-dark">24/7 · Pré-validação documental</span>
         </div>
       </div>
     </a>
@@ -242,99 +229,15 @@ footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; 
         <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="16" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="49" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="82" y="4" width="22" height="72" rx="4" stroke="#ef4444" stroke-width="1.5"/><rect x="20" y="20" width="14" height="6" rx="1" fill="white" opacity="0.2"/><rect x="20" y="30" width="14" height="6" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="53" y="20" width="14" height="20" rx="2" stroke="white" stroke-width="1" opacity="0.3"/><rect x="86" y="16" width="14" height="8" rx="2" fill="#ef4444" opacity="0.5"/></svg>
         <div class="thumb-overlay"></div>
         <div class="card-id">A3</div>
-        <div class="card-format">Mobile em molduras</div>
+        <div class="card-format">App Móvel · 3 ecrãs</div>
         <div class="open-btn">Abrir →</div>
       </div>
       <div class="card-body">
         <div class="card-name">App Móvel do Cidadão — 3 ecrãs</div>
-        <div class="card-desc">Início, registo de diáspora e alerta de crise (tema escuro). 3 smartphones genéricos lado a lado sobre fundo navy.</div>
+        <div class="card-desc">Início, registo de diáspora e alerta de crise em tema escuro. 3 smartphones lado a lado sobre fundo navy.</div>
         <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Portal do Cidadão</span>
-          <span class="card-tag tag-dark">Dados em Angola</span>
-        </div>
-      </div>
-    </a>
-
-  </div>
-
-  <!-- P1 -->
-  <div class="section-label"><span class="p-badge p1">P1</span> Prioridade alta · Fluxos operacionais</div>
-  <div class="grid">
-
-    <a href="B2_fila_processos.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B2">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><line x1="8" y1="20" x2="82" y2="20" stroke="white" stroke-width="1" opacity="0.4"/><line x1="8" y1="32" x2="82" y2="32" stroke="white" stroke-width="1" opacity="0.3"/><line x1="8" y1="44" x2="82" y2="44" stroke="white" stroke-width="1" opacity="0.3"/><rect x="50" y="26" width="24" height="4" rx="2" fill="#D9A21B" opacity="0.5"/><rect x="50" y="38" width="16" height="4" rx="2" fill="white" opacity="0.3"/><rect x="88" y="8" width="24" height="64" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B2</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
-      </div>
-      <div class="card-body">
-        <div class="card-name">Fila de Processos do Chefe de Posto</div>
-        <div class="card-desc">Tabela de processos com barras de SLA coloridas, filtros, e painel lateral com linha temporal de workflow completo.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Sistema Consular</span>
-          <span class="card-tag tag-dark">Adis Abeba</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="B3_expediente_diplomatico.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B3">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="36" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="12" y="16" width="28" height="6" rx="1" fill="white" opacity="0.2"/><rect x="12" y="26" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="12" y="34" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="50" y="8" width="62" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="55" y="14" width="52" height="4" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="55" y="24" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="31" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="38" width="52" height="3" rx="1" fill="white" opacity="0.1"/><rect x="55" y="62" width="52" height="4" rx="1" fill="rgba(46,125,79,0.5)"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B3</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
-      </div>
-      <div class="card-body">
-        <div class="card-name">Expediente Diplomático Cifrado</div>
-        <div class="card-desc">Lista de expedientes classificados (RESTRITO/CONFIDENCIAL) e viewer de documento com assinatura digital e trilha de auditoria.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Expediente</span>
-          <span class="card-tag tag-dark">Cifrado fim-a-fim</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="C1_painel_soc.html" class="card" target="_blank">
-      <div class="card-thumb thumb-C1">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><circle cx="60" cy="40" r="20" stroke="#22c55e" stroke-width="1" opacity="0.5"/><circle cx="60" cy="40" r="4" fill="#22c55e" opacity="0.8"/><circle cx="30" cy="25" r="3" fill="#22c55e" opacity="0.6"/><circle cx="90" cy="20" r="3" fill="#22c55e" opacity="0.6"/><circle cx="20" cy="55" r="3" fill="#f59e0b" opacity="0.8"/><circle cx="95" cy="55" r="3" fill="#ef4444" opacity="0.8"/><line x1="60" y1="40" x2="30" y2="25" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="90" y2="20" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="95" y2="55" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"/><rect x="8" y="60" width="50" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><rect x="64" y="60" width="48" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>
-        <div class="thumb-overlay" style="background:linear-gradient(135deg,rgba(6,13,20,0.7) 0%,transparent 60%)"></div>
-        <div class="card-id">C1</div>
-        <div class="card-format">Desktop · Tema escuro</div>
-        <div class="open-btn">Abrir →</div>
-      </div>
-      <div class="card-body">
-        <div class="card-name">Painel do SOC — Centro de Operações</div>
-        <div class="card-desc">Tema escuro. Topologia de rede 24/7, investigação de incidente de spear-phishing em curso, métricas de segurança e turno activo.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Centro de Operações</span>
-          <span class="card-tag tag-dark">Competência MIREX</span>
-        </div>
-      </div>
-    </a>
-
-  </div>
-
-  <!-- P2 -->
-  <div class="section-label"><span class="p-badge p2">P2</span> Prioridade complementar</div>
-  <div class="grid">
-
-    <a href="B4_mapa_corpo_diplomatico.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B4">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><circle cx="30" cy="35" r="5" fill="#2E7D4F" opacity="0.6"/><circle cx="55" cy="25" r="4" fill="#2E7D4F" opacity="0.6"/><circle cx="70" cy="40" r="6" fill="#2E7D4F" opacity="0.6"/><circle cx="45" cy="50" r="3" fill="#C77D0A" opacity="0.8"/><rect x="88" y="8" width="24" height="30" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="88" y="44" width="24" height="28" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><circle cx="100" cy="56" r="6" fill="white" opacity="0.1"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B4</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
-      </div>
-      <div class="card-body">
-        <div class="card-name">Mapa do Corpo Diplomático</div>
-        <div class="card-desc">Mapa mundial com efectivos por posto, 3 alertas de mandato a expirar em 90 dias e perfil detalhado de diplomata seleccionado.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Visão da Rede</span>
-          <span class="card-tag tag-dark">800+ efectivos</span>
+          <span class="card-tag tag-dark">iOS · Android</span>
+          <span class="card-tag tag-dark">Dados residem em Angola</span>
         </div>
       </div>
     </a>
@@ -349,10 +252,119 @@ footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; 
       </div>
       <div class="card-body">
         <div class="card-name">Verificação de Documento por QR</div>
-        <div class="card-desc">Mobile e desktop lado a lado. Resultado de verificação de certidão com cadeia criptográfica e nota para entidades autorizadas.</div>
+        <div class="card-desc">Mobile e desktop lado a lado. Autenticidade de certidão verificada com cadeia criptográfica e assinatura digital.</div>
         <div class="card-footer">
-          <span class="card-tag tag-dark">Módulo: Sistema Consular</span>
-          <span class="card-tag tag-green">Confiança verificável</span>
+          <span class="card-tag tag-green">Documento autêntico verificável</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="module-header">
+    <span class="module-num m2">2</span>
+    <div>
+      <div class="module-title">Backoffice</div>
+      <div class="module-sub">4 telas · Ferramentas de gestão interna para diplomatas e chefes de posto</div>
+    </div>
+  </div>
+  <div class="grid">
+
+    <a href="B1_dashboard_executivo.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B1">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="64" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="44" width="60" height="28" rx="2" stroke="white" stroke-width="1.5"/><rect x="76" y="44" width="36" height="28" rx="2" stroke="white" stroke-width="1.5"/><path d="M20 72 L30 58 L40 62 L50 48 L60 54" stroke="#D9A21B" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B1</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Dashboard Executivo do Ministro</div>
+        <div class="card-desc">Visão da rede inteira num ecrã: 4 KPIs, mapa mundial com 52 postos, gráfico de tendência e painel de alertas.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-gold">Tela principal da apresentação</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="B2_fila_processos.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B2">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><line x1="8" y1="20" x2="82" y2="20" stroke="white" stroke-width="1" opacity="0.4"/><line x1="8" y1="32" x2="82" y2="32" stroke="white" stroke-width="1" opacity="0.3"/><line x1="8" y1="44" x2="82" y2="44" stroke="white" stroke-width="1" opacity="0.3"/><rect x="50" y="26" width="24" height="4" rx="2" fill="#D9A21B" opacity="0.5"/><rect x="50" y="38" width="16" height="4" rx="2" fill="white" opacity="0.3"/><rect x="88" y="8" width="24" height="64" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B2</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Fila de Processos do Chefe de Posto</div>
+        <div class="card-desc">Tabela de processos com barras de SLA coloridas e painel lateral com linha temporal de workflow completo.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Sistema Consular · Adis Abeba</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="B3_expediente_diplomatico.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B3">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="36" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="12" y="16" width="28" height="6" rx="1" fill="white" opacity="0.2"/><rect x="12" y="26" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="12" y="34" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="50" y="8" width="62" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="55" y="14" width="52" height="4" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="55" y="24" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="31" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="38" width="52" height="3" rx="1" fill="white" opacity="0.1"/><rect x="55" y="62" width="52" height="4" rx="1" fill="rgba(46,125,79,0.5)"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B3</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Expediente Diplomático Cifrado</div>
+        <div class="card-desc">Lista de expedientes classificados (RESTRITO/CONFIDENCIAL) com viewer de documento, assinatura digital e trilha de auditoria.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Cifrado fim-a-fim</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="B4_mapa_corpo_diplomatico.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B4">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><circle cx="30" cy="35" r="5" fill="#2E7D4F" opacity="0.6"/><circle cx="55" cy="25" r="4" fill="#2E7D4F" opacity="0.6"/><circle cx="70" cy="40" r="6" fill="#2E7D4F" opacity="0.6"/><circle cx="45" cy="50" r="3" fill="#C77D0A" opacity="0.8"/><rect x="88" y="8" width="24" height="30" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="88" y="44" width="24" height="28" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><circle cx="100" cy="56" r="6" fill="white" opacity="0.1"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B4</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Mapa do Corpo Diplomático</div>
+        <div class="card-desc">Mapa mundial com efectivos por posto, alertas de mandato a expirar em 90 dias e perfil detalhado do diplomata seleccionado.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">800+ efectivos · 52 postos</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="module-header">
+    <span class="module-num m3">3</span>
+    <div>
+      <div class="module-title">Centro de Operações</div>
+      <div class="module-sub">1 tela · Monitorização de segurança e gestão de incidentes 24/7</div>
+    </div>
+  </div>
+  <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 340px));">
+
+    <a href="C1_painel_soc.html" class="card" target="_blank">
+      <div class="card-thumb thumb-C1">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><circle cx="60" cy="40" r="20" stroke="#22c55e" stroke-width="1" opacity="0.5"/><circle cx="60" cy="40" r="4" fill="#22c55e" opacity="0.8"/><circle cx="30" cy="25" r="3" fill="#22c55e" opacity="0.6"/><circle cx="90" cy="20" r="3" fill="#22c55e" opacity="0.6"/><circle cx="20" cy="55" r="3" fill="#f59e0b" opacity="0.8"/><circle cx="95" cy="55" r="3" fill="#ef4444" opacity="0.8"/><line x1="60" y1="40" x2="30" y2="25" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="90" y2="20" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="95" y2="55" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"/><rect x="8" y="60" width="50" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><rect x="64" y="60" width="48" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>
+        <div class="thumb-overlay" style="background:linear-gradient(135deg,rgba(6,13,20,0.7) 0%,transparent 60%)"></div>
+        <div class="card-id">C1</div>
+        <div class="card-format">Desktop · Tema escuro</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Painel SOC — Centro de Operações</div>
+        <div class="card-desc">Tema escuro. Topologia de rede 24/7, investigação de incidente de spear-phishing em curso, métricas de segurança e turno activo.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Retaguarda 24/7</span>
+          <span class="card-tag tag-dark">Competência MIREX</span>
         </div>
       </div>
     </a>
