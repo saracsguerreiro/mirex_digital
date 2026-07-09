@@ -28,13 +28,6 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
   align-items: center; justify-content: center; gap: 0;
   overflow: hidden; position: relative;
 }
-.page-hdr {
-  position: absolute; top: 0; left: 0; right: 0; height: 52px; z-index: 10;
-  background: rgba(22,38,61,0.72); backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  display: flex; align-items: center; padding: 0 40px;
-}
-
 /* Subtle background texture */
 .canvas::before {
   content: ''; position: absolute; inset: 0;
@@ -238,13 +231,9 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 <body><div id="_vp">
 <div class="canvas">
 
-  <!-- Logo header -->
-  <div class="page-hdr">
-    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="32" style="display:block">
-  </div>
-
   <!-- Scene header -->
   <div class="scene-header">
+    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="48" style="display:block;margin:0 auto 18px">
     <div class="scene-tag">
       <svg width="10" height="10" viewBox="0 0 12 12"><rect x="2" y="2" width="3" height="8" rx="1" fill="currentColor"/><rect x="7" y="2" width="3" height="8" rx="1" fill="currentColor"/></svg>
       Módulo App Móvel — 3 cenários
