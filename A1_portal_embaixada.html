@@ -107,32 +107,53 @@ body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(
 }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6adc96; flex-shrink: 0; }
 
-/* ── SERVICES STRIP ── */
-.services-strip {
-  background: var(--card); border-bottom: 1px solid var(--line);
-  flex-shrink: 0; padding: 28px 80px;
+/* ── CAROUSEL STRIP ── */
+.carousel-strip {
+  background: var(--navy); flex-shrink: 0; padding: 22px 0 18px;
+}
+.carousel-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 72px; margin-bottom: 16px;
 }
 .strip-label {
-  font-size: 11px; font-weight: 700; color: var(--muted);
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px;
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45);
+  letter-spacing: 1px; text-transform: uppercase;
 }
-.services-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
-.srv-card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px 18px; display: flex; flex-direction: column; gap: 10px;
-  transition: box-shadow .15s, border-color .15s; cursor: pointer;
+.car-arrows { display: flex; gap: 8px; }
+.car-arrow {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.70);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;
 }
-.srv-card:hover { box-shadow: 0 6px 20px rgba(22,38,61,0.09); border-color: rgba(22,38,61,0.18); }
-.srv-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: rgba(22,38,61,0.06); display: flex; align-items: center; justify-content: center;
+.carousel-track {
+  display: flex; gap: 14px; padding: 0 72px; overflow: hidden;
 }
-.srv-name { font-size: 14px; font-weight: 700; color: var(--ink); }
-.srv-desc { font-size: 12px; color: var(--muted); line-height: 1.4; flex: 1; }
-.srv-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 4px;
+.car-card {
+  flex-shrink: 0; width: 284px; border-radius: 16px; padding: 24px 26px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.10);
+  display: flex; flex-direction: column; gap: 12px; cursor: pointer;
+  transition: background .15s, border-color .15s;
 }
+.car-card.active {
+  background: var(--gold); border-color: transparent;
+}
+.car-ico {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center;
+}
+.car-card.active .car-ico { background: rgba(22,38,61,0.16); }
+.car-title { font-size: 18px; font-weight: 800; color: rgba(255,255,255,0.92); line-height: 1.2; }
+.car-card.active .car-title { color: var(--navy); }
+.car-sub { font-size: 12px; color: rgba(255,255,255,0.50); font-weight: 500; }
+.car-card.active .car-sub { color: rgba(22,38,61,0.65); }
+.car-cta {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: auto;
+  font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.55);
+}
+.car-card.active .car-cta { color: var(--navy); }
+.car-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+.car-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.20); }
+.car-dot.on { background: var(--gold); width: 20px; border-radius: 3px; }
 
 /* ── CONTENT ROW ── */
 .content-row {
@@ -265,53 +286,67 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
     </div>
   </div>
 
-  <!-- ── SERVICES STRIP ── -->
-  <div class="services-strip">
-    <div class="strip-label">Serviços disponíveis</div>
-    <div class="services-grid">
+  <!-- ── CAROUSEL STRIP ── -->
+  <div class="carousel-strip">
+    <div class="carousel-top">
+      <div class="strip-label">Serviços disponíveis</div>
+      <div class="car-arrows">
+        <div class="car-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="car-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="carousel-track">
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="var(--navy)" stroke-width="1.8"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="4" width="8" height="3" rx="0.5" stroke="var(--navy)" stroke-width="1.2"/></svg></div>
-        <div class="srv-name">Passaportes</div>
-        <div class="srv-desc">Emissão, renovação e 2.ª via de passaporte angolano</div>
-        <div class="srv-link">Agendar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card active">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="var(--navy)" stroke-width="1.8"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="car-title">Passaportes.</div>
+        <div class="car-sub">Emissão · Renovação · 2.ª via</div>
+        <div class="car-cta">Agendar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="var(--navy)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="var(--navy)" stroke-width="1.8"/><path d="M6 4V3M18 4V3" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="srv-name">Vistos</div>
-        <div class="srv-desc">Visto turístico, de trabalho, estudo e reagrupamento</div>
-        <div class="srv-link">Requerer <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/></svg></div>
+        <div class="car-title">Vistos.</div>
+        <div class="car-sub">Turístico · Trabalho · Estudo</div>
+        <div class="car-cta">Requerer <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--navy)" stroke-width="1.8"/><path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><path d="M8 3.5h8" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="srv-name">Registo Civil</div>
-        <div class="srv-desc">Nascimento, casamento e óbito de cidadãos angolanos</div>
-        <div class="srv-link">Solicitar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="car-title">Registo Civil.</div>
+        <div class="car-sub">Nascimento · Casamento · Óbito</div>
+        <div class="car-cta">Solicitar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="var(--navy)" stroke-width="1.8"/><circle cx="12" cy="15" r="2" stroke="var(--navy)" stroke-width="1.5"/><path d="M7 7h10M7 10.5h8" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="srv-name">Procurações</div>
-        <div class="srv-desc">Autenticação de documentos e reconhecimento notarial</div>
-        <div class="srv-link">Saber mais <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><circle cx="12" cy="15" r="2" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/><path d="M7 7h10M7 10.5h8" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="car-title">Procurações.</div>
+        <div class="car-sub">Autenticação · Reconhecimento</div>
+        <div class="car-cta">Saber mais <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--navy)" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="srv-name">Legalizações</div>
-        <div class="srv-desc">Apostilha, legalização e tradução de documentos</div>
-        <div class="srv-link">Iniciar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="car-title">Legalizações.</div>
+        <div class="car-sub">Apostilha · Tradução</div>
+        <div class="car-cta">Iniciar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
-      <div class="srv-card">
-        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="srv-name">Assistência Consular</div>
-        <div class="srv-desc">Apoio a cidadãos em situação de emergência</div>
-        <div class="srv-link">Contactar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="car-card" style="opacity:.6">
+        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="car-title">Assistência.</div>
+        <div class="car-sub">Apoio consular 24h</div>
+        <div class="car-cta">Contactar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
       </div>
 
+    </div>
+    <div class="car-dots">
+      <div class="car-dot on"></div>
+      <div class="car-dot"></div>
+      <div class="car-dot"></div>
+      <div class="car-dot"></div>
+      <div class="car-dot"></div>
+      <div class="car-dot"></div>
     </div>
   </div>
 
