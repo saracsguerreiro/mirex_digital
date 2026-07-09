@@ -2,506 +2,373 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>B4 · Mapa do Corpo Diplomático — MIREX Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>MIREX Digital · Mapa Corpo Diplomático</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
-  --navy-900: #16263D;
-  --navy-700: #23405F;
-  --surface: #F5F8FB;
-  --card: #FFFFFF;
-  --gold-500: #D9A21B;
-  --red-700: #B5121B;
-  --ink: #1A2433;
-  --muted: #5A6B80;
-  --line: #D7E1EC;
-  --verde: #2E7D4F;
-  --ambar: #C77D0A;
+  --bg1:#E8EBF5; --bg2:#EDF1FA; --bg3:#E2EBF8;
+  --glass:rgba(255,255,255,0.60); --glass-s:rgba(255,255,255,0.80);
+  --border:rgba(255,255,255,0.72); --line:rgba(100,120,180,0.13);
+  --shadow:0 8px 32px rgba(80,100,160,0.10); --shadow-s:0 2px 12px rgba(80,100,160,0.07);
+  --navy:#16263D; --gold:#D9A21B; --ink:#1C2B3A; --ink2:#334155;
+  --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
+  --sidebar:72px; --hdr:64px;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: #0d1117; }
-.canvas { width: 1920px; height: 1080px; background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);width:1920px;height:1080px;overflow:hidden;color:var(--ink)}
 
-/* HEADER */
-.inst-header { background: var(--navy-900); height: 56px; display: flex; align-items: center; padding: 0 32px; gap: 14px; flex-shrink: 0; }
-.emblem { width: 34px; height: 34px; border-radius: 50%; background: var(--gold-500); display: flex; align-items: center; justify-content: center; }
-.header-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
-.header-module { font-size: 17px; font-weight: 600; color: #fff; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
-.header-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
-
-/* TOOLBAR */
-.toolbar { background: var(--card); border-bottom: 1px solid var(--line); height: 48px; display: flex; align-items: center; padding: 0 28px; gap: 16px; flex-shrink: 0; }
-.toolbar-title { font-size: 15px; font-weight: 700; color: var(--ink); }
-.search-bar { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 12px; font-size: 13px; color: var(--muted); width: 240px; }
-.filter-group { display: flex; gap: 6px; margin-left: auto; }
-.filter-btn { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--line); color: var(--muted); background: var(--surface); }
-.filter-btn.active { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+/* SIDEBAR */
+.sb{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);background:var(--glass-s);backdrop-filter:blur(20px) saturate(1.4);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:20px 0;z-index:20;gap:6px}
+.sb-logo{width:42px;height:42px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:18px;flex-shrink:0}
+.ni{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s;cursor:pointer}
+.ni.on{background:rgba(22,38,61,0.09);color:var(--navy)}
+.ni svg{opacity:.65}.ni.on svg{opacity:1}
+.sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:6px}
 
 /* MAIN */
-.main-content { flex: 1; display: grid; grid-template-columns: 1fr 380px; overflow: hidden; gap: 0; }
+.main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
 
-/* MAP AREA */
-.map-area { display: flex; flex-direction: column; border-right: 1px solid var(--line); overflow: hidden; }
-.map-header { padding: 14px 24px; border-bottom: 1px solid var(--line); background: var(--card); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-.map-title { font-size: 14px; font-weight: 600; color: var(--ink); }
-.map-sub { font-size: 12px; color: var(--muted); }
-.map-stats { display: flex; gap: 20px; }
-.map-stat { text-align: center; }
-.map-stat-val { font-size: 20px; font-weight: 700; color: var(--ink); display: block; }
-.map-stat-label { font-size: 10px; color: var(--muted); }
-.map-wrapper { flex: 1; position: relative; overflow: hidden; }
+/* HEADER */
+.hdr{height:var(--hdr);background:var(--glass-s);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:20px;flex-shrink:0}
+.hdr-title{font-size:20px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.hdr-nav{display:flex;gap:3px;margin-left:24px}
+.nt{padding:7px 16px;border-radius:9px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
+.nt.on{background:var(--navy);color:#fff;font-weight:600}
+.hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.ib{width:36px;height:36px;border-radius:9px;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);position:relative;flex-shrink:0}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid #EDF1FA}
+.uchip{display:flex;align-items:center;gap:9px;background:var(--glass);border:1px solid var(--border);border-radius:11px;padding:5px 13px 5px 5px}
+.av{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
+.un{font-size:12px;font-weight:600;color:var(--ink)}
+.us{font-size:10px;color:var(--muted);margin-top:1px}
 
-/* Tooltip-like annotations */
-.map-annotation { position: absolute; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font-size: 10px; box-shadow: 0 2px 8px rgba(22,38,61,0.1); }
-.ann-post { font-weight: 700; color: var(--ink); margin-bottom: 1px; }
-.ann-count { color: var(--muted); }
-.ann-status { font-weight: 600; }
+/* CONTENT */
+.cnt{flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
 
-/* Map legend */
-.map-legend-bar { background: var(--card); border-top: 1px solid var(--line); padding: 10px 24px; display: flex; gap: 24px; align-items: center; flex-shrink: 0; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+/* KPI ROW */
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex-shrink:0}
+.kc{background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.kl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+.kv{font-size:32px;font-weight:700;color:var(--ink);margin:7px 0 3px;line-height:1}
+.kd{font-size:11px;font-weight:600}
 
-/* RIGHT PANEL */
-.right-panel { display: flex; flex-direction: column; overflow: hidden; background: var(--card); }
+/* GLASS CARD */
+.gc{background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.gh{padding:16px 20px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.gt{font-size:14px;font-weight:700;color:var(--ink)}
+.gs{font-size:10px;color:var(--muted);margin-top:2px}
+.gb{flex:1;overflow:hidden}
 
-/* Mandate alerts */
-.mandate-section { border-bottom: 1px solid var(--line); padding: 16px 20px; flex-shrink: 0; }
-.section-header { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-.mandate-item { padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
-.mandate-item:last-child { margin-bottom: 0; }
-.mandate-days { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 8px; flex-shrink: 0; }
-.mandate-days-num { font-size: 20px; font-weight: 700; line-height: 1; }
-.mandate-days-label { font-size: 9px; font-weight: 600; text-transform: uppercase; }
-.mandate-info { flex: 1; }
-.mandate-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-.mandate-post { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-.mandate-dates { font-size: 11px; color: var(--muted); }
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.cg{background:rgba(46,125,79,0.10);color:var(--verde)}
+.ca{background:rgba(199,125,10,0.10);color:var(--ambar)}
+.cr{background:rgba(181,18,27,0.10);color:var(--red)}
+.ci{background:rgba(217,162,27,0.10);color:#8a6500}
+.cn{background:rgba(100,116,139,0.10);color:var(--muted)}
 
-/* Diplomat profile */
-.profile-section { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
-.profile-header { padding: 16px 20px; border-bottom: 1px solid var(--line); flex-shrink: 0; display: flex; gap: 14px; align-items: flex-start; }
-.profile-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--navy-900); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.85); flex-shrink: 0; }
-.profile-name { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
-.profile-title { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-.profile-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-.badge-verde { background: rgba(46,125,79,0.1); color: var(--verde); }
-.badge-ambar { background: rgba(199,125,10,0.1); color: var(--ambar); }
-.badge-navy { background: rgba(22,38,61,0.08); color: var(--navy-700); }
-.badge-gold { background: rgba(217,162,27,0.12); color: #8a6800; }
+/* LEGEND */
+.leg{display:flex;align-items:center;gap:5px}
+.ld{width:7px;height:7px;border-radius:50%}
+.ll{font-size:10px;color:var(--muted)}
 
-.profile-body { flex: 1; overflow: hidden; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+/* BODY ROW */
+.brow{flex:1;display:flex;gap:16px;min-height:0}
 
-.info-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); }
-.info-row:last-child { border-bottom: none; }
-.info-label { font-size: 11px; color: var(--muted); }
-.info-value { font-size: 12px; font-weight: 600; color: var(--ink); text-align: right; max-width: 200px; }
+/* FOOTER */
+.ft{text-align:center;padding:6px;font-size:10px;color:rgba(100,116,139,0.45);flex-shrink:0}
 
-.skills-grid { display: flex; flex-wrap: wrap; gap: 5px; }
-.skill-tag { padding: 3px 9px; background: rgba(22,38,61,0.06); border: 1px solid var(--line); border-radius: 10px; font-size: 11px; color: var(--ink); }
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.sel td{background:rgba(22,38,61,0.04)}
+.tbl tr:not(.hdr-row):hover td{background:rgba(22,38,61,0.03)}
 
-.history-list { display: flex; flex-direction: column; gap: 6px; }
-.history-item { display: flex; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); }
-.history-item:last-child { border-bottom: none; }
-.history-period { font-size: 10px; color: var(--muted); min-width: 80px; }
-.history-post { font-size: 12px; color: var(--ink); font-weight: 600; }
-.history-role { font-size: 11px; color: var(--muted); }
+/* SLA BAR */
+.slab{height:4px;border-radius:2px;background:rgba(100,120,180,0.12);overflow:hidden}
+.slaf{height:100%;border-radius:2px}
 
-/* Footer */
-.page-footer { padding: 8px 28px; background: var(--surface); border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-shrink: 0; }
-.footer-copy { font-size: 11px; color: var(--muted); }
-</style>
-<style>
+/* TIMELINE */
+.tml{display:flex;flex-direction:column;gap:0}
+.tml-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+.tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tml-line{width:2px;background:var(--line);margin:2px auto 0;height:18px;margin-left:13px}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
+
+/* SEARCH BAR */
+.sbar{display:flex;align-items:center;gap:8px;background:var(--glass-s);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:12px;color:var(--ink)}
+.sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
+.sbar input::placeholder{color:var(--muted)}
+
+/* SCROLL (visual only) */
+.scroll{overflow:hidden}
+
+/* FILTER CHIPS */
+.fchips{display:flex;gap:6px}
+.fch{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
+.fch.on{background:var(--navy);color:#fff}
+.fch:not(.on){background:var(--glass);border-color:var(--border);color:var(--muted)}
+
+
+
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:24px;padding:9px 16px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
-#_back{position:fixed!important;bottom:22px!important;right:22px!important;z-index:9999!important;display:flex!important;align-items:center!important;gap:7px!important;background:rgba(22,38,61,0.92)!important;border:1px solid rgba(255,255,255,0.14)!important;border-radius:24px!important;padding:9px 16px!important;text-decoration:none!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-size:12px!important;font-weight:600!important;backdrop-filter:blur(8px)!important;box-shadow:0 4px 20px rgba(0,0,0,0.4)!important}
+
 </style>
 </head>
 <body><div id="_vp">
-<div class="canvas">
 
-  <!-- HEADER -->
-  <header class="inst-header">
-    <div class="emblem"><svg width="18" height="18" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg></div>
-    <div>
-      <div class="header-sub">República de Angola · MIREX</div>
-      <div class="header-module">Mapa do Corpo Diplomático</div>
-    </div>
-    <div class="header-right">
-      <span class="header-meta">09 Jul 2026 · Dados de pessoal actualizados</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--navy-700);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(255,255,255,0.8)">DS</div>
-        <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.75)">Dr.ª Sofia Neto · Direcção de Pessoal</span>
-      </div>
-    </div>
-  </header>
+<nav class="sb">
+  <div class="sb-logo"><svg width="22" height="22" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#D9A21B"/></svg></div>
+  <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
+<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+<div class="ni on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <span class="toolbar-title">Efectivos por posto · Rede global</span>
-    <div class="search-bar">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5A6B80" stroke-width="1.2"/><path d="M10 10l3 3" stroke="#5A6B80" stroke-width="1.2" stroke-linecap="round"/></svg>
-      Pesquisar diplomata ou posto…
-    </div>
-    <div class="filter-group">
-      <div class="filter-btn active">Todos (800+)</div>
-      <div class="filter-btn">Em funções</div>
-      <div class="filter-btn">Em trânsito</div>
-      <div class="filter-btn">Mandatos próximos</div>
-      <div class="filter-btn" style="color:var(--ambar);border-color:rgba(199,125,10,0.25);background:rgba(199,125,10,0.04)">⚠ Mandatos &lt; 90 dias <span style="background:rgba(199,125,10,0.15);color:var(--ambar);padding:1px 5px;border-radius:8px;font-size:10px;margin-left:3px">3</span></div>
+  <div class="sb-bot">
+    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+</nav>
+<div class="main">
+  <header class="hdr">
+  <div>
+    <div class="hdr-title">Corpo Diplomático</div>
+    <div class="hdr-sub">800+ efectivos · 52 postos · 5 continentes</div>
+  </div>
+  <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Por Posto</div><div class="nt">Mandatos</div><div class="nt">Formação</div></div>
+  <div class="hdr-r">
+    <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="uchip">
+      <div class="av">PV</div>
+      <div><div class="un">Dr. Pedro Valente</div><div class="us">Director de Recursos Humanos</div></div>
     </div>
   </div>
+</header>
+  <div class="cnt">
 
-  <!-- MAIN -->
-  <div class="main-content">
-
-    <!-- MAP AREA -->
-    <div class="map-area">
-      <div class="map-header">
-        <div>
-          <div class="map-title">Distribuição de efectivos por posto</div>
-          <div class="map-sub">Tamanho do marcador proporcional ao número de efectivos</div>
-        </div>
-        <div class="map-stats">
-          <div class="map-stat">
-            <span class="map-stat-val">800+</span>
-            <span class="map-stat-label">Diplomatas e funcionários</span>
-          </div>
-          <div class="map-stat">
-            <span class="map-stat-val">52</span>
-            <span class="map-stat-label">Postos activos</span>
-          </div>
-          <div class="map-stat">
-            <span class="map-stat-val" style="color:var(--ambar)">3</span>
-            <span class="map-stat-label">Mandatos &lt; 90 dias</span>
-          </div>
-        </div>
+    <!-- KPIs -->
+    <div class="krow">
+      <div class="kc">
+        <div class="kl">Total de Efectivos</div>
+        <div class="kv">842</div>
+        <div class="kd" style="color:var(--verde)">↑ 18 contratações Q2</div>
       </div>
-
-      <div class="map-wrapper">
-        <svg width="100%" height="100%" viewBox="0 0 1520 680" xmlns="http://www.w3.org/2000/svg">
-          <!-- Light blue ocean -->
-          <rect width="1520" height="680" fill="#EDF3F9"/>
-          <!-- Grid -->
-          <g stroke="#D5E0EA" stroke-width="0.5" opacity="0.6">
-            <line x1="0" y1="170" x2="1520" y2="170"/>
-            <line x1="0" y1="340" x2="1520" y2="340"/>
-            <line x1="0" y1="510" x2="1520" y2="510"/>
-            <line x1="380" y1="0" x2="380" y2="680"/>
-            <line x1="760" y1="0" x2="760" y2="680"/>
-            <line x1="1140" y1="0" x2="1140" y2="680"/>
-          </g>
-          <!-- Equator -->
-          <line x1="0" y1="340" x2="1520" y2="340" stroke="#BDD0DE" stroke-width="0.8" stroke-dasharray="6,6"/>
-
-          <!-- CONTINENTS (scaled for 1520×680) -->
-          <g fill="#C2D4E3" stroke="#A8BFD0" stroke-width="0.8">
-            <!-- Russia -->
-            <path d="M 793,72 L 935,52 L 1088,44 L 1225,57 L 1305,80 L 1315,115 L 1290,135 L 1178,138 L 1088,120 L 990,106 L 858,104 L 793,100 Z"/>
-            <!-- Greenland -->
-            <path d="M 320,28 L 415,15 L 475,36 L 462,74 L 398,86 L 335,66 Z"/>
-            <!-- North America -->
-            <path d="M 158,97 L 238,70 L 340,73 L 424,100 L 460,140 L 445,190 L 408,232 L 365,277 L 314,302 L 252,313 L 200,290 L 163,259 L 143,208 L 140,158 Z"/>
-            <!-- Central America -->
-            <path d="M 314,302 L 365,277 L 380,315 L 358,332 L 322,325 Z"/>
-            <!-- Caribbean -->
-            <ellipse cx="395" cy="292" rx="12" ry="7" fill="#C2D4E3"/>
-            <ellipse cx="420" cy="280" rx="9" ry="5" fill="#C2D4E3"/>
-            <!-- South America -->
-            <path d="M 295,330 L 360,312 L 425,322 L 468,347 L 482,394 L 476,445 L 450,503 L 408,535 L 355,545 L 298,527 L 263,488 L 244,440 L 238,390 L 252,358 Z"/>
-            <!-- Europe -->
-            <path d="M 690,118 L 748,103 L 806,105 L 854,120 L 862,143 L 842,173 L 800,188 L 758,196 L 722,190 L 698,171 L 692,148 Z"/>
-            <!-- Scandinavia -->
-            <path d="M 748,103 L 770,72 L 818,80 L 832,103 L 806,105 L 782,105 Z"/>
-            <!-- UK -->
-            <path d="M 710,118 L 728,106 L 748,113 L 744,138 L 728,144 L 712,135 Z"/>
-            <!-- Iceland -->
-            <ellipse cx="638" cy="90" rx="32" ry="18" fill="#C2D4E3"/>
-            <!-- Africa -->
-            <path d="M 680,196 L 754,188 L 810,196 L 850,210 L 875,248 L 880,302 L 872,362 L 848,420 L 818,468 L 780,490 L 742,498 L 700,490 L 660,455 L 634,408 L 620,344 L 620,290 L 630,246 L 648,218 Z"/>
-            <!-- Arabian Peninsula -->
-            <path d="M 838,186 L 908,174 L 970,188 L 1000,208 L 992,242 L 952,262 L 908,258 L 858,236 L 832,212 Z"/>
-            <!-- South Asia -->
-            <path d="M 920,178 L 992,162 L 1044,178 L 1060,210 L 1048,250 L 1004,278 L 964,284 L 924,266 L 898,238 L 904,204 Z"/>
-            <!-- East Asia -->
-            <path d="M 966,112 L 1092,92 L 1192,100 L 1268,124 L 1284,158 L 1272,200 L 1228,234 L 1168,255 L 1092,260 L 1028,252 L 968,228 L 940,196 L 940,162 L 952,136 Z"/>
-            <!-- Korea -->
-            <path d="M 1188,140 L 1212,128 L 1232,140 L 1228,168 L 1208,178 L 1188,165 Z"/>
-            <!-- Japan -->
-            <path d="M 1232,128 L 1258,116 L 1285,128 L 1285,162 L 1260,178 L 1235,165 Z"/>
-            <!-- SE Asia mainland -->
-            <path d="M 1075,232 L 1158,220 L 1212,236 L 1205,275 L 1175,310 L 1128,330 L 1082,320 L 1048,292 L 1040,264 Z"/>
-            <!-- SE Asia islands -->
-            <path d="M 1168,308 L 1232,292 L 1275,308 L 1270,345 L 1242,372 L 1205,380 L 1172,368 L 1148,345 L 1145,322 Z"/>
-            <!-- Australia -->
-            <path d="M 1138,378 L 1250,352 L 1338,378 L 1358,434 L 1340,492 L 1295,522 L 1230,528 L 1160,508 L 1125,470 L 1118,428 Z"/>
-          </g>
-
-          <!-- LUANDA HQ -->
-          <circle cx="822" cy="384" r="16" fill="rgba(217,162,27,0.12)" stroke="#D9A21B" stroke-width="1.5"/>
-          <circle cx="822" cy="384" r="9" fill="#D9A21B"/>
-          <text x="822" y="412" text-anchor="middle" font-size="10" fill="#16263D" font-weight="700" font-family="Inter,sans-serif">Luanda HQ</text>
-
-          <!-- POSTS with size proportional to staff count -->
-          <!-- Large posts (10+ staff) -->
-          <g fill="#2E7D4F" stroke="white" stroke-width="1.5" opacity="0.9">
-            <circle cx="712" cy="176" r="10"/> <!-- Lisboa: 18 -->
-            <circle cx="760" cy="142" r="9"/> <!-- Paris: 16 -->
-            <circle cx="745" cy="132" r="8"/> <!-- Londres: 14 -->
-            <circle cx="810" cy="128" r="8"/> <!-- Berlim: 14 -->
-            <circle cx="432" cy="178" r="9"/> <!-- Washington: 16 -->
-            <circle cx="444" cy="162" r="8"/> <!-- Nova Iorque: 14 -->
-            <circle cx="554" cy="362" r="8"/> <!-- São Paulo: 14 -->
-          </g>
-
-          <!-- Medium posts (6-10 staff) -->
-          <g fill="#2E7D4F" stroke="white" stroke-width="1.3" opacity="0.85">
-            <circle cx="805" cy="165" r="7"/> <!-- Roma -->
-            <circle cx="768" cy="138" r="7"/> <!-- Bruxelas -->
-            <circle cx="776" cy="152" r="7"/> <!-- Genebra -->
-            <circle cx="728" cy="170" r="7"/> <!-- Madrid -->
-            <circle cx="920" cy="348" r="7"/> <!-- Nairóbi -->
-            <circle cx="888" cy="210" r="7"/> <!-- Cairo -->
-            <circle cx="912" cy="336" r="7"/> <!-- Dar es Salaam -->
-            <circle cx="1080" cy="208" r="7"/> <!-- Deli -->
-            <circle cx="1248" cy="174" r="7"/> <!-- Pequim - amber -->
-            <circle cx="1332" cy="188" r="7"/> <!-- Tóquio -->
-            <circle cx="440" cy="300" r="7"/> <!-- Bogotá -->
-          </g>
-
-          <!-- Small posts (2-5 staff) -->
-          <g fill="#2E7D4F" stroke="white" stroke-width="1" opacity="0.8">
-            <circle cx="820" cy="132" r="5"/> <!-- Viena -->
-            <circle cx="834" cy="130" r="5"/> <!-- Varsóvia -->
-            <circle cx="826" cy="108" r="5"/> <!-- Estocolmo -->
-            <circle cx="406" cy="237" r="5"/> <!-- Havana -->
-            <circle cx="336" cy="250" r="5"/> <!-- México -->
-            <circle cx="424" cy="338" r="5"/> <!-- Lima -->
-            <circle cx="455" cy="366" r="5"/> <!-- Santiago -->
-            <circle cx="509" cy="370" r="5"/> <!-- Buenos Aires - amber -->
-            <circle cx="720" cy="278" r="5"/> <!-- Dacar -->
-            <circle cx="725" cy="196" r="5"/> <!-- Rabat -->
-            <circle cx="768" cy="190" r="5"/> <!-- Argel -->
-            <circle cx="782" cy="286" r="5"/> <!-- Abuja -->
-            <circle cx="750" cy="298" r="5"/> <!-- Lagos -->
-            <circle cx="748" cy="300" r="5"/> <!-- Acra -->
-            <circle cx="820" cy="330" r="5"/> <!-- Kinshasa -->
-            <circle cx="885" cy="368" r="5"/> <!-- Harare -->
-            <circle cx="873" cy="360" r="5"/> <!-- Lusaca -->
-            <circle cx="892" cy="378" r="5"/> <!-- Maputo -->
-            <circle cx="875" cy="375" r="5"/> <!-- Pretória -->
-            <circle cx="898" cy="200" r="5"/> <!-- Tel Aviv -->
-            <circle cx="984" cy="238" r="5"/> <!-- Dubai -->
-            <circle cx="1060" cy="250" r="5"/> <!-- Mumbai -->
-            <circle cx="1284" cy="182" r="5"/> <!-- Seul -->
-            <circle cx="1180" cy="270" r="5"/> <!-- Bangcoc -->
-            <circle cx="1194" cy="315" r="5"/> <!-- Singapura -->
-            <circle cx="1266" cy="208" r="5"/> <!-- Xangai -->
-            <circle cx="1188" cy="307" r="5"/> <!-- KL -->
-            <circle cx="1196" cy="245" r="5"/> <!-- Hanoí -->
-          </g>
-
-          <!-- AMBER posts (mandate alerts) -->
-          <circle cx="1248" cy="174" r="7" fill="#C77D0A" stroke="white" stroke-width="1.3"/><!-- Pequim -->
-          <circle cx="509" cy="366" r="7" fill="#C77D0A" stroke="white" stroke-width="1.3"/><!-- Buenos Aires -->
-
-          <!-- Mandate expiry annotations -->
-          <!-- Paris annotation -->
-          <rect x="766" y="120" width="82" height="38" rx="5" fill="white" stroke="var(--line)" stroke-width="1"/>
-          <text x="770" y="132" font-size="9" fill="#1A2433" font-weight="700" font-family="Inter,sans-serif">Paris</text>
-          <text x="770" y="146" font-size="8" fill="#C77D0A" font-weight="600" font-family="Inter,sans-serif">Mandato: 78 dias</text>
-          <line x1="800" y1="158" x2="800" y2="142" stroke="var(--line)" stroke-width="0.8"/>
-
-          <!-- Buenos Aires annotation -->
-          <rect x="516" y="346" width="108" height="38" rx="5" fill="white" stroke="var(--line)" stroke-width="1"/>
-          <text x="520" y="358" font-size="9" fill="#1A2433" font-weight="700" font-family="Inter,sans-serif">Buenos Aires</text>
-          <text x="520" y="372" font-size="8" fill="#C77D0A" font-weight="600" font-family="Inter,sans-serif">Mandato: 62 dias</text>
-          <line x1="524" y1="366" x2="509" y2="373" stroke="var(--line)" stroke-width="0.8"/>
-
-          <!-- Seul annotation -->
-          <rect x="1292" y="160" width="82" height="38" rx="5" fill="white" stroke="var(--line)" stroke-width="1"/>
-          <text x="1296" y="172" font-size="9" fill="#1A2433" font-weight="700" font-family="Inter,sans-serif">Seul</text>
-          <text x="1296" y="186" font-size="8" fill="#C77D0A" font-weight="600" font-family="Inter,sans-serif">Mandato: 88 dias</text>
-          <line x1="1295" y1="182" x2="1284" y2="184" stroke="var(--line)" stroke-width="0.8"/>
-
-          <!-- Staff count labels for biggest posts -->
-          <g font-size="7" fill="white" font-family="Inter,sans-serif" font-weight="700" text-anchor="middle">
-            <text x="712" y="179">18</text>
-            <text x="760" y="145">16</text>
-            <text x="432" y="181">16</text>
-            <text x="745" y="135">14</text>
-            <text x="810" y="131">14</text>
-            <text x="444" y="165">14</text>
-            <text x="554" y="365">14</text>
-          </g>
-        </svg>
+      <div class="kc">
+        <div class="kl">Mandatos a Expirar (90d)</div>
+        <div class="kv" style="color:var(--ambar)">3</div>
+        <div class="kd" style="color:var(--ambar)">Buenos Aires · Paris · Seul</div>
       </div>
-
-      <div class="map-legend-bar">
-        <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Legenda</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--verde);width:14px;height:14px"></div>Grande (10+ ef.)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--verde);width:10px;height:10px"></div>Médio (6–9)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--verde);width:7px;height:7px"></div>Pequeno (2–5)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--ambar)"></div>Mandato &lt; 90 dias</div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--gold-500)"></div>HQ Luanda</div>
-        <div style="margin-left:auto;font-size:11px;color:var(--muted)">Número = efectivos no posto · Clique para detalhe</div>
+      <div class="kc">
+        <div class="kl">Postos com Posto Completo</div>
+        <div class="kv">41<span style="font-size:17px;color:var(--muted)">/52</span></div>
+        <div class="kd" style="color:var(--muted)">11 com vagas em aberto</div>
+      </div>
+      <div class="kc">
+        <div class="kl">Médias de Mandato</div>
+        <div class="kv">3,4a</div>
+        <div class="kd" style="color:var(--muted)">Rotação: 4 anos</div>
       </div>
     </div>
 
-    <!-- RIGHT PANEL -->
-    <div class="right-panel">
+    <!-- Body -->
+    <div class="brow">
 
-      <!-- Mandate alerts -->
-      <div class="mandate-section">
-        <div class="section-header">
-          Alertas de Mandato
-          <span style="font-size:10px;background:rgba(199,125,10,0.1);color:var(--ambar);padding:2px 7px;border-radius:8px">3 activos</span>
-        </div>
-
-        <div class="mandate-item">
-          <div class="mandate-days" style="background:rgba(199,125,10,0.1)">
-            <div class="mandate-days-num amber" style="color:var(--ambar)">62</div>
-            <div class="mandate-days-label" style="color:var(--ambar)">dias</div>
-          </div>
-          <div class="mandate-info">
-            <div class="mandate-name">Emb. Carlos Neto Fernandes</div>
-            <div class="mandate-post">Embaixada de Angola em Buenos Aires</div>
-            <div class="mandate-dates">Mandato: Jan 2024 – Set 2026 · Substituição a iniciar</div>
-          </div>
-          <div class="badge badge-ambar">Urgente</div>
-        </div>
-
-        <div class="mandate-item">
-          <div class="mandate-days" style="background:rgba(199,125,10,0.06)">
-            <div class="mandate-days-num" style="color:var(--ambar)">78</div>
-            <div class="mandate-days-label" style="color:var(--ambar)">dias</div>
-          </div>
-          <div class="mandate-info">
-            <div class="mandate-name">Emb. Helena Tavares da Cruz</div>
-            <div class="mandate-post">Embaixada de Angola em Paris</div>
-            <div class="mandate-dates">Mandato: Out 2022 – Out 2026 · Processo a iniciar</div>
-          </div>
-          <div class="badge badge-ambar">Atenção</div>
-        </div>
-
-        <div class="mandate-item">
-          <div class="mandate-days" style="background:rgba(199,125,10,0.05)">
-            <div class="mandate-days-num" style="color:var(--ambar)">88</div>
-            <div class="mandate-days-label" style="color:var(--ambar)">dias</div>
-          </div>
-          <div class="mandate-info">
-            <div class="mandate-name">Emb. Paulo Kiala Mavungo</div>
-            <div class="mandate-post">Embaixada de Angola em Seul</div>
-            <div class="mandate-dates">Mandato: Nov 2022 – Out 2026 · Em agendamento</div>
-          </div>
-          <div class="badge badge-ambar">Atenção</div>
-        </div>
-      </div>
-
-      <!-- Diplomat profile -->
-      <div class="profile-section">
-        <div class="section-header" style="padding:12px 20px;flex-shrink:0;border-bottom:1px solid var(--line)">
-          Perfil Seleccionado
-          <span style="font-size:10px;background:rgba(22,38,61,0.06);color:var(--navy-700);padding:2px 7px;border-radius:8px">Lisboa</span>
-        </div>
-        <div class="profile-header">
-          <div class="profile-avatar">MC</div>
-          <div>
-            <div class="profile-name">Dra. Maria Conceição Baptista</div>
-            <div class="profile-title">Conselheira · Chefe de Secção Consular · Lisboa</div>
-            <div class="profile-badges">
-              <div class="badge badge-verde">● Em funções</div>
-              <div class="badge badge-navy">Carreira diplomática</div>
-              <div class="badge badge-gold">18 anos de serviço</div>
-            </div>
+      <!-- MAP -->
+      <div class="gc" style="flex:1">
+        <div class="gh">
+          <div><div class="gt">Distribuição Geográfica dos Efectivos</div><div class="gs">Tamanho do círculo proporcional ao número de efectivos</div></div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="leg"><span class="ld" style="background:var(--navy)"></span><span class="ll">Posto activo</span></div>
+            <div class="leg"><span class="ld" style="background:var(--ambar)"></span><span class="ll">Mandato expirando</span></div>
           </div>
         </div>
-        <div class="profile-body">
-          <div>
-            <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px">Informação do posto</div>
-            <div class="info-row">
-              <span class="info-label">Posto actual</span>
-              <span class="info-value">Embaixada de Angola em Lisboa</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Função</span>
-              <span class="info-value">Chefe de Secção Consular</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Início do mandato</span>
-              <span class="info-value">01 Fev 2024</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Fim previsto do mandato</span>
-              <span class="info-value">31 Jan 2027 (549 dias)</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Estado</span>
-              <span class="info-value" style="color:var(--verde)">Em funções</span>
-            </div>
-          </div>
+        <div class="gb" style="padding:12px 16px;position:relative">
+          <svg viewBox="0 0 1000 450" style="width:100%;height:100%">
+            <!-- Continents -->
+            <path d="M108 52 L152 46 L195 62 L238 86 L262 128 L258 158 L242 180 L218 202 L196 224 L172 248 L148 268 L126 290 L100 272 L78 250 L68 218 L78 190 L88 162 L100 132 L108 52Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M196 292 L218 278 L248 288 L266 310 L274 338 L272 368 L262 394 L244 410 L224 418 L204 406 L188 384 L180 356 L182 328 L196 292Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M438 40 L482 36 L516 46 L526 62 L514 84 L492 96 L468 106 L446 116 L434 102 L428 82 L432 60Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M448 132 L492 124 L524 136 L542 162 L546 196 L540 238 L530 278 L510 316 L490 342 L468 352 L448 340 L428 312 L418 272 L416 232 L422 190 L432 160Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M528 40 L598 34 L680 40 L752 52 L804 72 L822 102 L812 132 L782 152 L752 162 L700 166 L648 160 L598 148 L556 136 L536 114 L526 88 L524 60Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M718 172 L762 160 L804 172 L820 204 L812 236 L782 246 L750 236 L728 214Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
+            <path d="M782 292 L844 280 L904 292 L932 322 L924 362 L892 382 L852 388 L812 376 L780 350 L770 320Z" fill="rgba(100,120,180,0.08)" stroke="rgba(100,120,180,0.20)" stroke-width="1.2"/>
 
-          <div>
-            <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px">Valências e idiomas</div>
-            <div class="skills-grid">
-              <div class="skill-tag">Direito Internacional</div>
-              <div class="skill-tag">Direito Consular</div>
-              <div class="skill-tag">Negociação</div>
-              <div class="skill-tag">Português</div>
-              <div class="skill-tag">Inglês (C2)</div>
-              <div class="skill-tag">Francês (B2)</div>
-              <div class="skill-tag">Espanhol (B1)</div>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px">Histórico de colocações</div>
-            <div class="history-list">
-              <div class="history-item">
-                <span class="history-period">2024 – presente</span>
-                <div><div class="history-post">Lisboa, Portugal</div><div class="history-role">Chefe de Secção Consular</div></div>
-              </div>
-              <div class="history-item">
-                <span class="history-period">2020 – 2024</span>
-                <div><div class="history-post">Paris, França</div><div class="history-role">Conselheira de Embaixada</div></div>
-              </div>
-              <div class="history-item">
-                <span class="history-period">2016 – 2020</span>
-                <div><div class="history-post">Genebra, Suíça</div><div class="history-role">2.ª Secretária · ONU/WTO</div></div>
-              </div>
-              <div class="history-item">
-                <span class="history-period">2012 – 2016</span>
-                <div><div class="history-post">Luanda, Angola</div><div class="history-role">MIREX — DAC Central</div></div>
-              </div>
-            </div>
-          </div>
+            <!-- Posts sized by staff count -->
+            <!-- Lisboa r=12 (18 staff) -->
+            <circle cx="452" cy="88" r="12" fill="var(--navy)" opacity="0.75"/>
+            <text x="452" y="91" text-anchor="middle" font-size="8" fill="white" font-weight="700">18</text>
+            <!-- Paris r=11 (16 staff) - AMBAR -->
+            <circle cx="468" cy="68" r="11" fill="var(--ambar)" opacity="0.85"/>
+            <text x="468" y="71" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
+            <!-- Paris label -->
+            <text x="468" y="56" text-anchor="middle" font-size="8" fill="var(--ambar)" font-weight="700">78d</text>
+            <!-- Washington r=11 -->
+            <circle cx="146" cy="108" r="11" fill="var(--navy)" opacity="0.75"/>
+            <text x="146" y="111" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
+            <!-- Brasília r=10 -->
+            <circle cx="188" cy="184" r="10" fill="var(--navy)" opacity="0.75"/>
+            <text x="188" y="187" text-anchor="middle" font-size="7" fill="white" font-weight="700">14</text>
+            <!-- Luanda HQ -->
+            <circle cx="468" cy="190" r="10" fill="var(--gold)" stroke="white" stroke-width="2"/>
+            <text x="468" y="200" text-anchor="middle" font-size="8" fill="var(--navy)" font-weight="700">HQ</text>
+            <!-- Buenos Aires AMBAR -->
+            <circle cx="182" cy="298" r="10" fill="var(--ambar)" opacity="0.85"/>
+            <text x="182" y="307" text-anchor="middle" font-size="8" fill="var(--ambar)" font-weight="700">62d</text>
+            <!-- Seul AMBAR -->
+            <circle cx="724" cy="138" r="9" fill="var(--ambar)" opacity="0.85"/>
+            <text x="724" y="127" text-anchor="middle" font-size="8" fill="var(--ambar)" font-weight="700">88d</text>
+            <!-- Other medium posts -->
+            <circle cx="596" cy="116" r="9" fill="var(--navy)" opacity="0.7"/><text x="596" y="119" text-anchor="middle" font-size="7" fill="white" font-weight="700">12</text>
+            <circle cx="718" cy="144" r="9" fill="var(--navy)" opacity="0.7"/><text x="718" y="147" text-anchor="middle" font-size="7" fill="white" font-weight="700">11</text>
+            <circle cx="728" cy="148" r="8" fill="var(--navy)" opacity="0.7"/>
+            <circle cx="460" cy="168" r="7" fill="var(--navy)" opacity="0.7"/>
+            <circle cx="478" cy="164" r="7" fill="var(--navy)" opacity="0.7"/>
+            <circle cx="152" cy="98" r="7" fill="var(--navy)" opacity="0.7"/>
+            <!-- Small posts -->
+            <circle cx="460" cy="78" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="484" cy="62" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="474" cy="70" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="488" cy="74" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="498" cy="76" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="492" cy="84" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="496" cy="68" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="506" cy="78" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="472" cy="182" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="460" cy="206" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="678" cy="172" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="740" cy="186" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="562" cy="128" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="572" cy="136" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="548" cy="132" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="138" cy="118" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="168" cy="182" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="148" cy="128" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="454" cy="172" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="452" cy="150" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="468" cy="212" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="462" cy="200" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="696" cy="170" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="504" cy="90" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="478" cy="60" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="486" cy="176" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="192" cy="176" r="5" fill="var(--navy)" opacity="0.6"/>
+            <circle cx="142" cy="116" r="5" fill="var(--navy)" opacity="0.6"/>
+            <!-- Labels for big posts -->
+            <text x="452" y="105" text-anchor="middle" font-size="8" fill="var(--navy)" font-weight="600">Lisboa</text>
+            <text x="146" y="124" text-anchor="middle" font-size="8" fill="var(--navy)" font-weight="600">Washington</text>
+            <text x="188" y="200" text-anchor="middle" font-size="8" fill="var(--navy)" font-weight="600">Brasília</text>
+            <text x="468" y="208" text-anchor="middle" font-size="8" fill="var(--navy)" font-weight="700">Luanda</text>
+          </svg>
         </div>
       </div>
-    </div>
 
-  </div>
+      <!-- RIGHT PANEL -->
+      <div style="width:420px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
 
-  <!-- FOOTER -->
-  <div class="page-footer">
-    <span class="footer-copy">Protótipo conceptual · TIS · 2026</span>
-    <span class="footer-copy">MIREX Digital · Mapa do Corpo Diplomático · Dados de pessoal confidenciais</span>
-  </div>
+        <!-- Mandate alerts -->
+        <div class="gc" style="flex-shrink:0">
+          <div class="gh">
+            <div class="gt">Mandatos a Expirar</div>
+            <span class="chip ca">3 nos próx. 90 dias</span>
+          </div>
+          <div style="padding:0 18px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)">
+              <div>
+                <div style="font-size:12px;font-weight:700">Buenos Aires</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Carlos Freitas · 3 efectivos</div>
+              </div>
+              <span class="chip cr">62 dias</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)">
+              <div>
+                <div style="font-size:12px;font-weight:700">Paris</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Maria Conceição Baptista · 16 efectivos</div>
+              </div>
+              <span class="chip ca">78 dias</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
+              <div>
+                <div style="font-size:12px;font-weight:700">Seul</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. António Sebastião · 7 efectivos</div>
+              </div>
+              <span class="chip ci">88 dias</span>
+            </div>
+          </div>
+        </div>
 
-</div>
+        <!-- Diplomat profile -->
+        <div class="gc" style="flex:1">
+          <div class="gh">
+            <div class="gt">Perfil Seleccionado</div>
+            <span class="chip cn">Em funções</span>
+          </div>
+          <div style="padding:18px 20px">
+            <!-- Avatar + name -->
+            <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">
+              <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--navy) 0%,#23405F 100%);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0">MB</div>
+              <div>
+                <div style="font-size:15px;font-weight:700">Dra. Maria Conceição Baptista</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px">Embaixadora — Paris · Desde Jan 2022</div>
+                <div style="display:flex;gap:6px;margin-top:6px">
+                  <span class="chip cg">Activa</span>
+                  <span class="chip cn">Carreira diplomática</span>
+                </div>
+              </div>
+            </div>
+            <!-- Info grid -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+              <div style="background:rgba(100,120,180,0.05);border-radius:9px;padding:10px">
+                <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Posto</div>
+                <div style="font-size:12px;font-weight:600;margin-top:3px">Embaixada — Paris</div>
+              </div>
+              <div style="background:rgba(100,120,180,0.05);border-radius:9px;padding:10px">
+                <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Mandato</div>
+                <div style="font-size:12px;font-weight:600;margin-top:3px">Expira em 78 dias</div>
+              </div>
+              <div style="background:rgba(100,120,180,0.05);border-radius:9px;padding:10px">
+                <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Categoria</div>
+                <div style="font-size:12px;font-weight:600;margin-top:3px">Embaixadora</div>
+              </div>
+              <div style="background:rgba(100,120,180,0.05);border-radius:9px;padding:10px">
+                <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Historial</div>
+                <div style="font-size:12px;font-weight:600;margin-top:3px">Lisboa · Brasília · Paris</div>
+              </div>
+            </div>
+            <!-- Skills -->
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Competências</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span class="chip cn">Direito Internacional</span>
+              <span class="chip cn">Negociação Multilateral</span>
+              <span class="chip cn">Francês · Inglês · Português</span>
+              <span class="chip cg">Membro da ONU 2024</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right -->
+    </div><!-- /brow -->
+  </div><!-- /cnt -->
+  <div class="ft">Protótipo conceptual · TIS · 2026</div>
+</div><!-- /main -->
+
 </div>
 <a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
 <script>
 !function(){
   var vp=document.getElementById('_vp');
-  function fit(){
-    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
-    vp.style.transform='scale('+s+')';
-  }
-  fit();
-  window.addEventListener('resize',fit);
+  function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')';}
+  fit();window.addEventListener('resize',fit);
 }();
 </script>
 </body>
