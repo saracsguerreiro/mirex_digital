@@ -3,522 +3,439 @@
 <head>
 <meta charset="UTF-8">
 <title>A1 · Portal Público — Embaixada de Angola em Lisboa</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy-900: #16263D;
-  --navy-700: #23405F;
+  --navy: #16263D;
+  --navy700: #23405F;
   --surface: #F5F8FB;
   --card: #FFFFFF;
-  --gold-500: #D9A21B;
-  --red-700: #B5121B;
+  --gold: #D9A21B;
   --ink: #1A2433;
   --muted: #5A6B80;
   --line: #D7E1EC;
   --verde: #2E7D4F;
   --ambar: #C77D0A;
+  --red: #B5121B;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: #0d1117; }
+body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); }
 
-.canvas {
-  width: 1920px; height: 1080px;
-  display: flex; overflow: hidden;
-}
+/* ── LAYOUT CANVAS ── */
+.canvas { width: 1920px; height: 1080px; display: flex; flex-direction: column; overflow: hidden; }
 
-/* ─── MAIN PORTAL ─── */
-.portal-main {
-  width: 1920px;
-  display: flex; flex-direction: column;
-  background: var(--surface);
+/* ── INSTITUTIONAL HEADER ── */
+.inst-hdr {
+  background: var(--navy); height: 56px; flex-shrink: 0;
+  display: flex; align-items: center; padding: 0 40px; gap: 20px;
 }
-
-/* Institutional header */
-.inst-header {
-  background: var(--navy-900); height: 52px;
-  display: flex; align-items: center; padding: 0 28px; gap: 12px; flex-shrink: 0;
+.inst-hdr-center {
+  margin-left: auto; margin-right: auto;
+  display: flex; align-items: center; gap: 32px;
 }
-.emblem {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--gold-500);
-  display: flex; align-items: center; justify-content: center;
+.hdr-nav-item {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.70);
+  padding: 6px 0; cursor: pointer; border-bottom: 2px solid transparent;
 }
-.header-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
-.header-module { font-size: 16px; font-weight: 600; color: #fff; }
-.lang-sel {
-  margin-left: auto;
-  font-size: 12px; color: rgba(255,255,255,0.55);
-  display: flex; gap: 8px;
+.hdr-nav-item.on {
+  color: #fff; font-weight: 700; border-bottom-color: var(--gold);
 }
-.lang-active { color: var(--gold-500); font-weight: 600; }
-
-/* Topbar */
-.topbar {
-  background: var(--card); border-bottom: 1px solid var(--line);
-  height: 48px; display: flex; align-items: center; padding: 0 28px; gap: 32px;
-  flex-shrink: 0;
+.inst-hdr-r { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.lang-sel { display: flex; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.45); }
+.lang-sel .on { color: var(--gold); font-weight: 700; }
+.search-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.20);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
 }
-.nav-item { font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; padding: 14px 0; }
-.nav-item.active { color: var(--navy-900); border-bottom: 2px solid var(--gold-500); }
-.nav-item:hover { color: var(--navy-900); }
-
-/* Post banner */
-.post-banner {
-  background: var(--navy-700); padding: 10px 28px;
-  font-size: 13px; color: rgba(255,255,255,0.9); font-weight: 600;
-  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+.appt-btn {
+  background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 700;
+  padding: 8px 20px; border-radius: 9999px; cursor: pointer; white-space: nowrap;
 }
 
-/* Hero */
+/* ── HERO BANNER ── */
 .hero {
-  height: 240px; position: relative; overflow: hidden;
-  background: var(--navy-700); flex-shrink: 0;
+  height: 360px; flex-shrink: 0; position: relative; overflow: hidden;
+  background: var(--navy);
 }
 .hero-img {
-  position: absolute; right: 0; top: 0; width: 52%; height: 100%;
-  background: linear-gradient(105deg, var(--navy-700) 0%, #1c3550 40%, #243f60 100%);
-  display: flex; align-items: center; justify-content: center;
+  position: absolute; inset: 0;
+  background: url('imagem_banner.png') center/cover no-repeat;
 }
-.hero-building {
-  opacity: 0.22;
+.hero-fade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(22,38,61,0.88) 0%, rgba(22,38,61,0.55) 40%, rgba(22,38,61,0.05) 65%, transparent 100%);
 }
-.hero-overlay {
-  position: absolute; left: 0; top: 0; width: 58%; height: 100%;
-  background: linear-gradient(to right, var(--navy-700) 70%, transparent);
-  z-index: 1;
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 48px 80px; max-width: 680px; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
 }
-.hero-content { position: relative; z-index: 2; padding: 32px 28px; }
-.hero-badge { font-size: 10px; font-weight: 600; color: var(--gold-500); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
-.hero-title { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 8px; max-width: 440px; }
-.hero-sub { font-size: 13px; color: rgba(255,255,255,0.68); margin-bottom: 20px; max-width: 380px; }
-.btn-primary {
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(217,162,27,0.18); border: 1px solid rgba(217,162,27,0.35);
+  border-radius: 9999px; padding: 5px 14px;
+  font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.8px;
+  text-transform: uppercase; margin-bottom: 18px; width: fit-content;
+}
+.hero-title {
+  font-size: 38px; font-weight: 800; color: #fff; line-height: 1.2;
+  margin-bottom: 12px; letter-spacing: -0.5px;
+}
+.hero-sub {
+  font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.65;
+  margin-bottom: 28px; max-width: 520px;
+}
+.hero-actions { display: flex; gap: 12px; align-items: center; }
+.btn-gold {
+  background: var(--gold); color: var(--navy);
+  font-size: 14px; font-weight: 700; padding: 13px 28px; border-radius: 9999px;
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+}
+.btn-ghost-w {
+  background: transparent; color: #fff;
+  font-size: 14px; font-weight: 600; padding: 13px 24px; border-radius: 9999px;
+  border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer;
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gold-500); color: var(--navy-900);
-  font-size: 14px; font-weight: 700; padding: 11px 22px; border-radius: 6px;
 }
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 6px; margin-left: 12px;
-  background: transparent; color: rgba(255,255,255,0.8);
-  font-size: 13px; font-weight: 600; padding: 11px 18px;
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
+.hero-status {
+  position: absolute; bottom: 22px; right: 40px; z-index: 2;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.22); border-radius: 9999px;
+  padding: 7px 16px; font-size: 12px; color: #fff; font-weight: 500;
 }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6adc96; flex-shrink: 0; }
 
-/* Services */
-.services-section { padding: 22px 28px 18px; flex-shrink: 0; }
-.section-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px; }
+/* ── SERVICES STRIP ── */
+.services-strip {
+  background: var(--card); border-bottom: 1px solid var(--line);
+  flex-shrink: 0; padding: 28px 80px;
+}
+.strip-label {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px;
+}
 .services-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
-.service-card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
-  padding: 18px 16px; text-align: center;
-  box-shadow: 0 2px 8px rgba(22,38,61,0.05);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+.srv-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 18px; display: flex; flex-direction: column; gap: 10px;
+  transition: box-shadow .15s, border-color .15s; cursor: pointer;
 }
-.service-icon {
-  width: 40px; height: 40px;
-  background: rgba(22,38,61,0.06); border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+.srv-card:hover { box-shadow: 0 6px 20px rgba(22,38,61,0.09); border-color: rgba(22,38,61,0.18); }
+.srv-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(22,38,61,0.06); display: flex; align-items: center; justify-content: center;
 }
-.service-name { font-size: 13px; font-weight: 600; color: var(--ink); }
-.service-desc { font-size: 11px; color: var(--muted); }
-.service-link { font-size: 11px; color: var(--navy-700); font-weight: 600; margin-top: 4px; }
+.srv-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+.srv-desc { font-size: 12px; color: var(--muted); line-height: 1.4; flex: 1; }
+.srv-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 4px;
+}
 
-/* News */
-.news-section { padding: 18px 28px 16px; border-top: 1px solid var(--line); flex-shrink: 0; }
-.news-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+/* ── CONTENT ROW ── */
+.content-row {
+  flex: 1; display: flex; overflow: hidden;
+  padding: 24px 80px 20px; gap: 24px; background: var(--surface);
+}
+
+/* ── NEWS ── */
+.news-col { flex: 1; min-width: 0; }
+.col-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+.news-list { display: flex; flex-direction: column; gap: 10px; }
 .news-card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
-  padding: 14px 16px; display: flex; gap: 12px;
-  box-shadow: 0 1px 4px rgba(22,38,61,0.04);
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start;
+  cursor: pointer; transition: box-shadow .12s;
 }
-.news-date-badge {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
-  padding: 6px 10px; text-align: center; flex-shrink: 0;
+.news-card:hover { box-shadow: 0 4px 14px rgba(22,38,61,0.08); }
+.news-date {
+  background: var(--navy); border-radius: 8px;
+  padding: 8px 10px; text-align: center; flex-shrink: 0;
 }
-.news-day { font-size: 18px; font-weight: 700; color: var(--ink); display: block; line-height: 1; }
-.news-mon { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-.news-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.35; }
-.news-excerpt { font-size: 12px; color: var(--muted); line-height: 1.4; }
-.news-cat { font-size: 10px; font-weight: 600; color: var(--navy-700); margin-bottom: 4px; letter-spacing: 0.4px; }
+.news-day { font-size: 20px; font-weight: 800; color: var(--gold); display: block; line-height: 1; }
+.news-mon { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.55); text-transform: uppercase; }
+.news-cat { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+.news-title { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 3px; }
+.news-excerpt { font-size: 12px; color: var(--muted); line-height: 1.45; }
 
-/* Schedule strip */
-.schedule-strip {
-  background: var(--card); border-top: 1px solid var(--line);
-  padding: 12px 28px; display: flex; gap: 32px; align-items: center; flex-shrink: 0;
-}
-.schedule-item { display: flex; gap: 8px; align-items: center; }
-.schedule-label { font-size: 11px; color: var(--muted); }
-.schedule-value { font-size: 13px; font-weight: 600; color: var(--ink); }
+/* ── SIDE PANELS ── */
+.side-col { width: 420px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px; }
 
-/* Portal footer */
+.info-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden;
+}
+.ic-head {
+  background: var(--navy); padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.ic-head-title { font-size: 14px; font-weight: 700; color: #fff; }
+.ic-head-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top:1px; }
+.ic-body { padding: 16px 20px; }
+
+.sched-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--line);
+}
+.sched-row:last-child { border-bottom: none; }
+.sched-ico {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: rgba(22,38,61,0.05); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.sched-lbl { font-size: 11px; color: var(--muted); }
+.sched-val { font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 13px 14px; text-align: center;
+}
+.stat-num { font-size: 26px; font-weight: 800; color: var(--navy); }
+.stat-lbl { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+/* ── FOOTER ── */
 .portal-footer {
-  background: var(--navy-900); padding: 18px 28px;
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; flex-shrink: 0;
+  background: var(--navy); flex-shrink: 0;
+  padding: 16px 80px; display: flex; align-items: center; gap: 40px;
 }
-.footer-col-label { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-.footer-col-text { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.7; }
-.footer-map-placeholder {
-  width: 100%; height: 60px; background: var(--navy-700); border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; color: rgba(255,255,255,0.35);
-}
-.footer-bottom {
-  background: rgba(0,0,0,0.25); padding: 8px 28px;
-  display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
-}
-.footer-copy { font-size: 11px; color: var(--muted); }
-
-/* ─── COMPARISON SIDE ─── */
-.compare-side {
-  width: 660px;
-  background: var(--navy-900);
-  display: flex; flex-direction: column;
-  padding: 32px 28px;
-  gap: 20px;
-}
-.compare-header {
-  display: flex; flex-direction: column; gap: 4px;
-}
-.compare-tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(217,162,27,0.15); color: var(--gold-500);
-  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px;
-  letter-spacing: 0.5px; width: fit-content;
-}
-.compare-title {
-  font-size: 20px; font-weight: 700; color: #fff; margin-top: 6px;
-}
-.compare-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
-
-/* Mini portal */
-.mini-portal {
-  flex: 1; border-radius: 10px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  display: flex; flex-direction: column;
-}
-.mini-header {
-  background: var(--navy-700); padding: 8px 12px;
-  display: flex; align-items: center; gap: 8px;
-}
-.mini-emblem {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--gold-500); display: flex; align-items: center; justify-content: center;
-}
-.mini-header-text { font-size: 10px; color: rgba(255,255,255,0.85); font-weight: 600; }
-.mini-topbar {
-  background: var(--card); padding: 0 12px; height: 32px;
-  display: flex; align-items: center; gap: 16px;
-  border-bottom: 1px solid var(--line);
-}
-.mini-nav { font-size: 9px; font-weight: 600; color: var(--ink); }
-.mini-nav.a { color: var(--navy-900); border-bottom: 1.5px solid var(--gold-500); padding-bottom: 1px; }
-.mini-post { background: var(--navy-700); padding: 6px 12px; font-size: 9px; color: rgba(255,255,255,0.9); font-weight: 600; }
-.mini-hero {
-  height: 100px; background: var(--navy-700); position: relative;
-  display: flex; align-items: center; padding: 0 14px;
-}
-.mini-hero-text { font-size: 11px; font-weight: 700; color: #fff; line-height: 1.4; max-width: 200px; }
-.mini-hero-btn {
-  position: absolute; bottom: 14px; left: 14px;
-  background: var(--gold-500); color: var(--navy-900);
-  font-size: 9px; font-weight: 700; padding: 5px 10px; border-radius: 4px;
-}
-.mini-services {
-  background: var(--surface); padding: 10px 12px;
-  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px;
-}
-.mini-service {
-  background: var(--card); border: 1px solid var(--line); border-radius: 5px;
-  padding: 8px 6px; text-align: center;
-}
-.mini-service-icon {
-  width: 20px; height: 20px; border-radius: 4px;
-  background: rgba(22,38,61,0.06); margin: 0 auto 4px;
-  display: flex; align-items: center; justify-content: center;
-}
-.mini-service-name { font-size: 8px; font-weight: 600; color: var(--ink); }
-.mini-news {
-  background: var(--surface); padding: 8px 12px; flex: 1;
-  border-top: 1px solid var(--line);
-}
-.mini-news-item {
-  background: var(--card); border: 1px solid var(--line); border-radius: 5px;
-  padding: 7px 8px; margin-bottom: 5px;
-}
-.mini-news-title { font-size: 8.5px; font-weight: 600; color: var(--ink); }
-.mini-news-date { font-size: 8px; color: var(--muted); margin-bottom: 2px; }
-.mini-footer {
-  background: var(--navy-900); padding: 10px 12px;
-  font-size: 8px; color: rgba(255,255,255,0.5);
-}
-
-/* Badges list */
-.pattern-badges {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.pattern-badge {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.05); border-radius: 6px; padding: 8px 12px;
-}
-.pattern-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); flex-shrink: 0; }
-.pattern-text { font-size: 12px; color: rgba(255,255,255,0.65); }
+.footer-item { display: flex; gap: 10px; align-items: flex-start; }
+.footer-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.40); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; }
+.footer-val { font-size: 12px; color: rgba(255,255,255,0.70); line-height: 1.6; }
+.footer-div { width: 1px; height: 36px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+.footer-r { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.footer-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6adc96; font-weight: 600; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.30); }
 </style>
 <style>
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
-#_back{position:fixed!important;bottom:22px!important;right:22px!important;z-index:9999!important;display:flex!important;align-items:center!important;gap:7px!important;background:rgba(22,38,61,0.92)!important;border:1px solid rgba(255,255,255,0.14)!important;border-radius:24px!important;padding:9px 16px!important;text-decoration:none!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-size:12px!important;font-weight:600!important;backdrop-filter:blur(8px)!important;box-shadow:0 4px 20px rgba(0,0,0,0.4)!important}
+#_back{position:fixed!important;bottom:22px!important;right:22px!important;z-index:9999!important;display:flex!important;align-items:center!important;gap:7px!important;background:rgba(22,38,61,0.92)!important;border:1px solid rgba(255,255,255,0.14)!important;border-radius:9999px!important;padding:9px 18px!important;text-decoration:none!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-size:13px!important;font-weight:600!important;box-shadow:0 4px 20px rgba(0,0,0,.35)!important}
 </style>
 </head>
 <body><div id="_vp">
 <div class="canvas">
 
-  <!-- ═══════════════════════════════════════ MAIN PORTAL (Lisboa) ═══ -->
-  <div class="portal-main">
-
-    <!-- Institutional header -->
-    <header class="inst-header">
-      <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="36" style="display:block;flex-shrink:0">
-      <div class="lang-sel" style="margin-left:auto">
-        <span class="lang-active">PT</span><span>·</span><span>EN</span><span>·</span><span>FR</span>
-      </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="topbar">
-      <span class="nav-item active">Serviços Consulares</span>
-      <span class="nav-item">Vistos</span>
-      <span class="nav-item">Notícias</span>
-      <span class="nav-item">Contactos</span>
-    </nav>
-
-    <!-- Post banner -->
-    <div class="post-banner">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/></svg>
-      Embaixada de Angola em Lisboa · Avenida de Berna, 33 · 1050-037 Lisboa
+  <!-- ── INSTITUTIONAL HEADER ── -->
+  <header class="inst-hdr">
+    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="36" style="display:block;flex-shrink:0">
+    <div class="inst-hdr-center">
+      <span class="hdr-nav-item on">Serviços Consulares</span>
+      <span class="hdr-nav-item">Vistos</span>
+      <span class="hdr-nav-item">Passaportes</span>
+      <span class="hdr-nav-item">Registo Civil</span>
+      <span class="hdr-nav-item">Notícias</span>
+      <span class="hdr-nav-item">Contactos</span>
     </div>
-
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-img">
-        <!-- Architectural facade placeholder -->
-        <svg class="hero-building" width="480" height="240" viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
-          <rect x="60" y="40" width="360" height="190" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-          <rect x="100" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="150" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="200" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="250" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="300" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="350" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="400" y="40" width="2" height="190" fill="rgba(255,255,255,0.25)"/>
-          <rect x="60" y="80" width="360" height="2" fill="rgba(255,255,255,0.25)"/>
-          <rect x="60" y="120" width="360" height="2" fill="rgba(255,255,255,0.25)"/>
-          <rect x="60" y="160" width="360" height="2" fill="rgba(255,255,255,0.25)"/>
-          <!-- Windows -->
-          <g fill="rgba(255,255,255,0.12)">
-            <rect x="108" y="88" width="28" height="18"/><rect x="158" y="88" width="28" height="18"/>
-            <rect x="208" y="88" width="28" height="18"/><rect x="258" y="88" width="28" height="18"/>
-            <rect x="308" y="88" width="28" height="18"/><rect x="358" y="88" width="28" height="18"/>
-            <rect x="108" y="128" width="28" height="18"/><rect x="158" y="128" width="28" height="18"/>
-            <rect x="208" y="128" width="28" height="18"/><rect x="258" y="128" width="28" height="18"/>
-            <rect x="308" y="128" width="28" height="18"/><rect x="358" y="128" width="28" height="18"/>
-            <rect x="108" y="168" width="28" height="18"/><rect x="158" y="168" width="28" height="18"/>
-            <rect x="208" y="168" width="28" height="18"/><rect x="258" y="168" width="28" height="18"/>
-            <rect x="308" y="168" width="28" height="18"/><rect x="358" y="168" width="28" height="18"/>
-          </g>
-          <!-- Entrance -->
-          <rect x="190" y="180" width="100" height="50" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-          <!-- Steps -->
-          <rect x="170" y="228" width="140" height="4" fill="rgba(255,255,255,0.15)"/>
-          <rect x="160" y="232" width="160" height="4" fill="rgba(255,255,255,0.1)"/>
-          <!-- Flagpoles -->
-          <line x1="80" y1="15" x2="80" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-          <rect x="80" y="15" width="30" height="18" fill="rgba(217,162,27,0.5)"/>
-          <line x1="400" y1="15" x2="400" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-          <rect x="370" y="15" width="30" height="18" fill="rgba(255,255,255,0.25)"/>
-        </svg>
+    <div class="inst-hdr-r">
+      <div class="lang-sel">
+        <span class="on">PT</span><span>·</span><span>EN</span><span>·</span><span>FR</span>
       </div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <div class="hero-badge">Portal Oficial · Serviços Consulares</div>
-        <div class="hero-title">Embaixada de Angola em Lisboa</div>
-        <div class="hero-sub">Atendimento consular, vistos e registo de cidadãos angolanos residentes em Portugal e Espanha.</div>
-        <div>
-          <span class="btn-primary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1" stroke="#16263D" stroke-width="1.5"/><path d="M1 5h12" stroke="#16263D" stroke-width="1.5"/><path d="M4 1v2M10 1v2" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Agende o seu atendimento online
-          </span>
-          <span class="btn-ghost">Verificar situação de processo</span>
+      <div class="search-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="appt-btn">Marcar Atendimento</div>
+    </div>
+  </header>
+
+  <!-- ── HERO BANNER ── -->
+  <div class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-fade"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="var(--gold)" opacity="0.8"/></svg>
+        Portal Oficial · Serviços Consulares
+      </div>
+      <div class="hero-title">Embaixada de Angola<br>em Lisboa</div>
+      <div class="hero-sub">Atendimento consular, vistos e registo de cidadãos angolanos residentes em Portugal e Espanha.</div>
+      <div class="hero-actions">
+        <div class="btn-gold">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.8"/><line x1="16" y1="2" x2="16" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="var(--navy)" stroke-width="1.8"/></svg>
+          Agendar atendimento online
         </div>
+        <div class="btn-ghost-w">Verificar processo</div>
       </div>
     </div>
-
-    <!-- Services -->
-    <div class="services-section">
-      <div class="section-label">Serviços disponíveis</div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="2" width="14" height="18" rx="2" stroke="#16263D" stroke-width="1.5"/><path d="M7 7h8M7 10.5h8M7 14h5" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/><rect x="8" y="4" width="6" height="3" rx="0.5" stroke="#16263D" stroke-width="1"/></svg>
-          </div>
-          <div class="service-name">Passaportes</div>
-          <div class="service-desc">Emissão, renovação e 2.ª via</div>
-          <div class="service-link">→ Agendar</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="14" rx="2" stroke="#16263D" stroke-width="1.5"/><circle cx="11" cy="11" r="3" stroke="#16263D" stroke-width="1.5"/><path d="M6 4V3M16 4V3" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="service-name">Vistos</div>
-          <div class="service-desc">Visto turístico, trabalho, estudo</div>
-          <div class="service-link">→ Requerer</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3" stroke="#16263D" stroke-width="1.5"/><path d="M5 19c0-3.31 2.686-6 6-6s6 2.69 6 6" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3h6" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="service-name">Registo Civil</div>
-          <div class="service-desc">Nascimento, casamento, óbito</div>
-          <div class="service-link">→ Solicitar</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="3" width="14" height="16" rx="1.5" stroke="#16263D" stroke-width="1.5"/><circle cx="11" cy="15" r="1.5" stroke="#16263D" stroke-width="1.2"/><path d="M7 7h8M7 10h6" stroke="#16263D" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="service-name">Procurações</div>
-          <div class="service-desc">Autenticação e reconhecimento</div>
-          <div class="service-link">→ Saber mais</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#16263D" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="service-name">Legalizações</div>
-          <div class="service-desc">Apostilha e reconhecimento</div>
-          <div class="service-link">→ Iniciar</div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#16263D" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="service-name">Assistência</div>
-          <div class="service-desc">Apoio consular urgente</div>
-          <div class="service-link">→ Contactar</div>
-        </div>
-      </div>
+    <div class="hero-status">
+      <div class="status-dot"></div>
+      Sistemas operacionais · Espera actual: 3 dias úteis
     </div>
+  </div>
+
+  <!-- ── SERVICES STRIP ── -->
+  <div class="services-strip">
+    <div class="strip-label">Serviços disponíveis</div>
+    <div class="services-grid">
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="var(--navy)" stroke-width="1.8"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="4" width="8" height="3" rx="0.5" stroke="var(--navy)" stroke-width="1.2"/></svg></div>
+        <div class="srv-name">Passaportes</div>
+        <div class="srv-desc">Emissão, renovação e 2.ª via de passaporte angolano</div>
+        <div class="srv-link">Agendar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="var(--navy)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="var(--navy)" stroke-width="1.8"/><path d="M6 4V3M18 4V3" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="srv-name">Vistos</div>
+        <div class="srv-desc">Visto turístico, de trabalho, estudo e reagrupamento</div>
+        <div class="srv-link">Requerer <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--navy)" stroke-width="1.8"/><path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><path d="M8 3.5h8" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="srv-name">Registo Civil</div>
+        <div class="srv-desc">Nascimento, casamento e óbito de cidadãos angolanos</div>
+        <div class="srv-link">Solicitar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="var(--navy)" stroke-width="1.8"/><circle cx="12" cy="15" r="2" stroke="var(--navy)" stroke-width="1.5"/><path d="M7 7h10M7 10.5h8" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="srv-name">Procurações</div>
+        <div class="srv-desc">Autenticação de documentos e reconhecimento notarial</div>
+        <div class="srv-link">Saber mais <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--navy)" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="srv-name">Legalizações</div>
+        <div class="srv-desc">Apostilha, legalização e tradução de documentos</div>
+        <div class="srv-link">Iniciar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="srv-name">Assistência Consular</div>
+        <div class="srv-desc">Apoio a cidadãos em situação de emergência</div>
+        <div class="srv-link">Contactar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="var(--navy)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── CONTENT ROW ── -->
+  <div class="content-row">
 
     <!-- News -->
-    <div class="news-section">
-      <div class="section-label">Notícias e Avisos</div>
-      <div class="news-grid">
+    <div class="news-col">
+      <div class="col-title">Notícias e Avisos</div>
+      <div class="news-list">
+
         <div class="news-card">
-          <div class="news-date-badge">
-            <span class="news-day">07</span>
-            <span class="news-mon">Jul</span>
-          </div>
+          <div class="news-date"><span class="news-day">07</span><span class="news-mon">Jul</span></div>
           <div>
-            <div class="news-cat">AVISO CONSULAR</div>
+            <div class="news-cat">Aviso Consular</div>
             <div class="news-title">Alteração do horário de atendimento durante o período de verão</div>
             <div class="news-excerpt">De 15 de Julho a 31 de Agosto, o atendimento ao público decorrerá das 09h00 às 13h00. O sistema de agendamento online mantém-se disponível 24 horas.</div>
           </div>
         </div>
+
         <div class="news-card">
-          <div class="news-date-badge">
-            <span class="news-day">02</span>
-            <span class="news-mon">Jul</span>
-          </div>
+          <div class="news-date"><span class="news-day">02</span><span class="news-mon">Jul</span></div>
           <div>
-            <div class="news-cat">NOTA INFORMATIVA</div>
-            <div class="news-title">Novo procedimento para renovação de passaporte em vigor a partir de Agosto</div>
-            <div class="news-excerpt">A partir de 1 de Agosto de 2026, a renovação do passaporte pode ser iniciada integralmente online. Consulte os requisitos e os documentos necessários.</div>
+            <div class="news-cat">Nota Informativa</div>
+            <div class="news-title">Renovação de passaporte disponível integralmente online a partir de Agosto</div>
+            <div class="news-excerpt">A partir de 1 de Agosto de 2026, toda a submissão do processo de renovação pode ser iniciada no portal, sem deslocação presencial prévia.</div>
           </div>
         </div>
+
         <div class="news-card">
-          <div class="news-date-badge">
-            <span class="news-day">25</span>
-            <span class="news-mon">Jun</span>
-          </div>
+          <div class="news-date"><span class="news-day">25</span><span class="news-mon">Jun</span></div>
           <div>
-            <div class="news-cat">COMUNICADO</div>
+            <div class="news-cat">Comunicado</div>
             <div class="news-title">Lançamento da plataforma MIREX Digital — novo portal de serviços consulares</div>
             <div class="news-excerpt">A plataforma MIREX Digital entra em operação em todas as embaixadas e consulados. O acesso é feito pelo portal oficial em mirex.gov.ao.</div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- Schedule strip -->
-    <div class="schedule-strip">
-      <div class="schedule-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#5A6B80" stroke-width="1.2"/><path d="M7 4v3l1.5 1.5" stroke="#5A6B80" stroke-width="1.2" stroke-linecap="round"/></svg>
-        <div>
-          <div class="schedule-label">Horário de atendimento</div>
-          <div class="schedule-value">09h00 – 16h00 · Seg a Sex</div>
-        </div>
-      </div>
-      <div class="schedule-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10H2z" stroke="#5A6B80" stroke-width="1.2" rx="1"/><path d="M2 5h10" stroke="#5A6B80" stroke-width="1.2"/><path d="M5 2v3M9 2v3" stroke="#5A6B80" stroke-width="1.2" stroke-linecap="round"/></svg>
-        <div>
-          <div class="schedule-label">Próximo fecho</div>
-          <div class="schedule-value">15 Jul 2026 · Dia Nacional de Angola</div>
-        </div>
-      </div>
-      <div class="schedule-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1 3.5h3.5l-2.8 2 1 3.5L7 9 3.3 10.5l1-3.5L1.5 5H5z" stroke="#5A6B80" stroke-width="1.2"/></svg>
-        <div>
-          <div class="schedule-label">Tempo médio de espera</div>
-          <div class="schedule-value" style="color:var(--verde)">3 dias úteis</div>
-        </div>
-      </div>
-      <div style="margin-left:auto">
-        <span style="font-size:11px;background:rgba(46,125,79,0.08);color:var(--verde);padding:4px 10px;border-radius:4px;font-weight:600">● Sistemas operacionais</span>
-      </div>
-    </div>
+    <!-- Side panels -->
+    <div class="side-col">
 
-    <!-- Footer -->
-    <div class="portal-footer">
-      <div>
-        <div class="footer-col-label">Contactos</div>
-        <div class="footer-col-text">
-          +351 21 797 8840<br>
-          consulado.lisboa@mirex.gov.ao<br>
-          Avenida de Berna, 33<br>
-          1050-037 Lisboa
+      <!-- Horários e contactos -->
+      <div class="info-card">
+        <div class="ic-head">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="1.8"/><polyline points="12 6 12 12 16 14" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div>
+            <div class="ic-head-title">Horários e Contactos</div>
+            <div class="ic-head-sub">Embaixada de Angola em Lisboa</div>
+          </div>
+        </div>
+        <div class="ic-body">
+          <div class="sched-row">
+            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.6"/><line x1="3" y1="9" x2="21" y2="9" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
+            <div><div class="sched-lbl">Atendimento ao público</div><div class="sched-val">09h00 – 16h00 · Segunda a Sexta</div></div>
+          </div>
+          <div class="sched-row">
+            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+            <div><div class="sched-lbl">Linha consular geral</div><div class="sched-val">+351 21 797 8840</div></div>
+          </div>
+          <div class="sched-row">
+            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="var(--navy)" stroke-width="1.6"/><polyline points="22,6 12,13 2,6" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
+            <div><div class="sched-lbl">Correio electrónico</div><div class="sched-val">consulado.lisboa@mirex.gov.ao</div></div>
+          </div>
+          <div class="sched-row" style="border:none">
+            <div class="sched-ico" style="background:rgba(181,18,27,0.06)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--red)" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="13" stroke="var(--red)" stroke-width="1.6"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--red)" stroke-width="1.8"/></svg></div>
+            <div><div class="sched-lbl">Urgências consulares 24h</div><div class="sched-val" style="color:var(--red)">+351 91 234 5678</div></div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="footer-col-label">Serviços de urgência</div>
-        <div class="footer-col-text">
-          Linha consular 24h:<br>
-          +351 91 234 5678<br>
-          Apenas para cidadãos em situação<br>de emergência no estrangeiro.
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-label">Localização</div>
-        <div class="footer-map-placeholder">
-          <svg width="100%" height="100%" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
-            <rect width="240" height="60" fill="#1e3555"/>
-            <line x1="0" y1="30" x2="240" y2="30" stroke="#2a4570" stroke-width="1"/>
-            <line x1="120" y1="0" x2="120" y2="60" stroke="#2a4570" stroke-width="1"/>
-            <line x1="0" y1="15" x2="240" y2="15" stroke="#22385e" stroke-width="0.5"/>
-            <line x1="0" y1="45" x2="240" y2="45" stroke="#22385e" stroke-width="0.5"/>
-            <line x1="60" y1="0" x2="60" y2="60" stroke="#22385e" stroke-width="0.5"/>
-            <line x1="180" y1="0" x2="180" y2="60" stroke="#22385e" stroke-width="0.5"/>
-            <circle cx="120" cy="30" r="5" fill="#D9A21B"/>
-            <circle cx="120" cy="30" r="3" fill="#16263D"/>
-            <circle cx="120" cy="30" r="8" fill="none" stroke="#D9A21B" stroke-width="1" opacity="0.5"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">Protótipo conceptual · TIS · 2026</span>
-      <span class="footer-copy">MIREX Digital · Portal do Cidadão · Versão 1.0</span>
-    </div>
 
+      <!-- Stats -->
+      <div class="info-card">
+        <div class="ic-head">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17 6 23 6 23 12" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div class="ic-head-title">Indicadores do Posto</div>
+            <div class="ic-head-sub">Acumulado · 2026</div>
+          </div>
+        </div>
+        <div class="ic-body">
+          <div class="stat-grid">
+            <div class="stat-box"><div class="stat-num" style="color:var(--verde)">8.420</div><div class="stat-lbl">Vistos emitidos</div></div>
+            <div class="stat-box"><div class="stat-num">3.210</div><div class="stat-lbl">Passaportes</div></div>
+            <div class="stat-box"><div class="stat-num">5.170</div><div class="stat-lbl">Registo civil</div></div>
+            <div class="stat-box"><div class="stat-num" style="color:var(--ambar)">3 dias</div><div class="stat-lbl">Tempo médio SLA</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="portal-footer">
+    <img src="mirex_logo_branco_amarelo.png" alt="MIREX" height="30" style="display:block;flex-shrink:0;opacity:.85">
+    <div class="footer-div"></div>
+    <div class="footer-item">
+      <div>
+        <div class="footer-label">Morada</div>
+        <div class="footer-val">Avenida de Berna, 33 · 1050-037 Lisboa</div>
+      </div>
+    </div>
+    <div class="footer-div"></div>
+    <div class="footer-item">
+      <div>
+        <div class="footer-label">Próximo encerramento</div>
+        <div class="footer-val">15 Jul 2026 · Dia Nacional de Angola</div>
+      </div>
+    </div>
+    <div class="footer-div"></div>
+    <div class="footer-item">
+      <div>
+        <div class="footer-label">Cobertura consular</div>
+        <div class="footer-val">Portugal · Espanha · Andorra</div>
+      </div>
+    </div>
+    <div class="footer-r">
+      <div class="footer-status"><div class="status-dot"></div>Sistemas operacionais</div>
+      <div class="footer-copy">Protótipo conceptual · TIS · 2026 · MIREX Digital</div>
+    </div>
+  </footer>
 
 </div>
 </div>
@@ -526,12 +443,8 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 <script>
 !function(){
   var vp=document.getElementById('_vp');
-  function fit(){
-    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
-    vp.style.transform='scale('+s+')';
-  }
-  fit();
-  window.addEventListener('resize',fit);
+  function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')';}
+  fit(); window.addEventListener('resize',fit);
 }();
 </script>
 </body>
