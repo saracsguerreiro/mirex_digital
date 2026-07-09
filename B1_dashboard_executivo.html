@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <title>MIREX Digital · Dashboard Executivo</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 
 :root {
-  --glass:rgba(255,255,255,0.55); --border:rgba(255,255,255,0.68);
-  --line:rgba(22,38,61,0.10); --shadow:0 8px 32px rgba(0,0,0,0.13);
-  --navy:#16263D; --gold:#D9A21B; --ink:#16263D; --ink2:#334155;
-  --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
-  --sidebar:76px; --hdr:70px;
+  --glass:rgba(255,255,255,0.55);--border:rgba(255,255,255,0.68);
+  --line:rgba(22,38,61,0.10);--shadow:0 8px 32px rgba(0,0,0,0.13);
+  --navy:#16263D;--gold:#D9A21B;--ink:#16263D;--ink2:#334155;
+  --muted:#64748B;--verde:#2E7D4F;--ambar:#C77D0A;--red:#B5121B;
+  --sidebar:76px;--hdr:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -19,152 +20,72 @@ body{
   background:linear-gradient(180deg,#D7E1EC 0%,#8BA4BC 42%,#3A5473 74%,#23405F 100%);
   width:1920px;height:1080px;overflow:hidden;color:var(--ink)
 }
-
-/* SIDEBAR — sem painel, círculos flutuantes */
-.sb{
-  position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);
-  display:flex;flex-direction:column;align-items:center;
-  padding:18px 0;z-index:20;gap:7px
-}
-.sb-logo{
-  width:50px;height:50px;border-radius:50%;
-  background:rgba(255,255,255,0.35);
-  border:1.5px solid rgba(255,255,255,0.55);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:22px;flex-shrink:0;overflow:hidden
-}
-.ni{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(22,38,61,0.70);
-  background:rgba(255,255,255,0.20);
-  border:1px solid rgba(255,255,255,0.38);
-  transition:all .15s;cursor:pointer;flex-shrink:0
-}
-.ni.on{
-  background:rgba(255,255,255,0.50);color:var(--navy);
-  border-color:rgba(255,255,255,0.65);
-  box-shadow:0 4px 18px rgba(0,0,0,0.14)
-}
+.sb{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);display:flex;flex-direction:column;align-items:center;padding:18px 0;z-index:20;gap:7px}
+.sb-logo{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.35);border:1.5px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;margin-bottom:22px;flex-shrink:0;overflow:hidden}
+.ni{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(22,38,61,0.70);background:rgba(255,255,255,0.20);border:1px solid rgba(255,255,255,0.38);transition:all .15s;cursor:pointer;flex-shrink:0}
+.ni.on{background:rgba(255,255,255,0.50);color:var(--navy);border-color:rgba(255,255,255,0.65);box-shadow:0 4px 18px rgba(0,0,0,0.14)}
 .sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:7px}
-
-/* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
-
-/* HEADER — transparente */
-.hdr{
-  height:var(--hdr);background:transparent;
-  padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0
-}
+.hdr{height:var(--hdr);background:transparent;padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0}
 .hdr-logo{height:40px;mix-blend-mode:multiply;flex-shrink:0}
 .hdr-div{width:1px;height:32px;background:rgba(22,38,61,0.14);flex-shrink:0}
 .hdr-info{flex-shrink:0}
-.hdr-title{font-size:16px;font-weight:700;color:var(--ink)}
-.hdr-sub{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
+.hdr-title{font-size:18px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:12px;color:rgba(22,38,61,0.50);margin-top:1px}
 .hdr-nav{display:flex;gap:2px;margin-left:12px}
-.nt{
-  padding:8px 18px;border-radius:9999px;
-  font-size:13px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer
-}
+.nt{padding:8px 18px;border-radius:9999px;font-size:14px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer}
 .nt.on{background:rgba(22,38,61,0.10);color:var(--navy);font-weight:700}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.ib{
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0
-}
+.ib{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0}
 .notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid rgba(255,255,255,0.9)}
-.uchip{
-  display:flex;align-items:center;gap:9px;
-  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
-  border-radius:9999px;padding:5px 14px 5px 5px
-}
-.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
-.un{font-size:12px;font-weight:600;color:var(--ink)}
-.us{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
-
-/* CONTENT */
-.cnt{flex:1;overflow:hidden;padding:10px 24px 14px 20px;display:flex;flex-direction:column;gap:12px}
-
-/* KPI — CAIXA ÚNICA COM DIVISÓRIAS */
-.kcard{
-  background:rgba(255,255,255,0.58);
-  backdrop-filter:blur(24px) saturate(1.5);
-  border:1px solid rgba(255,255,255,0.72);
-  border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);
-  display:flex;align-items:stretch;flex-shrink:0
-}
-.ki{flex:1;padding:18px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
-.ki+.ki::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:1px;background:rgba(22,38,61,0.13)}
-.ki-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:3px;flex-shrink:0}
-.kbig{font-size:38px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
-.klbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.kdiff{font-size:11px;font-weight:600}
-
-/* GLASS CARD */
-.gc{
-  background:rgba(255,255,255,0.52);
-  backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid rgba(255,255,255,0.65);
-  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);
-  overflow:hidden;display:flex;flex-direction:column
-}
+.uchip{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);border-radius:9999px;padding:5px 14px 5px 5px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0}
+.un{font-size:13px;font-weight:600;color:var(--ink)}
+.us{font-size:11px;color:rgba(22,38,61,0.50);margin-top:1px}
+.cnt{flex:1;overflow:hidden;padding:10px 24px 10px 20px;display:flex;flex-direction:column;gap:12px}
+.kcard{background:rgba(255,255,255,0.58);backdrop-filter:blur(24px) saturate(1.5);border:1px solid rgba(255,255,255,0.72);border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);display:flex;align-items:stretch;flex-shrink:0}
+.ki{flex:1;padding:16px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
+.ki+.ki::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:rgba(22,38,61,0.13)}
+.ki-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:2px;flex-shrink:0}
+.kbig{font-size:40px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
+.klbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.kdiff{font-size:13px;font-weight:600}
+.gc{background:rgba(255,255,255,0.52);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(255,255,255,0.65);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column}
 .gh{padding:14px 20px 12px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.gt{font-size:14px;font-weight:700;color:var(--ink)}
-.gs{font-size:10px;color:var(--muted);margin-top:2px}
+.gt{font-size:16px;font-weight:700;color:var(--ink)}
+.gs{font-size:12px;color:var(--muted);margin-top:2px}
 .gb{flex:1;overflow:hidden}
-
-/* CHIPS */
-.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:9999px;font-size:11px;font-weight:700}
 .cg{background:rgba(46,125,79,0.12);color:var(--verde)}
 .ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
 .cr{background:rgba(181,18,27,0.12);color:var(--red)}
 .ci{background:rgba(217,162,27,0.12);color:#8a6500}
 .cn{background:rgba(100,116,139,0.10);color:var(--muted)}
-
-/* LEGEND */
 .leg{display:flex;align-items:center;gap:5px}
-.ld{width:7px;height:7px;border-radius:50%}
-.ll{font-size:10px;color:var(--muted)}
-
-/* BODY ROW */
+.ld{width:8px;height:8px;border-radius:50%}
+.ll{font-size:12px;color:var(--muted)}
 .brow{flex:1;display:flex;gap:14px;min-height:0}
-
-/* FOOTER */
-.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.32);flex-shrink:0}
-
-/* TABLE */
+.ft{text-align:center;padding:6px;font-size:12px;color:rgba(255,255,255,0.32);flex-shrink:0}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
-.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
+.tbl th{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:11px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
+.tbl td{padding:12px 14px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr.sel td{background:rgba(22,38,61,0.03)}
-
-/* SLA BAR */
-.slab{height:4px;border-radius:2px;background:rgba(22,38,61,0.08);overflow:hidden}
-.slaf{height:100%;border-radius:2px}
-
-/* TIMELINE */
+.slab{height:5px;border-radius:3px;background:rgba(22,38,61,0.08);overflow:hidden}
+.slaf{height:100%;border-radius:3px}
 .tml-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-
-/* BADGE */
-.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:9999px;font-size:10px;font-weight:600}
-
-/* SEARCH */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600}
 .sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.70);border-radius:9999px;padding:8px 16px}
-.sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
+.sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:13px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
-
-/* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
-.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
+.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
 .fch:not(.on){background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.65);color:var(--muted)}
 
 
-#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
@@ -180,159 +101,165 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
 <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
-  <div class="sb-bot">
-    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  </div>
+  <div class="sb-bot"><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 </nav><div class="main"><header class="hdr">
   <img src="mirex_logo_cores.png" class="hdr-logo" alt="MIREX Digital">
   <div class="hdr-div"></div>
-  <div class="hdr-info"><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática · 52 postos activos · 9 Jul 2026</div></div>
+  <div class="hdr-info"><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática global · 52 postos activos · 9 Jul 2026</div></div>
   <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
   <div class="hdr-r">
-    <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="uchip">
-      <div class="av">JC</div>
-      <div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div>
-    </div>
+    <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="uchip"><div class="av">JC</div><div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div></div>
   </div>
 </header>
 <div class="cnt">
-<div class="kcard">
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-    <div class="klbl">Actos Consulares / Mês</div>
-    <div class="kbig">18.432</div>
-    <div class="kdiff" style="color:var(--verde)">↑ 12% vs. mês anterior</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-    <div class="klbl">Receita Consular</div>
-    <div class="kbig">↑ 12%</div>
-    <div class="kdiff" style="color:var(--verde)">Crescimento homólogo</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <div class="klbl">Diáspora Registada</div>
-    <div class="kbig">78%</div>
-    <div class="kdiff" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-    <div class="klbl">Postos dentro de SLA</div>
-    <div class="kbig">46/52</div>
-    <div class="kdiff" style="color:var(--ambar)">6 em acompanhamento</div>
-  </div>
-</div>
+<div class="kcard"><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><div class="klbl">Actos Consulares / Mês</div><div class="kbig">18.432</div><div class="kdiff" style="color:var(--verde)">↑ 12% vs. mês anterior</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="klbl">Receita Consular</div><div class="kbig">↑ 12%</div><div class="kdiff" style="color:var(--verde)">Crescimento homólogo</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="klbl">Diáspora Registada</div><div class="kbig">78%</div><div class="kdiff" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="klbl">Postos dentro de SLA</div><div class="kbig">46/52</div><div class="kdiff" style="color:var(--ambar)">6 em acompanhamento</div></div></div>
 <div class="brow">
   <div class="gc" style="flex:1">
     <div class="gh">
-      <div><div class="gt">Rede Diplomática Global</div><div class="gs">52 postos em 5 continentes</div></div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Em SLA (46)</span></div>
-        <div class="leg"><span class="ld" style="background:#C77D0A"></span><span class="ll">Atenção (4)</span></div>
-        <div class="leg"><span class="ld" style="background:#B5121B"></span><span class="ll">Crítico (2)</span></div>
-        <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">HQ Luanda</span></div>
-      </div>
+      <div><div class="gt">Rede Diplomática Global</div><div class="gs">30 missões · 5 continentes</div></div>
+      <div style="display:flex;gap:14px;align-items:center">
+  <div class="leg"><span class="ld" style="background:#3b82f6"></span><span class="ll">Europa</span></div>
+  <div class="leg"><span class="ld" style="background:#10b981"></span><span class="ll">África</span></div>
+  <div class="leg"><span class="ld" style="background:#f59e0b"></span><span class="ll">Américas</span></div>
+  <div class="leg"><span class="ld" style="background:#ef4444"></span><span class="ll">Ásia</span></div>
+  <div class="leg"><span class="ld" style="background:#8b5cf6"></span><span class="ll">Am. Norte</span></div>
+  <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">HQ Luanda</span></div>
+  <div class="leg"><div style="width:12px;height:12px;border-radius:50%;border:1.5px solid #B5121B;opacity:.6"></div><span class="ll">Crítico</span></div>
+</div>
     </div>
-    <div class="gb" style="padding:8px 16px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 1000 480" style="width:100%;height:100%" fill="none">
-  <path d="M108 58 L152 52 L195 68 L238 92 L262 134 L258 164 L242 186 L218 208 L196 230 L172 254 L148 274 L126 296 L100 278 L78 256 L68 224 L78 196 L88 168 L100 138 L108 58Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M196 298 L218 284 L248 294 L266 316 L274 344 L272 374 L262 400 L244 416 L224 424 L204 412 L188 390 L180 362 L182 334 L196 298Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M438 46 L482 42 L516 52 L526 68 L514 90 L492 102 L468 112 L446 122 L434 108 L428 88 L432 66Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M448 138 L492 130 L524 142 L542 168 L546 202 L540 244 L530 284 L510 322 L490 348 L468 358 L448 346 L428 318 L418 278 L416 238 L422 196 L432 166Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M528 46 L598 40 L680 46 L752 58 L804 78 L822 108 L812 138 L782 158 L752 168 L700 172 L648 166 L598 154 L556 142 L536 120 L526 94 L524 66Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M718 178 L762 166 L804 178 L820 210 L812 242 L782 252 L750 242 L728 220Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <circle cx="468" cy="190" r="8" fill="#D9A21B" stroke="white" stroke-width="2"/>
-  <polygon points="468,183 469.5,187.5 474,187.5 470.5,190.2 471.8,194.5 468,191.8 464.2,194.5 465.5,190.2 462,187.5 466.5,187.5" fill="white"/>
-  <circle cx="452" cy="88" r="5.5" fill="#2E7D4F"/><circle cx="460" cy="78" r="4.5" fill="#2E7D4F"/>
-  <circle cx="468" cy="68" r="4.5" fill="#2E7D4F"/><circle cx="484" cy="62" r="4.5" fill="#2E7D4F"/>
-  <circle cx="474" cy="70" r="4.5" fill="#2E7D4F"/><circle cx="488" cy="74" r="4.5" fill="#2E7D4F"/>
-  <circle cx="498" cy="76" r="4.5" fill="#2E7D4F"/><circle cx="492" cy="84" r="4.5" fill="#2E7D4F"/>
-  <circle cx="496" cy="68" r="4.5" fill="#2E7D4F"/><circle cx="506" cy="78" r="4.5" fill="#2E7D4F"/>
-  <circle cx="504" cy="90" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="60" r="4.5" fill="#2E7D4F"/>
-  <circle cx="468" cy="212" r="4.5" fill="#2E7D4F"/><circle cx="460" cy="168" r="4.5" fill="#2E7D4F"/>
-  <circle cx="478" cy="164" r="4.5" fill="#2E7D4F"/><circle cx="472" cy="182" r="4.5" fill="#2E7D4F"/>
-  <circle cx="462" cy="200" r="4.5" fill="#2E7D4F"/><circle cx="454" cy="172" r="4.5" fill="#2E7D4F"/>
-  <circle cx="460" cy="206" r="4.5" fill="#2E7D4F"/><circle cx="452" cy="150" r="4.5" fill="#C77D0A"/>
-  <circle cx="486" cy="176" r="4.5" fill="#C77D0A"/>
-  <circle cx="146" cy="108" r="4.5" fill="#2E7D4F"/><circle cx="152" cy="98" r="4.5" fill="#2E7D4F"/>
-  <circle cx="138" cy="118" r="4.5" fill="#2E7D4F"/><circle cx="188" cy="184" r="4.5" fill="#2E7D4F"/>
-  <circle cx="192" cy="176" r="4.5" fill="#2E7D4F"/><circle cx="168" cy="182" r="4.5" fill="#2E7D4F"/>
-  <circle cx="182" cy="298" r="4.5" fill="#C77D0A"/><circle cx="148" cy="128" r="4.5" fill="#2E7D4F"/>
-  <circle cx="142" cy="116" r="4.5" fill="#2E7D4F"/>
-  <circle cx="718" cy="144" r="4.5" fill="#C77D0A"/><circle cx="728" cy="148" r="4.5" fill="#2E7D4F"/>
-  <circle cx="724" cy="138" r="4.5" fill="#2E7D4F"/><circle cx="596" cy="116" r="4.5" fill="#B5121B"/>
-  <circle cx="678" cy="172" r="4.5" fill="#2E7D4F"/><circle cx="696" cy="170" r="4.5" fill="#2E7D4F"/>
-  <circle cx="740" cy="186" r="4.5" fill="#B5121B"/><circle cx="562" cy="128" r="4.5" fill="#2E7D4F"/>
-  <circle cx="572" cy="136" r="4.5" fill="#2E7D4F"/><circle cx="578" cy="144" r="4.5" fill="#2E7D4F"/>
-  <circle cx="548" cy="132" r="4.5" fill="#2E7D4F"/><circle cx="662" cy="162" r="4.5" fill="#2E7D4F"/>
-  <text x="478" y="208" font-size="9" fill="white" font-family="Inter,sans-serif" font-weight="700" opacity="0.9">Luanda</text>
-  <text x="598" y="111" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Moscovo</text>
-  <text x="742" y="182" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Jacarta</text>
-</svg></div>
+    <div class="gb" style="position:relative"><div id="map-wrap" style="width:100%;height:100%;position:relative">
+  <svg id="world-svg" style="width:100%;height:100%;display:block"></svg>
+  <div id="map-tip" style="position:absolute;pointer-events:none;display:none;background:rgba(22,38,61,0.90);color:#fff;border-radius:10px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);box-shadow:0 4px 16px rgba(0,0,0,0.3)"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+const MISSIONS=[
+  {id:"HQ",loc:"Luanda — Sede",color:"#D9A21B",status:"normal",hq:true,coords:[13.23,-8.84]},
+  {id:"M001",loc:"Embaixada de Lisboa",color:"#3b82f6",status:"warning",hq:false,coords:[-9.14,38.72]},
+  {id:"M002",loc:"Consulado de Paris",color:"#3b82f6",status:"normal",hq:false,coords:[2.35,48.86]},
+  {id:"M003",loc:"Embaixada de Brasília",color:"#f59e0b",status:"critical",hq:false,coords:[-47.93,-15.78]},
+  {id:"M004",loc:"Embaixada de Pequim",color:"#ef4444",status:"warning",hq:false,coords:[116.4,39.91]},
+  {id:"M005",loc:"Embaixada de Washington",color:"#8b5cf6",status:"warning",hq:false,coords:[-77.04,38.91]},
+  {id:"M006",loc:"Embaixada de Moscovo",color:"#3b82f6",status:"critical",hq:false,coords:[37.62,55.75]},
+  {id:"M007",loc:"Consulado de Joanesburgo",color:"#10b981",status:"normal",hq:false,coords:[28.04,-26.2]},
+  {id:"M008",loc:"Embaixada de Londres",color:"#3b82f6",status:"normal",hq:false,coords:[-0.12,51.5]},
+  {id:"M009",loc:"Embaixada de Berlim",color:"#3b82f6",status:"critical",hq:false,coords:[13.4,52.52]},
+  {id:"M010",loc:"Embaixada de Madrid",color:"#3b82f6",status:"normal",hq:false,coords:[-3.7,40.42]},
+  {id:"M011",loc:"Embaixada de Tóquio",color:"#ef4444",status:"normal",hq:false,coords:[139.69,35.69]},
+  {id:"M012",loc:"Embaixada de Nova Delhi",color:"#ef4444",status:"normal",hq:false,coords:[77.21,28.61]},
+  {id:"M013",loc:"Embaixada do Cairo",color:"#10b981",status:"warning",hq:false,coords:[31.24,30.06]},
+  {id:"M014",loc:"Consulado de Toronto",color:"#8b5cf6",status:"normal",hq:false,coords:[-79.38,43.65]},
+  {id:"M015",loc:"Embaixada de Buenos Aires",color:"#f59e0b",status:"warning",hq:false,coords:[-58.38,-34.6]},
+  {id:"M016",loc:"Embaixada de Nairobi",color:"#10b981",status:"normal",hq:false,coords:[36.82,-1.29]},
+  {id:"M017",loc:"Embaixada de Abidjan",color:"#10b981",status:"normal",hq:false,coords:[-4.03,5.35]},
+  {id:"M018",loc:"Embaixada de Havana",color:"#8b5cf6",status:"warning",hq:false,coords:[-82.38,23.13]},
+  {id:"M019",loc:"Embaixada de Caracas",color:"#f59e0b",status:"normal",hq:false,coords:[-66.92,10.49]},
+  {id:"M020",loc:"Embaixada de Seul",color:"#ef4444",status:"normal",hq:false,coords:[126.98,37.57]},
+  {id:"M021",loc:"Embaixada de Lagos",color:"#10b981",status:"warning",hq:false,coords:[3.38,6.46]},
+  {id:"M022",loc:"Embaixada de Santiago",color:"#f59e0b",status:"normal",hq:false,coords:[-70.67,-33.45]},
+  {id:"M023",loc:"Embaixada da Cidade do México",color:"#8b5cf6",status:"warning",hq:false,coords:[-99.13,19.43]},
+  {id:"M024",loc:"Embaixada de Banguecoque",color:"#ef4444",status:"normal",hq:false,coords:[100.52,13.75]},
+  {id:"M025",loc:"Embaixada de Maputo",color:"#10b981",status:"normal",hq:false,coords:[32.58,-25.97]},
+  {id:"M026",loc:"Embaixada de Roma",color:"#3b82f6",status:"critical",hq:false,coords:[12.5,41.9]},
+  {id:"M027",loc:"Consulado de Genebra",color:"#3b82f6",status:"normal",hq:false,coords:[6.14,46.2]},
+  {id:"M028",loc:"Embaixada de Dacarta",color:"#ef4444",status:"normal",hq:false,coords:[106.84,-6.21]},
+  {id:"M029",loc:"Embaixada de Acra",color:"#10b981",status:"normal",hq:false,coords:[-0.19,5.55]},
+  {id:"M030",loc:"Embaixada de Adis Abeba",color:"#10b981",status:"normal",hq:false,coords:[38.74,9.02]},
+];
+(function(){
+  const W=1280, H=680;
+  const svg=d3.select('#world-svg').attr('viewBox','0 0 '+W+' '+H).attr('preserveAspectRatio','xMidYMid meet');
+  const proj=d3.geoNaturalEarth1().rotate([-15,0]).scale(215).translate([W/2,H/2+30]);
+  const path=d3.geoPath().projection(proj);
+  const tip=document.getElementById('map-tip');
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
+    const countries=topojson.feature(world,world.objects.countries);
+    svg.selectAll('.ctry').data(countries.features).enter().append('path')
+      .attr('class','ctry').attr('d',path)
+      .attr('fill','rgba(22,38,61,0.10)').attr('stroke','rgba(22,38,61,0.20)').attr('stroke-width',0.6);
+    MISSIONS.forEach(m=>{
+      const [x,y]=proj(m.coords);
+      if(!x||!y) return;
+      const g=svg.append('g').attr('transform','translate('+x+','+y+')').style('cursor','pointer');
+      if(m.status==='critical') g.append('circle').attr('r',14).attr('fill','none').attr('stroke','#B5121B').attr('stroke-width',1.5).attr('opacity',0.50);
+      if(m.hq){
+        g.append('circle').attr('r',11).attr('fill',m.color).attr('stroke','white').attr('stroke-width',2);
+        g.append('polygon').attr('points','0,-6 1.4,−2.5 5.7,-2.5 2.3,0 3.6,4.5 0,2 -3.6,4.5 -2.3,0 -5.7,-2.5 -1.4,-2.5').attr('fill','white').attr('transform','scale(0.85)');
+      } else {
+        g.append('circle').attr('r',m.status==='critical'?9:8).attr('fill',m.color).attr('stroke','white').attr('stroke-width',1.8);
+        g.append('circle').attr('r',3).attr('fill','rgba(255,255,255,0.70)');
+      }
+      g.on('mousemove',function(event){
+        const rect=document.getElementById('world-svg').getBoundingClientRect();
+        const sc=rect.width/W;
+        tip.style.display='block';
+        tip.style.left=(x*sc+rect.left+14)+'px';
+        tip.style.top=(y*sc+rect.top-50)+'px';
+        tip.innerHTML='<strong>'+m.loc+'</strong><br><span style="opacity:.7;font-size:12px">'+m.cont+'</span>';
+      }).on('mouseleave',()=>tip.style.display='none');
+    });
+  }).catch(()=>{
+    svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
+      .attr('font-family','Inter,sans-serif').attr('font-size','16').attr('fill','rgba(22,38,61,0.40)')
+      .text('Mapa indisponível sem conexão à internet');
+  });
+})();
+</script></div>
   </div>
   <div style="width:470px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
     <div class="gc" style="flex:1">
       <div class="gh">
-        <div><div class="gt">Tendência de Vistos</div><div class="gs">Jan–Dez 2025</div></div>
-        <div style="display:flex;gap:10px">
-          <div class="leg"><span class="ld" style="background:#16263D"></span><span class="ll">Europa</span></div>
-          <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">África</span></div>
-          <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Ásia</span></div>
-        </div>
+        <div><div class="gt">Actos Consulares por Tipo</div><div class="gs">Distribuição mensal · Jul 2026</div></div>
       </div>
-      <div class="gb" style="padding:10px 16px"><svg viewBox="0 0 420 170" style="width:100%;height:100%">
-  <line x1="38" y1="20" x2="38" y2="148" stroke="rgba(22,38,61,0.14)" stroke-width="1"/>
-  <line x1="38" y1="148" x2="414" y2="148" stroke="rgba(22,38,61,0.14)" stroke-width="1"/>
-  <line x1="38" y1="38" x2="414" y2="38" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="66" x2="414" y2="66" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="94" x2="414" y2="94" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="122" x2="414" y2="122" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
-  <text x="33" y="41" text-anchor="end" font-size="8" fill="#94a3b8">800</text>
-  <text x="33" y="69" text-anchor="end" font-size="8" fill="#94a3b8">600</text>
-  <text x="33" y="97" text-anchor="end" font-size="8" fill="#94a3b8">400</text>
-  <text x="33" y="125" text-anchor="end" font-size="8" fill="#94a3b8">200</text>
-  <text x="55" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jan</text><text x="85" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Fev</text>
-  <text x="115" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mar</text><text x="145" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Abr</text>
-  <text x="175" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mai</text><text x="205" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jun</text>
-  <text x="235" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jul</text><text x="265" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Ago</text>
-  <text x="295" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Set</text><text x="325" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Out</text>
-  <text x="355" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Nov</text><text x="385" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Dez</text>
-  <polygon points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38 385,148 55,148" fill="#16263D" opacity="0.09"/>
-  <polyline points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38" fill="none" stroke="#16263D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94 385,148 55,148" fill="#D9A21B" opacity="0.10"/>
-  <polyline points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94" fill="none" stroke="#D9A21B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120 385,148 55,148" fill="#2E7D4F" opacity="0.10"/>
-  <polyline points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120" fill="none" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="385" cy="38" r="4.5" fill="#16263D" stroke="white" stroke-width="2"/>
+      <div class="gb" style="padding:8px 10px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 400 350" style="width:100%;height:100%;display:block">
+<path d="M190.0,72.0 A108,108 0 0,1 220.4,283.6 L209.1,245.3 A68,68 0 0,0 190.0,112.0 Z" fill="#3b82f6"/><path d="M218.9,284.0 A108,108 0 0,1 82.5,190.1 L122.3,186.4 A68,68 0 0,0 208.2,245.5 Z" fill="#10b981"/><path d="M82.3,188.6 A108,108 0 0,1 131.7,89.1 L153.3,122.8 A68,68 0 0,0 122.2,185.4 Z" fill="#f59e0b"/><path d="M133.0,88.3 A108,108 0 0,1 188.5,72.0 L189.1,112.0 A68,68 0 0,0 154.1,122.3 Z" fill="#D9A21B"/>
+<circle cx="190" cy="180" r="108" fill="rgba(255,255,255,0.0)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/>
+<circle cx="190" cy="180" r="68" fill="rgba(255,255,255,0.55)"/>
+<text x="190" y="166" text-anchor="middle" font-size="28" font-weight="800" fill="#16263D" font-family="Inter,sans-serif">18.432</text>
+<text x="190" y="190" text-anchor="middle" font-size="12" fill="#64748B" font-family="Inter,sans-serif">actos / mês</text>
+<rect x="318" y="28" width="12" height="12" rx="3" fill="#3b82f6"/>
+<text x="336" y="38" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">45.7%</text>
+<text x="336" y="54" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Vistos</text>
+<text x="336" y="68" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">8,420 actos</text>
+<rect x="318" y="80" width="12" height="12" rx="3" fill="#10b981"/>
+<text x="336" y="90" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">28.0%</text>
+<text x="336" y="106" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Reg. Civil</text>
+<text x="336" y="120" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">5,170 actos</text>
+<rect x="318" y="132" width="12" height="12" rx="3" fill="#f59e0b"/>
+<text x="336" y="142" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">17.4%</text>
+<text x="336" y="158" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Passaportes</text>
+<text x="336" y="172" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">3,210 actos</text>
+<rect x="318" y="184" width="12" height="12" rx="3" fill="#D9A21B"/>
+<text x="336" y="194" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">8.9%</text>
+<text x="336" y="210" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Procurações</text>
+<text x="336" y="224" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">1,632 actos</text>
 </svg></div>
     </div>
-    <div class="gc" style="flex-shrink:0">
-      <div class="gh"><div class="gt">Alertas</div><span class="chip cr">3 activos</span></div>
-      <div style="padding:2px 18px">
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-          <div style="width:8px;height:8px;border-radius:50%;background:#B5121B;flex-shrink:0;margin-top:4px"></div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
-          <span class="chip cr">Crítico</span>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-          <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:600">Pequim — Degradação</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Tempo médio resposta &gt; 48h</div></div>
-          <span class="chip ca">Atenção</span>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-          <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:600">Jacarta — Volume atípico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">+340% de pedidos vs. média</div></div>
-          <span class="chip ca">Atenção</span>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0">
-          <div style="width:8px;height:8px;border-radius:50%;background:#D9A21B;flex-shrink:0;margin-top:4px"></div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
-          <span class="chip ci">Info</span>
-        </div>
-      </div>
-    </div>
+    <div class="gc" style="flex-shrink:0"><div class="gh"><div class="gt">Alertas</div><span class="chip cr">3 activos</span></div>
+<div style="padding:2px 18px">
+  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
+    <div style="width:9px;height:9px;border-radius:50%;background:#B5121B;flex-shrink:0;margin-top:4px"></div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
+    <span class="chip cr">Crítico</span>
+  </div>
+  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
+    <div style="width:9px;height:9px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:600">Berlim — SLA crítico</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tempo médio resposta > 72h</div></div>
+    <span class="chip cr">Crítico</span>
+  </div>
+  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
+    <div style="width:9px;height:9px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:600">Pequim — Degradação</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tempo médio resposta > 48h</div></div>
+    <span class="chip ca">Atenção</span>
+  </div>
+  <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
+    <div style="width:9px;height:9px;border-radius:50%;background:#D9A21B;flex-shrink:0;margin-top:4px"></div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
+    <span class="chip ci">Info</span>
+  </div>
+</div></div>
   </div>
 </div>
 </div>

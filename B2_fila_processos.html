@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <title>MIREX Digital · Fila de Processos</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 
 :root {
-  --glass:rgba(255,255,255,0.55); --border:rgba(255,255,255,0.68);
-  --line:rgba(22,38,61,0.10); --shadow:0 8px 32px rgba(0,0,0,0.13);
-  --navy:#16263D; --gold:#D9A21B; --ink:#16263D; --ink2:#334155;
-  --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
-  --sidebar:76px; --hdr:70px;
+  --glass:rgba(255,255,255,0.55);--border:rgba(255,255,255,0.68);
+  --line:rgba(22,38,61,0.10);--shadow:0 8px 32px rgba(0,0,0,0.13);
+  --navy:#16263D;--gold:#D9A21B;--ink:#16263D;--ink2:#334155;
+  --muted:#64748B;--verde:#2E7D4F;--ambar:#C77D0A;--red:#B5121B;
+  --sidebar:76px;--hdr:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -19,152 +20,72 @@ body{
   background:linear-gradient(180deg,#D7E1EC 0%,#8BA4BC 42%,#3A5473 74%,#23405F 100%);
   width:1920px;height:1080px;overflow:hidden;color:var(--ink)
 }
-
-/* SIDEBAR — sem painel, círculos flutuantes */
-.sb{
-  position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);
-  display:flex;flex-direction:column;align-items:center;
-  padding:18px 0;z-index:20;gap:7px
-}
-.sb-logo{
-  width:50px;height:50px;border-radius:50%;
-  background:rgba(255,255,255,0.35);
-  border:1.5px solid rgba(255,255,255,0.55);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:22px;flex-shrink:0;overflow:hidden
-}
-.ni{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(22,38,61,0.70);
-  background:rgba(255,255,255,0.20);
-  border:1px solid rgba(255,255,255,0.38);
-  transition:all .15s;cursor:pointer;flex-shrink:0
-}
-.ni.on{
-  background:rgba(255,255,255,0.50);color:var(--navy);
-  border-color:rgba(255,255,255,0.65);
-  box-shadow:0 4px 18px rgba(0,0,0,0.14)
-}
+.sb{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);display:flex;flex-direction:column;align-items:center;padding:18px 0;z-index:20;gap:7px}
+.sb-logo{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.35);border:1.5px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;margin-bottom:22px;flex-shrink:0;overflow:hidden}
+.ni{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(22,38,61,0.70);background:rgba(255,255,255,0.20);border:1px solid rgba(255,255,255,0.38);transition:all .15s;cursor:pointer;flex-shrink:0}
+.ni.on{background:rgba(255,255,255,0.50);color:var(--navy);border-color:rgba(255,255,255,0.65);box-shadow:0 4px 18px rgba(0,0,0,0.14)}
 .sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:7px}
-
-/* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
-
-/* HEADER — transparente */
-.hdr{
-  height:var(--hdr);background:transparent;
-  padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0
-}
+.hdr{height:var(--hdr);background:transparent;padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0}
 .hdr-logo{height:40px;mix-blend-mode:multiply;flex-shrink:0}
 .hdr-div{width:1px;height:32px;background:rgba(22,38,61,0.14);flex-shrink:0}
 .hdr-info{flex-shrink:0}
-.hdr-title{font-size:16px;font-weight:700;color:var(--ink)}
-.hdr-sub{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
+.hdr-title{font-size:18px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:12px;color:rgba(22,38,61,0.50);margin-top:1px}
 .hdr-nav{display:flex;gap:2px;margin-left:12px}
-.nt{
-  padding:8px 18px;border-radius:9999px;
-  font-size:13px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer
-}
+.nt{padding:8px 18px;border-radius:9999px;font-size:14px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer}
 .nt.on{background:rgba(22,38,61,0.10);color:var(--navy);font-weight:700}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.ib{
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0
-}
+.ib{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0}
 .notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid rgba(255,255,255,0.9)}
-.uchip{
-  display:flex;align-items:center;gap:9px;
-  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
-  border-radius:9999px;padding:5px 14px 5px 5px
-}
-.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
-.un{font-size:12px;font-weight:600;color:var(--ink)}
-.us{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
-
-/* CONTENT */
-.cnt{flex:1;overflow:hidden;padding:10px 24px 14px 20px;display:flex;flex-direction:column;gap:12px}
-
-/* KPI — CAIXA ÚNICA COM DIVISÓRIAS */
-.kcard{
-  background:rgba(255,255,255,0.58);
-  backdrop-filter:blur(24px) saturate(1.5);
-  border:1px solid rgba(255,255,255,0.72);
-  border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);
-  display:flex;align-items:stretch;flex-shrink:0
-}
-.ki{flex:1;padding:18px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
-.ki+.ki::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:1px;background:rgba(22,38,61,0.13)}
-.ki-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:3px;flex-shrink:0}
-.kbig{font-size:38px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
-.klbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.kdiff{font-size:11px;font-weight:600}
-
-/* GLASS CARD */
-.gc{
-  background:rgba(255,255,255,0.52);
-  backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid rgba(255,255,255,0.65);
-  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);
-  overflow:hidden;display:flex;flex-direction:column
-}
+.uchip{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);border-radius:9999px;padding:5px 14px 5px 5px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0}
+.un{font-size:13px;font-weight:600;color:var(--ink)}
+.us{font-size:11px;color:rgba(22,38,61,0.50);margin-top:1px}
+.cnt{flex:1;overflow:hidden;padding:10px 24px 10px 20px;display:flex;flex-direction:column;gap:12px}
+.kcard{background:rgba(255,255,255,0.58);backdrop-filter:blur(24px) saturate(1.5);border:1px solid rgba(255,255,255,0.72);border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);display:flex;align-items:stretch;flex-shrink:0}
+.ki{flex:1;padding:16px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
+.ki+.ki::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:rgba(22,38,61,0.13)}
+.ki-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:2px;flex-shrink:0}
+.kbig{font-size:40px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
+.klbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.kdiff{font-size:13px;font-weight:600}
+.gc{background:rgba(255,255,255,0.52);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(255,255,255,0.65);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column}
 .gh{padding:14px 20px 12px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.gt{font-size:14px;font-weight:700;color:var(--ink)}
-.gs{font-size:10px;color:var(--muted);margin-top:2px}
+.gt{font-size:16px;font-weight:700;color:var(--ink)}
+.gs{font-size:12px;color:var(--muted);margin-top:2px}
 .gb{flex:1;overflow:hidden}
-
-/* CHIPS */
-.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:9999px;font-size:11px;font-weight:700}
 .cg{background:rgba(46,125,79,0.12);color:var(--verde)}
 .ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
 .cr{background:rgba(181,18,27,0.12);color:var(--red)}
 .ci{background:rgba(217,162,27,0.12);color:#8a6500}
 .cn{background:rgba(100,116,139,0.10);color:var(--muted)}
-
-/* LEGEND */
 .leg{display:flex;align-items:center;gap:5px}
-.ld{width:7px;height:7px;border-radius:50%}
-.ll{font-size:10px;color:var(--muted)}
-
-/* BODY ROW */
+.ld{width:8px;height:8px;border-radius:50%}
+.ll{font-size:12px;color:var(--muted)}
 .brow{flex:1;display:flex;gap:14px;min-height:0}
-
-/* FOOTER */
-.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.32);flex-shrink:0}
-
-/* TABLE */
+.ft{text-align:center;padding:6px;font-size:12px;color:rgba(255,255,255,0.32);flex-shrink:0}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
-.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
+.tbl th{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:11px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
+.tbl td{padding:12px 14px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr.sel td{background:rgba(22,38,61,0.03)}
-
-/* SLA BAR */
-.slab{height:4px;border-radius:2px;background:rgba(22,38,61,0.08);overflow:hidden}
-.slaf{height:100%;border-radius:2px}
-
-/* TIMELINE */
+.slab{height:5px;border-radius:3px;background:rgba(22,38,61,0.08);overflow:hidden}
+.slaf{height:100%;border-radius:3px}
 .tml-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-
-/* BADGE */
-.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:9999px;font-size:10px;font-weight:600}
-
-/* SEARCH */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600}
 .sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.70);border-radius:9999px;padding:8px 16px}
-.sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
+.sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:13px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
-
-/* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
-.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
+.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
 .fch:not(.on){background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.65);color:var(--muted)}
 
 
-#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
@@ -180,59 +101,27 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
 <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
-  <div class="sb-bot">
-    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  </div>
+  <div class="sb-bot"><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 </nav><div class="main"><header class="hdr">
   <img src="mirex_logo_cores.png" class="hdr-logo" alt="MIREX Digital">
   <div class="hdr-div"></div>
   <div class="hdr-info"><div class="hdr-title">Fila de Processos</div><div class="hdr-sub">Embaixada de Angola em Adis Abeba</div></div>
   <div class="hdr-nav"><div class="nt on">Todos</div><div class="nt">Vistos</div><div class="nt">Registo Civil</div><div class="nt">Passaportes</div><div class="nt">Procurações</div></div>
   <div class="hdr-r">
-    <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="uchip">
-      <div class="av">NK</div>
-      <div><div class="un">NZinga Kiala</div><div class="us">Chefe de Posto</div></div>
-    </div>
+    <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="uchip"><div class="av">NK</div><div><div class="un">NZinga Kiala</div><div class="us">Chefe de Posto</div></div></div>
   </div>
 </header>
 <div class="cnt">
-<div class="kcard">
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-    <div class="klbl">Total em Fila</div>
-    <div class="kbig">47</div>
-    <div class="kdiff" style="color:var(--muted)">Processos pendentes</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-    <div class="klbl">Dentro de SLA</div>
-    <div class="kbig">38</div>
-    <div class="kdiff" style="color:var(--verde)">81% conformidade</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-    <div class="klbl">Em Risco de SLA</div>
-    <div class="kbig">7</div>
-    <div class="kdiff" style="color:var(--ambar)">Acção necessária hoje</div>
-  </div>
-<div class="ki">
-    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="klbl">Tempo Médio Resposta</div>
-    <div class="kbig">3,2d</div>
-    <div class="kdiff" style="color:var(--verde)">↓ 0,4d esta semana</div>
-  </div>
-</div>
+<div class="kcard"><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="klbl">Total em Fila</div><div class="kbig">47</div><div class="kdiff" style="color:var(--muted)">Processos pendentes</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="klbl">Dentro de SLA</div><div class="kbig">38</div><div class="kdiff" style="color:var(--verde)">81% conformidade</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="klbl">Em Risco de SLA</div><div class="kbig">7</div><div class="kdiff" style="color:var(--ambar)">Acção necessária hoje</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="klbl">Tempo Médio Resposta</div><div class="kbig">3,2d</div><div class="kdiff" style="color:var(--verde)">↓ 0,4d esta semana</div></div></div>
 <div class="brow">
   <div class="gc" style="flex:1;overflow:hidden">
     <div style="padding:14px 18px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;gap:10px;align-items:center;flex-shrink:0">
-      <div class="sbar" style="flex:1;max-width:280px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="var(--muted)" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/></svg><input placeholder="Pesquisar..." readonly/></div>
+      <div class="sbar" style="flex:1;max-width:280px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="var(--muted)" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/></svg><input placeholder="Pesquisar..." readonly/></div>
       <div class="fchips"><div class="fch on">Todos (47)</div><div class="fch">Urgente</div><div class="fch">Amber</div><div class="fch">Concluídos</div></div>
       <div style="margin-left:auto;display:flex;gap:8px">
-        <div style="background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);border-radius:9999px;padding:7px 16px;font-size:12px;font-weight:500;cursor:pointer">Exportar</div>
-        <div style="background:var(--navy);border-radius:9999px;padding:7px 16px;font-size:12px;color:#fff;font-weight:600;cursor:pointer">+ Novo processo</div>
+        <div style="background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);border-radius:9999px;padding:8px 18px;font-size:13px;font-weight:500;cursor:pointer">Exportar</div>
+        <div style="background:var(--navy);border-radius:9999px;padding:8px 18px;font-size:13px;color:#fff;font-weight:600;cursor:pointer">+ Novo processo</div>
       </div>
     </div>
     <div style="overflow:hidden;flex:1">
@@ -240,95 +129,95 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
         <thead><tr><th>Referência</th><th>Tipo</th><th>Requerente</th><th>Data Entrada</th><th>SLA</th><th>Estado</th><th>Responsável</th></tr></thead>
         <tbody>
           <tr class="sel">
-            <td style="font-family:monospace;font-size:11px;color:var(--navy);font-weight:700">ADD-VIS-2026-0148</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy);font-weight:700">ADD-VIS-2026-0148</td>
             <td><span class="badge" style="background:rgba(22,38,61,0.07);color:var(--navy)">Visto Estudo</span></td>
-            <td><div style="font-weight:600">Abebe Girma</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">07 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--ambar);font-weight:600;margin-bottom:4px">2 dias restantes</div><div class="slab"><div class="slaf" style="width:70%;background:#C77D0A"></div></div></td>
+            <td><div style="font-weight:600">Abebe Girma</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>07 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--ambar);font-weight:600;margin-bottom:5px">2 dias restantes</div><div class="slab"><div class="slaf" style="width:70%;background:#C77D0A"></div></div></td>
             <td><span class="chip ca">Em análise</span></td>
-            <td style="font-size:11px;color:var(--muted)">N. Kiala</td>
+            <td style="color:var(--muted)">N. Kiala</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;font-size:11px;color:var(--navy)">ADD-REG-2026-0147</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy)">ADD-REG-2026-0147</td>
             <td><span class="badge" style="background:rgba(46,125,79,0.08);color:#2E7D4F">Registo Nasc.</span></td>
-            <td><div style="font-weight:600">Tigist Haile</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">06 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--verde);font-weight:600;margin-bottom:4px">5 dias restantes</div><div class="slab"><div class="slaf" style="width:40%;background:#2E7D4F"></div></div></td>
+            <td><div style="font-weight:600">Tigist Haile</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>06 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--verde);font-weight:600;margin-bottom:5px">5 dias restantes</div><div class="slab"><div class="slaf" style="width:40%;background:#2E7D4F"></div></div></td>
             <td><span class="chip cg">Aprovado</span></td>
-            <td style="font-size:11px;color:var(--muted)">F. Domingos</td>
+            <td style="color:var(--muted)">F. Domingos</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;font-size:11px;color:var(--navy)">ADD-PAS-2026-0146</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy)">ADD-PAS-2026-0146</td>
             <td><span class="badge" style="background:rgba(181,18,27,0.08);color:#B5121B">Passaporte</span></td>
-            <td><div style="font-weight:600">Dawit Bekele</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">05 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--red);font-weight:600;margin-bottom:4px">SLA excedido</div><div class="slab"><div class="slaf" style="width:100%;background:#B5121B"></div></div></td>
+            <td><div style="font-weight:600">Dawit Bekele</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>05 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--red);font-weight:600;margin-bottom:5px">SLA excedido</div><div class="slab"><div class="slaf" style="width:100%;background:#B5121B"></div></div></td>
             <td><span class="chip cr">Urgente</span></td>
-            <td style="font-size:11px;color:var(--muted)">N. Kiala</td>
+            <td style="color:var(--muted)">N. Kiala</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;font-size:11px;color:var(--navy)">ADD-VIS-2026-0145</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy)">ADD-VIS-2026-0145</td>
             <td><span class="badge" style="background:rgba(22,38,61,0.07);color:var(--navy)">Visto Negócios</span></td>
-            <td><div style="font-weight:600">Hana Solomon</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">04 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--verde);font-weight:600;margin-bottom:4px">7 dias restantes</div><div class="slab"><div class="slaf" style="width:20%;background:#2E7D4F"></div></div></td>
+            <td><div style="font-weight:600">Hana Solomon</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>04 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--verde);font-weight:600;margin-bottom:5px">7 dias restantes</div><div class="slab"><div class="slaf" style="width:20%;background:#2E7D4F"></div></div></td>
             <td><span class="chip cg">Em análise</span></td>
-            <td style="font-size:11px;color:var(--muted)">C. António</td>
+            <td style="color:var(--muted)">C. António</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;font-size:11px;color:var(--navy)">ADD-PRO-2026-0144</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy)">ADD-PRO-2026-0144</td>
             <td><span class="badge" style="background:rgba(199,125,10,0.08);color:#C77D0A">Procuração</span></td>
-            <td><div style="font-weight:600">Yonas Tesfaye</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">03 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--ambar);font-weight:600;margin-bottom:4px">1 dia restante</div><div class="slab"><div class="slaf" style="width:88%;background:#C77D0A"></div></div></td>
+            <td><div style="font-weight:600">Yonas Tesfaye</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>03 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--ambar);font-weight:600;margin-bottom:5px">1 dia restante</div><div class="slab"><div class="slaf" style="width:88%;background:#C77D0A"></div></div></td>
             <td><span class="chip ca">Pendente docs</span></td>
-            <td style="font-size:11px;color:var(--muted)">F. Domingos</td>
+            <td style="color:var(--muted)">F. Domingos</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;font-size:11px;color:var(--navy)">ADD-REG-2026-0143</td>
+            <td style="font-family:monospace;font-size:12px;color:var(--navy)">ADD-REG-2026-0143</td>
             <td><span class="badge" style="background:rgba(46,125,79,0.08);color:#2E7D4F">Registo Casam.</span></td>
-            <td><div style="font-weight:600">Sara Mengistu</div><div style="font-size:10px;color:var(--muted)">ETH · Adis Abeba</div></td>
-            <td style="font-size:11px">02 Jul 2026</td>
-            <td style="width:130px"><div style="font-size:10px;color:var(--verde);font-weight:600;margin-bottom:4px">9 dias restantes</div><div class="slab"><div class="slaf" style="width:15%;background:#2E7D4F"></div></div></td>
+            <td><div style="font-weight:600">Sara Mengistu</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></td>
+            <td>02 Jul 2026</td>
+            <td style="width:140px"><div style="font-size:12px;color:var(--verde);font-weight:600;margin-bottom:5px">9 dias restantes</div><div class="slab"><div class="slaf" style="width:15%;background:#2E7D4F"></div></div></td>
             <td><span class="chip cg">Em análise</span></td>
-            <td style="font-size:11px;color:var(--muted)">C. António</td>
+            <td style="color:var(--muted)">C. António</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div style="padding:10px 18px;border-top:1px solid rgba(22,38,61,0.08);font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div style="padding:12px 18px;border-top:1px solid rgba(22,38,61,0.08);font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
       <span>A mostrar 1–6 de 47 processos</span>
       <div style="display:flex;gap:6px">
-        <div style="padding:4px 12px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:11px;cursor:pointer">← Anterior</div>
-        <div style="padding:4px 12px;border-radius:9999px;background:var(--navy);color:#fff;font-size:11px;cursor:pointer">1</div>
-        <div style="padding:4px 12px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:11px;cursor:pointer">2</div>
-        <div style="padding:4px 12px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:11px;cursor:pointer">Próximo →</div>
+        <div style="padding:5px 14px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:12px;cursor:pointer">← Anterior</div>
+        <div style="padding:5px 12px;border-radius:9999px;background:var(--navy);color:#fff;font-size:12px;cursor:pointer">1</div>
+        <div style="padding:5px 14px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:12px;cursor:pointer">2</div>
+        <div style="padding:5px 14px;border-radius:9999px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.65);font-size:12px;cursor:pointer">Próximo →</div>
       </div>
     </div>
   </div>
   <div class="gc" style="width:470px;flex-shrink:0">
-    <div class="gh"><div><div class="gt" style="font-family:monospace;font-size:12px">ADD-VIS-2026-0148</div><div class="gs">Visto de Estudo · Seleccionado</div></div><span class="chip ca">Em análise</span></div>
+    <div class="gh"><div><div class="gt" style="font-family:monospace;font-size:13px">ADD-VIS-2026-0148</div><div class="gs">Visto de Estudo · Seleccionado</div></div><span class="chip ca">Em análise</span></div>
     <div class="gb" style="padding:16px 20px;overflow:auto">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
-        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:12px"><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Requerente</div><div style="font-size:13px;font-weight:700;margin-top:4px">Abebe Girma</div><div style="font-size:11px;color:var(--muted)">ETH · Adis Abeba</div></div>
-        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:12px"><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Data de Entrada</div><div style="font-size:13px;font-weight:700;margin-top:4px">07 Jul 2026</div><div style="font-size:11px;color:var(--ambar)">2 dias até ao limite SLA</div></div>
-        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:12px"><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Tipo de Visto</div><div style="font-size:13px;font-weight:700;margin-top:4px">Estudo · Cat. D</div><div style="font-size:11px;color:var(--muted)">12 meses</div></div>
-        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:12px"><div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase">Responsável</div><div style="font-size:13px;font-weight:700;margin-top:4px">N. Kiala</div><div style="font-size:11px;color:var(--muted)">Chefe de Posto</div></div>
+        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:13px"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">Requerente</div><div style="font-size:14px;font-weight:700;margin-top:4px">Abebe Girma</div><div style="font-size:12px;color:var(--muted)">ETH · Adis Abeba</div></div>
+        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:13px"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">Data de Entrada</div><div style="font-size:14px;font-weight:700;margin-top:4px">07 Jul 2026</div><div style="font-size:12px;color:var(--ambar)">2 dias até ao SLA</div></div>
+        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:13px"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">Tipo de Visto</div><div style="font-size:14px;font-weight:700;margin-top:4px">Estudo · Cat. D</div><div style="font-size:12px;color:var(--muted)">12 meses</div></div>
+        <div style="background:rgba(255,255,255,0.40);border-radius:12px;padding:13px"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">Responsável</div><div style="font-size:14px;font-weight:700;margin-top:4px">N. Kiala</div><div style="font-size:12px;color:var(--muted)">Chefe de Posto</div></div>
       </div>
-      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Linha Temporal</div>
-      <div class="tml-item"><div class="tml-dot" style="background:rgba(46,125,79,0.12)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:12px;font-weight:600">Recepção e triagem</div><div style="font-size:10px;color:var(--muted)">07 Jul · 09h14 · Concluído</div></div></div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Linha Temporal</div>
+      <div class="tml-item"><div class="tml-dot" style="background:rgba(46,125,79,0.12)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:13px;font-weight:600">Recepção e triagem</div><div style="font-size:11px;color:var(--muted)">07 Jul · 09h14 · Concluído</div></div></div>
       <div style="width:2px;background:rgba(22,38,61,0.10);height:10px;margin-left:13px"></div>
-      <div class="tml-item"><div class="tml-dot" style="background:rgba(46,125,79,0.12)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:12px;font-weight:600">Verificação documental</div><div style="font-size:10px;color:var(--muted)">07 Jul · 11h32 · Concluído</div></div></div>
+      <div class="tml-item"><div class="tml-dot" style="background:rgba(46,125,79,0.12)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div style="font-size:13px;font-weight:600">Verificação documental</div><div style="font-size:11px;color:var(--muted)">07 Jul · 11h32 · Concluído</div></div></div>
       <div style="width:2px;background:rgba(22,38,61,0.10);height:10px;margin-left:13px"></div>
-      <div class="tml-item"><div class="tml-dot" style="background:rgba(22,38,61,0.08);border:2px solid var(--navy)"><div style="width:6px;height:6px;border-radius:50%;background:var(--navy)"></div></div><div><div style="font-size:12px;font-weight:700;color:var(--navy)">Análise consular — Em curso</div><div style="font-size:10px;color:var(--muted)">08 Jul · Em progresso</div></div></div>
+      <div class="tml-item"><div class="tml-dot" style="background:rgba(22,38,61,0.08);border:2px solid var(--navy)"><div style="width:7px;height:7px;border-radius:50%;background:var(--navy)"></div></div><div><div style="font-size:13px;font-weight:700;color:var(--navy)">Análise consular — Em curso</div><div style="font-size:11px;color:var(--muted)">08 Jul · Em progresso</div></div></div>
       <div style="width:2px;background:rgba(22,38,61,0.10);height:10px;margin-left:13px"></div>
-      <div class="tml-item" style="opacity:.4"><div class="tml-dot" style="background:rgba(100,116,139,0.10)"><div style="width:6px;height:6px;border-radius:50%;background:var(--muted)"></div></div><div><div style="font-size:12px;font-weight:600;color:var(--muted)">Decisão</div><div style="font-size:10px;color:var(--muted)">Aguarda análise</div></div></div>
+      <div class="tml-item" style="opacity:.4"><div class="tml-dot" style="background:rgba(100,116,139,0.10)"><div style="width:7px;height:7px;border-radius:50%;background:var(--muted)"></div></div><div><div style="font-size:13px;font-weight:600;color:var(--muted)">Decisão</div><div style="font-size:11px;color:var(--muted)">Aguarda análise</div></div></div>
       <div style="width:2px;background:rgba(22,38,61,0.10);height:10px;margin-left:13px"></div>
-      <div class="tml-item" style="opacity:.4"><div class="tml-dot" style="background:rgba(100,116,139,0.10)"><div style="width:6px;height:6px;border-radius:50%;background:var(--muted)"></div></div><div><div style="font-size:12px;font-weight:600;color:var(--muted)">Notificação ao requerente</div><div style="font-size:10px;color:var(--muted)">Aguarda decisão</div></div></div>
+      <div class="tml-item" style="opacity:.4"><div class="tml-dot" style="background:rgba(100,116,139,0.10)"><div style="width:7px;height:7px;border-radius:50%;background:var(--muted)"></div></div><div><div style="font-size:13px;font-weight:600;color:var(--muted)">Notificação ao requerente</div><div style="font-size:11px;color:var(--muted)">Aguarda decisão</div></div></div>
       <div style="display:flex;gap:10px;margin-top:18px">
-        <div style="flex:1;background:#2E7D4F;border-radius:9999px;padding:11px;text-align:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer">Aprovar</div>
-        <div style="flex:1;background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.72);border-radius:9999px;padding:11px;text-align:center;font-size:13px;font-weight:600;cursor:pointer">Devolver</div>
-        <div style="background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.72);border-radius:9999px;padding:11px 16px;cursor:pointer;color:var(--muted);display:flex;align-items:center">···</div>
+        <div style="flex:1;background:#2E7D4F;border-radius:9999px;padding:12px;text-align:center;font-size:14px;font-weight:700;color:#fff;cursor:pointer">Aprovar</div>
+        <div style="flex:1;background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.72);border-radius:9999px;padding:12px;text-align:center;font-size:14px;font-weight:600;cursor:pointer">Devolver</div>
+        <div style="background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.72);border-radius:9999px;padding:12px 18px;cursor:pointer;color:var(--muted);display:flex;align-items:center;font-size:14px">···</div>
       </div>
     </div>
   </div>
