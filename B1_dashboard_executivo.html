@@ -7,39 +7,73 @@
 <style>
 
 :root {
-  --bg1:#E8EBF5; --bg2:#EDF1FA; --bg3:#E2EBF8;
-  --glass:rgba(255,255,255,0.60); --glass-s:rgba(255,255,255,0.80);
-  --border:rgba(255,255,255,0.72); --line:rgba(100,120,180,0.13);
-  --shadow:0 8px 32px rgba(80,100,160,0.10); --shadow-s:0 2px 12px rgba(80,100,160,0.07);
+  --glass:rgba(255,255,255,0.62); --glass-s:rgba(255,255,255,0.80);
+  --border:rgba(255,255,255,0.70); --line:rgba(100,120,180,0.13);
+  --shadow:0 8px 32px rgba(0,0,0,0.14); --shadow-s:0 2px 12px rgba(0,0,0,0.10);
   --navy:#16263D; --gold:#D9A21B; --ink:#1C2B3A; --ink2:#334155;
   --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
   --sidebar:72px; --hdr:64px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);width:1920px;height:1080px;overflow:hidden;color:var(--ink)}
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,#16263D 0%,#3A5473 30%,#8BA4BC 65%,#D4DDE8 100%);
+  width:1920px;height:1080px;overflow:hidden;color:var(--ink)
+}
 
-/* SIDEBAR */
-.sb{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);background:var(--glass-s);backdrop-filter:blur(20px) saturate(1.4);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:20px 0;z-index:20;gap:6px}
-.sb-logo{width:42px;height:42px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:18px;flex-shrink:0}
-.ni{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s;cursor:pointer}
-.ni.on{background:rgba(22,38,61,0.09);color:var(--navy)}
-.ni svg{opacity:.65}.ni.on svg{opacity:1}
+/* SIDEBAR – glass sobre o gradiente escuro */
+.sb{
+  position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(20px) saturate(1.2);
+  border-right:1px solid rgba(255,255,255,0.18);
+  display:flex;flex-direction:column;align-items:center;
+  padding:20px 0;z-index:20;gap:6px
+}
+.sb-logo{
+  width:42px;height:42px;border-radius:12px;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;flex-shrink:0
+}
+.ni{
+  width:42px;height:42px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.50);transition:all .15s;cursor:pointer
+}
+.ni.on{background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.95)}
 .sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:6px}
 
 /* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
 
-/* HEADER */
-.hdr{height:var(--hdr);background:var(--glass-s);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:20px;flex-shrink:0}
+/* HEADER – glass branco sobre tudo */
+.hdr{
+  height:var(--hdr);
+  background:rgba(255,255,255,0.82);
+  backdrop-filter:blur(24px) saturate(1.5);
+  border-bottom:1px solid rgba(255,255,255,0.70);
+  padding:0 28px;display:flex;align-items:center;gap:20px;flex-shrink:0;
+  box-shadow:0 1px 0 rgba(255,255,255,0.40)
+}
 .hdr-title{font-size:20px;font-weight:700;color:var(--ink)}
 .hdr-sub{font-size:11px;color:var(--muted);margin-top:1px}
 .hdr-nav{display:flex;gap:3px;margin-left:24px}
 .nt{padding:7px 16px;border-radius:9px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
 .nt.on{background:var(--navy);color:#fff;font-weight:600}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.ib{width:36px;height:36px;border-radius:9px;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);position:relative;flex-shrink:0}
-.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid #EDF1FA}
-.uchip{display:flex;align-items:center;gap:9px;background:var(--glass);border:1px solid var(--border);border-radius:11px;padding:5px 13px 5px 5px}
+.ib{
+  width:36px;height:36px;border-radius:9px;
+  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);position:relative;flex-shrink:0
+}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid #fff}
+.uchip{
+  display:flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
+  border-radius:11px;padding:5px 13px 5px 5px
+}
 .av{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
 .un{font-size:12px;font-weight:600;color:var(--ink)}
 .us{font-size:10px;color:var(--muted);margin-top:1px}
@@ -49,13 +83,23 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1)
 
 /* KPI ROW */
 .krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex-shrink:0}
-.kc{background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.kc{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid var(--border);border-radius:14px;
+  padding:18px 20px;box-shadow:var(--shadow)
+}
 .kl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
 .kv{font-size:32px;font-weight:700;color:var(--ink);margin:7px 0 3px;line-height:1}
 .kd{font-size:11px;font-weight:600}
 
 /* GLASS CARD */
-.gc{background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.gc{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid var(--border);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column
+}
 .gh{padding:16px 20px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .gt{font-size:14px;font-weight:700;color:var(--ink)}
 .gs{font-size:10px;color:var(--muted);margin-top:2px}
@@ -63,10 +107,10 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1)
 
 /* CHIPS */
 .chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
-.cg{background:rgba(46,125,79,0.10);color:var(--verde)}
-.ca{background:rgba(199,125,10,0.10);color:var(--ambar)}
-.cr{background:rgba(181,18,27,0.10);color:var(--red)}
-.ci{background:rgba(217,162,27,0.10);color:#8a6500}
+.cg{background:rgba(46,125,79,0.12);color:var(--verde)}
+.ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
+.cr{background:rgba(181,18,27,0.12);color:var(--red)}
+.ci{background:rgba(217,162,27,0.12);color:#8a6500}
 .cn{background:rgba(100,116,139,0.10);color:var(--muted)}
 
 /* LEGEND */
@@ -78,7 +122,7 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1)
 .brow{flex:1;display:flex;gap:16px;min-height:0}
 
 /* FOOTER */
-.ft{text-align:center;padding:6px;font-size:10px;color:rgba(100,116,139,0.45);flex-shrink:0}
+.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.35);flex-shrink:0}
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse}
@@ -86,35 +130,29 @@ body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1)
 .tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--line)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr.sel td{background:rgba(22,38,61,0.04)}
-.tbl tr:not(.hdr-row):hover td{background:rgba(22,38,61,0.03)}
+.tbl tr:hover td{background:rgba(22,38,61,0.02)}
 
 /* SLA BAR */
 .slab{height:4px;border-radius:2px;background:rgba(100,120,180,0.12);overflow:hidden}
 .slaf{height:100%;border-radius:2px}
 
 /* TIMELINE */
-.tml{display:flex;flex-direction:column;gap:0}
 .tml-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.tml-line{width:2px;background:var(--line);margin:2px auto 0;height:18px;margin-left:13px}
 
 /* BADGE */
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
 
 /* SEARCH BAR */
-.sbar{display:flex;align-items:center;gap:8px;background:var(--glass-s);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:12px;color:var(--ink)}
+.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.60);border:1px solid rgba(255,255,255,0.80);border-radius:10px;padding:8px 14px}
 .sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
-
-/* SCROLL (visual only) */
-.scroll{overflow:hidden}
 
 /* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
 .fch{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
-.fch:not(.on){background:var(--glass);border-color:var(--border);color:var(--muted)}
-
+.fch:not(.on){background:rgba(255,255,255,0.50);border-color:rgba(255,255,255,0.70);color:var(--muted)}
 
 
 #_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:24px;padding:9px 16px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
@@ -125,7 +163,6 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </style>
 </head>
 <body><div id="_vp">
-
 <nav class="sb">
   <div class="sb-logo"><svg width="22" height="22" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#D9A21B"/></svg></div>
   <div class="ni on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
@@ -138,232 +175,141 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
     <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
     <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   </div>
-</nav>
-<div class="main">
-  <header class="hdr">
-  <div>
-    <div class="hdr-title">Bom dia, Min. João da Costa</div>
-    <div class="hdr-sub">Rede diplomática global · 52 postos activos</div>
-  </div>
-  <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
+</nav><div class="main"><header class="hdr">
+  <div><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática global · 52 postos activos</div></div>
+  <div class="hdr-nav"><div class="nt  on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
   <div class="hdr-r">
     <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
     <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="uchip">
-      <div class="av">JC</div>
-      <div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div>
-    </div>
+    <div class="uchip"><div class="av">JC</div><div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div></div>
   </div>
 </header>
-  <div class="cnt">
-
-    <!-- KPIs -->
-    <div class="krow">
-      <div class="kc">
-        <div class="kl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Actos Consulares / Mês</div>
-        <div class="kv">18.432</div>
-        <div class="kd" style="color:var(--verde)">↑ 12% vs. mês anterior</div>
-      </div>
-      <div class="kc">
-        <div class="kl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/></svg>Receita Consular</div>
-        <div class="kv">↑ 12%</div>
-        <div class="kd" style="color:var(--verde)">Crescimento homólogo</div>
-      </div>
-      <div class="kc">
-        <div class="kl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="var(--muted)" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/></svg>Diáspora Registada</div>
-        <div class="kv">78%</div>
-        <div class="kd" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div>
-      </div>
-      <div class="kc">
-        <div class="kl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--muted)" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/></svg>Postos dentro de SLA</div>
-        <div class="kv">46<span style="font-size:17px;color:var(--muted)">/52</span></div>
-        <div class="kd" style="color:var(--ambar)">6 postos em acompanhamento</div>
+<div class="cnt">
+<div class="krow">
+  <div class="kc"><div class="kl">Actos Consulares / Mês</div><div class="kv">18.432</div><div class="kd" style="color:var(--verde)">↑ 12% vs. mês anterior</div></div>
+  <div class="kc"><div class="kl">Receita Consular</div><div class="kv">↑ 12%</div><div class="kd" style="color:var(--verde)">Crescimento homólogo</div></div>
+  <div class="kc"><div class="kl">Diáspora Registada</div><div class="kv">78%</div><div class="kd" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div></div>
+  <div class="kc"><div class="kl">Postos dentro de SLA</div><div class="kv">46<span style="font-size:17px;color:var(--muted)">/52</span></div><div class="kd" style="color:var(--ambar)">6 postos em acompanhamento</div></div>
+</div>
+<div class="brow">
+  <div class="gc" style="flex:1">
+    <div class="gh">
+      <div><div class="gt">Rede Diplomática Global</div><div class="gs">52 postos em 5 continentes</div></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Em SLA (46)</span></div>
+        <div class="leg"><span class="ld" style="background:#C77D0A"></span><span class="ll">Atenção (4)</span></div>
+        <div class="leg"><span class="ld" style="background:#B5121B"></span><span class="ll">Crítico (2)</span></div>
+        <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">Sede Luanda</span></div>
       </div>
     </div>
-
-    <!-- Body -->
-    <div class="brow">
-
-      <!-- MAP -->
-      <div class="gc" style="flex:1">
-        <div class="gh">
-          <div><div class="gt">Rede Diplomática Global</div><div class="gs">52 postos em 5 continentes</div></div>
-          <div style="display:flex;gap:12px;align-items:center">
-            <div class="leg"><span class="ld" style="background:var(--verde)"></span><span class="ll">Em SLA (46)</span></div>
-            <div class="leg"><span class="ld" style="background:var(--ambar)"></span><span class="ll">Atenção (4)</span></div>
-            <div class="leg"><span class="ld" style="background:var(--red)"></span><span class="ll">Crítico (2)</span></div>
-            <div class="leg"><span class="ld" style="background:var(--gold)"></span><span class="ll">Sede Luanda</span></div>
-          </div>
-        </div>
-        <div class="gb" style="padding:12px 16px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 1000 480" style="width:100%;height:100%" fill="none">
-  <!-- Continent fills -->
-  <path d="M108 58 L152 52 L195 68 L238 92 L262 134 L258 164 L242 186 L218 208 L196 230 L172 254 L148 274 L126 296 L100 278 L78 256 L68 224 L78 196 L88 168 L100 138 L108 58Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M196 298 L218 284 L248 294 L266 316 L274 344 L272 374 L262 400 L244 416 L224 424 L204 412 L188 390 L180 362 L182 334 L196 298Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M438 46 L482 42 L516 52 L526 68 L514 90 L492 102 L468 112 L446 122 L434 108 L428 88 L432 66Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M448 138 L492 130 L524 142 L542 168 L546 202 L540 244 L530 284 L510 322 L490 348 L468 358 L448 346 L428 318 L418 278 L416 238 L422 196 L432 166Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M528 46 L598 40 L680 46 L752 58 L804 78 L822 108 L812 138 L782 158 L752 168 L700 172 L648 166 L598 154 L556 142 L536 120 L526 94 L524 66Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M718 178 L762 166 L804 178 L820 210 L812 242 L782 252 L750 242 L728 220Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-  <path d="M782 298 L844 286 L904 298 L932 328 L924 368 L892 388 L852 394 L812 382 L780 356 L770 326Z" fill="rgba(100,120,180,0.09)" stroke="rgba(100,120,180,0.22)" stroke-width="1.2"/>
-
-  <!-- POSTS (verde, ambar, red) -->
-  <!-- HQ Luanda - gold star -->
-  <circle cx="468" cy="190" r="7" fill="#D9A21B" stroke="white" stroke-width="2"/>
-  <polygon points="468,184 469.3,187.6 473,187.6 470.2,189.8 471.4,193.4 468,191.2 464.6,193.4 465.8,189.8 463,187.6 466.7,187.6" fill="white"/>
-
+    <div class="gb" style="padding:12px 16px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 1000 480" style="width:100%;height:100%" fill="none">
+  <path d="M108 58 L152 52 L195 68 L238 92 L262 134 L258 164 L242 186 L218 208 L196 230 L172 254 L148 274 L126 296 L100 278 L78 256 L68 224 L78 196 L88 168 L100 138 L108 58Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M196 298 L218 284 L248 294 L266 316 L274 344 L272 374 L262 400 L244 416 L224 424 L204 412 L188 390 L180 362 L182 334 L196 298Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M438 46 L482 42 L516 52 L526 68 L514 90 L492 102 L468 112 L446 122 L434 108 L428 88 L432 66Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M448 138 L492 130 L524 142 L542 168 L546 202 L540 244 L530 284 L510 322 L490 348 L468 358 L448 346 L428 318 L418 278 L416 238 L422 196 L432 166Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M528 46 L598 40 L680 46 L752 58 L804 78 L822 108 L812 138 L782 158 L752 168 L700 172 L648 166 L598 154 L556 142 L536 120 L526 94 L524 66Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M718 178 L762 166 L804 178 L820 210 L812 242 L782 252 L750 242 L728 220Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <path d="M782 298 L844 286 L904 298 L932 328 L924 368 L892 388 L852 394 L812 382 L780 356 L770 326Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
+  <!-- HQ Luanda -->
+  <circle cx="468" cy="190" r="8" fill="#D9A21B" stroke="white" stroke-width="2"/>
+  <polygon points="468,183 469.5,187.5 474,187.5 470.5,190.2 471.8,194.5 468,191.8 464.2,194.5 465.5,190.2 462,187.5 466.5,187.5" fill="white"/>
   <!-- Europa verde -->
-  <circle cx="452" cy="88" r="5" fill="#2E7D4F"/><!-- Lisboa -->
-  <circle cx="460" cy="78" r="4.5" fill="#2E7D4F"/><!-- Madrid -->
-  <circle cx="468" cy="68" r="4.5" fill="#2E7D4F"/><!-- Paris -->
-  <circle cx="484" cy="62" r="4.5" fill="#2E7D4F"/><!-- Berlim -->
-  <circle cx="474" cy="70" r="4.5" fill="#2E7D4F"/><!-- Londres -->
-  <circle cx="488" cy="74" r="4.5" fill="#2E7D4F"/><!-- Bruxelas -->
-  <circle cx="498" cy="76" r="4.5" fill="#2E7D4F"/><!-- Haia -->
-  <circle cx="492" cy="84" r="4.5" fill="#2E7D4F"/><!-- Viena -->
-  <circle cx="496" cy="68" r="4.5" fill="#2E7D4F"/><!-- Varsóvia -->
-  <circle cx="506" cy="78" r="4.5" fill="#2E7D4F"/><!-- Roma -->
-  <circle cx="504" cy="90" r="4.5" fill="#2E7D4F"/><!-- Genebra -->
-  <circle cx="478" cy="60" r="4.5" fill="#2E7D4F"/><!-- Estocolmo -->
-
-  <!-- África verde + ambar -->
-  <circle cx="468" cy="212" r="4.5" fill="#2E7D4F"/><!-- Joanesburgo -->
-  <circle cx="460" cy="168" r="4.5" fill="#2E7D4F"/><!-- Brazzaville -->
-  <circle cx="478" cy="164" r="4.5" fill="#2E7D4F"/><!-- Kinshasa -->
-  <circle cx="472" cy="182" r="4.5" fill="#2E7D4F"/><!-- Nairobi -->
-  <circle cx="462" cy="200" r="4.5" fill="#2E7D4F"/><!-- DSM -->
-  <circle cx="454" cy="172" r="4.5" fill="#2E7D4F"/><!-- Lagos -->
-  <circle cx="460" cy="206" r="4.5" fill="#2E7D4F"/><!-- Harare -->
-  <circle cx="452" cy="150" r="4.5" fill="#C77D0A"/><!-- Abidjan amb -->
-  <circle cx="486" cy="176" r="4.5" fill="#C77D0A"/><!-- Addis Abeba amb -->
-
+  <circle cx="452" cy="88" r="5.5" fill="#2E7D4F"/><circle cx="460" cy="78" r="4.5" fill="#2E7D4F"/><circle cx="468" cy="68" r="4.5" fill="#2E7D4F"/>
+  <circle cx="484" cy="62" r="4.5" fill="#2E7D4F"/><circle cx="474" cy="70" r="4.5" fill="#2E7D4F"/><circle cx="488" cy="74" r="4.5" fill="#2E7D4F"/>
+  <circle cx="498" cy="76" r="4.5" fill="#2E7D4F"/><circle cx="492" cy="84" r="4.5" fill="#2E7D4F"/><circle cx="496" cy="68" r="4.5" fill="#2E7D4F"/>
+  <circle cx="506" cy="78" r="4.5" fill="#2E7D4F"/><circle cx="504" cy="90" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="60" r="4.5" fill="#2E7D4F"/>
+  <!-- África -->
+  <circle cx="468" cy="212" r="4.5" fill="#2E7D4F"/><circle cx="460" cy="168" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="164" r="4.5" fill="#2E7D4F"/>
+  <circle cx="472" cy="182" r="4.5" fill="#2E7D4F"/><circle cx="462" cy="200" r="4.5" fill="#2E7D4F"/><circle cx="454" cy="172" r="4.5" fill="#2E7D4F"/>
+  <circle cx="460" cy="206" r="4.5" fill="#2E7D4F"/><circle cx="452" cy="150" r="4.5" fill="#C77D0A"/><circle cx="486" cy="176" r="4.5" fill="#C77D0A"/>
   <!-- Américas -->
-  <circle cx="146" cy="108" r="4.5" fill="#2E7D4F"/><!-- Washington -->
-  <circle cx="152" cy="98" r="4.5" fill="#2E7D4F"/><!-- NY -->
-  <circle cx="138" cy="118" r="4.5" fill="#2E7D4F"/><!-- Havana -->
-  <circle cx="188" cy="184" r="4.5" fill="#2E7D4F"/><!-- Brasília -->
-  <circle cx="192" cy="176" r="4.5" fill="#2E7D4F"/><!-- São Paulo -->
-  <circle cx="168" cy="182" r="4.5" fill="#2E7D4F"/><!-- Lima -->
-  <circle cx="182" cy="298" r="4.5" fill="#C77D0A"/><!-- Buenos Aires amb -->
-  <circle cx="148" cy="128" r="4.5" fill="#2E7D4F"/><!-- México -->
-  <circle cx="142" cy="116" r="4.5" fill="#2E7D4F"/><!-- Bogotá -->
-
+  <circle cx="146" cy="108" r="4.5" fill="#2E7D4F"/><circle cx="152" cy="98" r="4.5" fill="#2E7D4F"/><circle cx="138" cy="118" r="4.5" fill="#2E7D4F"/>
+  <circle cx="188" cy="184" r="4.5" fill="#2E7D4F"/><circle cx="192" cy="176" r="4.5" fill="#2E7D4F"/><circle cx="168" cy="182" r="4.5" fill="#2E7D4F"/>
+  <circle cx="182" cy="298" r="4.5" fill="#C77D0A"/><circle cx="148" cy="128" r="4.5" fill="#2E7D4F"/><circle cx="142" cy="116" r="4.5" fill="#2E7D4F"/>
   <!-- Ásia -->
-  <circle cx="718" cy="144" r="4.5" fill="#C77D0A"/><!-- Pequim amb -->
-  <circle cx="728" cy="148" r="4.5" fill="#2E7D4F"/><!-- Tóquio -->
-  <circle cx="724" cy="138" r="4.5" fill="#2E7D4F"/><!-- Seul -->
-  <circle cx="596" cy="116" r="4.5" fill="#B5121B"/><!-- Moscovo red -->
-  <circle cx="678" cy="172" r="4.5" fill="#2E7D4F"/><!-- Deli -->
-  <circle cx="696" cy="170" r="4.5" fill="#2E7D4F"/><!-- Bangkok -->
-  <circle cx="740" cy="186" r="4.5" fill="#B5121B"/><!-- Jacarta red -->
-  <circle cx="562" cy="128" r="4.5" fill="#2E7D4F"/><!-- Teerão -->
-  <circle cx="572" cy="136" r="4.5" fill="#2E7D4F"/><!-- Riade -->
-  <circle cx="578" cy="144" r="4.5" fill="#2E7D4F"/><!-- Abu Dhabi -->
-  <circle cx="548" cy="132" r="4.5" fill="#2E7D4F"/><!-- Cairo -->
-  <circle cx="662" cy="162" r="4.5" fill="#2E7D4F"/><!-- Colombo -->
-
-  <!-- Luanda label -->
-  <text x="478" y="200" font-size="9" fill="#16263D" font-family="Inter,sans-serif" font-weight="700">Luanda</text>
-  <!-- Red labels -->
-  <text x="598" y="112" font-size="8" fill="#B5121B" font-family="Inter,sans-serif" font-weight="600">Moscovo</text>
-  <text x="742" y="182" font-size="8" fill="#B5121B" font-family="Inter,sans-serif" font-weight="600">Jacarta</text>
+  <circle cx="718" cy="144" r="4.5" fill="#C77D0A"/><circle cx="728" cy="148" r="4.5" fill="#2E7D4F"/>
+  <circle cx="724" cy="138" r="4.5" fill="#2E7D4F"/><circle cx="596" cy="116" r="4.5" fill="#B5121B"/>
+  <circle cx="678" cy="172" r="4.5" fill="#2E7D4F"/><circle cx="696" cy="170" r="4.5" fill="#2E7D4F"/>
+  <circle cx="740" cy="186" r="4.5" fill="#B5121B"/><circle cx="562" cy="128" r="4.5" fill="#2E7D4F"/>
+  <circle cx="572" cy="136" r="4.5" fill="#2E7D4F"/><circle cx="578" cy="144" r="4.5" fill="#2E7D4F"/>
+  <circle cx="548" cy="132" r="4.5" fill="#2E7D4F"/><circle cx="662" cy="162" r="4.5" fill="#2E7D4F"/>
+  <!-- Labels -->
+  <text x="478" y="200" font-size="9" fill="white" font-family="Inter,sans-serif" font-weight="700" opacity="0.9">Luanda</text>
+  <text x="598" y="111" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Moscovo</text>
+  <text x="742" y="182" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Jacarta</text>
 </svg></div>
+  </div>
+  <div style="width:480px;flex-shrink:0;display:flex;flex-direction:column;gap:16px">
+    <div class="gc" style="flex:1">
+      <div class="gh">
+        <div><div class="gt">Tendência de Vistos</div><div class="gs">Jan–Dez 2025</div></div>
+        <div style="display:flex;gap:10px">
+          <div class="leg"><span class="ld" style="background:#4B6CB7"></span><span class="ll">Europa</span></div>
+          <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">África</span></div>
+          <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Ásia/M.Or.</span></div>
+        </div>
       </div>
-
-      <!-- Right col -->
-      <div style="width:480px;flex-shrink:0;display:flex;flex-direction:column;gap:16px">
-
-        <!-- Chart -->
-        <div class="gc" style="flex:1">
-          <div class="gh">
-            <div><div class="gt">Tendência de Vistos</div><div class="gs">Jan–Dez 2025</div></div>
-            <div style="display:flex;gap:10px">
-              <div class="leg"><span class="ld" style="background:#4B6CB7"></span><span class="ll">Europa</span></div>
-              <div class="leg"><span class="ld" style="background:var(--gold)"></span><span class="ll">África</span></div>
-              <div class="leg"><span class="ld" style="background:var(--verde)"></span><span class="ll">Ásia/M.Or.</span></div>
-            </div>
-          </div>
-          <div class="gb" style="padding:12px 16px"><svg viewBox="0 0 420 170" style="width:100%;height:100%">
-  <line x1="38" y1="20" x2="38" y2="148" stroke="rgba(100,120,180,0.15)" stroke-width="1"/>
-  <line x1="38" y1="148" x2="414" y2="148" stroke="rgba(100,120,180,0.15)" stroke-width="1"/>
-  <line x1="38" y1="38" x2="414" y2="38" stroke="rgba(100,120,180,0.08)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="66" x2="414" y2="66" stroke="rgba(100,120,180,0.08)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="94" x2="414" y2="94" stroke="rgba(100,120,180,0.08)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="122" x2="414" y2="122" stroke="rgba(100,120,180,0.08)" stroke-width="1" stroke-dasharray="3,3"/>
-  <text x="33" y="41" text-anchor="end" font-size="8" fill="rgba(100,116,139,.65)">800</text>
-  <text x="33" y="69" text-anchor="end" font-size="8" fill="rgba(100,116,139,.65)">600</text>
-  <text x="33" y="97" text-anchor="end" font-size="8" fill="rgba(100,116,139,.65)">400</text>
-  <text x="33" y="125" text-anchor="end" font-size="8" fill="rgba(100,116,139,.65)">200</text>
-  <text x="33" y="151" text-anchor="end" font-size="8" fill="rgba(100,116,139,.65)">0</text>
-  <!-- X labels -->
-  <text x="55" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Jan</text>
-  <text x="85" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Fev</text>
-  <text x="115" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Mar</text>
-  <text x="145" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Abr</text>
-  <text x="175" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Mai</text>
-  <text x="205" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Jun</text>
-  <text x="235" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Jul</text>
-  <text x="265" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Ago</text>
-  <text x="295" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Set</text>
-  <text x="325" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Out</text>
-  <text x="355" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Nov</text>
-  <text x="385" y="162" text-anchor="middle" font-size="8" fill="rgba(100,116,139,.65)">Dez</text>
-  <!-- Europa fill + line -->
-  <polygon points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38 385,148 55,148" fill="#4B6CB7" opacity="0.07"/>
+      <div class="gb" style="padding:12px 16px"><svg viewBox="0 0 420 170" style="width:100%;height:100%">
+  <line x1="38" y1="20" x2="38" y2="148" stroke="rgba(100,120,180,0.20)" stroke-width="1"/>
+  <line x1="38" y1="148" x2="414" y2="148" stroke="rgba(100,120,180,0.20)" stroke-width="1"/>
+  <line x1="38" y1="38" x2="414" y2="38" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="66" x2="414" y2="66" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="94" x2="414" y2="94" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="122" x2="414" y2="122" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="33" y="41" text-anchor="end" font-size="8" fill="#94a3b8">800</text>
+  <text x="33" y="69" text-anchor="end" font-size="8" fill="#94a3b8">600</text>
+  <text x="33" y="97" text-anchor="end" font-size="8" fill="#94a3b8">400</text>
+  <text x="33" y="125" text-anchor="end" font-size="8" fill="#94a3b8">200</text>
+  <text x="33" y="151" text-anchor="end" font-size="8" fill="#94a3b8">0</text>
+  <text x="55" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jan</text><text x="85" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Fev</text>
+  <text x="115" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mar</text><text x="145" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Abr</text>
+  <text x="175" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mai</text><text x="205" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jun</text>
+  <text x="235" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jul</text><text x="265" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Ago</text>
+  <text x="295" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Set</text><text x="325" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Out</text>
+  <text x="355" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Nov</text><text x="385" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Dez</text>
+  <polygon points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38 385,148 55,148" fill="#4B6CB7" opacity="0.09"/>
   <polyline points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38" fill="none" stroke="#4B6CB7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- África fill + line -->
-  <polygon points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94 385,148 55,148" fill="#D9A21B" opacity="0.07"/>
+  <polygon points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94 385,148 55,148" fill="#D9A21B" opacity="0.09"/>
   <polyline points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94" fill="none" stroke="#D9A21B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Ásia/M.Or fill + line -->
-  <polygon points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120 385,148 55,148" fill="#2E7D4F" opacity="0.07"/>
+  <polygon points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120 385,148 55,148" fill="#2E7D4F" opacity="0.09"/>
   <polyline points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120" fill="none" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Europa latest dot -->
   <circle cx="385" cy="38" r="4.5" fill="#4B6CB7" stroke="white" stroke-width="2"/>
 </svg></div>
+    </div>
+    <div class="gc" style="flex-shrink:0">
+      <div class="gh"><div class="gt">Alertas e Notificações</div><span class="chip cr">3 activos</span></div>
+      <div style="padding:4px 20px">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+          <div style="width:8px;height:8px;border-radius:50%;background:#B5121B;flex-shrink:0;margin-top:4px"></div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
+          <span class="chip cr">Crítico</span>
         </div>
-
-        <!-- Alerts -->
-        <div class="gc" style="flex-shrink:0">
-          <div class="gh">
-            <div class="gt">Alertas e Notificações</div>
-            <span class="chip cr">3 activos</span>
-          </div>
-          <div style="padding:4px 20px">
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
-              <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px"></div>
-              <div style="flex:1"><div style="font-size:12px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
-              <span class="chip cr">Crítico</span>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
-              <div style="width:8px;height:8px;border-radius:50%;background:var(--ambar);flex-shrink:0;margin-top:4px"></div>
-              <div style="flex:1"><div style="font-size:12px;font-weight:600">Pequim — Degradação</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Tempo médio resposta &gt; 48h</div></div>
-              <span class="chip ca">Atenção</span>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
-              <div style="width:8px;height:8px;border-radius:50%;background:var(--ambar);flex-shrink:0;margin-top:4px"></div>
-              <div style="flex:1"><div style="font-size:12px;font-weight:600">Jacarta — Volume atípico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">+340% de pedidos vs. média</div></div>
-              <span class="chip ca">Atenção</span>
-            </div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
-              <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px"></div>
-              <div style="flex:1"><div style="font-size:12px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
-              <span class="chip ci">Info</span>
-            </div>
-          </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:600">Pequim — Degradação</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Tempo médio resposta &gt; 48h</div></div>
+          <span class="chip ca">Atenção</span>
         </div>
-
-      </div><!-- /right col -->
-    </div><!-- /brow -->
-  </div><!-- /cnt -->
-  <div class="ft">Protótipo conceptual · TIS · 2026</div>
-</div><!-- /main -->
-
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:600">Jacarta — Volume atípico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">+340% de pedidos vs. média</div></div>
+          <span class="chip ca">Atenção</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
+          <div style="width:8px;height:8px;border-radius:50%;background:#D9A21B;flex-shrink:0;margin-top:4px"></div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
+          <span class="chip ci">Info</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ft">Protótipo conceptual · TIS · 2026</div>
+</div>
 </div>
 <a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
 <script>
-!function(){
-  var vp=document.getElementById('_vp');
-  function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')';}
-  fit();window.addEventListener('resize',fit);
-}();
+!function(){var vp=document.getElementById('_vp');function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')'}fit();window.addEventListener('resize',fit)}();
 </script>
 </body>
 </html>
