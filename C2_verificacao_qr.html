@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>C2 · Verificação de Documento por QR — MIREX Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #16263D;
+  --navy-700: #23405F;
+  --surface: #F5F8FB;
+  --card: #FFFFFF;
+  --gold-500: #D9A21B;
+  --red-700: #B5121B;
+  --ink: #1A2433;
+  --muted: #5A6B80;
+  --line: #D7E1EC;
+  --verde: #2E7D4F;
+  --ambar: #C77D0A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0d1117; }
+.canvas {
+  width: 1920px; height: 1080px;
+  background: var(--navy-900);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+  gap: 0;
+}
+
+/* BG pattern */
+.canvas::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(35,64,95,0.5) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Top label */
+.scene-header {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 2;
+}
+.scene-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(217,162,27,0.15); border: 1px solid rgba(217,162,27,0.3); color: var(--gold-500); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.6px; margin-bottom: 10px; }
+.scene-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.scene-sub { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+/* Main row */
+.main-row {
+  display: flex; gap: 64px; align-items: flex-start; position: relative; z-index: 2; margin-top: 80px;
+}
+
+/* ─── PHONE ─── */
+.phone-frame { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.phone {
+  width: 340px; border-radius: 42px; background: #0a0a12; padding: 10px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 24px 80px rgba(0,0,0,0.7), 0 8px 32px rgba(0,0,0,0.4);
+  position: relative;
+}
+.phone::before { content: ''; position: absolute; right: -3px; top: 120px; width: 3px; height: 60px; background: rgba(255,255,255,0.12); border-radius: 2px; }
+.phone::after { content: ''; position: absolute; left: -3px; top: 100px; width: 3px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 2px; box-shadow: 0 55px 0 rgba(255,255,255,0.1); }
+.phone-screen { border-radius: 34px; overflow: hidden; background: var(--surface); height: 720px; display: flex; flex-direction: column; }
+.status-bar { height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
+.sb-time { font-size: 11px; font-weight: 700; color: var(--ink); }
+.sb-icons { display: flex; gap: 4px; align-items: center; }
+
+/* Phone screen */
+.mob-header { background: var(--navy-900); padding: 14px 20px; flex-shrink: 0; display: flex; align-items: center; gap: 10px; }
+.mob-emblem { width: 28px; height: 28px; border-radius: 50%; background: var(--gold-500); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mob-title { font-size: 14px; font-weight: 700; color: #fff; }
+.mob-sub { font-size: 10px; color: rgba(255,255,255,0.5); }
+
+.mob-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* QR scan indicator */
+.mob-scan-section { background: var(--navy-700); padding: 16px 20px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.mob-scan-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(46,125,79,0.15); border: 2px solid var(--verde); display: flex; align-items: center; justify-content: center; }
+.mob-scan-title { font-size: 13px; font-weight: 700; color: #fff; }
+.mob-scan-sub { font-size: 11px; color: rgba(255,255,255,0.5); text-align: center; }
+
+/* Verification result */
+.mob-result { flex: 1; background: var(--surface); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+.verify-seal { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px; background: var(--card); border-radius: 12px; border: 1.5px solid rgba(46,125,79,0.25); box-shadow: 0 2px 8px rgba(22,38,61,0.06); }
+.seal-icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(46,125,79,0.1); display: flex; align-items: center; justify-content: center; }
+.seal-status { font-size: 13px; font-weight: 700; color: var(--verde); }
+.seal-doc-type { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4; }
+
+.mob-doc-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.mob-doc-field { padding: 9px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.mob-doc-field:last-child { border-bottom: none; }
+.mob-doc-label { font-size: 10px; color: var(--muted); }
+.mob-doc-value { font-size: 12px; font-weight: 600; color: var(--ink); }
+.mob-doc-value.masked { font-family: monospace; letter-spacing: 1px; }
+
+.mob-auth-note { background: rgba(46,125,79,0.06); border: 1px solid rgba(46,125,79,0.15); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--muted); line-height: 1.4; display: flex; gap: 8px; }
+
+.mob-entity-note { background: rgba(22,38,61,0.04); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--muted); line-height: 1.4; display: flex; gap: 6px; align-items: flex-start; }
+
+.home-indicator { width: 100px; height: 4px; background: rgba(22,38,61,0.15); border-radius: 2px; margin: 8px auto 6px; }
+
+.phone-label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.5); text-align: center; }
+.phone-label span { display: block; font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
+
+/* ─── DESKTOP ─── */
+.desktop-frame { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.browser {
+  width: 1000px; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 24px 80px rgba(0,0,0,0.6);
+}
+.browser-chrome {
+  background: #1a1a2e; height: 38px; display: flex; align-items: center; padding: 0 16px; gap: 12px;
+}
+.browser-dots { display: flex; gap: 6px; }
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+.browser-url { flex: 1; background: rgba(255,255,255,0.06); border-radius: 16px; padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 6px; font-family: monospace; }
+.browser-lock { color: var(--verde); }
+.browser-content { background: var(--surface); }
+
+/* Desktop verification page */
+.dsk-page { padding: 40px 60px; min-height: 620px; display: flex; flex-direction: column; gap: 28px; }
+.dsk-org-header { display: flex; align-items: center; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.dsk-org-emblem { width: 52px; height: 52px; border-radius: 50%; background: var(--gold-500); display: flex; align-items: center; justify-content: center; }
+.dsk-org-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+.dsk-org-sub { font-size: 13px; color: var(--muted); }
+.dsk-system { margin-left: auto; text-align: right; }
+.dsk-system-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.dsk-system-sub { font-size: 11px; color: var(--muted); }
+
+/* Verification main area */
+.dsk-verify-main { display: grid; grid-template-columns: 280px 1fr; gap: 28px; }
+
+/* QR area */
+.dsk-qr-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.dsk-qr-box { width: 200px; height: 200px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.dsk-qr-verified { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--verde); }
+.dsk-qr-ts { font-size: 11px; color: var(--muted); text-align: center; }
+.dsk-qr-label { font-size: 11px; font-weight: 600; color: var(--muted); text-align: center; font-family: monospace; letter-spacing: 0.5px; }
+
+/* Result area */
+.dsk-result { display: flex; flex-direction: column; gap: 16px; }
+
+/* Big status banner */
+.status-banner { background: rgba(46,125,79,0.05); border: 2px solid rgba(46,125,79,0.2); border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; gap: 20px; }
+.banner-icon { width: 60px; height: 60px; border-radius: 50%; background: rgba(46,125,79,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.banner-text { flex: 1; }
+.banner-status { font-size: 18px; font-weight: 700; color: var(--verde); margin-bottom: 4px; }
+.banner-detail { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.banner-ts { font-size: 12px; color: var(--muted); }
+
+/* Document details */
+.dsk-doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+.dsk-doc-cell { background: var(--card); padding: 12px 16px; }
+.dsk-doc-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.dsk-doc-value { font-size: 13px; font-weight: 600; color: var(--ink); }
+.dsk-doc-value.green { color: var(--verde); }
+.dsk-doc-value.masked { font-family: monospace; letter-spacing: 1px; }
+
+/* Chain verification */
+.dsk-chain { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; }
+.dsk-chain-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.chain-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.chain-step:last-child { margin-bottom: 0; }
+.chain-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.chain-icon.ok { background: rgba(46,125,79,0.1); }
+.chain-text { font-size: 12px; color: var(--ink); }
+.chain-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+/* Entity note */
+.entity-note { background: rgba(22,38,61,0.04); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--muted); line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+
+/* Footer */
+.dsk-footer { border-top: 1px solid var(--line); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+.dsk-footer-copy { font-size: 11px; color: var(--muted); }
+
+/* Bottom label */
+.frame-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4); }
+.frame-label span { display: block; font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.65); margin-bottom: 2px; text-align: center; }
+
+.page-footer-abs { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); font-size: 11px; color: rgba(255,255,255,0.25); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- Scene header -->
+  <div class="scene-header">
+    <div class="scene-tag">
+      <svg width="10" height="10" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1"/><rect x="2.5" y="2.5" width="5" height="5" rx="0.5" fill="currentColor"/></svg>
+      Verificação de Documento por QR
+    </div>
+    <div class="scene-title">MIREX Digital · Autenticidade verificável por terceiros</div>
+    <div class="scene-sub">Bancos, universidades e entidades autorizadas podem confirmar a autenticidade de qualquer documento emitido</div>
+  </div>
+
+  <!-- Main row: phone + desktop -->
+  <div class="main-row">
+
+    <!-- PHONE -->
+    <div class="phone-frame">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span class="sb-time">10:45</span>
+            <div class="sb-icons">
+              <svg width="14" height="10" viewBox="0 0 14 10"><rect x="0" y="6" width="2" height="4" rx="0.5" fill="#1A2433"/><rect x="3" y="4" width="2" height="6" rx="0.5" fill="#1A2433"/><rect x="6" y="2" width="2" height="8" rx="0.5" fill="#1A2433"/><rect x="9" y="0" width="2" height="10" rx="0.5" fill="#1A2433"/></svg>
+              <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0.5" y="0.5" width="18" height="10" rx="2" stroke="#1A2433" stroke-width="1"/><rect x="2" y="2" width="15" height="7" rx="1" fill="#1A2433"/><path d="M20 3.5v4c.9-.5.9-3.5 0-4z" fill="#1A2433" opacity="0.5"/></svg>
+            </div>
+          </div>
+
+          <div class="mob-header">
+            <div class="mob-emblem">
+              <svg width="14" height="14" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg>
+            </div>
+            <div>
+              <div class="mob-title">Verificação MIREX</div>
+              <div class="mob-sub">Portal de autenticidade de documentos</div>
+            </div>
+          </div>
+
+          <div class="mob-scan-section">
+            <div class="mob-scan-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 6l-6 3.5v7L14 20l6-3.5v-7L14 6z" fill="rgba(46,125,79,0.2)" stroke="#2E7D4F" stroke-width="1.3"/><path d="M9 14l3.5 3.5 7-7" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="mob-scan-title">QR Verificado</div>
+            <div class="mob-scan-sub">Certidão n.º PAR-CERT-2026-0341<br>Emitida em Paris · 09 Jul 2026</div>
+          </div>
+
+          <div class="mob-result">
+            <div class="verify-seal">
+              <div class="seal-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 2L3 7v7c0 7 5 12 11 13 6-1 11-6 11-13V7L14 2z" fill="rgba(46,125,79,0.12)" stroke="#2E7D4F" stroke-width="1.5"/><path d="M9 14l3.5 3.5 7-7" stroke="#2E7D4F" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+              <div class="seal-status">Documento autêntico</div>
+              <div class="seal-doc-type">Emitido pela Embaixada de Angola em Paris<br>Assinatura digital válida</div>
+            </div>
+
+            <div class="mob-doc-card">
+              <div class="mob-doc-field">
+                <span class="mob-doc-label">Tipo de documento</span>
+                <span class="mob-doc-value">Certidão de registo civil</span>
+              </div>
+              <div class="mob-doc-field">
+                <span class="mob-doc-label">Número</span>
+                <span class="mob-doc-value masked">PAR-CERT-26-···-0341</span>
+              </div>
+              <div class="mob-doc-field">
+                <span class="mob-doc-label">Emitido em</span>
+                <span class="mob-doc-value">09 Jul 2026 · Paris</span>
+              </div>
+              <div class="mob-doc-field">
+                <span class="mob-doc-label">Validade</span>
+                <span class="mob-doc-value" style="color:var(--verde)">Permanente</span>
+              </div>
+            </div>
+
+            <div class="mob-auth-note">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1L1.5 3.5v4c0 3.5 2.5 6 5.5 6.5 3-.5 5.5-3 5.5-6.5v-4L7 1z" stroke="#2E7D4F" stroke-width="1"/></svg>
+              <span>Documento validado por criptografia assimétrica. Trilha de auditoria registada e imutável.</span>
+            </div>
+
+            <div class="mob-entity-note">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="6.5" cy="6.5" r="5" stroke="#5A6B80" stroke-width="1"/><path d="M6.5 4v3" stroke="#5A6B80" stroke-width="1" stroke-linecap="round"/><circle cx="6.5" cy="9" r="0.6" fill="#5A6B80"/></svg>
+              <span>Verificação detalhada disponível para entidades autorizadas através do portal MIREX.</span>
+            </div>
+          </div>
+
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+      <div class="frame-label"><span>Mobile</span>Leitura do QR pelo cidadão ou entidade</div>
+    </div>
+
+    <!-- DESKTOP -->
+    <div class="desktop-frame">
+      <div class="browser">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background:#ff5f57"></div>
+            <div class="browser-dot" style="background:#febc2e"></div>
+            <div class="browser-dot" style="background:#28c840"></div>
+          </div>
+          <div class="browser-url">
+            <span class="browser-lock">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1.5" y="4" width="7" height="5.5" rx="1" stroke="#22c55e" stroke-width="0.9"/><path d="M3 4V3a2 2 0 0 1 4 0v1" stroke="#22c55e" stroke-width="0.9"/></svg>
+            </span>
+            verificar.mirex.gov.ao/doc/PAR-CERT-2026-0341
+          </div>
+        </div>
+        <div class="browser-content">
+          <div class="dsk-page">
+
+            <!-- Org header -->
+            <div class="dsk-org-header">
+              <div class="dsk-org-emblem">
+                <svg width="28" height="28" viewBox="0 0 28 28"><polygon points="14,2 16.8,10 25,10 18.6,14.8 21,22 14,18 7,22 9.4,14.8 3,10 11.2,10" fill="#16263D"/></svg>
+              </div>
+              <div>
+                <div class="dsk-org-name">República de Angola</div>
+                <div class="dsk-org-sub">Ministério das Relações Exteriores · Portal de Verificação Documental</div>
+              </div>
+              <div class="dsk-system">
+                <div class="dsk-system-name">MIREX Digital</div>
+                <div class="dsk-system-sub">Sistema de Verificação · verificar.mirex.gov.ao</div>
+              </div>
+            </div>
+
+            <!-- Verification main -->
+            <div class="dsk-verify-main">
+
+              <!-- QR + verified stamp -->
+              <div class="dsk-qr-area">
+                <div class="dsk-qr-box">
+                  <svg width="168" height="168" viewBox="0 0 168 168" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="168" height="168" fill="white"/>
+                    <!-- TL finder -->
+                    <rect x="8" y="8" width="46" height="46" rx="4" fill="#1A2433"/>
+                    <rect x="15" y="15" width="32" height="32" rx="2" fill="white"/>
+                    <rect x="22" y="22" width="18" height="18" fill="#1A2433"/>
+                    <!-- TR finder -->
+                    <rect x="114" y="8" width="46" height="46" rx="4" fill="#1A2433"/>
+                    <rect x="121" y="15" width="32" height="32" rx="2" fill="white"/>
+                    <rect x="128" y="22" width="18" height="18" fill="#1A2433"/>
+                    <!-- BL finder -->
+                    <rect x="8" y="114" width="46" height="46" rx="4" fill="#1A2433"/>
+                    <rect x="15" y="121" width="32" height="32" rx="2" fill="white"/>
+                    <rect x="22" y="128" width="18" height="18" fill="#1A2433"/>
+                    <!-- Data modules -->
+                    <g fill="#1A2433">
+                      <rect x="62" y="8" width="8" height="8"/><rect x="74" y="8" width="8" height="8"/><rect x="86" y="8" width="8" height="8"/>
+                      <rect x="98" y="8" width="8" height="8"/><rect x="62" y="20" width="8" height="8"/>
+                      <rect x="86" y="20" width="8" height="8"/><rect x="98" y="20" width="8" height="8"/>
+                      <rect x="62" y="32" width="8" height="8"/><rect x="74" y="32" width="8" height="8"/>
+                      <rect x="86" y="44" width="8" height="8"/><rect x="62" y="44" width="8" height="8"/>
+                      <rect x="8" y="62" width="8" height="8"/><rect x="20" y="62" width="8" height="8"/>
+                      <rect x="44" y="62" width="8" height="8"/><rect x="62" y="62" width="8" height="8"/>
+                      <rect x="74" y="62" width="8" height="8"/><rect x="98" y="62" width="8" height="8"/>
+                      <rect x="110" y="62" width="8" height="8"/><rect x="122" y="62" width="8" height="8"/>
+                      <rect x="146" y="62" width="8" height="8"/>
+                      <rect x="8" y="74" width="8" height="8"/><rect x="32" y="74" width="8" height="8"/>
+                      <rect x="62" y="74" width="8" height="8"/><rect x="86" y="74" width="8" height="8"/>
+                      <rect x="110" y="74" width="8" height="8"/><rect x="134" y="74" width="8" height="8"/>
+                      <rect x="152" y="74" width="8" height="8"/>
+                      <rect x="8" y="86" width="8" height="8"/><rect x="44" y="86" width="8" height="8"/>
+                      <rect x="62" y="86" width="8" height="8"/><rect x="86" y="86" width="8" height="8"/>
+                      <rect x="98" y="86" width="8" height="8"/><rect x="122" y="86" width="8" height="8"/>
+                      <rect x="8" y="98" width="8" height="8"/><rect x="20" y="98" width="8" height="8"/>
+                      <rect x="44" y="98" width="8" height="8"/><rect x="74" y="98" width="8" height="8"/>
+                      <rect x="110" y="98" width="8" height="8"/><rect x="134" y="98" width="8" height="8"/>
+                      <rect x="146" y="98" width="8" height="8"/>
+                      <rect x="62" y="114" width="8" height="8"/><rect x="86" y="114" width="8" height="8"/>
+                      <rect x="110" y="114" width="8" height="8"/><rect x="134" y="114" width="8" height="8"/>
+                      <rect x="152" y="114" width="8" height="8"/>
+                      <rect x="62" y="126" width="8" height="8"/><rect x="74" y="126" width="8" height="8"/>
+                      <rect x="110" y="126" width="8" height="8"/><rect x="122" y="126" width="8" height="8"/>
+                      <rect x="62" y="138" width="8" height="8"/><rect x="98" y="138" width="8" height="8"/>
+                      <rect x="134" y="138" width="8" height="8"/><rect x="146" y="138" width="8" height="8"/>
+                      <rect x="62" y="150" width="8" height="8"/><rect x="74" y="150" width="8" height="8"/>
+                      <rect x="86" y="150" width="8" height="8"/><rect x="122" y="150" width="8" height="8"/>
+                      <rect x="146" y="150" width="8" height="8"/>
+                    </g>
+                  </svg>
+                </div>
+                <div class="dsk-qr-verified">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1.5 3.5v4c0 3.5 2.5 6 5.5 6.5 3-.5 5.5-3 5.5-6.5v-4L7 1z" fill="rgba(46,125,79,0.15)" stroke="#2E7D4F" stroke-width="1"/><path d="M4.5 7l2 2 3.5-3.5" stroke="#2E7D4F" stroke-width="1.3" stroke-linecap="round"/></svg>
+                  QR Autêntico
+                </div>
+                <div class="dsk-qr-label">PAR-CERT-2026-0341</div>
+                <div class="dsk-qr-ts">Verificado em 09 Jul 2026 · 10:45:22</div>
+              </div>
+
+              <!-- Result -->
+              <div class="dsk-result">
+                <div class="status-banner">
+                  <div class="banner-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 2L3 8v8c0 8 5.5 14 13 15.5C24 30 29.5 24 29.5 16V8L16 2z" fill="rgba(46,125,79,0.1)" stroke="#2E7D4F" stroke-width="1.5"/><path d="M10 16l4.5 4.5 9-9" stroke="#2E7D4F" stroke-width="2" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="banner-text">
+                    <div class="banner-status">Documento autêntico · Assinatura digital válida</div>
+                    <div class="banner-detail">Emitido pela Embaixada de Angola em Paris · Certidão de registo civil<br>Titular: Domingos Kiala F. · Data de emissão: 09 de Julho de 2026</div>
+                  </div>
+                  <div class="banner-ts">10:45:22 UTC+1</div>
+                </div>
+
+                <div class="dsk-doc-grid">
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Tipo de documento</div>
+                    <div class="dsk-doc-value">Certidão de registo civil</div>
+                  </div>
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Número de documento</div>
+                    <div class="dsk-doc-value masked">PAR-CERT-26-··· ···-0341</div>
+                  </div>
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Posto emissor</div>
+                    <div class="dsk-doc-value">Embaixada de Angola em Paris</div>
+                  </div>
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Data de emissão</div>
+                    <div class="dsk-doc-value">09 de Julho de 2026</div>
+                  </div>
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Validade</div>
+                    <div class="dsk-doc-value green">Permanente</div>
+                  </div>
+                  <div class="dsk-doc-cell">
+                    <div class="dsk-doc-label">Estado da assinatura</div>
+                    <div class="dsk-doc-value green">Válida · Não revogada</div>
+                  </div>
+                </div>
+
+                <div class="dsk-chain">
+                  <div class="dsk-chain-title">Cadeia de verificação criptográfica</div>
+                  <div class="chain-step">
+                    <div class="chain-icon ok"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 4-4" stroke="#2E7D4F" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+                    <div><div class="chain-text">Assinatura digital verificada — Embaixada de Angola em Paris</div><div class="chain-sub">Chave pública: MIREX-PAR-2026-PROD · SHA-256</div></div>
+                  </div>
+                  <div class="chain-step">
+                    <div class="chain-icon ok"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 4-4" stroke="#2E7D4F" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+                    <div><div class="chain-text">Certificado emitido por autoridade certificadora MIREX</div><div class="chain-sub">CA raiz: MIREX-ROOT-CA · Válido até 31/12/2028</div></div>
+                  </div>
+                  <div class="chain-step">
+                    <div class="chain-icon ok"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 4-4" stroke="#2E7D4F" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+                    <div><div class="chain-text">Trilha de auditoria imutável registada</div><div class="chain-sub">3 eventos · emissão, assinatura, publicação QR</div></div>
+                  </div>
+                  <div class="chain-step">
+                    <div class="chain-icon ok"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5 4-4" stroke="#2E7D4F" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+                    <div><div class="chain-text">Documento não revogado · Estado activo</div><div class="chain-sub">Consultado em tempo real · 09 Jul 2026 · 10:45:22</div></div>
+                  </div>
+                </div>
+
+                <div class="entity-note">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="7.5" cy="7.5" r="6" stroke="#5A6B80" stroke-width="1.1"/><path d="M7.5 5v3.5" stroke="#5A6B80" stroke-width="1.1" stroke-linecap="round"/><circle cx="7.5" cy="11" r="0.7" fill="#5A6B80"/></svg>
+                  <span>A verificação detalhada dos dados pessoais do titular está disponível exclusivamente para entidades autorizadas (instituições bancárias, universidades, organismos públicos) mediante autenticação no portal MIREX para entidades. A presente verificação confirma apenas a autenticidade do documento.</span>
+                </div>
+
+                <div class="dsk-footer">
+                  <div class="dsk-footer-copy">verificar.mirex.gov.ao · Sistema de Verificação Documental · República de Angola</div>
+                  <div class="dsk-footer-copy">Protótipo conceptual · TIS · 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-label"><span>Desktop</span>Portal de verificação para entidades autorizadas</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom footer -->
+  <div class="page-footer-abs">Protótipo conceptual · TIS · 2026 · MIREX Digital · Sistema de Verificação Documental</div>
+
+</div>
+</body>
+</html>

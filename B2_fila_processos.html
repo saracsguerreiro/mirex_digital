@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>B2 · Fila de Processos — MIREX Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #16263D;
+  --navy-700: #23405F;
+  --surface: #F5F8FB;
+  --card: #FFFFFF;
+  --gold-500: #D9A21B;
+  --red-700: #B5121B;
+  --ink: #1A2433;
+  --muted: #5A6B80;
+  --line: #D7E1EC;
+  --verde: #2E7D4F;
+  --ambar: #C77D0A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0d1117; }
+.canvas { width: 1920px; height: 1080px; background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
+
+/* HEADER */
+.inst-header { background: var(--navy-900); height: 56px; display: flex; align-items: center; padding: 0 32px; gap: 14px; flex-shrink: 0; }
+.emblem { width: 34px; height: 34px; border-radius: 50%; background: var(--gold-500); display: flex; align-items: center; justify-content: center; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
+.header-module { font-size: 17px; font-weight: 600; color: #fff; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+.header-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
+.user-chip { display: flex; align-items: center; gap: 8px; }
+.user-av { width: 30px; height: 30px; border-radius: 50%; background: var(--navy-700); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); }
+.user-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75); }
+
+/* POST BAR */
+.post-bar {
+  background: var(--card); border-bottom: 1px solid var(--line); height: 48px;
+  display: flex; align-items: center; padding: 0 28px; gap: 16px; flex-shrink: 0;
+}
+.post-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+.post-status { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--verde); font-weight: 600; }
+.filter-group { margin-left: auto; display: flex; gap: 8px; }
+.filter-btn { display: flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--line); color: var(--muted); background: var(--surface); }
+.filter-btn.active { background: var(--navy-900); color: #fff; border-color: var(--navy-900); }
+.search-bar { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; font-size: 13px; color: var(--muted); width: 220px; }
+
+/* MAIN */
+.main-content { flex: 1; display: flex; overflow: hidden; }
+
+/* TABLE PANEL */
+.table-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; border-right: 1px solid var(--line); }
+.table-subheader { padding: 12px 24px; border-bottom: 1px solid var(--line); background: var(--card); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.tab { padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--muted); }
+.tab.active { background: var(--navy-900); color: #fff; }
+.count-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(22,38,61,0.08); font-size: 10px; font-weight: 700; color: var(--muted); margin-left: 4px; }
+.tab.active .count-badge { background: rgba(255,255,255,0.15); color: #fff; }
+.table-stats { margin-left: auto; display: flex; gap: 20px; }
+.tstat { font-size: 12px; color: var(--muted); }
+.tstat strong { color: var(--ink); }
+
+/* Table */
+.table-scroll { flex: 1; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: var(--surface); }
+thead th { padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tbody tr { border-bottom: 1px solid var(--line); cursor: pointer; transition: background 0.1s; }
+tbody tr:hover { background: rgba(22,38,61,0.02); }
+tbody tr.selected { background: rgba(22,38,61,0.04); }
+td { padding: 12px 16px; font-size: 13px; color: var(--ink); vertical-align: middle; }
+.td-id { font-family: monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.3px; }
+.td-type { font-weight: 600; }
+.td-name { display: flex; flex-direction: column; gap: 1px; }
+.td-name-main { font-weight: 600; }
+.td-name-nat { font-size: 11px; color: var(--muted); }
+
+/* Badge */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.badge-verde { background: rgba(46,125,79,0.1); color: var(--verde); }
+.badge-ambar { background: rgba(199,125,10,0.1); color: var(--ambar); }
+.badge-red { background: rgba(181,18,27,0.1); color: var(--red-700); }
+.badge-blue { background: rgba(22,38,61,0.08); color: var(--navy-700); }
+.badge-muted { background: var(--surface); color: var(--muted); border: 1px solid var(--line); }
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; }
+.badge-verde .badge-dot { background: var(--verde); }
+.badge-ambar .badge-dot { background: var(--ambar); }
+.badge-red .badge-dot { background: var(--red-700); }
+.badge-blue .badge-dot { background: var(--navy-700); }
+.badge-muted .badge-dot { background: var(--muted); }
+
+/* SLA bar */
+.sla-cell { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
+.sla-bar { height: 5px; background: var(--line); border-radius: 3px; }
+.sla-fill { height: 100%; border-radius: 3px; }
+.sla-text { font-size: 10px; color: var(--muted); }
+
+/* DETAIL PANEL */
+.detail-panel { width: 580px; display: flex; flex-direction: column; background: var(--card); overflow: hidden; }
+.detail-header { background: var(--navy-900); padding: 20px 24px; flex-shrink: 0; }
+.detail-id { font-size: 11px; color: rgba(255,255,255,0.5); font-family: monospace; letter-spacing: 0.5px; margin-bottom: 4px; }
+.detail-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.detail-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+.detail-meta-item { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 4px; }
+.detail-meta-item strong { color: rgba(255,255,255,0.85); }
+
+.detail-body { flex: 1; overflow: hidden; padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+
+/* Info grid */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+.info-cell { background: var(--card); padding: 12px 14px; }
+.info-cell-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.info-cell-value { font-size: 13px; font-weight: 600; color: var(--ink); }
+
+/* Timeline */
+.timeline-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-step { display: flex; gap: 14px; position: relative; }
+.tl-indicator { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; }
+.tl-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+.tl-dot.done { background: var(--verde); }
+.tl-dot.active { background: var(--gold-500); box-shadow: 0 0 0 4px rgba(217,162,27,0.2); }
+.tl-dot.pending { background: var(--card); border: 2px solid var(--line); }
+.tl-line { width: 2px; flex: 1; min-height: 20px; background: var(--line); margin: 4px 0; }
+.tl-line.done { background: var(--verde); }
+.tl-content { padding: 2px 0 20px; flex: 1; }
+.tl-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.tl-title.active { color: var(--navy-900); }
+.tl-title.pending { color: var(--muted); }
+.tl-sub { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+.tl-time { font-size: 10px; color: var(--muted); }
+
+/* Action buttons */
+.action-row { display: flex; gap: 10px; padding-top: 4px; }
+.btn-approve { flex: 1; background: var(--verde); color: #fff; font-size: 13px; font-weight: 700; padding: 11px; border-radius: 8px; text-align: center; }
+.btn-return { flex: 1; background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-size: 13px; font-weight: 600; padding: 11px; border-radius: 8px; text-align: center; }
+.btn-escalate { background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 12px; padding: 8px 14px; border-radius: 6px; }
+
+/* Footer */
+.page-footer { padding: 8px 28px; background: var(--surface); border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-shrink: 0; }
+.footer-copy { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- HEADER -->
+  <header class="inst-header">
+    <div class="emblem"><svg width="18" height="18" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg></div>
+    <div>
+      <div class="header-sub">República de Angola · MIREX</div>
+      <div class="header-module">Sistema Consular · Fila de Processos</div>
+    </div>
+    <div class="header-right">
+      <span class="header-meta">09 Jul 2026 · 10:22 EAT</span>
+      <div class="user-chip">
+        <div class="user-av">NK</div>
+        <span class="user-name">N'Zinga Kiala · Chefe de Posto</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- POST BAR -->
+  <div class="post-bar">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L1 6v8.5h4.5V10h5v4.5H15V6L8 1.5z" stroke="#16263D" stroke-width="1.3"/></svg>
+    <span class="post-name">Embaixada de Angola em Adis Abeba</span>
+    <div class="post-status"><span style="width:6px;height:6px;border-radius:50%;background:var(--verde)"></span> Sistemas operacionais</div>
+    <div style="height:20px;width:1px;background:var(--line);margin:0 4px"></div>
+    <div class="search-bar">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5A6B80" stroke-width="1.2"/><path d="M10 10l3 3" stroke="#5A6B80" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Pesquisar processos…
+    </div>
+    <div class="filter-group">
+      <div class="filter-btn active">Todos <span class="count-badge" style="background:rgba(255,255,255,0.15);color:#fff">47</span></div>
+      <div class="filter-btn">Vistos <span class="count-badge">22</span></div>
+      <div class="filter-btn">Passaportes <span class="count-badge">15</span></div>
+      <div class="filter-btn">Reg. Civil <span class="count-badge">10</span></div>
+      <div class="filter-btn" style="color:var(--ambar);border-color:rgba(199,125,10,0.25);background:rgba(199,125,10,0.05)">
+        ⚠ SLA em risco <span class="count-badge" style="background:rgba(199,125,10,0.15);color:var(--ambar)">5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- TABLE -->
+    <div class="table-panel">
+      <div class="table-subheader">
+        <div class="tab active">Em curso <span class="count-badge">28</span></div>
+        <div class="tab">Aguarda documentação <span class="count-badge">9</span></div>
+        <div class="tab">Concluídos (hoje) <span class="count-badge">10</span></div>
+        <div class="table-stats">
+          <div class="tstat">Dentro do SLA: <strong style="color:var(--verde)">23</strong></div>
+          <div class="tstat">Em risco: <strong style="color:var(--ambar)">4</strong></div>
+          <div class="tstat">Excedido: <strong style="color:var(--red-700)">1</strong></div>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:140px">Referência</th>
+              <th>Tipo de acto</th>
+              <th style="width:200px">Requerente</th>
+              <th style="width:140px">Estado</th>
+              <th style="width:160px">Prazo SLA</th>
+              <th style="width:90px">Entrada</th>
+              <th style="width:80px">Acções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="selected">
+              <td class="td-id">ADD-VIS-2026-0148</td>
+              <td class="td-type">Visto de trabalho</td>
+              <td><div class="td-name"><span class="td-name-main">Domingos Kiala</span><span class="td-name-nat">Angolano · pass. AO-4872913</span></div></td>
+              <td><div class="badge badge-blue"><span class="badge-dot"></span>Em análise</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:62%;background:var(--ambar)"></div></div>
+                  <div class="sla-text">6 / 10 dias · <strong style="color:var(--ambar)">4 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">03 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600;cursor:pointer">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-PAS-2026-0093</td>
+              <td class="td-type">Renovação de passaporte</td>
+              <td><div class="td-name"><span class="td-name-main">Esperança Tchioco</span><span class="td-name-nat">Angolana · pass. AO-5110034</span></div></td>
+              <td><div class="badge badge-verde"><span class="badge-dot"></span>Biometria ag.</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:30%;background:var(--verde)"></div></div>
+                  <div class="sla-text">3 / 10 dias · <strong style="color:var(--verde)">7 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">06 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-VIS-2026-0149</td>
+              <td class="td-type">Visto de turismo</td>
+              <td><div class="td-name"><span class="td-name-main">Hiroshi Tanaka</span><span class="td-name-nat">Japonês · pass. JP-AB7291</span></div></td>
+              <td><div class="badge badge-ambar"><span class="badge-dot"></span>Doc. em falta</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:90%;background:var(--red-700)"></div></div>
+                  <div class="sla-text">9 / 10 dias · <strong style="color:var(--red-700)">1 restante</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">30 Jun</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-RC-2026-0041</td>
+              <td class="td-type">Registo de nascimento</td>
+              <td><div class="td-name"><span class="td-name-main">Marta Savimbi</span><span class="td-name-nat">Angolana · BI 00391842</span></div></td>
+              <td><div class="badge badge-blue"><span class="badge-dot"></span>Em análise</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:45%;background:var(--verde)"></div></div>
+                  <div class="sla-text">4 / 9 dias · <strong style="color:var(--verde)">5 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">05 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-VIS-2026-0145</td>
+              <td class="td-type">Visto de estudante</td>
+              <td><div class="td-name"><span class="td-name-main">Alem Girma</span><span class="td-name-nat">Etíope · pass. ET-PQ8812</span></div></td>
+              <td><div class="badge badge-verde"><span class="badge-dot"></span>Pgm. pago</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:20%;background:var(--verde)"></div></div>
+                  <div class="sla-text">2 / 10 dias · <strong style="color:var(--verde)">8 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">07 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-PAS-2026-0088</td>
+              <td class="td-type">1.º passaporte</td>
+              <td><div class="td-name"><span class="td-name-main">João Mbala Neto</span><span class="td-name-nat">Angolano · BI 00714293</span></div></td>
+              <td><div class="badge badge-muted"><span class="badge-dot"></span>Triagem</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:10%;background:var(--verde)"></div></div>
+                  <div class="sla-text">1 / 10 dias · <strong style="color:var(--verde)">9 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">09 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-VIS-2026-0143</td>
+              <td class="td-type">Visto de negócios</td>
+              <td><div class="td-name"><span class="td-name-main">Wei Zhang</span><span class="td-name-nat">Chinês · pass. CN-G2841903</span></div></td>
+              <td><div class="badge badge-verde"><span class="badge-dot"></span>Concluído</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:70%;background:var(--verde)"></div></div>
+                  <div class="sla-text">7 / 10 dias · Concluído</div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">02 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-RC-2026-0038</td>
+              <td class="td-type">Casamento consular</td>
+              <td><div class="td-name"><span class="td-name-main">Conceição Lopes</span><span class="td-name-nat">Angolana · BI 00284712</span></div></td>
+              <td><div class="badge badge-blue"><span class="badge-dot"></span>Em análise</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:55%;background:var(--ambar)"></div></div>
+                  <div class="sla-text">8 / 15 dias · <strong style="color:var(--ambar)">7 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">01 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+            <tr>
+              <td class="td-id">ADD-PAS-2026-0091</td>
+              <td class="td-type">Renovação de passaporte</td>
+              <td><div class="td-name"><span class="td-name-main">Fernanda Neto Burity</span><span class="td-name-nat">Angolana · pass. AO-6234810</span></div></td>
+              <td><div class="badge badge-muted"><span class="badge-dot"></span>Aguarda pgm.</div></td>
+              <td>
+                <div class="sla-cell">
+                  <div class="sla-bar"><div class="sla-fill" style="width:40%;background:var(--verde)"></div></div>
+                  <div class="sla-text">4 / 10 dias · <strong style="color:var(--verde)">6 restantes</strong></div>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--muted)">05 Jul</td>
+              <td><span style="font-size:11px;color:var(--navy-700);font-weight:600">→ Abrir</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel">
+      <div class="detail-header">
+        <div class="detail-id">ADD-VIS-2026-0148 · Detalhe do processo</div>
+        <div class="detail-title">Visto de Trabalho — Domingos Kiala</div>
+        <div class="detail-meta">
+          <div class="detail-meta-item"><strong>Entrada:</strong> 03 Jul 2026</div>
+          <div class="detail-meta-item"><strong>SLA:</strong> 10 dias · <span style="color:#F59E0B">4 restantes</span></div>
+          <div class="detail-meta-item">
+            <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(199,125,10,0.2);padding:2px 7px;border-radius:8px;font-size:11px;color:#F59E0B;font-weight:700">⚠ Em atenção</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <!-- Info grid -->
+        <div class="info-grid">
+          <div class="info-cell">
+            <div class="info-cell-label">Requerente</div>
+            <div class="info-cell-value">Domingos Kiala</div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell-label">Nacionalidade</div>
+            <div class="info-cell-value">Angola · AO-4872913</div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell-label">Tipo de visto</div>
+            <div class="info-cell-value">Trabalho — cat. D</div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell-label">Entidade patronal</div>
+            <div class="info-cell-value">Construtora Luso-Africana Lda.</div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell-label">Pagamento</div>
+            <div class="info-cell-value" style="color:var(--verde)">Confirmado · € 120,00</div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell-label">Analista</div>
+            <div class="info-cell-value">N'Zinga Kiala</div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div>
+          <div class="timeline-label">Linha temporal do processo</div>
+          <div class="timeline">
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="tl-line done"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-title">Pedido submetido online</div>
+                <div class="tl-sub">Portal do Cidadão · formulário completo</div>
+                <div class="tl-time">03 Jul 2026 · 14:32</div>
+              </div>
+            </div>
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="tl-line done"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-title">Triagem automática</div>
+                <div class="tl-sub">Documentação validada · 6/6 itens OK</div>
+                <div class="tl-time">03 Jul 2026 · 14:33 · Sistema automático</div>
+              </div>
+            </div>
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot done"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="tl-line done"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-title">Pagamento confirmado</div>
+                <div class="tl-sub">€ 120,00 · ref. PG-2026-ADD-0148</div>
+                <div class="tl-time">03 Jul 2026 · 16:10</div>
+              </div>
+            </div>
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot active">
+                  <div style="width:8px;height:8px;border-radius:50%;background:var(--navy-900)"></div>
+                </div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-title active">Análise humana — em curso</div>
+                <div class="tl-sub">Atribuído a N'Zinga Kiala · em tratamento</div>
+                <div class="tl-time">04 Jul 2026 · 09:00 · <span style="color:var(--ambar)">4 dias úteis restantes</span></div>
+              </div>
+            </div>
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot pending"></div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-content">
+                <div class="tl-title pending">Biometria — agendada</div>
+                <div class="tl-sub">14 Jul 2026 · 10h00 · Balcão 2</div>
+                <div class="tl-time">Aguarda conclusão da análise humana</div>
+              </div>
+            </div>
+            <div class="tl-step">
+              <div class="tl-indicator">
+                <div class="tl-dot pending"></div>
+              </div>
+              <div class="tl-content" style="padding-bottom:0">
+                <div class="tl-title pending">Decisão e emissão</div>
+                <div class="tl-sub" style="color:rgba(90,107,128,0.5)">Data prevista: 15 Jul 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div>
+          <div class="timeline-label">Acções disponíveis</div>
+          <div class="action-row">
+            <div class="btn-approve">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline;margin-right:4px"><path d="M2 7l3.5 3.5 7-7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Aprovar e emitir visto
+            </div>
+            <div class="btn-return">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline;margin-right:4px"><path d="M6 3H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8" stroke="#1A2433" stroke-width="1.3" stroke-linecap="round"/><path d="M10 1l3 3-3 3M13 4H7" stroke="#1A2433" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Devolver com nota
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <div class="btn-escalate">Escalar para supervisão</div>
+            <div class="btn-escalate">Solicitar documentação adicional</div>
+            <div class="btn-escalate">Adicionar nota interna</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span class="footer-copy">Protótipo conceptual · TIS · 2026</span>
+    <span class="footer-copy">MIREX Digital · Sistema Consular · Embaixada de Angola em Adis Abeba</span>
+  </div>
+
+</div>
+</body>
+</html>

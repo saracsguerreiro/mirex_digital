@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>B1 · Dashboard Executivo — MIREX Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #16263D;
+  --navy-700: #23405F;
+  --surface: #F5F8FB;
+  --card: #FFFFFF;
+  --gold-500: #D9A21B;
+  --red-700: #B5121B;
+  --ink: #1A2433;
+  --muted: #5A6B80;
+  --line: #D7E1EC;
+  --verde: #2E7D4F;
+  --ambar: #C77D0A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0d1117; }
+
+.canvas {
+  width: 1920px;
+  height: 1080px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+.inst-header {
+  background: var(--navy-900);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.emblem {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gold-500);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.header-text { display: flex; flex-direction: column; gap: 1px; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.4px; }
+.header-module { font-size: 17px; font-weight: 600; color: #fff; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+.header-meta { font-size: 12px; color: rgba(255,255,255,0.5); }
+.header-user { display: flex; align-items: center; gap: 8px; }
+.user-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--navy-700); border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8);
+}
+.user-name { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 600; }
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 24px 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* KPI ROW */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  flex-shrink: 0;
+}
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(22,38,61,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+.kpi-value { font-size: 32px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.kpi-context { font-size: 12px; color: var(--muted); margin-top: 2px; display: flex; align-items: center; gap: 5px; }
+.kpi-trend { font-weight: 600; }
+.kpi-trend.up { color: var(--verde); }
+.kpi-trend.warn { color: var(--ambar); }
+.kpi-bar {
+  height: 3px; background: var(--line); border-radius: 2px; margin-top: 8px;
+}
+.kpi-bar-fill { height: 100%; border-radius: 2px; }
+
+/* MAIN ROW */
+.main-row {
+  display: grid;
+  grid-template-columns: 1fr 480px 320px;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(22,38,61,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.panel-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+.panel-sub { font-size: 12px; color: var(--muted); }
+.panel-body { flex: 1; overflow: hidden; }
+
+/* MAP */
+.map-wrapper { width: 100%; height: 100%; position: relative; }
+.map-legend {
+  position: absolute;
+  bottom: 14px; left: 16px;
+  display: flex; gap: 20px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* CHART */
+.chart-wrapper { padding: 16px 20px; height: 100%; display: flex; flex-direction: column; gap: 12px; }
+.chart-legend { display: flex; gap: 16px; }
+.chart-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+.chart-legend-line { width: 18px; height: 2px; border-radius: 1px; }
+.chart-area { flex: 1; position: relative; }
+.chart-y-labels {
+  position: absolute; left: 0; top: 0; bottom: 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  font-size: 10px; color: var(--muted); text-align: right; width: 36px;
+}
+.chart-svg-wrap { position: absolute; left: 44px; right: 0; top: 0; bottom: 24px; }
+.chart-x-labels {
+  position: absolute; left: 44px; right: 0; bottom: 0;
+  display: flex; justify-content: space-between;
+  font-size: 10px; color: var(--muted);
+}
+
+/* ALERTS */
+.alerts-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; overflow: hidden; }
+.alert-item {
+  border-radius: 6px;
+  padding: 12px 12px 12px 14px;
+  position: relative;
+  overflow: hidden;
+}
+.alert-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.alert-item.ambar { background: rgba(199,125,10,0.06); }
+.alert-item.ambar::before { background: var(--ambar); }
+.alert-item.gold { background: rgba(217,162,27,0.08); }
+.alert-item.gold::before { background: var(--gold-500); }
+.alert-item.red { background: rgba(181,18,27,0.06); }
+.alert-item.red::before { background: var(--red-700); }
+.alert-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.alert-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.alert-time { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.alert-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600;
+  margin-bottom: 4px;
+}
+.badge-ambar { background: rgba(199,125,10,0.12); color: var(--ambar); }
+.badge-gold { background: rgba(217,162,27,0.14); color: #a07810; }
+.badge-red { background: rgba(181,18,27,0.10); color: var(--red-700); }
+.badge-verde { background: rgba(46,125,79,0.12); color: var(--verde); }
+
+.divider-section {
+  padding: 10px 16px 6px;
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  border-top: 1px solid var(--line);
+}
+
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 16px; border-bottom: 1px solid var(--line);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: 12px; color: var(--muted); }
+.stat-value { font-size: 13px; font-weight: 600; color: var(--ink); }
+
+/* FOOTER */
+.page-footer {
+  padding: 8px 32px;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer-copy { font-size: 11px; color: var(--muted); }
+.footer-ts { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- INSTITUTIONAL HEADER -->
+  <header class="inst-header">
+    <div class="emblem">
+      <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg>
+    </div>
+    <div class="header-text">
+      <span class="header-sub">República de Angola · MIREX</span>
+      <span class="header-module">Visão da Rede — Dashboard Executivo</span>
+    </div>
+    <div class="header-right">
+      <span class="header-meta">Actualizado: 09 Jul 2026 · 08:47 WAT</span>
+      <div class="header-user">
+        <div class="user-avatar">MJ</div>
+        <span class="user-name">Min. João da Costa</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- KPI ROW -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-label">Actos emitidos (mês actual)</span>
+        <span class="kpi-value">18.432</span>
+        <span class="kpi-context">
+          <span class="kpi-trend up">↑ 8,3%</span> vs. mesmo período ano anterior
+        </span>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:72%;background:var(--verde)"></div></div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Receita consular acumulada</span>
+        <span class="kpi-value" style="color:var(--verde)">↑ 12%</span>
+        <span class="kpi-context">Face ao mesmo trimestre de 2025</span>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:62%;background:var(--verde)"></div></div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Diáspora registada</span>
+        <span class="kpi-value">78%</span>
+        <span class="kpi-context">
+          <span class="kpi-trend warn">+ 4 pp</span> · Meta 2026: 85%
+        </span>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:78%;background:var(--ambar)"></div></div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Postos dentro do SLA</span>
+        <span class="kpi-value">46 <span style="font-size:18px;font-weight:400;color:var(--muted)">/ 52</span></span>
+        <span class="kpi-context">
+          <span class="kpi-trend warn">4 em atenção</span> · 2 acima do limite
+        </span>
+        <div class="kpi-bar">
+          <div class="kpi-bar-fill" style="width:88%;background:var(--ambar)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN ROW -->
+    <div class="main-row">
+
+      <!-- MAP PANEL -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Rede Diplomática e Consular</div>
+            <div class="panel-sub">52 postos activos · tempo real</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <span style="font-size:11px;background:rgba(46,125,79,0.1);color:var(--verde);padding:3px 8px;border-radius:4px;font-weight:600">46 OK</span>
+            <span style="font-size:11px;background:rgba(199,125,10,0.1);color:var(--ambar);padding:3px 8px;border-radius:4px;font-weight:600">4 Atenção</span>
+            <span style="font-size:11px;background:rgba(181,18,27,0.1);color:var(--red-700);padding:3px 8px;border-radius:4px;font-weight:600">2 Crítico</span>
+          </div>
+        </div>
+        <div class="panel-body" style="position:relative">
+          <div class="map-wrapper">
+            <svg viewBox="0 0 1000 500" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ocean background -->
+              <rect width="1000" height="500" fill="#EBF2F9"/>
+              <!-- Graticule lines -->
+              <g stroke="#D0DCE9" stroke-width="0.4" opacity="0.6">
+                <line x1="0" y1="111" x2="1000" y2="111"/>
+                <line x1="0" y1="167" x2="1000" y2="167"/>
+                <line x1="0" y1="222" x2="1000" y2="222"/>
+                <line x1="0" y1="278" x2="1000" y2="278"/>
+                <line x1="0" y1="333" x2="1000" y2="333"/>
+                <line x1="250" y1="0" x2="250" y2="500"/>
+                <line x1="500" y1="0" x2="500" y2="500"/>
+                <line x1="750" y1="0" x2="750" y2="500"/>
+              </g>
+
+              <!-- CONTINENTS -->
+              <g fill="#C8D8E8" stroke="#B0C4D8" stroke-width="0.8">
+                <!-- Russia -->
+                <path d="M 525,58 L 618,42 L 718,36 L 810,44 L 858,62 L 865,88 L 848,105 L 775,108 L 718,96 L 655,86 L 568,82 L 525,78 Z"/>
+                <!-- Greenland -->
+                <path d="M 215,22 L 275,12 L 318,28 L 308,58 L 265,68 L 222,52 Z"/>
+                <!-- North America -->
+                <path d="M 105,80 L 158,55 L 225,58 L 282,78 L 305,110 L 295,148 L 270,182 L 242,218 L 208,238 L 168,248 L 132,228 L 108,205 L 95,165 L 92,125 Z"/>
+                <!-- Central America -->
+                <path d="M 208,238 L 242,218 L 252,245 L 238,258 L 215,252 Z"/>
+                <!-- Caribbean islands hint -->
+                <ellipse cx="265" cy="225" rx="8" ry="5" fill="#C8D8E8"/>
+                <ellipse cx="278" cy="218" rx="6" ry="4" fill="#C8D8E8"/>
+                <!-- South America -->
+                <path d="M 195,258 L 240,245 L 285,252 L 312,272 L 322,308 L 318,348 L 300,392 L 270,418 L 235,428 L 198,412 L 175,382 L 162,342 L 158,305 L 168,278 Z"/>
+                <!-- Europe (with Iberian peninsula) -->
+                <path d="M 455,95 L 492,82 L 535,80 L 568,90 L 578,110 L 562,135 L 532,150 L 498,158 L 468,150 L 448,132 L 452,112 Z"/>
+                <!-- Scandinavia -->
+                <path d="M 492,82 L 512,58 L 535,62 L 548,80 L 535,80 L 512,82 Z"/>
+                <!-- UK -->
+                <path d="M 468,90 L 482,82 L 495,88 L 492,108 L 478,112 L 465,105 Z"/>
+                <!-- Iceland -->
+                <ellipse cx="418" cy="72" rx="22" ry="14" fill="#C8D8E8"/>
+                <!-- Africa -->
+                <path d="M 452,155 L 498,148 L 535,152 L 562,168 L 578,198 L 580,238 L 572,282 L 558,328 L 535,368 L 512,390 L 488,395 L 462,388 L 438,365 L 422,325 L 412,282 L 412,238 L 418,198 L 428,172 Z"/>
+                <!-- Arabian Peninsula -->
+                <path d="M 555,148 L 598,138 L 640,148 L 658,165 L 652,192 L 625,208 L 598,205 L 568,188 L 552,168 Z"/>
+                <!-- South Asia (India) -->
+                <path d="M 605,142 L 652,132 L 688,142 L 698,168 L 690,198 L 662,222 L 635,225 L 608,212 L 592,188 L 595,162 Z"/>
+                <!-- East Asia (China+surroundings) -->
+                <path d="M 635,92 L 718,72 L 782,78 L 832,95 L 845,118 L 838,150 L 810,178 L 770,195 L 722,200 L 678,195 L 642,178 L 622,155 L 622,125 L 628,108 Z"/>
+                <!-- Korean Peninsula -->
+                <path d="M 778,108 L 795,100 L 812,108 L 808,128 L 792,135 L 778,128 Z"/>
+                <!-- Japan -->
+                <path d="M 818,105 L 835,95 L 852,105 L 852,128 L 838,140 L 820,130 Z"/>
+                <!-- Southeast Asia mainland -->
+                <path d="M 705,185 L 762,175 L 798,185 L 792,215 L 770,242 L 742,258 L 712,252 L 688,232 L 682,208 Z"/>
+                <!-- Malay Archipelago simplified -->
+                <path d="M 768,240 L 808,230 L 835,245 L 832,268 L 808,278 L 778,268 L 762,252 Z"/>
+                <!-- Australia -->
+                <path d="M 748,295 L 822,278 L 875,295 L 892,338 L 882,385 L 852,408 L 808,412 L 762,398 L 738,368 L 732,328 Z"/>
+                <!-- New Zealand -->
+                <path d="M 878,328 L 895,318 L 905,332 L 900,355 L 885,362 L 875,348 Z"/>
+              </g>
+
+              <!-- Equator and Tropic lines -->
+              <line x1="0" y1="250" x2="1000" y2="250" stroke="#90A8BE" stroke-width="0.6" stroke-dasharray="4,4" opacity="0.5"/>
+
+              <!-- LUANDA HQ (special gold star) -->
+              <circle cx="542" cy="272" r="9" fill="#D9A21B" stroke="white" stroke-width="2"/>
+              <text x="542" y="276" text-anchor="middle" font-size="10" fill="#16263D" font-weight="bold">★</text>
+              <text x="542" y="290" text-anchor="middle" font-size="8.5" fill="#16263D" font-weight="700">Luanda</text>
+
+              <!-- GREEN POSTS (OK) -->
+              <g fill="#2E7D4F" stroke="white" stroke-width="1.5">
+                <!-- Europa -->
+                <circle cx="474" cy="140" r="5.5"/><title>Lisboa</title>
+                <circle cx="507" cy="114" r="5.5"/><title>Paris</title>
+                <circle cx="498" cy="105" r="5.5"/><title>Londres</title>
+                <circle cx="537" cy="103" r="5.5"/><title>Berlim</title>
+                <circle cx="534" cy="132" r="5.5"/><title>Roma</title>
+                <circle cx="511" cy="108" r="5.5"/><title>Bruxelas</title>
+                <circle cx="516" cy="120" r="5.5"/><title>Genebra</title>
+                <circle cx="483" cy="136" r="5.5"/><title>Madrid</title>
+                <circle cx="510" cy="104" r="5.5"/>
+                <circle cx="545" cy="115" r="5.5"/><title>Viena</title>
+                <circle cx="557" cy="104" r="5.5"/><title>Varsóvia</title>
+                <circle cx="549" cy="85" r="5.5"/><title>Estocolmo</title>
+                <!-- Americas -->
+                <circle cx="282" cy="140" r="5.5"/><title>Washington</title>
+                <circle cx="292" cy="130" r="5.5"/><title>Nova Iorque</title>
+                <circle cx="270" cy="185" r="5.5"/><title>Havana</title>
+                <circle cx="222" cy="195" r="5.5"/><title>México</title>
+                <circle cx="368" cy="282" r="5.5"/><title>São Paulo</title>
+                <circle cx="292" cy="237" r="5.5"/><title>Bogotá</title>
+                <circle cx="282" cy="265" r="5.5"/><title>Lima</title>
+                <circle cx="302" cy="285" r="5.5"/><title>Santiago</title>
+                <!-- Africa -->
+                <circle cx="450" cy="218" r="5.5"/><title>Dacar</title>
+                <circle cx="480" cy="154" r="5.5"/><title>Rabat</title>
+                <circle cx="508" cy="148" r="5.5"/><title>Argel</title>
+                <circle cx="586" cy="165" r="5.5"/><title>Cairo</title>
+                <circle cx="518" cy="222" r="5.5"/><title>Abuja</title>
+                <circle cx="498" cy="232" r="5.5"/><title>Acra</title>
+                <circle cx="542" cy="258" r="5.5"/><title>Kinshasa</title>
+                <circle cx="604" cy="252" r="5.5"/><title>Nairóbi</title>
+                <circle cx="610" cy="268" r="5.5"/><title>Dar es Salaam</title>
+                <circle cx="585" cy="272" r="5.5"/><title>Harare</title>
+                <circle cx="578" cy="265" r="5.5"/><title>Lusaca</title>
+                <circle cx="590" cy="295" r="5.5"/><title>Maputo</title>
+                <circle cx="578" cy="292" r="5.5"/><title>Pretória</title>
+                <!-- Middle East / Asia -->
+                <circle cx="595" cy="160" r="5.5"/><title>Tel Aviv</title>
+                <circle cx="653" cy="185" r="5.5"/><title>Dubai</title>
+                <circle cx="712" cy="168" r="5.5"/><title>Nova Deli</title>
+                <circle cx="700" cy="195" r="5.5"/><title>Mumbai</title>
+                <circle cx="888" cy="150" r="5.5"/><title>Tóquio</title>
+                <circle cx="852" cy="142" r="5.5"/><title>Seul</title>
+                <circle cx="778" cy="210" r="5.5"/><title>Bangcoc</title>
+                <circle cx="788" cy="245" r="5.5"/><title>Singapura</title>
+                <circle cx="838" cy="162" r="5.5"/><title>Xangai</title>
+                <circle cx="782" cy="240" r="5.5"/><title>Kuala Lumpur</title>
+                <circle cx="793" cy="190" r="5.5"/><title>Hanoí</title>
+              </g>
+
+              <!-- AMBER POSTS (attention) -->
+              <g fill="#C77D0A" stroke="white" stroke-width="1.5">
+                <circle cx="822" cy="138" r="6"/><title>Pequim — SLA excedido</title>
+                <circle cx="338" cy="290" r="6"/><title>Buenos Aires</title>
+                <circle cx="608" cy="225" r="6"/><title>Addis Abeba</title>
+                <circle cx="488" cy="235" r="6"/><title>Abidjan</title>
+              </g>
+
+              <!-- RED POSTS (critical) -->
+              <g fill="#B5121B" stroke="white" stroke-width="2">
+                <circle cx="604" cy="94" r="7"/><title>Moscovo — Crítico</title>
+                <circle cx="796" cy="262" r="7"/><title>Jacarta — Crítico</title>
+              </g>
+
+              <!-- Labels for key posts -->
+              <g font-size="8" fill="#334" font-family="Inter,sans-serif">
+                <text x="474" y="155" text-anchor="middle">Lisboa</text>
+                <text x="507" y="128" text-anchor="middle">Paris</text>
+                <text x="282" y="154" text-anchor="middle">Washington</text>
+                <text x="604" y="82" text-anchor="middle" fill="#B5121B" font-weight="700">Moscovo ⚠</text>
+                <text x="822" y="125" text-anchor="middle" fill="#C77D0A" font-weight="700">Pequim</text>
+              </g>
+            </svg>
+
+            <!-- Legend overlay -->
+            <div class="map-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#2E7D4F"></div> OK (46)
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#C77D0A"></div> Atenção (4)
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#B5121B"></div> Crítico (2)
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#D9A21B"></div> Sede (Luanda)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINE CHART PANEL -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Vistos emitidos por região</div>
+            <div class="panel-sub">Tendência 12 meses · Jan–Dez 2025</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="chart-wrapper">
+            <div class="chart-legend">
+              <div class="chart-legend-item">
+                <div class="chart-legend-line" style="background:#16263D"></div>
+                Europa
+              </div>
+              <div class="chart-legend-item">
+                <div class="chart-legend-line" style="background:#D9A21B"></div>
+                África
+              </div>
+              <div class="chart-legend-item">
+                <div class="chart-legend-line" style="background:#5A6B80"></div>
+                Ásia / M. Oriente
+              </div>
+            </div>
+            <div class="chart-area">
+              <div class="chart-y-labels">
+                <span>1.4k</span>
+                <span>1.0k</span>
+                <span>700</span>
+                <span>350</span>
+                <span>0</span>
+              </div>
+              <div class="chart-svg-wrap">
+                <svg width="100%" height="100%" viewBox="0 0 420 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Grid -->
+                  <g stroke="#D7E1EC" stroke-width="0.5">
+                    <line x1="0" y1="0" x2="420" y2="0"/>
+                    <line x1="0" y1="50" x2="420" y2="50"/>
+                    <line x1="0" y1="100" x2="420" y2="100"/>
+                    <line x1="0" y1="150" x2="420" y2="150"/>
+                    <line x1="0" y1="200" x2="420" y2="200"/>
+                  </g>
+                  <!-- Europa fill -->
+                  <path d="M 0,178 L 38,168 L 76,174 L 114,150 L 152,140 L 190,145 L 228,160 L 266,175 L 304,142 L 342,120 L 380,130 L 420,150 L 420,200 L 0,200 Z"
+                    fill="#16263D" fill-opacity="0.06"/>
+                  <!-- Africa fill -->
+                  <path d="M 0,210 L 38,202 L 76,198 L 114,193 L 152,188 L 190,182 L 228,186 L 266,193 L 304,185 L 342,172 L 380,168 L 420,175 L 420,220 L 0,220 Z"
+                    fill="#D9A21B" fill-opacity="0.06"/>
+                  <!-- Europa line -->
+                  <polyline points="0,178 38,168 76,174 114,150 152,140 190,145 228,160 266,175 304,142 342,120 380,130 420,150"
+                    fill="none" stroke="#16263D" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                  <!-- Africa line -->
+                  <polyline points="0,210 38,202 76,198 114,193 152,188 190,182 228,186 266,193 304,185 342,172 380,168 420,175"
+                    fill="none" stroke="#D9A21B" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                  <!-- Asia line -->
+                  <polyline points="0,260 38,256 76,258 114,251 152,246 190,241 228,244 266,249 304,240 342,231 380,234 420,244"
+                    fill="none" stroke="#5A6B80" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6,3"/>
+                  <!-- Dots Europa -->
+                  <g fill="#16263D">
+                    <circle cx="342" cy="120" r="3.5"/>
+                    <circle cx="380" cy="130" r="3.5"/>
+                  </g>
+                  <!-- Dots Africa -->
+                  <g fill="#D9A21B">
+                    <circle cx="342" cy="172" r="3.5"/>
+                    <circle cx="380" cy="168" r="3.5"/>
+                  </g>
+                  <!-- Annotation: peak -->
+                  <line x1="342" y1="120" x2="342" y2="200" stroke="#D7E1EC" stroke-width="0.8" stroke-dasharray="3,3"/>
+                  <text x="350" y="115" font-size="8" fill="#5A6B80" font-family="Inter,sans-serif">+48%</text>
+                </svg>
+              </div>
+              <div class="chart-x-labels">
+                <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span><span>Nov</span><span>Dez</span>
+              </div>
+            </div>
+
+            <!-- Quick stats below chart -->
+            <div style="border-top:1px solid var(--line);padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div style="background:var(--surface);border-radius:6px;padding:10px 12px;">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">Europa (acum. 2025)</div>
+                <div style="font-size:16px;font-weight:700;color:var(--ink)">12.480</div>
+                <div style="font-size:10px;color:var(--verde)">↑ 11%</div>
+              </div>
+              <div style="background:var(--surface);border-radius:6px;padding:10px 12px;">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">África (acum. 2025)</div>
+                <div style="font-size:16px;font-weight:700;color:var(--ink)">9.245</div>
+                <div style="font-size:10px;color:var(--verde)">↑ 7%</div>
+              </div>
+              <div style="background:var(--surface);border-radius:6px;padding:10px 12px;">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">Ásia / M. Oriente</div>
+                <div style="font-size:16px;font-weight:700;color:var(--ink)">4.682</div>
+                <div style="font-size:10px;color:var(--ambar)">↑ 3%</div>
+              </div>
+              <div style="background:var(--surface);border-radius:6px;padding:10px 12px;">
+                <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">Américas</div>
+                <div style="font-size:16px;font-weight:700;color:var(--ink)">2.108</div>
+                <div style="font-size:10px;color:var(--verde)">↑ 5%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALERTS PANEL -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Alertas e Notificações</div>
+          <span style="font-size:11px;background:rgba(181,18,27,0.1);color:var(--red-700);padding:2px 7px;border-radius:10px;font-weight:600">1 crítico</span>
+        </div>
+        <div class="alerts-body">
+
+          <div class="alert-item red">
+            <div class="alert-badge badge-red">● CRÍTICO</div>
+            <div class="alert-title">Posto de Moscovo — SLA de emissão excedido</div>
+            <div class="alert-desc">Passaportes com prazo médio de 18 dias (limite: 10). Afecta 38 processos em fila.</div>
+            <div class="alert-time">Sinalizado em 04 Jul 2026 · Em escalada</div>
+          </div>
+
+          <div class="alert-item ambar">
+            <div class="alert-badge badge-ambar">● ATENÇÃO</div>
+            <div class="alert-title">Posto de Pequim — SLA acima do limite há 5 dias</div>
+            <div class="alert-desc">Tempo médio de emissão de vistos: 14 dias (limite: 10). Causa provável: pico sazonal.</div>
+            <div class="alert-time">Desde 04 Jul 2026 · 23 processos pendentes</div>
+          </div>
+
+          <div class="alert-item ambar">
+            <div class="alert-badge badge-ambar">● ATENÇÃO</div>
+            <div class="alert-title">Jacarta — Conectividade intermitente</div>
+            <div class="alert-desc">Falhas de sincronização detectadas nas últimas 48h. Expediente em modo offline.</div>
+            <div class="alert-time">Última sincronização: 09 Jul 08:12</div>
+          </div>
+
+          <div class="alert-item gold">
+            <div class="alert-badge badge-gold">ℹ INFORMAÇÃO</div>
+            <div class="alert-title">3 mandatos a terminar em 90 dias</div>
+            <div class="alert-desc">Embaixadores em Paris, Seul e Buenos Aires. Processos de substituição a iniciar.</div>
+            <div class="alert-time">Prazo limite: 08 Out 2026</div>
+          </div>
+
+        </div>
+
+        <div class="divider-section">Indicadores de Rede</div>
+        <div class="stat-row">
+          <span class="stat-label">Disponibilidade do sistema</span>
+          <span class="stat-value" style="color:var(--verde)">99,8%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Processos em fila (rede)</span>
+          <span class="stat-value">2.847</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Diplomatas em funções</span>
+          <span class="stat-value">800+</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Turno de suporte activo</span>
+          <span class="stat-value" style="color:var(--verde)">● Equipa A</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span class="footer-copy">Protótipo conceptual · TIS · 2026</span>
+    <span class="footer-ts">MIREX Digital · Visão da Rede · Dados simulados para efeitos de demonstração</span>
+  </div>
+
+</div>
+</body>
+</html>
