@@ -109,28 +109,28 @@ body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(
 
 /* ── CAROUSEL STRIP ── */
 .carousel-strip {
-  background: var(--navy); flex-shrink: 0; padding: 22px 0 18px;
+  background: var(--card); border-bottom: 1px solid var(--line); flex-shrink: 0; padding: 22px 0 18px;
 }
 .carousel-top {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 72px; margin-bottom: 16px;
 }
 .strip-label {
-  font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45);
+  font-size: 11px; font-weight: 700; color: var(--muted);
   letter-spacing: 1px; text-transform: uppercase;
 }
 .car-arrows { display: flex; gap: 8px; }
 .car-arrow {
-  width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.70);
-  display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--surface); color: var(--muted);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
 }
 .carousel-track {
   display: flex; gap: 14px; padding: 0 72px; overflow: hidden;
 }
 .car-card {
   flex-shrink: 0; width: 284px; border-radius: 16px; padding: 24px 26px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.10);
+  background: var(--navy); border: 1px solid transparent;
   display: flex; flex-direction: column; gap: 12px; cursor: pointer;
   transition: background .15s, border-color .15s;
 }
@@ -152,8 +152,8 @@ body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(
 }
 .car-card.active .car-cta { color: var(--navy); }
 .car-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
-.car-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.20); }
-.car-dot.on { background: var(--gold); width: 20px; border-radius: 3px; }
+.car-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+.car-dot.on { background: var(--navy); width: 20px; border-radius: 3px; }
 
 /* ── CONTENT ROW ── */
 .content-row {
