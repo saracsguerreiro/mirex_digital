@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIREX Digital · Índice de Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #16263D;
+  --navy-700: #23405F;
+  --surface: #F5F8FB;
+  --card: #FFFFFF;
+  --gold-500: #D9A21B;
+  --ink: #1A2433;
+  --muted: #5A6B80;
+  --line: #D7E1EC;
+  --verde: #2E7D4F;
+  --ambar: #C77D0A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); min-height: 100vh; }
+
+/* HEADER */
+header {
+  background: var(--navy-900); padding: 20px 40px;
+  display: flex; align-items: center; gap: 14px;
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.emblem {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--gold-500); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.header-text h1 { font-size: 18px; font-weight: 700; color: #fff; }
+.header-text p { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.status-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(46,125,79,0.18); border: 1px solid rgba(46,125,79,0.35);
+  border-radius: 20px; padding: 5px 12px; font-size: 11px; font-weight: 600; color: #6adc96;
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #6adc96; }
+.tip-pill {
+  background: rgba(217,162,27,0.1); border: 1px solid rgba(217,162,27,0.25);
+  border-radius: 20px; padding: 5px 12px; font-size: 11px; color: rgba(217,162,27,0.85);
+}
+
+/* CONTENT */
+.content { max-width: 1200px; margin: 0 auto; padding: 40px 32px 60px; }
+.page-title { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.page-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
+
+/* Priority section */
+.section-label {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 16px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 8px;
+}
+.p-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  font-size: 10px; font-weight: 700;
+}
+.p0 { background: var(--navy-900); color: #fff; }
+.p1 { background: rgba(22,38,61,0.12); color: var(--navy-700); }
+.p2 { background: var(--line); color: var(--muted); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+
+/* Card */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; text-decoration: none; color: inherit;
+  box-shadow: 0 2px 8px rgba(22,38,61,0.05);
+  transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column;
+}
+.card:hover {
+  box-shadow: 0 6px 24px rgba(22,38,61,0.12);
+  transform: translateY(-2px);
+  border-color: rgba(22,38,61,0.15);
+}
+
+.card-thumb {
+  height: 140px; background: var(--navy-700); position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.thumb-icon { opacity: 0.18; }
+.thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(22,38,61,0.6) 0%, transparent 60%);
+}
+.card-id {
+  position: absolute; top: 10px; left: 12px;
+  background: rgba(0,0,0,0.45); border-radius: 4px; padding: 3px 8px;
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.9);
+  font-family: monospace; letter-spacing: 0.5px;
+}
+.card-format {
+  position: absolute; top: 10px; right: 12px;
+  background: rgba(0,0,0,0.35); border-radius: 4px; padding: 3px 8px;
+  font-size: 10px; color: rgba(255,255,255,0.65);
+}
+.open-btn {
+  position: absolute; bottom: 10px; right: 12px;
+  background: var(--gold-500); color: var(--navy-900);
+  font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 5px;
+  opacity: 0; transition: opacity 0.15s;
+}
+.card:hover .open-btn { opacity: 1; }
+
+.card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.card-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
+.card-footer { display: flex; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); margin-top: 6px; }
+.card-tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; }
+.tag-dark { background: rgba(22,38,61,0.07); color: var(--navy-700); }
+.tag-gold { background: rgba(217,162,27,0.1); color: #8a6800; }
+.tag-green { background: rgba(46,125,79,0.1); color: var(--verde); }
+
+/* Colors per screen */
+.thumb-A1 { background: linear-gradient(135deg, #16263D 0%, #23405F 100%); }
+.thumb-A2 { background: linear-gradient(135deg, #1a3050 0%, #243f60 100%); }
+.thumb-A3 { background: linear-gradient(135deg, #0D1825 0%, #16263D 100%); }
+.thumb-B1 { background: linear-gradient(135deg, #12202F 0%, #1a3252 100%); }
+.thumb-B2 { background: linear-gradient(135deg, #1c2e42 0%, #243f60 100%); }
+.thumb-B3 { background: linear-gradient(135deg, #16263D 0%, #1f3450 100%); }
+.thumb-B4 { background: linear-gradient(135deg, #1a3050 0%, #2a4870 100%); }
+.thumb-C1 { background: linear-gradient(135deg, #060d14 0%, #0D1825 100%); }
+.thumb-C2 { background: linear-gradient(135deg, #0D1825 0%, #16263D 100%); }
+
+/* Footer */
+footer {
+  background: var(--navy-900); padding: 20px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 12px; color: rgba(255,255,255,0.35); }
+footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="emblem">
+    <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#16263D"/></svg>
+  </div>
+  <div class="header-text">
+    <h1>MIREX Digital · Mockups de Apresentação</h1>
+    <p>República de Angola · Ministério das Relações Exteriores</p>
+  </div>
+  <div class="header-right">
+    <div class="status-pill"><div class="status-dot"></div>9 telas · publicadas</div>
+    <div class="tip-pill">Abrir cada tela em ecrã completo para pré-visualização</div>
+  </div>
+</header>
+
+<div class="content">
+  <div class="page-title">Índice de Mockups</div>
+  <div class="page-sub">Clique numa tela para a abrir. Para ver a resolução de apresentação (1920×1080), use Ctrl+Shift+M no Chrome/Edge para activar o modo de dispositivo e definir a dimensão manualmente.</div>
+
+  <!-- P0 -->
+  <div class="section-label"><span class="p-badge p0">P0</span> Prioridade máxima · Apresentação principal</div>
+  <div class="grid">
+
+    <a href="B1_dashboard_executivo.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B1">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="64" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="44" width="60" height="28" rx="2" stroke="white" stroke-width="1.5"/><rect x="76" y="44" width="36" height="28" rx="2" stroke="white" stroke-width="1.5"/><path d="M20 72 L30 58 L40 62 L50 48 L60 54" stroke="#D9A21B" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B1</div>
+        <div class="card-format">Desktop 16:9 ★</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Dashboard Executivo do Ministro</div>
+        <div class="card-desc">Visão da rede inteira num ecrã: 4 KPIs, mapa mundial com 52 postos, gráfico de tendência de vistos e painel de alertas.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-gold">A tela mais importante</span>
+          <span class="card-tag tag-dark">Módulo: Visão da Rede</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="A1_portal_embaixada.html" class="card" target="_blank">
+      <div class="card-thumb thumb-A1">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="104" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="26" width="60" height="24" rx="2" stroke="white" stroke-width="1.5"/><rect x="74" y="26" width="38" height="24" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="8" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="34" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="60" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="86" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">A1</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Portal Público de Embaixada</div>
+        <div class="card-desc">Homepage da Embaixada em Lisboa com painel de comparação ao lado mostrando o mesmo padrão no posto de Pequim.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Portal do Cidadão</span>
+          <span class="card-tag tag-green">Padrão replicável</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="A2_agendamento_assistente.html" class="card" target="_blank">
+      <div class="card-thumb thumb-A2">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="54" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="14" y="18" width="42" height="8" rx="2" fill="white" opacity="0.2"/><rect x="14" y="30" width="30" height="8" rx="2" fill="white" opacity="0.2"/><rect x="26" y="42" width="30" height="8" rx="2" fill="#D9A21B" opacity="0.4"/><rect x="68" y="8" width="44" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="74" y="18" width="32" height="32" rx="2" stroke="white" stroke-width="1" opacity="0.4"/><rect x="74" y="56" width="32" height="8" rx="2" fill="#D9A21B" opacity="0.4"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">A2</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Agendamento com Assistente Virtual</div>
+        <div class="card-desc">Duas colunas: conversa com o assistente MIREX à esquerda, resumo da marcação com QR de senha à direita.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Agendamento</span>
+          <span class="card-tag tag-dark">24/7 · Pré-validação</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="A3_app_movel.html" class="card" target="_blank">
+      <div class="card-thumb thumb-A3">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="16" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="49" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="82" y="4" width="22" height="72" rx="4" stroke="#ef4444" stroke-width="1.5"/><rect x="20" y="20" width="14" height="6" rx="1" fill="white" opacity="0.2"/><rect x="20" y="30" width="14" height="6" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="53" y="20" width="14" height="20" rx="2" stroke="white" stroke-width="1" opacity="0.3"/><rect x="86" y="16" width="14" height="8" rx="2" fill="#ef4444" opacity="0.5"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">A3</div>
+        <div class="card-format">Mobile em molduras</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">App Móvel do Cidadão — 3 ecrãs</div>
+        <div class="card-desc">Início, registo de diáspora e alerta de crise (tema escuro). 3 smartphones genéricos lado a lado sobre fundo navy.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Portal do Cidadão</span>
+          <span class="card-tag tag-dark">Dados em Angola</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- P1 -->
+  <div class="section-label"><span class="p-badge p1">P1</span> Prioridade alta · Fluxos operacionais</div>
+  <div class="grid">
+
+    <a href="B2_fila_processos.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B2">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><line x1="8" y1="20" x2="82" y2="20" stroke="white" stroke-width="1" opacity="0.4"/><line x1="8" y1="32" x2="82" y2="32" stroke="white" stroke-width="1" opacity="0.3"/><line x1="8" y1="44" x2="82" y2="44" stroke="white" stroke-width="1" opacity="0.3"/><rect x="50" y="26" width="24" height="4" rx="2" fill="#D9A21B" opacity="0.5"/><rect x="50" y="38" width="16" height="4" rx="2" fill="white" opacity="0.3"/><rect x="88" y="8" width="24" height="64" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B2</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Fila de Processos do Chefe de Posto</div>
+        <div class="card-desc">Tabela de processos com barras de SLA coloridas, filtros, e painel lateral com linha temporal de workflow completo.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Sistema Consular</span>
+          <span class="card-tag tag-dark">Adis Abeba</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="B3_expediente_diplomatico.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B3">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="36" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="12" y="16" width="28" height="6" rx="1" fill="white" opacity="0.2"/><rect x="12" y="26" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="12" y="34" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="50" y="8" width="62" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="55" y="14" width="52" height="4" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="55" y="24" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="31" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="38" width="52" height="3" rx="1" fill="white" opacity="0.1"/><rect x="55" y="62" width="52" height="4" rx="1" fill="rgba(46,125,79,0.5)"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B3</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Expediente Diplomático Cifrado</div>
+        <div class="card-desc">Lista de expedientes classificados (RESTRITO/CONFIDENCIAL) e viewer de documento com assinatura digital e trilha de auditoria.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Expediente</span>
+          <span class="card-tag tag-dark">Cifrado fim-a-fim</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="C1_painel_soc.html" class="card" target="_blank">
+      <div class="card-thumb thumb-C1">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><circle cx="60" cy="40" r="20" stroke="#22c55e" stroke-width="1" opacity="0.5"/><circle cx="60" cy="40" r="4" fill="#22c55e" opacity="0.8"/><circle cx="30" cy="25" r="3" fill="#22c55e" opacity="0.6"/><circle cx="90" cy="20" r="3" fill="#22c55e" opacity="0.6"/><circle cx="20" cy="55" r="3" fill="#f59e0b" opacity="0.8"/><circle cx="95" cy="55" r="3" fill="#ef4444" opacity="0.8"/><line x1="60" y1="40" x2="30" y2="25" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="90" y2="20" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="95" y2="55" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"/><rect x="8" y="60" width="50" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><rect x="64" y="60" width="48" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>
+        <div class="thumb-overlay" style="background:linear-gradient(135deg,rgba(6,13,20,0.7) 0%,transparent 60%)"></div>
+        <div class="card-id">C1</div>
+        <div class="card-format">Desktop · Tema escuro</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Painel do SOC — Centro de Operações</div>
+        <div class="card-desc">Tema escuro. Topologia de rede 24/7, investigação de incidente de spear-phishing em curso, métricas de segurança e turno activo.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Centro de Operações</span>
+          <span class="card-tag tag-dark">Competência MIREX</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- P2 -->
+  <div class="section-label"><span class="p-badge p2">P2</span> Prioridade complementar</div>
+  <div class="grid">
+
+    <a href="B4_mapa_corpo_diplomatico.html" class="card" target="_blank">
+      <div class="card-thumb thumb-B4">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><circle cx="30" cy="35" r="5" fill="#2E7D4F" opacity="0.6"/><circle cx="55" cy="25" r="4" fill="#2E7D4F" opacity="0.6"/><circle cx="70" cy="40" r="6" fill="#2E7D4F" opacity="0.6"/><circle cx="45" cy="50" r="3" fill="#C77D0A" opacity="0.8"/><rect x="88" y="8" width="24" height="30" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="88" y="44" width="24" height="28" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><circle cx="100" cy="56" r="6" fill="white" opacity="0.1"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">B4</div>
+        <div class="card-format">Desktop 16:9</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Mapa do Corpo Diplomático</div>
+        <div class="card-desc">Mapa mundial com efectivos por posto, 3 alertas de mandato a expirar em 90 dias e perfil detalhado de diplomata seleccionado.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Visão da Rede</span>
+          <span class="card-tag tag-dark">800+ efectivos</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="C2_verificacao_qr.html" class="card" target="_blank">
+      <div class="card-thumb thumb-C2">
+        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="28" y="12" width="20" height="56" rx="4" stroke="white" stroke-width="1.5"/><rect x="34" y="30" width="8" height="8" rx="1" stroke="#2E7D4F" stroke-width="1.2"/><rect x="54" y="8" width="58" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="60" y="20" width="20" height="20" rx="2" stroke="white" stroke-width="1" opacity="0.4"/><rect x="84" y="20" width="22" height="8" rx="1" fill="#2E7D4F" opacity="0.3"/><rect x="84" y="32" width="22" height="4" rx="1" fill="white" opacity="0.2"/><rect x="84" y="40" width="16" height="4" rx="1" fill="white" opacity="0.15"/><path d="M57 54l4 4 8-8" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="thumb-overlay"></div>
+        <div class="card-id">C2</div>
+        <div class="card-format">Mobile + Desktop</div>
+        <div class="open-btn">Abrir →</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Verificação de Documento por QR</div>
+        <div class="card-desc">Mobile e desktop lado a lado. Resultado de verificação de certidão com cadeia criptográfica e nota para entidades autorizadas.</div>
+        <div class="card-footer">
+          <span class="card-tag tag-dark">Módulo: Sistema Consular</span>
+          <span class="card-tag tag-green">Confiança verificável</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Instructions -->
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-top:8px">
+    <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px">Instruções de pré-visualização</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Para ver em 1920×1080 (apresentação real)</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">
+          1. Abrir a tela num tab novo<br>
+          2. Chrome/Edge: <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">F12</kbd> → ícone de dispositivo <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">Ctrl+Shift+M</kbd><br>
+          3. Definir dimensão: <strong>1920 × 1080</strong> e escala 1×<br>
+          4. Para captura: <strong>Ctrl+Shift+P</strong> → "Capture full size screenshot"
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Para exportar PNG 4K (3840×2160)</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">
+          1. Abrir DevTools → <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">Ctrl+Shift+P</kbd><br>
+          2. Escrever "device pixel" → definir <strong>Device Pixel Ratio = 2</strong><br>
+          3. Definir viewport para <strong>1920×1080</strong><br>
+          4. Capturar → resultado: PNG 3840×2160
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Protótipo conceptual · TIS · 2026 · MIREX Digital — República de Angola</p>
+  <a href="https://github.com/saracsguerreiro/mirex_digital" target="_blank">Ver repositório no GitHub →</a>
+</footer>
+
+</body>
+</html>
