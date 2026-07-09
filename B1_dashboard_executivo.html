@@ -3,110 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <title>MIREX Digital · Dashboard Executivo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 :root {
-  --glass:rgba(255,255,255,0.62); --glass-s:rgba(255,255,255,0.80);
-  --border:rgba(255,255,255,0.70); --line:rgba(100,120,180,0.13);
-  --shadow:0 8px 32px rgba(0,0,0,0.14); --shadow-s:0 2px 12px rgba(0,0,0,0.10);
-  --navy:#16263D; --gold:#D9A21B; --ink:#1C2B3A; --ink2:#334155;
+  --glass:rgba(255,255,255,0.55); --border:rgba(255,255,255,0.68);
+  --line:rgba(22,38,61,0.10); --shadow:0 8px 32px rgba(0,0,0,0.13);
+  --navy:#16263D; --gold:#D9A21B; --ink:#16263D; --ink2:#334155;
   --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
-  --sidebar:72px; --hdr:64px;
+  --sidebar:76px; --hdr:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:linear-gradient(135deg,#16263D 0%,#3A5473 30%,#8BA4BC 65%,#D4DDE8 100%);
+  background:linear-gradient(180deg,#D7E1EC 0%,#8BA4BC 42%,#3A5473 74%,#23405F 100%);
   width:1920px;height:1080px;overflow:hidden;color:var(--ink)
 }
 
-/* SIDEBAR – glass sobre o gradiente escuro */
+/* SIDEBAR — sem painel, círculos flutuantes */
 .sb{
   position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);
-  background:rgba(255,255,255,0.10);
-  backdrop-filter:blur(20px) saturate(1.2);
-  border-right:1px solid rgba(255,255,255,0.18);
   display:flex;flex-direction:column;align-items:center;
-  padding:20px 0;z-index:20;gap:6px
+  padding:18px 0;z-index:20;gap:7px
 }
 .sb-logo{
-  width:42px;height:42px;border-radius:12px;
-  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  border:1.5px solid rgba(255,255,255,0.55);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;flex-shrink:0
+  margin-bottom:22px;flex-shrink:0;overflow:hidden
 }
 .ni{
-  width:42px;height:42px;border-radius:11px;
+  width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,0.50);transition:all .15s;cursor:pointer
+  color:rgba(22,38,61,0.70);
+  background:rgba(255,255,255,0.20);
+  border:1px solid rgba(255,255,255,0.38);
+  transition:all .15s;cursor:pointer;flex-shrink:0
 }
-.ni.on{background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.95)}
-.sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+.ni.on{
+  background:rgba(255,255,255,0.50);color:var(--navy);
+  border-color:rgba(255,255,255,0.65);
+  box-shadow:0 4px 18px rgba(0,0,0,0.14)
+}
+.sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:7px}
 
 /* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
 
-/* HEADER – glass branco sobre tudo */
+/* HEADER — transparente */
 .hdr{
-  height:var(--hdr);
-  background:rgba(255,255,255,0.82);
-  backdrop-filter:blur(24px) saturate(1.5);
-  border-bottom:1px solid rgba(255,255,255,0.70);
-  padding:0 28px;display:flex;align-items:center;gap:20px;flex-shrink:0;
-  box-shadow:0 1px 0 rgba(255,255,255,0.40)
+  height:var(--hdr);background:transparent;
+  padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0
 }
-.hdr-title{font-size:20px;font-weight:700;color:var(--ink)}
-.hdr-sub{font-size:11px;color:var(--muted);margin-top:1px}
-.hdr-nav{display:flex;gap:3px;margin-left:24px}
-.nt{padding:7px 16px;border-radius:9px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
-.nt.on{background:var(--navy);color:#fff;font-weight:600}
+.hdr-logo{height:40px;mix-blend-mode:multiply;flex-shrink:0}
+.hdr-div{width:1px;height:32px;background:rgba(22,38,61,0.14);flex-shrink:0}
+.hdr-info{flex-shrink:0}
+.hdr-title{font-size:16px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
+.hdr-nav{display:flex;gap:2px;margin-left:12px}
+.nt{
+  padding:8px 18px;border-radius:9999px;
+  font-size:13px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer
+}
+.nt.on{background:rgba(22,38,61,0.10);color:var(--navy);font-weight:700}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
 .ib{
-  width:36px;height:36px;border-radius:9px;
-  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--muted);position:relative;flex-shrink:0
+  cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0
 }
-.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid #fff}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid rgba(255,255,255,0.9)}
 .uchip{
   display:flex;align-items:center;gap:9px;
-  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
-  border-radius:11px;padding:5px 13px 5px 5px
+  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
+  border-radius:9999px;padding:5px 14px 5px 5px
 }
-.av{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
+.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
 .un{font-size:12px;font-weight:600;color:var(--ink)}
-.us{font-size:10px;color:var(--muted);margin-top:1px}
+.us{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
 
 /* CONTENT */
-.cnt{flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.cnt{flex:1;overflow:hidden;padding:10px 24px 14px 20px;display:flex;flex-direction:column;gap:12px}
 
-/* KPI ROW */
-.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex-shrink:0}
-.kc{
-  background:var(--glass);
-  backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid var(--border);border-radius:14px;
-  padding:18px 20px;box-shadow:var(--shadow)
+/* KPI — CAIXA ÚNICA COM DIVISÓRIAS */
+.kcard{
+  background:rgba(255,255,255,0.58);
+  backdrop-filter:blur(24px) saturate(1.5);
+  border:1px solid rgba(255,255,255,0.72);
+  border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);
+  display:flex;align-items:stretch;flex-shrink:0
 }
-.kl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
-.kv{font-size:32px;font-weight:700;color:var(--ink);margin:7px 0 3px;line-height:1}
-.kd{font-size:11px;font-weight:600}
+.ki{flex:1;padding:18px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
+.ki+.ki::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:1px;background:rgba(22,38,61,0.13)}
+.ki-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:3px;flex-shrink:0}
+.kbig{font-size:38px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
+.klbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.kdiff{font-size:11px;font-weight:600}
 
 /* GLASS CARD */
 .gc{
-  background:var(--glass);
+  background:rgba(255,255,255,0.52);
   backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid var(--border);border-radius:14px;
-  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column
+  border:1px solid rgba(255,255,255,0.65);
+  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);
+  overflow:hidden;display:flex;flex-direction:column
 }
-.gh{padding:16px 20px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.gh{padding:14px 20px 12px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .gt{font-size:14px;font-weight:700;color:var(--ink)}
 .gs{font-size:10px;color:var(--muted);margin-top:2px}
 .gb{flex:1;overflow:hidden}
 
 /* CHIPS */
-.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700}
 .cg{background:rgba(46,125,79,0.12);color:var(--verde)}
 .ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
 .cr{background:rgba(181,18,27,0.12);color:var(--red)}
@@ -119,21 +129,20 @@ body{
 .ll{font-size:10px;color:var(--muted)}
 
 /* BODY ROW */
-.brow{flex:1;display:flex;gap:16px;min-height:0}
+.brow{flex:1;display:flex;gap:14px;min-height:0}
 
 /* FOOTER */
-.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.35);flex-shrink:0}
+.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.32);flex-shrink:0}
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
-.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--line)}
+.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
+.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tr.sel td{background:rgba(22,38,61,0.04)}
-.tbl tr:hover td{background:rgba(22,38,61,0.02)}
+.tbl tr.sel td{background:rgba(22,38,61,0.03)}
 
 /* SLA BAR */
-.slab{height:4px;border-radius:2px;background:rgba(100,120,180,0.12);overflow:hidden}
+.slab{height:4px;border-radius:2px;background:rgba(22,38,61,0.08);overflow:hidden}
 .slaf{height:100%;border-radius:2px}
 
 /* TIMELINE */
@@ -141,21 +150,21 @@ body{
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 
 /* BADGE */
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:9999px;font-size:10px;font-weight:600}
 
-/* SEARCH BAR */
-.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.60);border:1px solid rgba(255,255,255,0.80);border-radius:10px;padding:8px 14px}
+/* SEARCH */
+.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.70);border-radius:9999px;padding:8px 16px}
 .sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
 
 /* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
-.fch{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
+.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
-.fch:not(.on){background:rgba(255,255,255,0.50);border-color:rgba(255,255,255,0.70);color:var(--muted)}
+.fch:not(.on){background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.65);color:var(--muted)}
 
 
-#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:24px;padding:9px 16px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
@@ -164,32 +173,57 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </head>
 <body><div id="_vp">
 <nav class="sb">
-  <div class="sb-logo"><svg width="22" height="22" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#D9A21B"/></svg></div>
-  <div class="ni on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="sb-logo"><img src="mirex_insignia_cores.png" width="36" height="36" alt="MIREX"></div>
+  <div class="ni on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
   <div class="sb-bot">
-    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   </div>
 </nav><div class="main"><header class="hdr">
-  <div><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática global · 52 postos activos</div></div>
-  <div class="hdr-nav"><div class="nt  on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
+  <img src="mirex_logo_cores.png" class="hdr-logo" alt="MIREX Digital">
+  <div class="hdr-div"></div>
+  <div class="hdr-info"><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática · 52 postos activos · 9 Jul 2026</div></div>
+  <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
   <div class="hdr-r">
     <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
     <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="uchip"><div class="av">JC</div><div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div></div>
+    <div class="uchip">
+      <div class="av">JC</div>
+      <div><div class="un">Min. João da Costa</div><div class="us">Ministro</div></div>
+    </div>
   </div>
 </header>
 <div class="cnt">
-<div class="krow">
-  <div class="kc"><div class="kl">Actos Consulares / Mês</div><div class="kv">18.432</div><div class="kd" style="color:var(--verde)">↑ 12% vs. mês anterior</div></div>
-  <div class="kc"><div class="kl">Receita Consular</div><div class="kv">↑ 12%</div><div class="kd" style="color:var(--verde)">Crescimento homólogo</div></div>
-  <div class="kc"><div class="kl">Diáspora Registada</div><div class="kv">78%</div><div class="kd" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div></div>
-  <div class="kc"><div class="kl">Postos dentro de SLA</div><div class="kv">46<span style="font-size:17px;color:var(--muted)">/52</span></div><div class="kd" style="color:var(--ambar)">6 postos em acompanhamento</div></div>
+<div class="kcard">
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+    <div class="klbl">Actos Consulares / Mês</div>
+    <div class="kbig">18.432</div>
+    <div class="kdiff" style="color:var(--verde)">↑ 12% vs. mês anterior</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+    <div class="klbl">Receita Consular</div>
+    <div class="kbig">↑ 12%</div>
+    <div class="kdiff" style="color:var(--verde)">Crescimento homólogo</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+    <div class="klbl">Diáspora Registada</div>
+    <div class="kbig">78%</div>
+    <div class="kdiff" style="color:var(--verde)">↑ 4 p.p. · Meta: 85%</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="klbl">Postos dentro de SLA</div>
+    <div class="kbig">46/52</div>
+    <div class="kdiff" style="color:var(--ambar)">6 em acompanhamento</div>
+  </div>
 </div>
 <div class="brow">
   <div class="gc" style="flex:1">
@@ -199,102 +233,100 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
         <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Em SLA (46)</span></div>
         <div class="leg"><span class="ld" style="background:#C77D0A"></span><span class="ll">Atenção (4)</span></div>
         <div class="leg"><span class="ld" style="background:#B5121B"></span><span class="ll">Crítico (2)</span></div>
-        <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">Sede Luanda</span></div>
+        <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">HQ Luanda</span></div>
       </div>
     </div>
-    <div class="gb" style="padding:12px 16px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 1000 480" style="width:100%;height:100%" fill="none">
-  <path d="M108 58 L152 52 L195 68 L238 92 L262 134 L258 164 L242 186 L218 208 L196 230 L172 254 L148 274 L126 296 L100 278 L78 256 L68 224 L78 196 L88 168 L100 138 L108 58Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M196 298 L218 284 L248 294 L266 316 L274 344 L272 374 L262 400 L244 416 L224 424 L204 412 L188 390 L180 362 L182 334 L196 298Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M438 46 L482 42 L516 52 L526 68 L514 90 L492 102 L468 112 L446 122 L434 108 L428 88 L432 66Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M448 138 L492 130 L524 142 L542 168 L546 202 L540 244 L530 284 L510 322 L490 348 L468 358 L448 346 L428 318 L418 278 L416 238 L422 196 L432 166Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M528 46 L598 40 L680 46 L752 58 L804 78 L822 108 L812 138 L782 158 L752 168 L700 172 L648 166 L598 154 L556 142 L536 120 L526 94 L524 66Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M718 178 L762 166 L804 178 L820 210 L812 242 L782 252 L750 242 L728 220Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <path d="M782 298 L844 286 L904 298 L932 328 L924 368 L892 388 L852 394 L812 382 L780 356 L770 326Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.20)" stroke-width="1.2"/>
-  <!-- HQ Luanda -->
+    <div class="gb" style="padding:8px 16px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 1000 480" style="width:100%;height:100%" fill="none">
+  <path d="M108 58 L152 52 L195 68 L238 92 L262 134 L258 164 L242 186 L218 208 L196 230 L172 254 L148 274 L126 296 L100 278 L78 256 L68 224 L78 196 L88 168 L100 138 L108 58Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M196 298 L218 284 L248 294 L266 316 L274 344 L272 374 L262 400 L244 416 L224 424 L204 412 L188 390 L180 362 L182 334 L196 298Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M438 46 L482 42 L516 52 L526 68 L514 90 L492 102 L468 112 L446 122 L434 108 L428 88 L432 66Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M448 138 L492 130 L524 142 L542 168 L546 202 L540 244 L530 284 L510 322 L490 348 L468 358 L448 346 L428 318 L418 278 L416 238 L422 196 L432 166Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M528 46 L598 40 L680 46 L752 58 L804 78 L822 108 L812 138 L782 158 L752 168 L700 172 L648 166 L598 154 L556 142 L536 120 L526 94 L524 66Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M718 178 L762 166 L804 178 L820 210 L812 242 L782 252 L750 242 L728 220Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
   <circle cx="468" cy="190" r="8" fill="#D9A21B" stroke="white" stroke-width="2"/>
   <polygon points="468,183 469.5,187.5 474,187.5 470.5,190.2 471.8,194.5 468,191.8 464.2,194.5 465.5,190.2 462,187.5 466.5,187.5" fill="white"/>
-  <!-- Europa verde -->
-  <circle cx="452" cy="88" r="5.5" fill="#2E7D4F"/><circle cx="460" cy="78" r="4.5" fill="#2E7D4F"/><circle cx="468" cy="68" r="4.5" fill="#2E7D4F"/>
-  <circle cx="484" cy="62" r="4.5" fill="#2E7D4F"/><circle cx="474" cy="70" r="4.5" fill="#2E7D4F"/><circle cx="488" cy="74" r="4.5" fill="#2E7D4F"/>
-  <circle cx="498" cy="76" r="4.5" fill="#2E7D4F"/><circle cx="492" cy="84" r="4.5" fill="#2E7D4F"/><circle cx="496" cy="68" r="4.5" fill="#2E7D4F"/>
-  <circle cx="506" cy="78" r="4.5" fill="#2E7D4F"/><circle cx="504" cy="90" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="60" r="4.5" fill="#2E7D4F"/>
-  <!-- África -->
-  <circle cx="468" cy="212" r="4.5" fill="#2E7D4F"/><circle cx="460" cy="168" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="164" r="4.5" fill="#2E7D4F"/>
-  <circle cx="472" cy="182" r="4.5" fill="#2E7D4F"/><circle cx="462" cy="200" r="4.5" fill="#2E7D4F"/><circle cx="454" cy="172" r="4.5" fill="#2E7D4F"/>
-  <circle cx="460" cy="206" r="4.5" fill="#2E7D4F"/><circle cx="452" cy="150" r="4.5" fill="#C77D0A"/><circle cx="486" cy="176" r="4.5" fill="#C77D0A"/>
-  <!-- Américas -->
-  <circle cx="146" cy="108" r="4.5" fill="#2E7D4F"/><circle cx="152" cy="98" r="4.5" fill="#2E7D4F"/><circle cx="138" cy="118" r="4.5" fill="#2E7D4F"/>
-  <circle cx="188" cy="184" r="4.5" fill="#2E7D4F"/><circle cx="192" cy="176" r="4.5" fill="#2E7D4F"/><circle cx="168" cy="182" r="4.5" fill="#2E7D4F"/>
-  <circle cx="182" cy="298" r="4.5" fill="#C77D0A"/><circle cx="148" cy="128" r="4.5" fill="#2E7D4F"/><circle cx="142" cy="116" r="4.5" fill="#2E7D4F"/>
-  <!-- Ásia -->
+  <circle cx="452" cy="88" r="5.5" fill="#2E7D4F"/><circle cx="460" cy="78" r="4.5" fill="#2E7D4F"/>
+  <circle cx="468" cy="68" r="4.5" fill="#2E7D4F"/><circle cx="484" cy="62" r="4.5" fill="#2E7D4F"/>
+  <circle cx="474" cy="70" r="4.5" fill="#2E7D4F"/><circle cx="488" cy="74" r="4.5" fill="#2E7D4F"/>
+  <circle cx="498" cy="76" r="4.5" fill="#2E7D4F"/><circle cx="492" cy="84" r="4.5" fill="#2E7D4F"/>
+  <circle cx="496" cy="68" r="4.5" fill="#2E7D4F"/><circle cx="506" cy="78" r="4.5" fill="#2E7D4F"/>
+  <circle cx="504" cy="90" r="4.5" fill="#2E7D4F"/><circle cx="478" cy="60" r="4.5" fill="#2E7D4F"/>
+  <circle cx="468" cy="212" r="4.5" fill="#2E7D4F"/><circle cx="460" cy="168" r="4.5" fill="#2E7D4F"/>
+  <circle cx="478" cy="164" r="4.5" fill="#2E7D4F"/><circle cx="472" cy="182" r="4.5" fill="#2E7D4F"/>
+  <circle cx="462" cy="200" r="4.5" fill="#2E7D4F"/><circle cx="454" cy="172" r="4.5" fill="#2E7D4F"/>
+  <circle cx="460" cy="206" r="4.5" fill="#2E7D4F"/><circle cx="452" cy="150" r="4.5" fill="#C77D0A"/>
+  <circle cx="486" cy="176" r="4.5" fill="#C77D0A"/>
+  <circle cx="146" cy="108" r="4.5" fill="#2E7D4F"/><circle cx="152" cy="98" r="4.5" fill="#2E7D4F"/>
+  <circle cx="138" cy="118" r="4.5" fill="#2E7D4F"/><circle cx="188" cy="184" r="4.5" fill="#2E7D4F"/>
+  <circle cx="192" cy="176" r="4.5" fill="#2E7D4F"/><circle cx="168" cy="182" r="4.5" fill="#2E7D4F"/>
+  <circle cx="182" cy="298" r="4.5" fill="#C77D0A"/><circle cx="148" cy="128" r="4.5" fill="#2E7D4F"/>
+  <circle cx="142" cy="116" r="4.5" fill="#2E7D4F"/>
   <circle cx="718" cy="144" r="4.5" fill="#C77D0A"/><circle cx="728" cy="148" r="4.5" fill="#2E7D4F"/>
   <circle cx="724" cy="138" r="4.5" fill="#2E7D4F"/><circle cx="596" cy="116" r="4.5" fill="#B5121B"/>
   <circle cx="678" cy="172" r="4.5" fill="#2E7D4F"/><circle cx="696" cy="170" r="4.5" fill="#2E7D4F"/>
   <circle cx="740" cy="186" r="4.5" fill="#B5121B"/><circle cx="562" cy="128" r="4.5" fill="#2E7D4F"/>
   <circle cx="572" cy="136" r="4.5" fill="#2E7D4F"/><circle cx="578" cy="144" r="4.5" fill="#2E7D4F"/>
   <circle cx="548" cy="132" r="4.5" fill="#2E7D4F"/><circle cx="662" cy="162" r="4.5" fill="#2E7D4F"/>
-  <!-- Labels -->
-  <text x="478" y="200" font-size="9" fill="white" font-family="Inter,sans-serif" font-weight="700" opacity="0.9">Luanda</text>
+  <text x="478" y="208" font-size="9" fill="white" font-family="Inter,sans-serif" font-weight="700" opacity="0.9">Luanda</text>
   <text x="598" y="111" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Moscovo</text>
   <text x="742" y="182" font-size="8" fill="#ff8080" font-family="Inter,sans-serif" font-weight="600">Jacarta</text>
 </svg></div>
   </div>
-  <div style="width:480px;flex-shrink:0;display:flex;flex-direction:column;gap:16px">
+  <div style="width:470px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
     <div class="gc" style="flex:1">
       <div class="gh">
         <div><div class="gt">Tendência de Vistos</div><div class="gs">Jan–Dez 2025</div></div>
         <div style="display:flex;gap:10px">
-          <div class="leg"><span class="ld" style="background:#4B6CB7"></span><span class="ll">Europa</span></div>
+          <div class="leg"><span class="ld" style="background:#16263D"></span><span class="ll">Europa</span></div>
           <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">África</span></div>
-          <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Ásia/M.Or.</span></div>
+          <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">Ásia</span></div>
         </div>
       </div>
-      <div class="gb" style="padding:12px 16px"><svg viewBox="0 0 420 170" style="width:100%;height:100%">
-  <line x1="38" y1="20" x2="38" y2="148" stroke="rgba(100,120,180,0.20)" stroke-width="1"/>
-  <line x1="38" y1="148" x2="414" y2="148" stroke="rgba(100,120,180,0.20)" stroke-width="1"/>
-  <line x1="38" y1="38" x2="414" y2="38" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="66" x2="414" y2="66" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="94" x2="414" y2="94" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="38" y1="122" x2="414" y2="122" stroke="rgba(100,120,180,0.10)" stroke-width="1" stroke-dasharray="3,3"/>
+      <div class="gb" style="padding:10px 16px"><svg viewBox="0 0 420 170" style="width:100%;height:100%">
+  <line x1="38" y1="20" x2="38" y2="148" stroke="rgba(22,38,61,0.14)" stroke-width="1"/>
+  <line x1="38" y1="148" x2="414" y2="148" stroke="rgba(22,38,61,0.14)" stroke-width="1"/>
+  <line x1="38" y1="38" x2="414" y2="38" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="66" x2="414" y2="66" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="94" x2="414" y2="94" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="38" y1="122" x2="414" y2="122" stroke="rgba(22,38,61,0.07)" stroke-width="1" stroke-dasharray="3,3"/>
   <text x="33" y="41" text-anchor="end" font-size="8" fill="#94a3b8">800</text>
   <text x="33" y="69" text-anchor="end" font-size="8" fill="#94a3b8">600</text>
   <text x="33" y="97" text-anchor="end" font-size="8" fill="#94a3b8">400</text>
   <text x="33" y="125" text-anchor="end" font-size="8" fill="#94a3b8">200</text>
-  <text x="33" y="151" text-anchor="end" font-size="8" fill="#94a3b8">0</text>
   <text x="55" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jan</text><text x="85" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Fev</text>
   <text x="115" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mar</text><text x="145" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Abr</text>
   <text x="175" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Mai</text><text x="205" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jun</text>
   <text x="235" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Jul</text><text x="265" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Ago</text>
   <text x="295" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Set</text><text x="325" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Out</text>
   <text x="355" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Nov</text><text x="385" y="162" text-anchor="middle" font-size="8" fill="#94a3b8">Dez</text>
-  <polygon points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38 385,148 55,148" fill="#4B6CB7" opacity="0.09"/>
-  <polyline points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38" fill="none" stroke="#4B6CB7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94 385,148 55,148" fill="#D9A21B" opacity="0.09"/>
+  <polygon points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38 385,148 55,148" fill="#16263D" opacity="0.09"/>
+  <polyline points="55,116 85,106 115,100 145,90 175,82 205,68 235,60 265,54 295,48 325,44 355,40 385,38" fill="none" stroke="#16263D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94 385,148 55,148" fill="#D9A21B" opacity="0.10"/>
   <polyline points="55,136 85,130 115,134 145,126 175,120 205,115 235,110 265,106 295,103 325,100 355,97 385,94" fill="none" stroke="#D9A21B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120 385,148 55,148" fill="#2E7D4F" opacity="0.09"/>
+  <polygon points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120 385,148 55,148" fill="#2E7D4F" opacity="0.10"/>
   <polyline points="55,143 85,141 115,139 145,137 175,134 205,136 235,132 265,129 295,127 325,124 355,122 385,120" fill="none" stroke="#2E7D4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="385" cy="38" r="4.5" fill="#4B6CB7" stroke="white" stroke-width="2"/>
+  <circle cx="385" cy="38" r="4.5" fill="#16263D" stroke="white" stroke-width="2"/>
 </svg></div>
     </div>
     <div class="gc" style="flex-shrink:0">
-      <div class="gh"><div class="gt">Alertas e Notificações</div><span class="chip cr">3 activos</span></div>
-      <div style="padding:4px 20px">
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+      <div class="gh"><div class="gt">Alertas</div><span class="chip cr">3 activos</span></div>
+      <div style="padding:2px 18px">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
           <div style="width:8px;height:8px;border-radius:50%;background:#B5121B;flex-shrink:0;margin-top:4px"></div>
           <div style="flex:1"><div style="font-size:12px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
           <span class="chip cr">Crítico</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
           <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
           <div style="flex:1"><div style="font-size:12px;font-weight:600">Pequim — Degradação</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Tempo médio resposta &gt; 48h</div></div>
           <span class="chip ca">Atenção</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
           <div style="width:8px;height:8px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
           <div style="flex:1"><div style="font-size:12px;font-weight:600">Jacarta — Volume atípico</div><div style="font-size:10px;color:var(--muted);margin-top:2px">+340% de pedidos vs. média</div></div>
           <span class="chip ca">Atenção</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0">
           <div style="width:8px;height:8px;border-radius:50%;background:#D9A21B;flex-shrink:0;margin-top:4px"></div>
           <div style="flex:1"><div style="font-size:12px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
           <span class="chip ci">Info</span>

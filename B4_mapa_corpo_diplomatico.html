@@ -3,110 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <title>MIREX Digital · Mapa Corpo Diplomático</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 :root {
-  --glass:rgba(255,255,255,0.62); --glass-s:rgba(255,255,255,0.80);
-  --border:rgba(255,255,255,0.70); --line:rgba(100,120,180,0.13);
-  --shadow:0 8px 32px rgba(0,0,0,0.14); --shadow-s:0 2px 12px rgba(0,0,0,0.10);
-  --navy:#16263D; --gold:#D9A21B; --ink:#1C2B3A; --ink2:#334155;
+  --glass:rgba(255,255,255,0.55); --border:rgba(255,255,255,0.68);
+  --line:rgba(22,38,61,0.10); --shadow:0 8px 32px rgba(0,0,0,0.13);
+  --navy:#16263D; --gold:#D9A21B; --ink:#16263D; --ink2:#334155;
   --muted:#64748B; --verde:#2E7D4F; --ambar:#C77D0A; --red:#B5121B;
-  --sidebar:72px; --hdr:64px;
+  --sidebar:76px; --hdr:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:linear-gradient(135deg,#16263D 0%,#3A5473 30%,#8BA4BC 65%,#D4DDE8 100%);
+  background:linear-gradient(180deg,#D7E1EC 0%,#8BA4BC 42%,#3A5473 74%,#23405F 100%);
   width:1920px;height:1080px;overflow:hidden;color:var(--ink)
 }
 
-/* SIDEBAR – glass sobre o gradiente escuro */
+/* SIDEBAR — sem painel, círculos flutuantes */
 .sb{
   position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);
-  background:rgba(255,255,255,0.10);
-  backdrop-filter:blur(20px) saturate(1.2);
-  border-right:1px solid rgba(255,255,255,0.18);
   display:flex;flex-direction:column;align-items:center;
-  padding:20px 0;z-index:20;gap:6px
+  padding:18px 0;z-index:20;gap:7px
 }
 .sb-logo{
-  width:42px;height:42px;border-radius:12px;
-  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  border:1.5px solid rgba(255,255,255,0.55);
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;flex-shrink:0
+  margin-bottom:22px;flex-shrink:0;overflow:hidden
 }
 .ni{
-  width:42px;height:42px;border-radius:11px;
+  width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,0.50);transition:all .15s;cursor:pointer
+  color:rgba(22,38,61,0.70);
+  background:rgba(255,255,255,0.20);
+  border:1px solid rgba(255,255,255,0.38);
+  transition:all .15s;cursor:pointer;flex-shrink:0
 }
-.ni.on{background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.95)}
-.sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+.ni.on{
+  background:rgba(255,255,255,0.50);color:var(--navy);
+  border-color:rgba(255,255,255,0.65);
+  box-shadow:0 4px 18px rgba(0,0,0,0.14)
+}
+.sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:7px}
 
 /* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
 
-/* HEADER – glass branco sobre tudo */
+/* HEADER — transparente */
 .hdr{
-  height:var(--hdr);
-  background:rgba(255,255,255,0.82);
-  backdrop-filter:blur(24px) saturate(1.5);
-  border-bottom:1px solid rgba(255,255,255,0.70);
-  padding:0 28px;display:flex;align-items:center;gap:20px;flex-shrink:0;
-  box-shadow:0 1px 0 rgba(255,255,255,0.40)
+  height:var(--hdr);background:transparent;
+  padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0
 }
-.hdr-title{font-size:20px;font-weight:700;color:var(--ink)}
-.hdr-sub{font-size:11px;color:var(--muted);margin-top:1px}
-.hdr-nav{display:flex;gap:3px;margin-left:24px}
-.nt{padding:7px 16px;border-radius:9px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
-.nt.on{background:var(--navy);color:#fff;font-weight:600}
+.hdr-logo{height:40px;mix-blend-mode:multiply;flex-shrink:0}
+.hdr-div{width:1px;height:32px;background:rgba(22,38,61,0.14);flex-shrink:0}
+.hdr-info{flex-shrink:0}
+.hdr-title{font-size:16px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
+.hdr-nav{display:flex;gap:2px;margin-left:12px}
+.nt{
+  padding:8px 18px;border-radius:9999px;
+  font-size:13px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer
+}
+.nt.on{background:rgba(22,38,61,0.10);color:var(--navy);font-weight:700}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
 .ib{
-  width:36px;height:36px;border-radius:9px;
-  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--muted);position:relative;flex-shrink:0
+  cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0
 }
-.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid #fff}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid rgba(255,255,255,0.9)}
 .uchip{
   display:flex;align-items:center;gap:9px;
-  background:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.80);
-  border-radius:11px;padding:5px 13px 5px 5px
+  background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);
+  border-radius:9999px;padding:5px 14px 5px 5px
 }
-.av{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
+.av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
 .un{font-size:12px;font-weight:600;color:var(--ink)}
-.us{font-size:10px;color:var(--muted);margin-top:1px}
+.us{font-size:10px;color:rgba(22,38,61,0.50);margin-top:1px}
 
 /* CONTENT */
-.cnt{flex:1;overflow:hidden;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.cnt{flex:1;overflow:hidden;padding:10px 24px 14px 20px;display:flex;flex-direction:column;gap:12px}
 
-/* KPI ROW */
-.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex-shrink:0}
-.kc{
-  background:var(--glass);
-  backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid var(--border);border-radius:14px;
-  padding:18px 20px;box-shadow:var(--shadow)
+/* KPI — CAIXA ÚNICA COM DIVISÓRIAS */
+.kcard{
+  background:rgba(255,255,255,0.58);
+  backdrop-filter:blur(24px) saturate(1.5);
+  border:1px solid rgba(255,255,255,0.72);
+  border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);
+  display:flex;align-items:stretch;flex-shrink:0
 }
-.kl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
-.kv{font-size:32px;font-weight:700;color:var(--ink);margin:7px 0 3px;line-height:1}
-.kd{font-size:11px;font-weight:600}
+.ki{flex:1;padding:18px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
+.ki+.ki::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:1px;background:rgba(22,38,61,0.13)}
+.ki-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:3px;flex-shrink:0}
+.kbig{font-size:38px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
+.klbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.kdiff{font-size:11px;font-weight:600}
 
 /* GLASS CARD */
 .gc{
-  background:var(--glass);
+  background:rgba(255,255,255,0.52);
   backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid var(--border);border-radius:14px;
-  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column
+  border:1px solid rgba(255,255,255,0.65);
+  border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);
+  overflow:hidden;display:flex;flex-direction:column
 }
-.gh{padding:16px 20px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.gh{padding:14px 20px 12px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .gt{font-size:14px;font-weight:700;color:var(--ink)}
 .gs{font-size:10px;color:var(--muted);margin-top:2px}
 .gb{flex:1;overflow:hidden}
 
 /* CHIPS */
-.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:10px;font-weight:700}
 .cg{background:rgba(46,125,79,0.12);color:var(--verde)}
 .ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
 .cr{background:rgba(181,18,27,0.12);color:var(--red)}
@@ -119,21 +129,20 @@ body{
 .ll{font-size:10px;color:var(--muted)}
 
 /* BODY ROW */
-.brow{flex:1;display:flex;gap:16px;min-height:0}
+.brow{flex:1;display:flex;gap:14px;min-height:0}
 
 /* FOOTER */
-.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.35);flex-shrink:0}
+.ft{text-align:center;padding:6px;font-size:10px;color:rgba(255,255,255,0.32);flex-shrink:0}
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
-.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid var(--line)}
+.tbl th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
+.tbl td{padding:11px 14px;font-size:12px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tr.sel td{background:rgba(22,38,61,0.04)}
-.tbl tr:hover td{background:rgba(22,38,61,0.02)}
+.tbl tr.sel td{background:rgba(22,38,61,0.03)}
 
 /* SLA BAR */
-.slab{height:4px;border-radius:2px;background:rgba(100,120,180,0.12);overflow:hidden}
+.slab{height:4px;border-radius:2px;background:rgba(22,38,61,0.08);overflow:hidden}
 .slaf{height:100%;border-radius:2px}
 
 /* TIMELINE */
@@ -141,21 +150,21 @@ body{
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 
 /* BADGE */
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600}
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:9999px;font-size:10px;font-weight:600}
 
-/* SEARCH BAR */
-.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.60);border:1px solid rgba(255,255,255,0.80);border-radius:10px;padding:8px 14px}
+/* SEARCH */
+.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.70);border-radius:9999px;padding:8px 16px}
 .sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:12px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
 
 /* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
-.fch{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
+.fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
-.fch:not(.on){background:rgba(255,255,255,0.50);border-color:rgba(255,255,255,0.70);color:var(--muted)}
+.fch:not(.on){background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.65);color:var(--muted)}
 
 
-#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:24px;padding:9px 16px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
@@ -164,107 +173,131 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </head>
 <body><div id="_vp">
 <nav class="sb">
-  <div class="sb-logo"><svg width="22" height="22" viewBox="0 0 20 20"><polygon points="10,1 12.2,7.2 19,7.2 13.4,11.5 15.6,17.7 10,13.4 4.4,17.7 6.6,11.5 1,7.2 7.8,7.2" fill="#D9A21B"/></svg></div>
-  <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-<div class="ni on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-<div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="sb-logo"><img src="mirex_insignia_cores.png" width="36" height="36" alt="MIREX"></div>
+  <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="1.8"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+<div class="ni on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M22 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+<div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l4.553-2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
   <div class="sb-bot">
-    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="ni"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   </div>
 </nav><div class="main"><header class="hdr">
-  <div><div class="hdr-title">Corpo Diplomático</div><div class="hdr-sub">842 efectivos · 52 postos · 5 continentes</div></div>
-  <div class="hdr-nav"><div class="nt  on">Visão Geral</div><div class="nt">Por Posto</div><div class="nt">Mandatos</div><div class="nt">Formação</div></div>
+  <img src="mirex_logo_cores.png" class="hdr-logo" alt="MIREX Digital">
+  <div class="hdr-div"></div>
+  <div class="hdr-info"><div class="hdr-title">Corpo Diplomático</div><div class="hdr-sub">842 efectivos · 52 postos · 5 continentes</div></div>
+  <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Por Posto</div><div class="nt">Mandatos</div><div class="nt">Formação</div></div>
   <div class="hdr-r">
     <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
     <div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    <div class="uchip"><div class="av">PV</div><div><div class="un">Dr. Pedro Valente</div><div class="us">Director de RH</div></div></div>
+    <div class="uchip">
+      <div class="av">PV</div>
+      <div><div class="un">Dr. Pedro Valente</div><div class="us">Director de RH</div></div>
+    </div>
   </div>
 </header>
 <div class="cnt">
-<div class="krow">
-  <div class="kc"><div class="kl">Total de Efectivos</div><div class="kv">842</div><div class="kd" style="color:var(--verde)">↑ 18 contratações Q2</div></div>
-  <div class="kc"><div class="kl">Mandatos a Expirar (90d)</div><div class="kv" style="color:var(--ambar)">3</div><div class="kd" style="color:var(--ambar)">Buenos Aires · Paris · Seul</div></div>
-  <div class="kc"><div class="kl">Postos com Efectivo Completo</div><div class="kv">41<span style="font-size:17px;color:var(--muted)">/52</span></div><div class="kd" style="color:var(--muted)">11 com vagas em aberto</div></div>
-  <div class="kc"><div class="kl">Média de Mandato</div><div class="kv">3,4a</div><div class="kd" style="color:var(--muted)">Rotação: 4 anos</div></div>
+<div class="kcard">
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+    <div class="klbl">Total de Efectivos</div>
+    <div class="kbig">842</div>
+    <div class="kdiff" style="color:var(--verde)">↑ 18 contratações Q2</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="klbl">Mandatos a Expirar (90d)</div>
+    <div class="kbig">3</div>
+    <div class="kdiff" style="color:var(--ambar)">Buenos Aires·Paris·Seul</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="klbl">Postos com Efectivo Completo</div>
+    <div class="kbig">41/52</div>
+    <div class="kdiff" style="color:var(--muted)">11 com vagas em aberto</div>
+  </div>
+<div class="ki">
+    <div class="ki-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="klbl">Média de Mandato</div>
+    <div class="kbig">3,4a</div>
+    <div class="kdiff" style="color:var(--muted)">Rotação padrão: 4 anos</div>
+  </div>
 </div>
 <div class="brow">
   <div class="gc" style="flex:1">
     <div class="gh">
       <div><div class="gt">Distribuição Geográfica dos Efectivos</div><div class="gs">Tamanho proporcional ao número de efectivos · Laranja = mandato a expirar</div></div>
+      <div style="display:flex;gap:10px">
+        <div class="leg"><span class="ld" style="background:rgba(22,38,61,0.70)"></span><span class="ll">Posto activo</span></div>
+        <div class="leg"><span class="ld" style="background:#C77D0A"></span><span class="ll">Mandato a expirar</span></div>
+        <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">HQ Luanda</span></div>
+      </div>
     </div>
-    <div class="gb" style="padding:10px 12px"><svg viewBox="0 0 1000 420" style="width:100%;height:100%" fill="none">
-  <path d="M108 52 L152 46 L195 62 L238 86 L262 128 L258 158 L242 180 L218 202 L196 224 L172 248 L148 268 L126 290 L100 272 L78 250 L68 218 L78 190 L88 162 L100 132 L108 52Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M196 292 L218 278 L248 288 L266 310 L274 338 L272 368 L262 394 L244 410 L224 418 L204 406 L188 384 L180 356 L182 328 L196 292Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M438 40 L482 36 L516 46 L526 62 L514 84 L492 96 L468 106 L446 116 L434 102 L428 82 L432 60Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M448 132 L492 124 L524 136 L542 162 L546 196 L540 238 L530 278 L510 316 L490 342 L468 352 L448 340 L428 312 L418 272 L416 232 L422 190 L432 160Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M528 40 L598 34 L680 40 L752 52 L804 72 L822 102 L812 132 L782 152 L752 162 L700 166 L648 160 L598 148 L556 136 L536 114 L526 88 L524 60Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <path d="M718 172 L762 160 L804 172 L820 204 L812 236 L782 246 L750 236 L728 214Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-  <!-- Sized by staff -->
-  <circle cx="452" cy="88" r="12" fill="rgba(22,38,61,0.75)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><text x="452" y="92" text-anchor="middle" font-size="8" fill="white" font-weight="700">18</text>
-  <circle cx="468" cy="68" r="11" fill="rgba(199,125,10,0.80)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><text x="468" y="72" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
-  <text x="468" y="55" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700" opacity="0.9">78d</text>
-  <circle cx="146" cy="108" r="11" fill="rgba(22,38,61,0.75)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><text x="146" y="112" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
-  <circle cx="182" cy="298" r="10" fill="rgba(199,125,10,0.80)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-  <text x="182" y="313" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700" opacity="0.9">62d</text>
-  <circle cx="724" cy="138" r="10" fill="rgba(199,125,10,0.80)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-  <text x="724" y="126" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700" opacity="0.9">88d</text>
-  <circle cx="468" cy="190" r="9" fill="#D9A21B" stroke="white" stroke-width="2"/><text x="468" y="204" text-anchor="middle" font-size="8" fill="white" font-weight="700" opacity="0.9">HQ</text>
-  <circle cx="188" cy="184" r="9" fill="rgba(22,38,61,0.70)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="188" y="188" text-anchor="middle" font-size="7" fill="white" font-weight="700">14</text>
-  <circle cx="596" cy="116" r="8" fill="rgba(22,38,61,0.70)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="596" y="120" text-anchor="middle" font-size="7" fill="white" font-weight="700">12</text>
-  <circle cx="718" cy="144" r="8" fill="rgba(22,38,61,0.70)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="718" y="148" text-anchor="middle" font-size="7" fill="white" font-weight="700">11</text>
-  <circle cx="152" cy="98" r="6" fill="rgba(22,38,61,0.65)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
-  <circle cx="460" cy="78" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="484" cy="62" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="474" cy="70" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="488" cy="74" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="492" cy="84" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="496" cy="68" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="460" cy="168" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="478" cy="164" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="472" cy="182" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="562" cy="128" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="572" cy="136" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="138" cy="118" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <circle cx="728" cy="148" r="5" fill="rgba(22,38,61,0.60)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-  <!-- Labels -->
+    <div class="gb" style="padding:8px 14px;display:flex;align-items:center"><svg viewBox="0 0 1000 390" style="width:100%;height:100%" fill="none">
+  <path d="M108 52 L152 46 L195 62 L238 86 L262 128 L258 158 L242 180 L218 202 L196 224 L172 248 L148 268 L126 290 L100 272 L78 250 L68 218 L78 190 L88 162 L100 132 L108 52Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M196 292 L218 278 L248 288 L266 310 L274 338 L272 368 L262 394 L244 380 L224 375 L204 360 L188 340 L180 312 L182 296Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M438 40 L482 36 L516 46 L526 62 L514 84 L492 96 L468 106 L446 116 L434 102 L428 82 L432 60Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M448 132 L492 124 L524 136 L542 162 L546 196 L540 238 L530 278 L510 316 L490 342 L468 352 L448 340 L428 312 L418 272 L416 232 L422 190 L432 160Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <path d="M528 40 L598 34 L680 40 L752 52 L804 72 L822 102 L812 132 L782 152 L752 162 L700 166 L648 160 L598 148 L556 136 L536 114 L526 88 L524 60Z" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  <!-- Sized bubbles -->
+  <circle cx="452" cy="88" r="12" fill="rgba(22,38,61,0.70)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/><text x="452" y="92" text-anchor="middle" font-size="8" fill="white" font-weight="700">18</text>
+  <circle cx="468" cy="68" r="11" fill="rgba(199,125,10,0.85)" stroke="white" stroke-width="2"/><text x="468" y="72" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
+  <text x="468" y="54" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700">78d</text>
+  <circle cx="146" cy="108" r="11" fill="rgba(22,38,61,0.70)" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/><text x="146" y="112" text-anchor="middle" font-size="8" fill="white" font-weight="700">16</text>
+  <circle cx="182" cy="298" r="10" fill="rgba(199,125,10,0.85)" stroke="white" stroke-width="2"/>
+  <text x="182" y="314" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700">62d</text>
+  <circle cx="724" cy="138" r="10" fill="rgba(199,125,10,0.85)" stroke="white" stroke-width="2"/>
+  <text x="724" y="125" text-anchor="middle" font-size="8" fill="#F5A623" font-weight="700">88d</text>
+  <circle cx="468" cy="190" r="9" fill="#D9A21B" stroke="white" stroke-width="2"/>
+  <polygon points="468,183 469.5,187.5 474,187.5 470.5,190.2 471.8,194.5 468,191.8 464.2,194.5 465.5,190.2 462,187.5 466.5,187.5" fill="white"/>
+  <circle cx="188" cy="184" r="9" fill="rgba(22,38,61,0.65)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/><text x="188" y="188" text-anchor="middle" font-size="7" fill="white" font-weight="700">14</text>
+  <circle cx="596" cy="116" r="8" fill="rgba(22,38,61,0.65)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/><text x="596" y="120" text-anchor="middle" font-size="7" fill="white" font-weight="700">12</text>
+  <circle cx="718" cy="144" r="8" fill="rgba(22,38,61,0.65)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/><text x="718" y="148" text-anchor="middle" font-size="7" fill="white" font-weight="700">11</text>
+  <circle cx="152" cy="98" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="460" cy="78" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="484" cy="62" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="474" cy="70" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="460" cy="168" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="478" cy="164" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="562" cy="128" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+  <circle cx="728" cy="148" r="5" fill="rgba(22,38,61,0.55)" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
   <text x="452" y="106" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.85)" font-weight="600">Lisboa</text>
   <text x="146" y="124" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.85)" font-weight="600">Washington</text>
   <text x="188" y="200" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.85)" font-weight="600">Brasília</text>
+  <text x="478" y="206" font-size="8" fill="white" font-family="Inter,sans-serif" font-weight="700">HQ</text>
 </svg></div>
   </div>
-  <div style="width:400px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
+  <div style="width:420px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
     <div class="gc" style="flex-shrink:0">
       <div class="gh"><div class="gt">Mandatos a Expirar</div><span class="chip ca">3 nos próx. 90 dias</span></div>
       <div style="padding:0 18px">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)"><div><div style="font-size:12px;font-weight:700">Buenos Aires</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Carlos Freitas · 3 efectivos</div></div><span class="chip cr">62 dias</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)"><div><div style="font-size:12px;font-weight:700">Paris</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Maria Conceição Baptista · 16 efectivos</div></div><span class="chip ca">78 dias</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)"><div><div style="font-size:12px;font-weight:700">Buenos Aires</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Carlos Freitas · 3 efectivos</div></div><span class="chip cr">62 dias</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)"><div><div style="font-size:12px;font-weight:700">Paris</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. Maria Conceição Baptista · 16 efectivos</div></div><span class="chip ca">78 dias</span></div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0"><div><div style="font-size:12px;font-weight:700">Seul</div><div style="font-size:10px;color:var(--muted);margin-top:2px">Emb. António Sebastião · 7 efectivos</div></div><span class="chip ci">88 dias</span></div>
       </div>
     </div>
     <div class="gc" style="flex:1">
       <div class="gh"><div class="gt">Perfil Seleccionado</div><span class="chip cg">Em funções</span></div>
-      <div style="padding:18px 20px">
-        <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">
-          <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#16263D 0%,#23405F 100%);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#D9A21B;flex-shrink:0">MB</div>
+      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px;height:100%">
+        <div style="display:flex;gap:14px;align-items:center">
+          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#16263D,#23405F);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#D9A21B;flex-shrink:0">MB</div>
           <div>
-            <div style="font-size:15px;font-weight:700">Dra. Maria Conceição Baptista</div>
+            <div style="font-size:15px;font-weight:700">Dra. Maria C. Baptista</div>
             <div style="font-size:11px;color:var(--muted);margin-top:2px">Embaixadora — Paris · Desde Jan 2022</div>
             <div style="display:flex;gap:6px;margin-top:6px"><span class="chip cg">Activa</span><span class="chip cn">Carreira diplomática</span></div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-          <div style="background:rgba(255,255,255,0.45);border-radius:9px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Posto</div><div style="font-size:12px;font-weight:600;margin-top:3px">Embaixada — Paris</div></div>
-          <div style="background:rgba(255,255,255,0.45);border-radius:9px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Mandato</div><div style="font-size:12px;font-weight:600;margin-top:3px;color:var(--ambar)">Expira em 78 dias</div></div>
-          <div style="background:rgba(255,255,255,0.45);border-radius:9px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Categoria</div><div style="font-size:12px;font-weight:600;margin-top:3px">Embaixadora</div></div>
-          <div style="background:rgba(255,255,255,0.45);border-radius:9px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Historial</div><div style="font-size:12px;font-weight:600;margin-top:3px">Lisboa · Brasília · Paris</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:rgba(255,255,255,0.42);border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Posto</div><div style="font-size:12px;font-weight:600;margin-top:3px">Embaixada — Paris</div></div>
+          <div style="background:rgba(255,255,255,0.42);border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Mandato</div><div style="font-size:12px;font-weight:600;margin-top:3px;color:var(--ambar)">Expira em 78 dias</div></div>
+          <div style="background:rgba(255,255,255,0.42);border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Categoria</div><div style="font-size:12px;font-weight:600;margin-top:3px">Embaixadora</div></div>
+          <div style="background:rgba(255,255,255,0.42);border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase">Historial</div><div style="font-size:12px;font-weight:600;margin-top:3px">Lisboa · Brasília · Paris</div></div>
         </div>
-        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Competências</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px">
-          <span class="chip cn">Direito Internacional</span><span class="chip cn">Negociação Multilateral</span><span class="chip cn">FR · EN · PT</span><span class="chip cg">Membro ONU 2024</span>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Competências</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="chip cn">Direito Internacional</span><span class="chip cn">Negociação Multilateral</span><span class="chip cn">FR · EN · PT</span><span class="chip cg">Membro ONU 2024</span></div>
         </div>
       </div>
     </div>
