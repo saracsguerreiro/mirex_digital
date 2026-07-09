@@ -222,6 +222,7 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
 .s3-contact-label { color: rgba(255,255,255,0.4); flex: 1; }
 .s3-contact-value { color: rgba(255,255,255,0.85); font-weight: 600; }
 </style>
+<style>html,body{margin:0;overflow:hidden}</style>
 </head>
 <body>
 <div class="canvas">
@@ -544,5 +545,22 @@ body { font-family: 'Inter', sans-serif; background: #0d1117; }
   </div>
 
 </div>
+<a href="index.html" style="position:fixed;top:14px;left:14px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:7px 14px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,0.35);transition:opacity .15s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Índice</a>
+<script>
+!function(){
+  function fit(){
+    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+    var b=document.body;
+    b.style.transform='scale('+s+')';
+    b.style.transformOrigin='top left';
+    b.style.width='1920px';
+    b.style.height='1080px';
+    b.style.overflow='hidden';
+    document.documentElement.style.cssText='margin:0;padding:0;overflow:hidden;background:'+getComputedStyle(b).backgroundColor;
+  }
+  fit();
+  window.addEventListener('resize',fit);
+}();
+</script>
 </body>
 </html>

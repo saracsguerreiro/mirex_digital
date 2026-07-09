@@ -133,6 +133,23 @@ header {
 .thumb-C1 { background: linear-gradient(135deg, #060d14 0%, #0D1825 100%); }
 .thumb-C2 { background: linear-gradient(135deg, #0D1825 0%, #16263D 100%); }
 
+/* Responsive */
+@media (max-width: 900px) {
+  header { padding: 14px 20px; gap: 10px; }
+  .header-text h1 { font-size: 14px; }
+  .tip-pill { display: none; }
+  .content { padding: 24px 16px 48px; }
+  .page-title { font-size: 20px; }
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  header { flex-wrap: wrap; }
+  .header-right { width: 100%; }
+  .grid { grid-template-columns: 1fr; }
+  .card-thumb { height: 120px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 18px 20px; }
+}
+
 /* Footer */
 footer {
   background: var(--navy-900); padding: 20px 40px;
