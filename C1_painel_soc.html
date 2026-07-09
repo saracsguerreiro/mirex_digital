@@ -51,7 +51,7 @@ body { font-family: 'Inter', sans-serif; background: #060d14; }
 .user-av { width: 30px; height: 30px; border-radius: 50%; background: var(--navy-700); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); }
 
 /* CONTENT */
-.content { flex: 1; display: grid; grid-template-columns: 1fr 420px 380px; gap: 0; overflow: hidden; }
+.content { flex: 1; display: grid; grid-template-columns: 1fr 800px; gap: 0; overflow: hidden; }
 
 /* PANEL */
 .panel { background: var(--soc-panel); border-right: 1px solid var(--soc-border); display: flex; flex-direction: column; }
@@ -165,48 +165,11 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
     </div>
   </header>
 
-  <!-- KPI STRIP -->
-  <div class="kpi-strip">
-    <div class="kpi-cell">
-      <div class="kpi-label">Eventos correlacionados 24h</div>
-      <div class="kpi-val white">1.247</div>
-      <div class="kpi-sub">↑ normal para o período</div>
-    </div>
-    <div class="kpi-cell">
-      <div class="kpi-label">Alertas em triagem</div>
-      <div class="kpi-val amber">4</div>
-      <div class="kpi-sub">Nível de prioridade médio</div>
-    </div>
-    <div class="kpi-cell">
-      <div class="kpi-label">Incidentes activos</div>
-      <div class="kpi-val red">1</div>
-      <div class="kpi-sub">INC-2026-0092 · Em investigação</div>
-    </div>
-    <div class="kpi-cell">
-      <div class="kpi-label">Postos ligados agora</div>
-      <div class="kpi-val green">49 <span style="font-size:14px;font-weight:400;opacity:0.5">/ 52</span></div>
-      <div class="kpi-sub">3 em modo offline sincronizado</div>
-    </div>
-  </div>
-
   <!-- MAIN CONTENT -->
   <div class="content">
 
-    <!-- LEFT: Network map -->
+    <!-- LEFT: Network map (full height) -->
     <div class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--soc-green)"></div>
-            Topologia de Rede — Postos e Ligações
-          </div>
-          <div class="panel-sub">52 nós · latência e estado em tempo real</div>
-        </div>
-        <div style="display:flex;gap:6px">
-          <div style="font-size:10px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:var(--soc-red);padding:2px 8px;border-radius:4px;font-weight:600">1 incidente</div>
-          <div style="font-size:10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--soc-amber);padding:2px 8px;border-radius:4px;font-weight:600">4 alertas</div>
-        </div>
-      </div>
       <div class="map-section">
         <div class="map-label">Rede MIREX Digital · Visão global de segurança</div>
         <div id="map-wrap-c1" style="width:100%;height:100%;position:relative">
@@ -320,8 +283,34 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
       </div>
     </div>
 
+    <!-- RIGHT COLUMN: KPI strip + investigation + connections -->
+    <div style="display:flex;flex-direction:column;overflow:hidden">
+      <div class="kpi-strip">
+        <div class="kpi-cell">
+          <div class="kpi-label">Eventos correlacionados 24h</div>
+          <div class="kpi-val white">1.247</div>
+          <div class="kpi-sub">↑ normal para o período</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Alertas em triagem</div>
+          <div class="kpi-val amber">4</div>
+          <div class="kpi-sub">Nível de prioridade médio</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Incidentes activos</div>
+          <div class="kpi-val red">1</div>
+          <div class="kpi-sub">INC-2026-0092 · Em investigação</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Postos ligados agora</div>
+          <div class="kpi-val green">49 <span style="font-size:14px;font-weight:400;opacity:0.5">/ 52</span></div>
+          <div class="kpi-sub">3 em modo offline sincronizado</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;overflow:hidden">
+
     <!-- MIDDLE: Alert investigation -->
-    <div class="panel" style="border-right:1px solid var(--soc-border)">
+    <div class="panel" style="flex:0 0 420px;border-right:1px solid var(--soc-border)">
       <div class="panel-header">
         <div>
           <div class="panel-title">
@@ -416,7 +405,7 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
     </div>
 
     <!-- RIGHT: Connections + stats -->
-    <div class="panel" style="border-right:none">
+    <div class="panel" style="flex:1;border-right:none">
       <div class="panel-header">
         <div class="panel-title">Postos — Estado de ligação</div>
         <div class="panel-sub">Actualizado em tempo real</div>
@@ -534,6 +523,8 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
       </div>
 
     </div>
+      </div><!-- fecha flex row -->
+    </div><!-- fecha coluna direita -->
   </div>
 
   <!-- FOOTER -->
