@@ -4,15 +4,12 @@
 <meta charset="UTF-8">
 <title>MIREX Digital · Dashboard Executivo</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-
-:root {
-  --glass:rgba(255,255,255,0.55);--border:rgba(255,255,255,0.68);
-  --line:rgba(22,38,61,0.10);--shadow:0 8px 32px rgba(0,0,0,0.13);
-  --navy:#16263D;--gold:#D9A21B;--ink:#16263D;--ink2:#334155;
-  --muted:#64748B;--verde:#2E7D4F;--ambar:#C77D0A;--red:#B5121B;
-  --sidebar:76px;--hdr:70px;
+:root{
+  --navy:#16263D; --navy700:#23405F; --surface:#F5F8FB; --card:#FFFFFF;
+  --gold:#D9A21B; --red:#B5121B; --ink:#1A2433; --muted:#5A6B80;
+  --line:#D7E1EC; --verde:#2E7D4F; --ambar:#C77D0A;
+  --sidebar:76px; --hdr:70px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -20,76 +17,106 @@ body{
   background:linear-gradient(180deg,#D7E1EC 0%,#8BA4BC 42%,#3A5473 74%,#23405F 100%);
   width:1920px;height:1080px;overflow:hidden;color:var(--ink)
 }
+
+/* SIDEBAR — círculos flutuantes */
 .sb{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar);display:flex;flex-direction:column;align-items:center;padding:18px 0;z-index:20;gap:7px}
 .sb-logo{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.35);border:1.5px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;margin-bottom:22px;flex-shrink:0;overflow:hidden}
-.ni{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(22,38,61,0.70);background:rgba(255,255,255,0.20);border:1px solid rgba(255,255,255,0.38);transition:all .15s;cursor:pointer;flex-shrink:0}
-.ni.on{background:rgba(255,255,255,0.50);color:var(--navy);border-color:rgba(255,255,255,0.65);box-shadow:0 4px 18px rgba(0,0,0,0.14)}
+.ni{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(22,38,61,0.65);background:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.40);transition:all .15s;cursor:pointer;flex-shrink:0}
+.ni.on{background:rgba(255,255,255,0.55);color:var(--navy);border-color:rgba(255,255,255,0.70);box-shadow:0 4px 18px rgba(0,0,0,0.14)}
 .sb-bot{margin-top:auto;display:flex;flex-direction:column;gap:7px}
+
+/* MAIN */
 .main{position:absolute;left:var(--sidebar);top:0;right:0;bottom:0;display:flex;flex-direction:column}
+
+/* HEADER — transparente */
 .hdr{height:var(--hdr);background:transparent;padding:0 28px 0 20px;display:flex;align-items:center;gap:16px;flex-shrink:0}
-.hdr-logo{height:40px;mix-blend-mode:multiply;flex-shrink:0}
-.hdr-div{width:1px;height:32px;background:rgba(22,38,61,0.14);flex-shrink:0}
+.hdr-div{width:1px;height:30px;background:rgba(26,36,51,0.16);flex-shrink:0;margin:0 4px}
 .hdr-info{flex-shrink:0}
-.hdr-title{font-size:18px;font-weight:700;color:var(--ink)}
-.hdr-sub{font-size:12px;color:rgba(22,38,61,0.50);margin-top:1px}
-.hdr-nav{display:flex;gap:2px;margin-left:12px}
-.nt{padding:8px 18px;border-radius:9999px;font-size:14px;font-weight:500;color:rgba(22,38,61,0.52);cursor:pointer}
-.nt.on{background:rgba(22,38,61,0.10);color:var(--navy);font-weight:700}
+.hdr-title{font-size:17px;font-weight:700;color:var(--ink)}
+.hdr-sub{font-size:12px;color:var(--muted);margin-top:1px}
+.hdr-nav{display:flex;gap:2px;margin-left:10px}
+.nt{padding:8px 18px;border-radius:9999px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
+.nt.on{background:rgba(26,36,51,0.09);color:var(--ink);font-weight:700}
 .hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.ib{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(22,38,61,0.65);position:relative;flex-shrink:0}
-.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#B5121B;border:1.5px solid rgba(255,255,255,0.9)}
-.uchip{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.45);border-radius:9999px;padding:5px 14px 5px 5px}
+.ib{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.50);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);position:relative;flex-shrink:0}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1.5px solid rgba(255,255,255,0.9)}
+.uchip{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.30);border:1px solid rgba(255,255,255,0.50);border-radius:9999px;padding:5px 14px 5px 5px}
 .av{width:30px;height:30px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0}
 .un{font-size:13px;font-weight:600;color:var(--ink)}
-.us{font-size:11px;color:rgba(22,38,61,0.50);margin-top:1px}
+.us{font-size:11px;color:var(--muted);margin-top:1px}
+
+/* CONTENT */
 .cnt{flex:1;overflow:hidden;padding:10px 24px 10px 20px;display:flex;flex-direction:column;gap:12px}
-.kcard{background:rgba(255,255,255,0.58);backdrop-filter:blur(24px) saturate(1.5);border:1px solid rgba(255,255,255,0.72);border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,0.10);display:flex;align-items:stretch;flex-shrink:0}
+
+/* KPI CARD */
+.kcard{background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 20px rgba(22,38,61,0.08);display:flex;align-items:stretch;flex-shrink:0}
 .ki{flex:1;padding:16px 26px;display:flex;flex-direction:column;gap:4px;position:relative}
-.ki+.ki::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:rgba(22,38,61,0.13)}
-.ki-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.07);margin-bottom:2px;flex-shrink:0}
+.ki+.ki::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--line)}
+.ki-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,38,61,0.06);margin-bottom:2px;flex-shrink:0}
 .kbig{font-size:40px;font-weight:800;color:var(--navy);line-height:1.05;letter-spacing:-.5px}
-.klbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.klbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
 .kdiff{font-size:13px;font-weight:600}
-.gc{background:rgba(255,255,255,0.52);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(255,255,255,0.65);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column}
-.gh{padding:14px 20px 12px;border-bottom:1px solid rgba(22,38,61,0.09);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+
+/* GLASS CARD */
+.gc{background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 20px rgba(22,38,61,0.08);overflow:hidden;display:flex;flex-direction:column}
+.gh{padding:14px 20px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .gt{font-size:16px;font-weight:700;color:var(--ink)}
 .gs{font-size:12px;color:var(--muted);margin-top:2px}
 .gb{flex:1;overflow:hidden}
+
+/* CHIPS */
 .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:9999px;font-size:11px;font-weight:700}
-.cg{background:rgba(46,125,79,0.12);color:var(--verde)}
-.ca{background:rgba(199,125,10,0.12);color:var(--ambar)}
-.cr{background:rgba(181,18,27,0.12);color:var(--red)}
-.ci{background:rgba(217,162,27,0.12);color:#8a6500}
-.cn{background:rgba(100,116,139,0.10);color:var(--muted)}
+.cg{background:rgba(46,125,79,0.10);color:var(--verde)}
+.ca{background:rgba(199,125,10,0.10);color:var(--ambar)}
+.cr{background:rgba(181,18,27,0.10);color:var(--red)}
+.ci{background:rgba(217,162,27,0.10);color:#8a6500}
+.cn{background:rgba(90,107,128,0.10);color:var(--muted)}
+
+/* LEGEND */
 .leg{display:flex;align-items:center;gap:5px}
 .ld{width:8px;height:8px;border-radius:50%}
 .ll{font-size:12px;color:var(--muted)}
+
+/* BODY ROW */
 .brow{flex:1;display:flex;gap:14px;min-height:0}
-.ft{text-align:center;padding:6px;font-size:12px;color:rgba(255,255,255,0.32);flex-shrink:0}
+
+/* FOOTER */
+.ft{text-align:center;padding:6px;font-size:12px;color:rgba(255,255,255,0.35);flex-shrink:0}
+
+/* TABLE */
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:11px 14px;text-align:left;border-bottom:1px solid rgba(22,38,61,0.09)}
-.tbl td{padding:12px 14px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(22,38,61,0.07)}
+.tbl th{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 14px;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr.sel td{background:rgba(22,38,61,0.03)}
-.slab{height:5px;border-radius:3px;background:rgba(22,38,61,0.08);overflow:hidden}
+.tbl tr:hover td{background:rgba(22,38,61,0.02)}
+
+/* SLA BAR */
+.slab{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
 .slaf{height:100%;border-radius:3px}
+
+/* TIMELINE */
 .tml-item{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
 .tml-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* BADGE */
 .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600}
-.sbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.70);border-radius:9999px;padding:8px 16px}
+
+/* SEARCH */
+.sbar{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:9999px;padding:8px 16px}
 .sbar input{background:none;border:none;outline:none;font-family:Inter,sans-serif;font-size:13px;color:var(--ink);width:100%}
 .sbar input::placeholder{color:var(--muted)}
+
+/* FILTER CHIPS */
 .fchips{display:flex;gap:6px}
 .fch{display:inline-flex;align-items:center;padding:5px 14px;border-radius:9999px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent}
 .fch.on{background:var(--navy);color:#fff}
-.fch:not(.on){background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.65);color:var(--muted)}
+.fch:not(.on){background:var(--surface);border-color:var(--line);color:var(--muted)}
 
-
-#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:rgba(22,38,61,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#_back{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:7px;background:var(--navy);border:1px solid rgba(255,255,255,0.12);border-radius:9999px;padding:9px 18px;text-decoration:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.35)}
 html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
 body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
 #_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
-
 </style>
 </head>
 <body><div id="_vp">
@@ -103,7 +130,10 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 
   <div class="sb-bot"><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 </nav><div class="main"><header class="hdr">
-  <img src="mirex_logo_cores.png" class="hdr-logo" alt="MIREX Digital">
+  <div style="line-height:1.1;flex-shrink:0">
+  <div style="font-size:10px;font-weight:700;letter-spacing:.9px;color:#1A2433;font-family:Inter,sans-serif;text-transform:uppercase">República de Angola</div>
+  <div style="font-size:20px;font-weight:800;line-height:1.1;letter-spacing:-.2px;font-family:Inter,sans-serif"><span style="color:#D9A21B">MIREX</span><span style="color:#1A2433">·Digital</span></div>
+</div>
   <div class="hdr-div"></div>
   <div class="hdr-info"><div class="hdr-title">Bom dia, Min. João da Costa</div><div class="hdr-sub">Rede diplomática global · 52 postos activos · 9 Jul 2026</div></div>
   <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Postos</div><div class="nt">Analítica</div><div class="nt">Relatórios</div></div>
@@ -117,158 +147,159 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 <div class="brow">
   <div class="gc" style="flex:1">
     <div class="gh">
-      <div><div class="gt">Rede Diplomática Global</div><div class="gs">30 missões · 5 continentes</div></div>
+      <div><div class="gt">Rede Diplomática Global</div><div class="gs">31 missões · 5 continentes · dados SIGEP-MIREX</div></div>
       <div style="display:flex;gap:14px;align-items:center">
-  <div class="leg"><span class="ld" style="background:#3b82f6"></span><span class="ll">Europa</span></div>
-  <div class="leg"><span class="ld" style="background:#10b981"></span><span class="ll">África</span></div>
-  <div class="leg"><span class="ld" style="background:#f59e0b"></span><span class="ll">Américas</span></div>
-  <div class="leg"><span class="ld" style="background:#ef4444"></span><span class="ll">Ásia</span></div>
-  <div class="leg"><span class="ld" style="background:#8b5cf6"></span><span class="ll">Am. Norte</span></div>
+  <div class="leg"><span class="ld" style="background:#16263D"></span><span class="ll">Europa</span></div>
+  <div class="leg"><span class="ld" style="background:#2E7D4F"></span><span class="ll">África / Am. Sul</span></div>
+  <div class="leg"><span class="ld" style="background:#23405F"></span><span class="ll">Ásia</span></div>
+  <div class="leg"><span class="ld" style="background:#C77D0A"></span><span class="ll">Am. Norte</span></div>
   <div class="leg"><span class="ld" style="background:#D9A21B"></span><span class="ll">HQ Luanda</span></div>
-  <div class="leg"><div style="width:12px;height:12px;border-radius:50%;border:1.5px solid #B5121B;opacity:.6"></div><span class="ll">Crítico</span></div>
+  <div class="leg"><div style="width:12px;height:12px;border-radius:50%;border:1.5px solid #B5121B;opacity:.6"></div><span class="ll">SLA crítico</span></div>
 </div>
     </div>
     <div class="gb" style="position:relative"><div id="map-wrap" style="width:100%;height:100%;position:relative">
   <svg id="world-svg" style="width:100%;height:100%;display:block"></svg>
-  <div id="map-tip" style="position:absolute;pointer-events:none;display:none;background:rgba(22,38,61,0.90);color:#fff;border-radius:10px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);box-shadow:0 4px 16px rgba(0,0,0,0.3)"></div>
+  <div id="map-tip" style="position:absolute;pointer-events:none;display:none;background:var(--navy);color:#fff;border-radius:10px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;border:1px solid rgba(255,255,255,0.12);box-shadow:0 4px 16px rgba(0,0,0,0.3)"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
 const MISSIONS=[
-  {id:"HQ",loc:"Luanda — Sede",color:"#D9A21B",status:"normal",hq:true,coords:[13.23,-8.84]},
-  {id:"M001",loc:"Embaixada de Lisboa",color:"#3b82f6",status:"warning",hq:false,coords:[-9.14,38.72]},
-  {id:"M002",loc:"Consulado de Paris",color:"#3b82f6",status:"normal",hq:false,coords:[2.35,48.86]},
-  {id:"M003",loc:"Embaixada de Brasília",color:"#f59e0b",status:"critical",hq:false,coords:[-47.93,-15.78]},
-  {id:"M004",loc:"Embaixada de Pequim",color:"#ef4444",status:"warning",hq:false,coords:[116.4,39.91]},
-  {id:"M005",loc:"Embaixada de Washington",color:"#8b5cf6",status:"warning",hq:false,coords:[-77.04,38.91]},
-  {id:"M006",loc:"Embaixada de Moscovo",color:"#3b82f6",status:"critical",hq:false,coords:[37.62,55.75]},
-  {id:"M007",loc:"Consulado de Joanesburgo",color:"#10b981",status:"normal",hq:false,coords:[28.04,-26.2]},
-  {id:"M008",loc:"Embaixada de Londres",color:"#3b82f6",status:"normal",hq:false,coords:[-0.12,51.5]},
-  {id:"M009",loc:"Embaixada de Berlim",color:"#3b82f6",status:"critical",hq:false,coords:[13.4,52.52]},
-  {id:"M010",loc:"Embaixada de Madrid",color:"#3b82f6",status:"normal",hq:false,coords:[-3.7,40.42]},
-  {id:"M011",loc:"Embaixada de Tóquio",color:"#ef4444",status:"normal",hq:false,coords:[139.69,35.69]},
-  {id:"M012",loc:"Embaixada de Nova Delhi",color:"#ef4444",status:"normal",hq:false,coords:[77.21,28.61]},
-  {id:"M013",loc:"Embaixada do Cairo",color:"#10b981",status:"warning",hq:false,coords:[31.24,30.06]},
-  {id:"M014",loc:"Consulado de Toronto",color:"#8b5cf6",status:"normal",hq:false,coords:[-79.38,43.65]},
-  {id:"M015",loc:"Embaixada de Buenos Aires",color:"#f59e0b",status:"warning",hq:false,coords:[-58.38,-34.6]},
-  {id:"M016",loc:"Embaixada de Nairobi",color:"#10b981",status:"normal",hq:false,coords:[36.82,-1.29]},
-  {id:"M017",loc:"Embaixada de Abidjan",color:"#10b981",status:"normal",hq:false,coords:[-4.03,5.35]},
-  {id:"M018",loc:"Embaixada de Havana",color:"#8b5cf6",status:"warning",hq:false,coords:[-82.38,23.13]},
-  {id:"M019",loc:"Embaixada de Caracas",color:"#f59e0b",status:"normal",hq:false,coords:[-66.92,10.49]},
-  {id:"M020",loc:"Embaixada de Seul",color:"#ef4444",status:"normal",hq:false,coords:[126.98,37.57]},
-  {id:"M021",loc:"Embaixada de Lagos",color:"#10b981",status:"warning",hq:false,coords:[3.38,6.46]},
-  {id:"M022",loc:"Embaixada de Santiago",color:"#f59e0b",status:"normal",hq:false,coords:[-70.67,-33.45]},
-  {id:"M023",loc:"Embaixada da Cidade do México",color:"#8b5cf6",status:"warning",hq:false,coords:[-99.13,19.43]},
-  {id:"M024",loc:"Embaixada de Banguecoque",color:"#ef4444",status:"normal",hq:false,coords:[100.52,13.75]},
-  {id:"M025",loc:"Embaixada de Maputo",color:"#10b981",status:"normal",hq:false,coords:[32.58,-25.97]},
-  {id:"M026",loc:"Embaixada de Roma",color:"#3b82f6",status:"critical",hq:false,coords:[12.5,41.9]},
-  {id:"M027",loc:"Consulado de Genebra",color:"#3b82f6",status:"normal",hq:false,coords:[6.14,46.2]},
-  {id:"M028",loc:"Embaixada de Dacarta",color:"#ef4444",status:"normal",hq:false,coords:[106.84,-6.21]},
-  {id:"M029",loc:"Embaixada de Acra",color:"#10b981",status:"normal",hq:false,coords:[-0.19,5.55]},
-  {id:"M030",loc:"Embaixada de Adis Abeba",color:"#10b981",status:"normal",hq:false,coords:[38.74,9.02]},
+  {id:"HQ",  loc:"Luanda — Sede",              cont:"Angola",           color:"#D9A21B",status:"normal",hq:true, coords:[13.23,-8.84]},
+  {id:"M001",loc:"Embaixada de Lisboa",         cont:"Europa",           color:"#16263D",status:"warning",hq:false,coords:[-9.14,38.72]},
+  {id:"M002",loc:"Consulado de Paris",          cont:"Europa",           color:"#16263D",status:"normal",hq:false,coords:[2.35,48.86]},
+  {id:"M003",loc:"Embaixada de Brasília",       cont:"América do Sul",   color:"#2E7D4F",status:"critical",hq:false,coords:[-47.93,-15.78]},
+  {id:"M004",loc:"Embaixada de Pequim",         cont:"Ásia",             color:"#23405F",status:"warning",hq:false,coords:[116.40,39.91]},
+  {id:"M005",loc:"Embaixada de Washington",     cont:"América do Norte", color:"#C77D0A",status:"warning",hq:false,coords:[-77.04,38.91]},
+  {id:"M006",loc:"Embaixada de Moscovo",        cont:"Europa",           color:"#16263D",status:"critical",hq:false,coords:[37.62,55.75]},
+  {id:"M007",loc:"Consulado de Joanesburgo",    cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[28.04,-26.20]},
+  {id:"M008",loc:"Embaixada de Londres",        cont:"Europa",           color:"#16263D",status:"normal",hq:false,coords:[-0.12,51.50]},
+  {id:"M009",loc:"Embaixada de Berlim",         cont:"Europa",           color:"#16263D",status:"critical",hq:false,coords:[13.40,52.52]},
+  {id:"M010",loc:"Embaixada de Madrid",         cont:"Europa",           color:"#16263D",status:"normal",hq:false,coords:[-3.70,40.42]},
+  {id:"M011",loc:"Embaixada de Tóquio",         cont:"Ásia",             color:"#23405F",status:"normal",hq:false,coords:[139.69,35.69]},
+  {id:"M012",loc:"Embaixada de Nova Delhi",     cont:"Ásia",             color:"#23405F",status:"normal",hq:false,coords:[77.21,28.61]},
+  {id:"M013",loc:"Embaixada do Cairo",          cont:"África",           color:"#2E7D4F",status:"warning",hq:false,coords:[31.24,30.06]},
+  {id:"M014",loc:"Consulado de Toronto",        cont:"América do Norte", color:"#C77D0A",status:"normal",hq:false,coords:[-79.38,43.65]},
+  {id:"M015",loc:"Embaixada de Buenos Aires",   cont:"América do Sul",   color:"#2E7D4F",status:"warning",hq:false,coords:[-58.38,-34.60]},
+  {id:"M016",loc:"Embaixada de Nairobi",        cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[36.82,-1.29]},
+  {id:"M017",loc:"Embaixada de Abidjan",        cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[-4.03,5.35]},
+  {id:"M018",loc:"Embaixada de Havana",         cont:"América do Norte", color:"#C77D0A",status:"warning",hq:false,coords:[-82.38,23.13]},
+  {id:"M019",loc:"Embaixada de Caracas",        cont:"América do Sul",   color:"#2E7D4F",status:"normal",hq:false,coords:[-66.92,10.49]},
+  {id:"M020",loc:"Embaixada de Seul",           cont:"Ásia",             color:"#23405F",status:"normal",hq:false,coords:[126.98,37.57]},
+  {id:"M021",loc:"Embaixada de Lagos",          cont:"África",           color:"#2E7D4F",status:"warning",hq:false,coords:[3.38,6.46]},
+  {id:"M022",loc:"Embaixada de Santiago",       cont:"América do Sul",   color:"#2E7D4F",status:"normal",hq:false,coords:[-70.67,-33.45]},
+  {id:"M023",loc:"Embaixada da Cidade do México",cont:"América do Norte",color:"#C77D0A",status:"warning",hq:false,coords:[-99.13,19.43]},
+  {id:"M024",loc:"Embaixada de Banguecoque",    cont:"Ásia",             color:"#23405F",status:"normal",hq:false,coords:[100.52,13.75]},
+  {id:"M025",loc:"Embaixada de Maputo",         cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[32.58,-25.97]},
+  {id:"M026",loc:"Embaixada de Roma",           cont:"Europa",           color:"#16263D",status:"critical",hq:false,coords:[12.50,41.90]},
+  {id:"M027",loc:"Consulado de Genebra",        cont:"Europa",           color:"#16263D",status:"normal",hq:false,coords:[6.14,46.20]},
+  {id:"M028",loc:"Embaixada de Dacarta",        cont:"Ásia",             color:"#23405F",status:"normal",hq:false,coords:[106.84,-6.21]},
+  {id:"M029",loc:"Embaixada de Acra",           cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[-0.19,5.55]},
+  {id:"M030",loc:"Embaixada de Adis Abeba",     cont:"África",           color:"#2E7D4F",status:"normal",hq:false,coords:[38.74,9.02]},
 ];
 (function(){
-  const W=1280, H=680;
+  const W=1280,H=660;
   const svg=d3.select('#world-svg').attr('viewBox','0 0 '+W+' '+H).attr('preserveAspectRatio','xMidYMid meet');
-  const proj=d3.geoNaturalEarth1().rotate([-15,0]).scale(215).translate([W/2,H/2+30]);
+  const proj=d3.geoNaturalEarth1().rotate([-15,0]).scale(210).translate([W/2,H/2+30]);
   const path=d3.geoPath().projection(proj);
   const tip=document.getElementById('map-tip');
   d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
     const countries=topojson.feature(world,world.objects.countries);
     svg.selectAll('.ctry').data(countries.features).enter().append('path')
       .attr('class','ctry').attr('d',path)
-      .attr('fill','rgba(22,38,61,0.10)').attr('stroke','rgba(22,38,61,0.20)').attr('stroke-width',0.6);
+      .attr('fill','rgba(22,38,61,0.09)').attr('stroke','rgba(22,38,61,0.18)').attr('stroke-width',0.6);
     MISSIONS.forEach(m=>{
-      const [x,y]=proj(m.coords);
-      if(!x||!y) return;
+      const p=proj(m.coords); if(!p) return;
+      const [x,y]=p;
       const g=svg.append('g').attr('transform','translate('+x+','+y+')').style('cursor','pointer');
-      if(m.status==='critical') g.append('circle').attr('r',14).attr('fill','none').attr('stroke','#B5121B').attr('stroke-width',1.5).attr('opacity',0.50);
+      if(m.status==='critical') g.append('circle').attr('r',13).attr('fill','none').attr('stroke','#B5121B').attr('stroke-width',1.5).attr('opacity',0.55);
       if(m.hq){
-        g.append('circle').attr('r',11).attr('fill',m.color).attr('stroke','white').attr('stroke-width',2);
-        g.append('polygon').attr('points','0,-6 1.4,−2.5 5.7,-2.5 2.3,0 3.6,4.5 0,2 -3.6,4.5 -2.3,0 -5.7,-2.5 -1.4,-2.5').attr('fill','white').attr('transform','scale(0.85)');
+        g.append('circle').attr('r',10).attr('fill','#D9A21B').attr('stroke','#fff').attr('stroke-width',2);
+        g.append('polygon').attr('points','0,-5.5 1.3,-2 4.5,-2 2,0.7 3,4.5 0,2.5 -3,4.5 -2,0.7 -4.5,-2 -1.3,-2').attr('fill','#fff');
       } else {
-        g.append('circle').attr('r',m.status==='critical'?9:8).attr('fill',m.color).attr('stroke','white').attr('stroke-width',1.8);
-        g.append('circle').attr('r',3).attr('fill','rgba(255,255,255,0.70)');
+        g.append('circle').attr('r',m.status==='critical'?9:8).attr('fill',m.color).attr('stroke','rgba(255,255,255,0.9)').attr('stroke-width',1.8);
+        g.append('circle').attr('r',2.5).attr('fill','rgba(255,255,255,0.65)');
       }
       g.on('mousemove',function(event){
         const rect=document.getElementById('world-svg').getBoundingClientRect();
         const sc=rect.width/W;
         tip.style.display='block';
-        tip.style.left=(x*sc+rect.left+14)+'px';
-        tip.style.top=(y*sc+rect.top-50)+'px';
-        tip.innerHTML='<strong>'+m.loc+'</strong><br><span style="opacity:.7;font-size:12px">'+m.cont+'</span>';
+        tip.style.left=(x*sc+8)+'px';
+        tip.style.top=((y-18)*sc)+'px';
+        tip.innerHTML='<span style="font-weight:700">'+m.loc+'</span><br><span style="opacity:.65;font-size:11px">'+m.cont+'</span>';
       }).on('mouseleave',()=>tip.style.display='none');
     });
   }).catch(()=>{
     svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
-      .attr('font-family','Inter,sans-serif').attr('font-size','16').attr('fill','rgba(22,38,61,0.40)')
-      .text('Mapa indisponível sem conexão à internet');
+      .attr('font-family','Inter,sans-serif').attr('font-size','14').attr('fill','var(--muted)')
+      .text('Mapa requer ligação à internet');
   });
 })();
 </script></div>
   </div>
-  <div style="width:470px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
+  <div style="width:480px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">
     <div class="gc" style="flex:1">
       <div class="gh">
-        <div><div class="gt">Actos Consulares por Tipo</div><div class="gs">Distribuição mensal · Jul 2026</div></div>
+        <div><div class="gt">Actos por Tipo</div><div class="gs">Distribuição mensal · Jul 2026</div></div>
       </div>
-      <div class="gb" style="padding:8px 10px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 400 350" style="width:100%;height:100%;display:block">
-<path d="M190.0,72.0 A108,108 0 0,1 220.4,283.6 L209.1,245.3 A68,68 0 0,0 190.0,112.0 Z" fill="#3b82f6"/><path d="M218.9,284.0 A108,108 0 0,1 82.5,190.1 L122.3,186.4 A68,68 0 0,0 208.2,245.5 Z" fill="#10b981"/><path d="M82.3,188.6 A108,108 0 0,1 131.7,89.1 L153.3,122.8 A68,68 0 0,0 122.2,185.4 Z" fill="#f59e0b"/><path d="M133.0,88.3 A108,108 0 0,1 188.5,72.0 L189.1,112.0 A68,68 0 0,0 154.1,122.3 Z" fill="#D9A21B"/>
-<circle cx="190" cy="180" r="108" fill="rgba(255,255,255,0.0)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/>
-<circle cx="190" cy="180" r="68" fill="rgba(255,255,255,0.55)"/>
-<text x="190" y="166" text-anchor="middle" font-size="28" font-weight="800" fill="#16263D" font-family="Inter,sans-serif">18.432</text>
-<text x="190" y="190" text-anchor="middle" font-size="12" fill="#64748B" font-family="Inter,sans-serif">actos / mês</text>
-<rect x="318" y="28" width="12" height="12" rx="3" fill="#3b82f6"/>
-<text x="336" y="38" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">45.7%</text>
-<text x="336" y="54" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Vistos</text>
-<text x="336" y="68" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">8,420 actos</text>
-<rect x="318" y="80" width="12" height="12" rx="3" fill="#10b981"/>
-<text x="336" y="90" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">28.0%</text>
-<text x="336" y="106" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Reg. Civil</text>
-<text x="336" y="120" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">5,170 actos</text>
-<rect x="318" y="132" width="12" height="12" rx="3" fill="#f59e0b"/>
-<text x="336" y="142" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">17.4%</text>
-<text x="336" y="158" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Passaportes</text>
-<text x="336" y="172" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">3,210 actos</text>
-<rect x="318" y="184" width="12" height="12" rx="3" fill="#D9A21B"/>
-<text x="336" y="194" font-size="14" font-family="Inter,sans-serif" font-weight="700" fill="#16263D">8.9%</text>
-<text x="336" y="210" font-size="12" font-family="Inter,sans-serif" fill="#64748B">Procurações</text>
-<text x="336" y="224" font-size="11" font-family="Inter,sans-serif" fill="#94a3b8">1,632 actos</text>
+      <div class="gb" style="padding:16px 24px 12px"><svg viewBox="0 0 420 415" style="width:100%;height:100%;display:block">
+
+  <text x="0" y="24" font-size="13" font-weight="600" fill="#5A6B80" font-family="Inter,sans-serif">Vistos</text>
+  <text x="418" y="24" font-size="13" fill="#5A6B80" text-anchor="end" font-family="Inter,sans-serif">45,7%</text>
+  <rect x="0" y="32" width="290" height="14" rx="7" fill="#D7E1EC"/>
+  <rect x="0" y="32" width="290" height="14" rx="7" fill="#16263D"/>
+  <text x="0" y="70" font-size="26" font-weight="800" fill="#1A2433" font-family="Inter,sans-serif">8.420</text>
+  <text x="0" y="86" font-size="11" fill="#5A6B80" font-family="Inter,sans-serif">actos/mês</text>
+  <text x="0" y="112" font-size="13" font-weight="600" fill="#5A6B80" font-family="Inter,sans-serif">Registo Civil</text>
+  <text x="418" y="112" font-size="13" fill="#5A6B80" text-anchor="end" font-family="Inter,sans-serif">28,0%</text>
+  <rect x="0" y="120" width="290" height="14" rx="7" fill="#D7E1EC"/>
+  <rect x="0" y="120" width="178" height="14" rx="7" fill="#2E7D4F"/>
+  <text x="0" y="158" font-size="26" font-weight="800" fill="#1A2433" font-family="Inter,sans-serif">5.170</text>
+  <text x="0" y="174" font-size="11" fill="#5A6B80" font-family="Inter,sans-serif">actos/mês</text>
+  <text x="0" y="200" font-size="13" font-weight="600" fill="#5A6B80" font-family="Inter,sans-serif">Passaportes</text>
+  <text x="418" y="200" font-size="13" fill="#5A6B80" text-anchor="end" font-family="Inter,sans-serif">17,4%</text>
+  <rect x="0" y="208" width="290" height="14" rx="7" fill="#D7E1EC"/>
+  <rect x="0" y="208" width="111" height="14" rx="7" fill="#D9A21B"/>
+  <text x="0" y="246" font-size="26" font-weight="800" fill="#1A2433" font-family="Inter,sans-serif">3.210</text>
+  <text x="0" y="262" font-size="11" fill="#5A6B80" font-family="Inter,sans-serif">actos/mês</text>
+  <text x="0" y="288" font-size="13" font-weight="600" fill="#5A6B80" font-family="Inter,sans-serif">Procurações</text>
+  <text x="418" y="288" font-size="13" fill="#5A6B80" text-anchor="end" font-family="Inter,sans-serif">8,9%</text>
+  <rect x="0" y="296" width="290" height="14" rx="7" fill="#D7E1EC"/>
+  <rect x="0" y="296" width="56" height="14" rx="7" fill="#C77D0A"/>
+  <text x="0" y="334" font-size="26" font-weight="800" fill="#1A2433" font-family="Inter,sans-serif">1.632</text>
+  <text x="0" y="350" font-size="11" fill="#5A6B80" font-family="Inter,sans-serif">actos/mês</text>
+  <line x1="0" y1="384" x2="420" y2="384" stroke="#D7E1EC" stroke-width="1"/>
+  <text x="0" y="406" font-size="13" fill="#5A6B80" font-family="Inter,sans-serif" font-weight="600">Total mensal</text>
+  <text x="418" y="406" font-size="22" font-weight="800" fill="#16263D" font-family="Inter,sans-serif" text-anchor="end">18.432</text>
 </svg></div>
     </div>
-    <div class="gc" style="flex-shrink:0"><div class="gh"><div class="gt">Alertas</div><span class="chip cr">3 activos</span></div>
-<div style="padding:2px 18px">
-  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-    <div style="width:9px;height:9px;border-radius:50%;background:#B5121B;flex-shrink:0;margin-top:4px"></div>
-    <div style="flex:1"><div style="font-size:13px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
-    <span class="chip cr">Crítico</span>
-  </div>
-  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-    <div style="width:9px;height:9px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
-    <div style="flex:1"><div style="font-size:13px;font-weight:600">Berlim — SLA crítico</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tempo médio resposta > 72h</div></div>
-    <span class="chip cr">Crítico</span>
-  </div>
-  <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(22,38,61,0.08)">
-    <div style="width:9px;height:9px;border-radius:50%;background:#C77D0A;flex-shrink:0;margin-top:4px"></div>
-    <div style="flex:1"><div style="font-size:13px;font-weight:600">Pequim — Degradação</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tempo médio resposta > 48h</div></div>
-    <span class="chip ca">Atenção</span>
-  </div>
-  <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
-    <div style="width:9px;height:9px;border-radius:50%;background:#D9A21B;flex-shrink:0;margin-top:4px"></div>
-    <div style="flex:1"><div style="font-size:13px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
-    <span class="chip ci">Info</span>
-  </div>
-</div></div>
+    <div class="gc" style="flex-shrink:0">
+      <div class="gh"><div class="gt">Alertas</div><span class="chip cr">3 activos</span></div>
+      <div style="padding:2px 18px">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px"></div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">Moscovo — SLA crítico</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Prazo excedido 72h · INC-2026-0092</div></div>
+          <span class="chip cr">Crítico</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--ambar);flex-shrink:0;margin-top:5px"></div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">Pequim — Degradação de serviço</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Tempo médio resposta &gt; 48h</div></div>
+          <span class="chip ca">Atenção</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px"></div>
+          <div style="flex:1"><div style="font-size:13px;font-weight:600">3 mandatos expiram em 90 dias</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Buenos Aires · Paris · Seul</div></div>
+          <span class="chip ci">Info</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
 <div class="ft">Protótipo conceptual · TIS · 2026</div>
 </div>
-</div>
-<a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
+</div><a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
 <script>
 !function(){var vp=document.getElementById('_vp');function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')'}fit();window.addEventListener('resize',fit)}();
 </script>
-</body>
-</html>
+</body></html>
