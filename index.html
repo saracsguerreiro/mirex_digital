@@ -3,397 +3,752 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIREX Digital · Índice de Mockups</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>MIREX Digital · Protótipos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy-900: #16263D;
-  --navy-700: #23405F;
-  --surface: #F5F8FB;
-  --card: #FFFFFF;
-  --gold-500: #D9A21B;
-  --ink: #1A2433;
-  --muted: #5A6B80;
-  --line: #D7E1EC;
-  --verde: #2E7D4F;
-  --ambar: #C77D0A;
+  --navy: #16263D;
+  --navy-dark: #0D1825;
+  --gold: #D9A21B;
+  --ink: #111827;
+  --muted: #6B7280;
+  --line: #E5EAF0;
+  --surface: #F5F7FA;
+  --white: #fff;
+  --green: #15803d;
+  --red: #dc2626;
+  --blue: #1d4ed8;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); min-height: 100vh; }
+body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); }
 
-/* HEADER */
-header {
-  background: var(--navy-900); padding: 20px 40px;
-  display: flex; align-items: center; gap: 14px;
-  position: sticky; top: 0; z-index: 10;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+/* ── BANNER ── */
+.banner {
+  background: linear-gradient(100deg, var(--navy-dark) 0%, #1d3a5c 100%);
+  padding: 0 48px;
+  height: 80px;
+  display: flex; align-items: center; gap: 20px;
+  position: sticky; top: 0; z-index: 20;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.emblem {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--gold-500); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.header-text h1 { font-size: 18px; font-weight: 700; color: #fff; }
-.header-text p { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.status-pill {
-  display: flex; align-items: center; gap: 6px;
-  background: rgba(46,125,79,0.18); border: 1px solid rgba(46,125,79,0.35);
-  border-radius: 20px; padding: 5px 12px; font-size: 11px; font-weight: 600; color: #6adc96;
-}
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #6adc96; }
-.tip-pill {
-  background: rgba(217,162,27,0.1); border: 1px solid rgba(217,162,27,0.25);
-  border-radius: 20px; padding: 5px 12px; font-size: 11px; color: rgba(217,162,27,0.85);
-}
+.banner img { height: 46px; flex-shrink: 0; }
+.banner-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.banner-text strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+.banner-text span { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 2px; display: block; }
+.banner-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.chip { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+.chip-green { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+.chip-gold  { background: rgba(217,162,27,0.12); color: var(--gold); border: 1px solid rgba(217,162,27,0.2); }
 
-/* CONTENT */
-.content { max-width: 1200px; margin: 0 auto; padding: 40px 32px 60px; }
-.page-title { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-.page-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
+/* ── MAIN CONTENT ── */
+.content { max-width: 1160px; margin: 0 auto; padding: 40px 48px 100px; }
 
-/* Module section */
-.module-header {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 18px; padding-bottom: 14px;
-  border-bottom: 2px solid var(--line);
-}
-.module-num {
+/* ── MODULE HEADER ── */
+.mod-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; margin-top: 56px; padding-bottom: 18px; border-bottom: 2px solid var(--line); }
+.mod-head:first-child { margin-top: 0; }
+.mod-head-left { display: flex; align-items: center; gap: 14px; }
+.mod-pill {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
-  font-size: 14px; font-weight: 700;
+  width: 36px; height: 36px; border-radius: 10px;
+  font-size: 15px; font-weight: 800; flex-shrink: 0;
 }
-.m1 { background: var(--navy-900); color: var(--gold-500); }
-.m2 { background: var(--navy-700); color: #fff; }
-.m3 { background: #0D1825; color: #6adc96; }
-.module-title { font-size: 15px; font-weight: 700; color: var(--ink); }
-.module-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.mod-pill-A { background: var(--navy); color: var(--gold); }
+.mod-pill-B { background: #23405F; color: #fff; }
+.mod-pill-C { background: var(--navy-dark); color: #4ade80; }
+.mod-title { font-size: 20px; font-weight: 800; color: var(--ink); }
+.mod-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.mod-count { font-size: 12px; color: var(--muted); }
 
-/* Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-.grid-1 { grid-template-columns: repeat(auto-fill, minmax(280px, 320px)); }
+/* ── GRID ── */
+.grid { display: grid; gap: 20px; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g2 { grid-template-columns: repeat(2, 1fr); }
 
-/* Card */
+/* ── CARD ── */
 .card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  overflow: hidden; text-decoration: none; color: inherit;
-  box-shadow: 0 2px 8px rgba(22,38,61,0.05);
-  transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
   display: flex; flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .card:hover {
-  box-shadow: 0 6px 24px rgba(22,38,61,0.12);
-  transform: translateY(-2px);
-  border-color: rgba(22,38,61,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(22,38,61,0.14);
+  border-color: var(--gold);
 }
 
-.card-thumb {
-  height: 140px; background: var(--navy-700); position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
+/* ── THUMBNAIL AREA ── */
+.thumb {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
 }
-.thumb-icon { opacity: 0.18; }
-.thumb-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(22,38,61,0.6) 0%, transparent 60%);
-}
-.card-id {
-  position: absolute; top: 10px; left: 12px;
-  background: rgba(0,0,0,0.45); border-radius: 4px; padding: 3px 8px;
-  font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.9);
-  font-family: monospace; letter-spacing: 0.5px;
-}
-.card-format {
-  position: absolute; top: 10px; right: 12px;
-  background: rgba(0,0,0,0.35); border-radius: 4px; padding: 3px 8px;
-  font-size: 10px; color: rgba(255,255,255,0.65);
-}
-.open-btn {
-  position: absolute; bottom: 10px; right: 12px;
-  background: var(--gold-500); color: var(--navy-900);
-  font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 5px;
-  opacity: 0; transition: opacity 0.15s;
-}
-.card:hover .open-btn { opacity: 1; }
+.bg-A1 { background: linear-gradient(155deg,#16263D 0%,#2a4d74 100%); }
+.bg-A2 { background: linear-gradient(155deg,#1a2f5e 0%,#264a90 100%); }
+.bg-A3 { background: linear-gradient(155deg,#0D1825 0%,#193050 100%); }
+.bg-B1 { background: linear-gradient(155deg,#0f2236 0%,#1c3a5a 100%); }
+.bg-B2 { background: linear-gradient(155deg,#182a3e 0%,#26415c 100%); }
+.bg-B3 { background: linear-gradient(155deg,#14243a 0%,#1e3248 100%); }
+.bg-B4 { background: linear-gradient(155deg,#162840 0%,#224668 100%); }
+.bg-C1 { background: linear-gradient(155deg,#030709 0%,#0a1624 100%); }
+.bg-C2 { background: linear-gradient(155deg,#0a1826 0%,#14263a 100%); }
 
-.card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-.card-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-.card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
-.card-footer { display: flex; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); margin-top: 6px; }
-.card-tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; }
-.tag-dark { background: rgba(22,38,61,0.07); color: var(--navy-700); }
-.tag-gold { background: rgba(217,162,27,0.1); color: #8a6800; }
-.tag-green { background: rgba(46,125,79,0.1); color: var(--verde); }
-
-/* Colors per screen */
-.thumb-A1 { background: linear-gradient(135deg, #16263D 0%, #23405F 100%); }
-.thumb-A2 { background: linear-gradient(135deg, #1a3050 0%, #243f60 100%); }
-.thumb-A3 { background: linear-gradient(135deg, #0D1825 0%, #16263D 100%); }
-.thumb-B1 { background: linear-gradient(135deg, #12202F 0%, #1a3252 100%); }
-.thumb-B2 { background: linear-gradient(135deg, #1c2e42 0%, #243f60 100%); }
-.thumb-B3 { background: linear-gradient(135deg, #16263D 0%, #1f3450 100%); }
-.thumb-B4 { background: linear-gradient(135deg, #1a3050 0%, #2a4870 100%); }
-.thumb-C1 { background: linear-gradient(135deg, #060d14 0%, #0D1825 100%); }
-.thumb-C2 { background: linear-gradient(135deg, #0D1825 0%, #16263D 100%); }
-
-/* Responsive */
-@media (max-width: 900px) {
-  header { padding: 14px 20px; gap: 10px; }
-  .header-text h1 { font-size: 14px; }
-  .tip-pill { display: none; }
-  .content { padding: 24px 16px 48px; }
-  .page-title { font-size: 20px; }
-  .grid { grid-template-columns: 1fr 1fr; }
+.thumb::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
 }
-@media (max-width: 600px) {
-  header { flex-wrap: wrap; }
-  .header-right { width: 100%; }
-  .grid { grid-template-columns: 1fr; }
-  .card-thumb { height: 120px; }
-  footer { flex-direction: column; gap: 8px; text-align: center; padding: 18px 20px; }
-}
+.acc-gold::after  { background: linear-gradient(90deg,transparent,var(--gold),transparent); }
+.acc-blue::after  { background: linear-gradient(90deg,transparent,#60a5fa,transparent); }
+.acc-green::after { background: linear-gradient(90deg,transparent,#34d399,transparent); }
 
-/* Footer */
+.t-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.85);
+  font-size: 10px; font-weight: 700; font-family: monospace; letter-spacing: 0.5px;
+  padding: 3px 9px; border-radius: 5px;
+}
+.t-fmt {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  background: rgba(0,0,0,0.4); color: rgba(255,255,255,0.5);
+  font-size: 9px; padding: 3px 8px; border-radius: 5px;
+}
+.thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ── CARD BODY ── */
+.card-body { padding: 18px 20px 0; flex: 1; }
+.card-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 6px; }
+.card-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.tag { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 8px; }
+.tag-n { background: rgba(22,38,61,0.07); color: #1d3a5a; }
+.tag-g { background: rgba(217,162,27,0.1); color: #7a5800; }
+.tag-v { background: rgba(21,128,61,0.1); color: var(--green); }
+
+/* ── OPEN BUTTON ── */
+.card-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 16px 20px 20px;
+  padding: 12px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 13px; font-weight: 700;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.card:hover .card-btn { background: var(--gold); color: var(--navy-dark); }
+.card-btn svg { transition: transform 0.15s; }
+.card:hover .card-btn svg { transform: translateX(3px); }
+
+/* ── FOOTER ── */
 footer {
-  background: var(--navy-900); padding: 20px 40px;
+  background: var(--navy-dark); padding: 24px 48px;
   display: flex; justify-content: space-between; align-items: center;
 }
-footer p { font-size: 12px; color: rgba(255,255,255,0.35); }
-footer a { color: rgba(217,162,27,0.7); text-decoration: none; font-size: 12px; }
+footer p { font-size: 12px; color: rgba(255,255,255,0.28); }
+footer a { font-size: 12px; color: rgba(217,162,27,0.6); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1050px) {
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .content { padding: 32px 28px 80px; }
+  .banner { padding: 0 28px; }
+}
+@media (max-width: 640px) {
+  .g4, .g3, .g2 { grid-template-columns: 1fr; }
+  .banner { padding: 0 16px; height: 64px; }
+  .banner img { height: 36px; }
+  .banner-text strong { font-size: 12px; }
+  .chip-gold { display: none; }
+  .content { padding: 24px 16px 60px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+}
 </style>
 </head>
 <body>
 
-<header>
-  <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="44" style="display:block;flex-shrink:0">
-  <div class="header-text">
-    <h1>MIREX Digital · Mockups de Apresentação</h1>
-    <p>República de Angola · Ministério das Relações Exteriores</p>
+<!-- BANNER -->
+<header class="banner">
+  <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital">
+  <div class="banner-sep"></div>
+  <div class="banner-text">
+    <strong>MIREX Digital · Protótipos</strong>
+    <span>República de Angola · Ministério das Relações Exteriores</span>
   </div>
-  <div class="header-right">
-    <div class="status-pill"><div class="status-dot"></div>9 telas · publicadas</div>
-    <div class="tip-pill">Abrir cada tela em ecrã completo para pré-visualização</div>
+  <div class="banner-right">
+    <span class="chip chip-green">● 9 telas publicadas</span>
+    <span class="chip chip-gold">Julho 2026</span>
   </div>
 </header>
 
 <div class="content">
-  <div class="page-title">Mockups MIREX Digital</div>
-  <div class="page-sub">Clique numa tela para a abrir em ecrã completo. A página adapta-se automaticamente ao tamanho do seu ecrã.</div>
 
-  <!-- MÓDULO 1 -->
-  <div class="module-header">
-    <span class="module-num m1">1</span>
-    <div>
-      <div class="module-title">Portal MIREX para o Cidadão</div>
-      <div class="module-sub">4 telas · Canais digitais de acesso público e serviços consulares para a diáspora</div>
+  <!-- MÓDULO A -->
+  <div class="mod-head">
+    <div class="mod-head-left">
+      <span class="mod-pill mod-pill-A">A</span>
+      <div>
+        <div class="mod-title">Portal MIREX para o Cidadão</div>
+        <div class="mod-sub">Canais digitais de acesso público e serviços consulares para a diáspora</div>
+      </div>
     </div>
+    <span class="mod-count">4 telas</span>
   </div>
-  <div class="grid grid-4">
 
+  <div class="grid g4">
+
+    <!-- A1 Portal Embaixada -->
     <a href="A1_portal_embaixada.html" class="card" target="_blank">
-      <div class="card-thumb thumb-A1">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="104" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="26" width="60" height="24" rx="2" stroke="white" stroke-width="1.5"/><rect x="74" y="26" width="38" height="24" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="8" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="34" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="60" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/><rect x="86" y="56" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">A1</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-A1 acc-blue">
+        <div class="t-badge">A1</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="360" height="28" fill="rgba(13,24,37,0.9)"/>
+          <rect x="10" y="9" width="40" height="10" rx="2" fill="#D9A21B" opacity="0.8"/>
+          <rect x="220" y="9" width="30" height="10" rx="3" fill="rgba(255,255,255,0.15)"/>
+          <rect x="255" y="9" width="30" height="10" rx="3" fill="rgba(255,255,255,0.15)"/>
+          <rect x="290" y="9" width="30" height="10" rx="3" fill="rgba(255,255,255,0.15)"/>
+          <rect x="330" y="7" width="24" height="14" rx="3" fill="#D9A21B" opacity="0.9"/>
+          <rect x="0" y="28" width="360" height="72" fill="rgba(22,38,61,0.6)"/>
+          <rect x="20" y="42" width="120" height="14" rx="2" fill="rgba(255,255,255,0.8)"/>
+          <rect x="20" y="61" width="80" height="8" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="20" y="74" width="50" height="14" rx="3" fill="#D9A21B"/>
+          <rect x="10" y="108" width="78" height="50" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="18" y="116" width="20" height="20" rx="10" fill="rgba(217,162,27,0.3)"/>
+          <rect x="18" y="140" width="50" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="18" y="150" width="35" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="96" y="108" width="78" height="50" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="104" y="116" width="20" height="20" rx="10" fill="rgba(96,165,250,0.3)"/>
+          <rect x="104" y="140" width="50" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="104" y="150" width="35" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="182" y="108" width="78" height="50" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="190" y="116" width="20" height="20" rx="10" fill="rgba(52,211,153,0.3)"/>
+          <rect x="190" y="140" width="50" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="190" y="150" width="35" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="268" y="108" width="82" height="50" rx="4" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="276" y="116" width="20" height="20" rx="10" fill="rgba(249,115,22,0.3)"/>
+          <rect x="276" y="140" width="50" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="276" y="150" width="35" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <line x1="180" y1="28" x2="180" y2="100" stroke="rgba(217,162,27,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="90" y="24" font-size="7" fill="rgba(217,162,27,0.7)" font-family="Inter,sans-serif" text-anchor="middle">Lisboa</text>
+          <text x="270" y="24" font-size="7" fill="rgba(217,162,27,0.7)" font-family="Inter,sans-serif" text-anchor="middle">Pequim</text>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Portal Público da Embaixada</div>
-        <div class="card-desc">Homepage da Embaixada em Lisboa com painel de comparação mostrando o mesmo padrão no posto de Pequim.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Passaportes · Vistos · Registo Civil</span>
-          <span class="card-tag tag-green">Padrão replicável</span>
+        <div class="card-desc">Homepage com painel de comparação Lisboa / Pequim. Passaportes, vistos e registo civil num padrão replicável.</div>
+        <div class="tags">
+          <span class="tag tag-n">Passaportes · Vistos</span>
+          <span class="tag tag-v">Padrão replicável</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- A2 Agendamento -->
     <a href="A2_agendamento_assistente.html" class="card" target="_blank">
-      <div class="card-thumb thumb-A2">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="54" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="14" y="18" width="42" height="8" rx="2" fill="white" opacity="0.2"/><rect x="14" y="30" width="30" height="8" rx="2" fill="white" opacity="0.2"/><rect x="26" y="42" width="30" height="8" rx="2" fill="#D9A21B" opacity="0.4"/><rect x="68" y="8" width="44" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="74" y="18" width="32" height="32" rx="2" stroke="white" stroke-width="1" opacity="0.4"/><rect x="74" y="56" width="32" height="8" rx="2" fill="#D9A21B" opacity="0.4"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">A2</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-A2 acc-gold">
+        <div class="t-badge">A2</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="160" height="200" fill="rgba(13,24,37,0.8)"/>
+          <rect x="10" y="12" width="60" height="8" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="10" y="24" width="40" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="10" y="38" width="120" height="30" rx="6" fill="rgba(217,162,27,0.15)" stroke="rgba(217,162,27,0.3)" stroke-width="1"/>
+          <rect x="18" y="46" width="90" height="5" rx="2" fill="rgba(217,162,27,0.7)"/>
+          <rect x="18" y="55" width="70" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="30" y="76" width="120" height="20" rx="6" fill="rgba(255,255,255,0.08)"/>
+          <rect x="38" y="83" width="80" height="5" rx="2" fill="rgba(255,255,255,0.45)"/>
+          <rect x="10" y="104" width="130" height="40" rx="6" fill="rgba(217,162,27,0.15)" stroke="rgba(217,162,27,0.3)" stroke-width="1"/>
+          <rect x="18" y="112" width="95" height="5" rx="2" fill="rgba(217,162,27,0.7)"/>
+          <rect x="18" y="121" width="70" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="18" y="130" width="50" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="10" y="178" width="130" height="16" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <rect x="18" y="184" width="60" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+          <rect x="160" y="0" width="200" height="200" fill="rgba(22,38,61,0.5)"/>
+          <rect x="168" y="12" width="80" height="8" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="168" y="28" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="196" y="28" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="224" y="28" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="252" y="28" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="280" y="28" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="168" y="48" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="196" y="48" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="224" y="48" width="24" height="16" rx="3" fill="#D9A21B" opacity="0.85"/>
+          <rect x="252" y="48" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="280" y="48" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="168" y="68" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="196" y="68" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="224" y="68" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="252" y="68" width="24" height="16" rx="3" fill="rgba(46,125,79,0.5)"/>
+          <rect x="280" y="68" width="24" height="16" rx="3" fill="rgba(255,255,255,0.08)"/>
+          <rect x="168" y="100" width="184" height="16" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="175" y="106" width="50" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="168" y="120" width="184" height="16" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="175" y="126" width="50" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="168" y="140" width="184" height="16" rx="3" fill="rgba(217,162,27,0.15)" stroke="rgba(217,162,27,0.4)" stroke-width="1"/>
+          <rect x="175" y="146" width="50" height="4" rx="2" fill="rgba(217,162,27,0.8)"/>
+          <rect x="168" y="168" width="184" height="22" rx="5" fill="#D9A21B"/>
+          <rect x="208" y="175" width="100" height="8" rx="2" fill="rgba(13,24,37,0.7)"/>
+          <line x1="160" y1="0" x2="160" y2="200" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Agendamento com Assistente Virtual</div>
         <div class="card-desc">Assistente MIREX guia o cidadão pelo agendamento e valida documentos; confirmação com QR de senha.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">24/7 · Pré-validação documental</span>
+        <div class="tags">
+          <span class="tag tag-n">24/7</span>
+          <span class="tag tag-n">Pré-validação documental</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- A3 App Móvel -->
     <a href="A3_app_movel.html" class="card" target="_blank">
-      <div class="card-thumb thumb-A3">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="16" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="49" y="4" width="22" height="72" rx="4" stroke="white" stroke-width="1.5"/><rect x="82" y="4" width="22" height="72" rx="4" stroke="#ef4444" stroke-width="1.5"/><rect x="20" y="20" width="14" height="6" rx="1" fill="white" opacity="0.2"/><rect x="20" y="30" width="14" height="6" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="53" y="20" width="14" height="20" rx="2" stroke="white" stroke-width="1" opacity="0.3"/><rect x="86" y="16" width="14" height="8" rx="2" fill="#ef4444" opacity="0.5"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">A3</div>
-        <div class="card-format">App Móvel · 3 ecrãs</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-A3 acc-blue">
+        <div class="t-badge">A3</div>
+        <div class="t-fmt">App Móvel · 3 ecrãs</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="14" width="74" height="130" rx="10" fill="#0D1825" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <rect x="36" y="24" width="62" height="110" rx="4" fill="rgba(22,38,61,0.9)"/>
+          <rect x="44" y="30" width="30" height="14" rx="7" fill="#D9A21B" opacity="0.7"/>
+          <rect x="44" y="50" width="46" height="6" rx="3" fill="rgba(255,255,255,0.7)"/>
+          <rect x="44" y="60" width="34" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="44" y="72" width="60" height="22" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="50" y="78" width="20" height="10" rx="2" fill="rgba(217,162,27,0.3)"/>
+          <rect x="74" y="79" width="22" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="74" y="85" width="14" height="3" rx="2" fill="rgba(255,255,255,0.2)"/>
+          <rect x="44" y="98" width="60" height="22" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="50" y="104" width="20" height="10" rx="2" fill="rgba(96,165,250,0.3)"/>
+          <rect x="74" y="105" width="22" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="74" y="111" width="14" height="3" rx="2" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="67" cy="140" r="2.5" fill="#D9A21B"/>
+          <circle cx="78" cy="140" r="2" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="89" cy="140" r="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="143" y="14" width="74" height="130" rx="10" fill="#0D1825" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <rect x="149" y="24" width="62" height="110" rx="4" fill="rgba(22,38,61,0.9)"/>
+          <rect x="157" y="30" width="46" height="7" rx="3" fill="rgba(255,255,255,0.6)"/>
+          <rect x="157" y="42" width="46" height="20" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <rect x="162" y="49" width="30" height="6" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="157" y="66" width="46" height="20" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <rect x="162" y="73" width="30" height="6" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="157" y="90" width="46" height="20" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <rect x="162" y="97" width="30" height="6" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="157" y="118" width="46" height="12" rx="4" fill="#D9A21B"/>
+          <rect x="170" y="122" width="22" height="4" rx="2" fill="rgba(13,24,37,0.7)"/>
+          <rect x="256" y="14" width="74" height="130" rx="10" fill="#0D1825" stroke="rgba(220,38,38,0.5)" stroke-width="1.5"/>
+          <rect x="262" y="24" width="62" height="110" rx="4" fill="rgba(30,10,10,0.95)"/>
+          <rect x="270" y="30" width="46" height="22" rx="4" fill="rgba(220,38,38,0.15)" stroke="rgba(220,38,38,0.4)" stroke-width="1"/>
+          <circle cx="283" cy="41" r="6" fill="rgba(220,38,38,0.8)"/>
+          <rect x="294" y="37" width="16" height="4" rx="2" fill="rgba(255,255,255,0.7)"/>
+          <rect x="294" y="43" width="10" height="3" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="270" y="58" width="46" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="270" y="68" width="34" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="270" y="80" width="46" height="34" rx="4" fill="rgba(220,38,38,0.08)" stroke="rgba(220,38,38,0.3)" stroke-width="1"/>
+          <rect x="276" y="86" width="34" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="276" y="94" width="28" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="276" y="102" width="22" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+          <rect x="270" y="122" width="46" height="10" rx="4" fill="rgba(220,38,38,0.7)"/>
+          <text x="67" y="160" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" text-anchor="middle">Início</text>
+          <text x="180" y="160" font-size="8" fill="rgba(255,255,255,0.35)" font-family="Inter,sans-serif" text-anchor="middle">Registo Diáspora</text>
+          <text x="293" y="160" font-size="8" fill="rgba(220,38,38,0.6)" font-family="Inter,sans-serif" text-anchor="middle">Alerta de Crise</text>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">App Móvel do Cidadão — 3 ecrãs</div>
-        <div class="card-desc">Início, registo de diáspora e alerta de crise em tema escuro. 3 smartphones lado a lado sobre fundo navy.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">iOS · Android</span>
-          <span class="card-tag tag-dark">Dados residem em Angola</span>
+        <div class="card-desc">Início, registo de diáspora e alerta de crise em tema escuro. 3 smartphones lado a lado.</div>
+        <div class="tags">
+          <span class="tag tag-n">iOS · Android</span>
+          <span class="tag tag-n">Dados residem em Angola</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- C2 QR -->
     <a href="C2_verificacao_qr.html" class="card" target="_blank">
-      <div class="card-thumb thumb-C2">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="28" y="12" width="20" height="56" rx="4" stroke="white" stroke-width="1.5"/><rect x="34" y="30" width="8" height="8" rx="1" stroke="#2E7D4F" stroke-width="1.2"/><rect x="54" y="8" width="58" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="60" y="20" width="20" height="20" rx="2" stroke="white" stroke-width="1" opacity="0.4"/><rect x="84" y="20" width="22" height="8" rx="1" fill="#2E7D4F" opacity="0.3"/><rect x="84" y="32" width="22" height="4" rx="1" fill="white" opacity="0.2"/><rect x="84" y="40" width="16" height="4" rx="1" fill="white" opacity="0.15"/><path d="M57 54l4 4 8-8" stroke="#2E7D4F" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">C2</div>
-        <div class="card-format">Mobile + Desktop</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-C2 acc-green">
+        <div class="t-badge">C2</div>
+        <div class="t-fmt">Mobile + Desktop</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="90" height="160" rx="12" fill="#0a1826" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <rect x="28" y="32" width="74" height="136" rx="5" fill="rgba(10,24,38,0.95)"/>
+          <rect x="38" y="50" width="54" height="54" rx="4" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.6)" stroke-width="1.5"/>
+          <path d="M38 62 L38 50 L50 50" stroke="#34d399" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M80 50 L92 50 L92 62" stroke="#34d399" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M38 92 L38 104 L50 104" stroke="#34d399" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M80 104 L92 104 L92 92" stroke="#34d399" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <rect x="44" y="56" width="12" height="12" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="62" y="56" width="5" height="5" rx="1" fill="rgba(255,255,255,0.2)"/>
+          <rect x="70" y="56" width="5" height="5" rx="1" fill="rgba(255,255,255,0.2)"/>
+          <rect x="74" y="56" width="12" height="12" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="44" y="88" width="12" height="12" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="74" y="88" width="12" height="12" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="36" y="114" width="58" height="8" rx="3" fill="rgba(52,211,153,0.1)"/>
+          <rect x="50" y="116" width="30" height="4" rx="2" fill="rgba(52,211,153,0.6)"/>
+          <rect x="38" y="130" width="54" height="24" rx="5" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)" stroke-width="1"/>
+          <rect x="46" y="137" width="38" height="4" rx="2" fill="rgba(52,211,153,0.7)"/>
+          <rect x="50" y="145" width="30" height="3" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="130" y="10" width="220" height="180" rx="8" fill="rgba(13,24,37,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <rect x="130" y="10" width="220" height="22" rx="8" fill="rgba(22,38,61,0.9)"/>
+          <rect x="138" y="18" width="60" height="6" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="140" y="42" width="200" height="40" rx="6" fill="rgba(21,128,61,0.15)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <circle cx="158" cy="62" r="9" fill="rgba(52,211,153,0.2)" stroke="#34d399" stroke-width="1.5"/>
+          <path d="M153 62 L157 66 L163 58" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <rect x="172" y="55" width="80" height="6" rx="2" fill="rgba(52,211,153,0.8)"/>
+          <rect x="172" y="65" width="60" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <rect x="140" y="92" width="90" height="6" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="140" y="102" width="60" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="140" y="114" width="90" height="6" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="140" y="124" width="60" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="140" y="136" width="90" height="6" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="140" y="146" width="60" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="140" y="162" width="200" height="16" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <rect x="148" y="167" width="120" height="5" rx="2" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="292" cy="118" r="14" fill="none" stroke="rgba(52,211,153,0.3)" stroke-width="2"/>
+          <circle cx="292" cy="118" r="6" fill="rgba(52,211,153,0.4)"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Verificação de Documento por QR</div>
-        <div class="card-desc">Mobile e desktop lado a lado. Autenticidade de certidão verificada com cadeia criptográfica e assinatura digital.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-green">Documento autêntico verificável</span>
+        <div class="card-desc">Mobile e desktop lado a lado. Autenticidade de certidão com cadeia criptográfica e assinatura digital.</div>
+        <div class="tags">
+          <span class="tag tag-v">Documento autêntico verificável</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
   </div>
 
-  <!-- MÓDULO 2 -->
-  <div class="module-header">
-    <span class="module-num m2">2</span>
-    <div>
-      <div class="module-title">Backoffice</div>
-      <div class="module-sub">4 telas · Ferramentas de gestão interna para diplomatas e chefes de posto</div>
+  <!-- MÓDULO B -->
+  <div class="mod-head">
+    <div class="mod-head-left">
+      <span class="mod-pill mod-pill-B">B</span>
+      <div>
+        <div class="mod-title">Backoffice Diplomático</div>
+        <div class="mod-sub">Ferramentas de gestão interna para diplomatas e chefes de posto</div>
+      </div>
     </div>
+    <span class="mod-count">4 telas</span>
   </div>
-  <div class="grid grid-4">
 
+  <div class="grid g4">
+
+    <!-- B1 Dashboard -->
     <a href="B1_dashboard_executivo.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B1">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="64" y="8" width="48" height="30" rx="2" stroke="white" stroke-width="1.5"/><rect x="8" y="44" width="60" height="28" rx="2" stroke="white" stroke-width="1.5"/><rect x="76" y="44" width="36" height="28" rx="2" stroke="white" stroke-width="1.5"/><path d="M20 72 L30 58 L40 62 L50 48 L60 54" stroke="#D9A21B" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B1</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-B1 acc-gold">
+        <div class="t-badge">B1</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="360" height="26" fill="rgba(13,24,37,0.9)"/>
+          <rect x="10" y="8" width="50" height="10" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="290" y="8" width="60" height="10" rx="3" fill="#D9A21B" opacity="0.8"/>
+          <rect x="8" y="34" width="80" height="36" rx="5" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="16" y="40" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="16" y="50" width="28" height="12" rx="2" fill="rgba(217,162,27,0.8)"/>
+          <rect x="96" y="34" width="80" height="36" rx="5" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="104" y="40" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="104" y="50" width="28" height="12" rx="2" fill="rgba(96,165,250,0.8)"/>
+          <rect x="184" y="34" width="80" height="36" rx="5" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="192" y="40" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="192" y="50" width="28" height="12" rx="2" fill="rgba(52,211,153,0.8)"/>
+          <rect x="272" y="34" width="80" height="36" rx="5" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <rect x="280" y="40" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="280" y="50" width="28" height="12" rx="2" fill="rgba(249,115,22,0.8)"/>
+          <rect x="8" y="78" width="222" height="116" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <ellipse cx="119" cy="136" rx="40" ry="45" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <circle cx="90" cy="148" r="3" fill="#D9A21B" opacity="0.9"/>
+          <circle cx="119" cy="110" r="3" fill="#D9A21B" opacity="0.9"/>
+          <circle cx="145" cy="155" r="3" fill="#22c55e" opacity="0.9"/>
+          <circle cx="60" cy="130" r="3" fill="#22c55e" opacity="0.9"/>
+          <circle cx="200" cy="100" r="3" fill="#22c55e" opacity="0.9"/>
+          <circle cx="30" cy="115" r="2.5" fill="#22c55e" opacity="0.7"/>
+          <circle cx="175" cy="140" r="2.5" fill="#D9A21B" opacity="0.7"/>
+          <circle cx="55" cy="105" r="2" fill="#f59e0b" opacity="0.7"/>
+          <rect x="16" y="84" width="50" height="6" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="238" y="78" width="114" height="116" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <rect x="246" y="84" width="50" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <polyline points="246,168 260,152 274,158 288,140 302,145 316,128 330,132 344,118" stroke="#D9A21B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M246,168 260,152 274,158 288,140 302,145 316,128 330,132 344,118 344,180 246,180 Z" fill="rgba(217,162,27,0.08)"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Dashboard Executivo do Ministro</div>
-        <div class="card-desc">Visão da rede inteira num ecrã: 4 KPIs, mapa mundial com 52 postos, gráfico de tendência e painel de alertas.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-gold">Tela principal da apresentação</span>
+        <div class="card-desc">4 KPIs, mapa mundial com 52 postos, gráfico de tendência e painel de alertas críticos.</div>
+        <div class="tags">
+          <span class="tag tag-g">★ Tela principal da apresentação</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- B2 Fila -->
     <a href="B2_fila_processos.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B2">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><line x1="8" y1="20" x2="82" y2="20" stroke="white" stroke-width="1" opacity="0.4"/><line x1="8" y1="32" x2="82" y2="32" stroke="white" stroke-width="1" opacity="0.3"/><line x1="8" y1="44" x2="82" y2="44" stroke="white" stroke-width="1" opacity="0.3"/><rect x="50" y="26" width="24" height="4" rx="2" fill="#D9A21B" opacity="0.5"/><rect x="50" y="38" width="16" height="4" rx="2" fill="white" opacity="0.3"/><rect x="88" y="8" width="24" height="64" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B2</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-B2 acc-blue">
+        <div class="t-badge">B2</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="360" height="24" fill="rgba(13,24,37,0.9)"/>
+          <rect x="10" y="7" width="60" height="10" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="0" y="24" width="260" height="176" fill="rgba(15,28,44,0.8)"/>
+          <rect x="0" y="24" width="260" height="22" fill="rgba(22,38,61,0.9)"/>
+          <rect x="10" y="30" width="30" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="60" y="30" width="50" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="130" y="30" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="190" y="30" width="40" height="6" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="0" y="46" width="260" height="26" fill="rgba(220,38,38,0.06)"/>
+          <rect x="0" y="46" width="3" height="26" fill="#dc2626"/>
+          <rect x="10" y="53" width="36" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="60" y="53" width="55" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="130" y="51" width="50" height="9" rx="3" fill="rgba(220,38,38,0.3)"/>
+          <rect x="137" y="54" width="36" height="3" rx="1" fill="rgba(220,38,38,0.8)"/>
+          <rect x="0" y="74" width="3" height="26" fill="#D9A21B"/>
+          <rect x="10" y="81" width="36" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="60" y="81" width="55" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="130" y="79" width="70" height="9" rx="3" fill="rgba(217,162,27,0.2)"/>
+          <rect x="137" y="82" width="56" height="3" rx="1" fill="rgba(217,162,27,0.8)"/>
+          <rect x="0" y="102" width="260" height="26" fill="rgba(22,38,61,0.4)"/>
+          <rect x="0" y="102" width="3" height="26" fill="#22c55e"/>
+          <rect x="10" y="109" width="36" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="60" y="109" width="55" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <rect x="130" y="107" width="86" height="9" rx="3" fill="rgba(34,197,94,0.15)"/>
+          <rect x="137" y="110" width="72" height="3" rx="1" fill="rgba(34,197,94,0.8)"/>
+          <rect x="0" y="130" width="3" height="26" fill="#D9A21B"/>
+          <rect x="10" y="137" width="36" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="130" y="135" width="40" height="9" rx="3" fill="rgba(217,162,27,0.2)"/>
+          <rect x="137" y="138" width="26" height="3" rx="1" fill="rgba(217,162,27,0.8)"/>
+          <rect x="0" y="158" width="260" height="26" fill="rgba(22,38,61,0.4)"/>
+          <rect x="0" y="158" width="3" height="26" fill="#dc2626"/>
+          <rect x="10" y="165" width="36" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="130" y="163" width="20" height="9" rx="3" fill="rgba(220,38,38,0.3)"/>
+          <rect x="137" y="166" width="6" height="3" rx="1" fill="rgba(220,38,38,0.8)"/>
+          <rect x="260" y="24" width="100" height="176" fill="rgba(10,20,32,0.9)"/>
+          <rect x="268" y="32" width="50" height="7" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <circle cx="276" cy="62" r="4" fill="#D9A21B"/>
+          <line x1="276" y1="66" x2="276" y2="82" stroke="rgba(217,162,27,0.3)" stroke-width="1.5"/>
+          <rect x="285" y="58" width="60" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="276" cy="86" r="4" fill="#60a5fa"/>
+          <line x1="276" y1="90" x2="276" y2="106" stroke="rgba(96,165,250,0.3)" stroke-width="1.5"/>
+          <rect x="285" y="82" width="60" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="276" cy="110" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <line x1="276" y1="114" x2="276" y2="130" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <rect x="285" y="106" width="60" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Fila de Processos do Chefe de Posto</div>
-        <div class="card-desc">Tabela de processos com barras de SLA coloridas e painel lateral com linha temporal de workflow completo.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Sistema Consular · Adis Abeba</span>
+        <div class="card-desc">Tabela de processos com barras de SLA coloridas e painel lateral com linha temporal de workflow.</div>
+        <div class="tags">
+          <span class="tag tag-n">Sistema Consular · Adis Abeba</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- B3 Expediente -->
     <a href="B3_expediente_diplomatico.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B3">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="36" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="12" y="16" width="28" height="6" rx="1" fill="white" opacity="0.2"/><rect x="12" y="26" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="12" y="34" width="22" height="4" rx="1" fill="white" opacity="0.15"/><rect x="50" y="8" width="62" height="64" rx="2" stroke="white" stroke-width="1.5"/><rect x="55" y="14" width="52" height="4" rx="1" fill="#D9A21B" opacity="0.3"/><rect x="55" y="24" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="31" width="52" height="3" rx="1" fill="white" opacity="0.15"/><rect x="55" y="38" width="52" height="3" rx="1" fill="white" opacity="0.1"/><rect x="55" y="62" width="52" height="4" rx="1" fill="rgba(46,125,79,0.5)"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B3</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-B3 acc-gold">
+        <div class="t-badge">B3</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="130" height="200" fill="rgba(13,24,37,0.9)"/>
+          <rect x="8" y="10" width="60" height="8" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="8" y="36" width="114" height="28" rx="4" fill="rgba(217,162,27,0.1)" stroke="rgba(217,162,27,0.35)" stroke-width="1"/>
+          <rect x="14" y="41" width="60" height="5" rx="2" fill="rgba(255,255,255,0.65)"/>
+          <rect x="14" y="50" width="36" height="4" rx="2" fill="rgba(217,162,27,0.7)"/>
+          <rect x="100" y="41" width="16" height="5" rx="2" fill="rgba(220,38,38,0.7)"/>
+          <rect x="8" y="68" width="114" height="28" rx="4" fill="rgba(255,255,255,0.04)"/>
+          <rect x="14" y="73" width="60" height="5" rx="2" fill="rgba(255,255,255,0.45)"/>
+          <rect x="100" y="73" width="16" height="5" rx="2" fill="rgba(249,115,22,0.7)"/>
+          <rect x="8" y="100" width="114" height="28" rx="4" fill="rgba(255,255,255,0.04)"/>
+          <rect x="14" y="105" width="60" height="5" rx="2" fill="rgba(255,255,255,0.45)"/>
+          <rect x="100" y="105" width="16" height="5" rx="2" fill="rgba(96,165,250,0.7)"/>
+          <rect x="8" y="132" width="114" height="28" rx="4" fill="rgba(255,255,255,0.04)"/>
+          <rect x="14" y="137" width="60" height="5" rx="2" fill="rgba(255,255,255,0.45)"/>
+          <rect x="100" y="137" width="16" height="5" rx="2" fill="rgba(249,115,22,0.7)"/>
+          <rect x="130" y="0" width="230" height="200" fill="rgba(18,32,46,0.8)"/>
+          <rect x="130" y="0" width="230" height="28" fill="rgba(22,38,61,0.9)"/>
+          <rect x="140" y="8" width="80" height="8" rx="2" fill="rgba(217,162,27,0.8)"/>
+          <rect x="148" y="36" width="80" height="18" rx="3" fill="rgba(220,38,38,0.12)" stroke="rgba(220,38,38,0.5)" stroke-width="1.5"/>
+          <rect x="160" y="42" width="56" height="6" rx="2" fill="rgba(220,38,38,0.7)"/>
+          <rect x="148" y="62" width="190" height="5" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="148" y="72" width="170" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="148" y="82" width="190" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="148" y="92" width="140" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="148" y="108" width="190" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="148" y="118" width="190" height="5" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="148" y="148" width="200" height="40" rx="4" fill="rgba(22,38,61,0.7)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <path d="M156 168 Q175 158 190 168 Q205 178 220 165" stroke="rgba(52,211,153,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <rect x="232" y="152" width="108" height="16" rx="3" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.25)" stroke-width="1"/>
+          <rect x="238" y="157" width="70" height="4" rx="2" fill="rgba(52,211,153,0.5)"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Expediente Diplomático Cifrado</div>
-        <div class="card-desc">Lista de expedientes classificados (RESTRITO/CONFIDENCIAL) com viewer de documento, assinatura digital e trilha de auditoria.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Cifrado fim-a-fim</span>
+        <div class="card-desc">Expedientes RESTRITO/CONFIDENCIAL com viewer de documento, assinatura digital e trilha de auditoria.</div>
+        <div class="tags">
+          <span class="tag tag-n">Cifrado fim-a-fim</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
+    <!-- B4 Mapa -->
     <a href="B4_mapa_corpo_diplomatico.html" class="card" target="_blank">
-      <div class="card-thumb thumb-B4">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="8" y="8" width="74" height="64" rx="2" stroke="white" stroke-width="1.5"/><circle cx="30" cy="35" r="5" fill="#2E7D4F" opacity="0.6"/><circle cx="55" cy="25" r="4" fill="#2E7D4F" opacity="0.6"/><circle cx="70" cy="40" r="6" fill="#2E7D4F" opacity="0.6"/><circle cx="45" cy="50" r="3" fill="#C77D0A" opacity="0.8"/><rect x="88" y="8" width="24" height="30" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><rect x="88" y="44" width="24" height="28" rx="2" stroke="white" stroke-width="1.5" opacity="0.5"/><circle cx="100" cy="56" r="6" fill="white" opacity="0.1"/></svg>
-        <div class="thumb-overlay"></div>
-        <div class="card-id">B4</div>
-        <div class="card-format">Desktop 16:9</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-B4 acc-green">
+        <div class="t-badge">B4</div>
+        <div class="t-fmt">Desktop 16:9</div>
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="360" height="24" fill="rgba(13,24,37,0.9)"/>
+          <rect x="10" y="8" width="70" height="8" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="0" y="24" width="250" height="176" fill="rgba(12,24,36,0.8)"/>
+          <ellipse cx="72" cy="110" rx="35" ry="48" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <ellipse cx="130" cy="100" rx="50" ry="42" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <ellipse cx="200" cy="115" rx="38" ry="30" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <circle cx="72" cy="115" r="5" fill="#22c55e" opacity="0.9"/>
+          <circle cx="60" cy="98" r="4" fill="#22c55e" opacity="0.8"/>
+          <circle cx="90" cy="105" r="4" fill="#22c55e" opacity="0.8"/>
+          <circle cx="110" cy="88" r="4" fill="#D9A21B" opacity="0.9"/>
+          <circle cx="145" cy="78" r="4" fill="#22c55e" opacity="0.8"/>
+          <circle cx="178" cy="95" r="5" fill="#22c55e" opacity="0.8"/>
+          <circle cx="225" cy="125" r="4" fill="#f59e0b" opacity="0.8"/>
+          <circle cx="72" cy="115" r="10" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.4)" stroke-width="1"/>
+          <rect x="250" y="24" width="110" height="176" fill="rgba(10,20,34,0.95)"/>
+          <rect x="258" y="32" width="94" height="36" rx="5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <circle cx="276" cy="50" r="12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <rect x="292" y="43" width="50" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="292" y="52" width="36" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="258" y="85" width="90" height="5" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="258" y="105" width="80" height="5" rx="2" fill="rgba(255,255,255,0.5)"/>
+          <rect x="258" y="142" width="94" height="22" rx="4" fill="rgba(249,115,22,0.12)" stroke="rgba(249,115,22,0.4)" stroke-width="1"/>
+          <rect x="264" y="148" width="80" height="4" rx="2" fill="rgba(249,115,22,0.8)"/>
+        </svg>
       </div>
       <div class="card-body">
         <div class="card-name">Mapa do Corpo Diplomático</div>
-        <div class="card-desc">Mapa mundial com efectivos por posto, alertas de mandato a expirar em 90 dias e perfil detalhado do diplomata seleccionado.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">800+ efectivos · 52 postos</span>
+        <div class="card-desc">Efectivos por posto, alertas de mandato a expirar em 90 dias e perfil detalhado do diplomata seleccionado.</div>
+        <div class="tags">
+          <span class="tag tag-n">800+ efectivos · 52 postos</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
   </div>
 
-  <!-- MÓDULO 3 -->
-  <div class="module-header">
-    <span class="module-num m3">3</span>
-    <div>
-      <div class="module-title">Centro de Operações</div>
-      <div class="module-sub">1 tela · Monitorização de segurança e gestão de incidentes 24/7</div>
+  <!-- MÓDULO C -->
+  <div class="mod-head">
+    <div class="mod-head-left">
+      <span class="mod-pill mod-pill-C">C</span>
+      <div>
+        <div class="mod-title">Centro de Operações de Segurança</div>
+        <div class="mod-sub">Monitorização de segurança e gestão de incidentes 24/7</div>
+      </div>
     </div>
+    <span class="mod-count">1 tela</span>
   </div>
-  <div class="grid grid-1">
 
+  <div class="grid g2" style="max-width:660px">
+
+    <!-- C1 SOC -->
     <a href="C1_painel_soc.html" class="card" target="_blank">
-      <div class="card-thumb thumb-C1">
-        <svg class="thumb-icon" width="120" height="80" viewBox="0 0 120 80" fill="none"><circle cx="60" cy="40" r="20" stroke="#22c55e" stroke-width="1" opacity="0.5"/><circle cx="60" cy="40" r="4" fill="#22c55e" opacity="0.8"/><circle cx="30" cy="25" r="3" fill="#22c55e" opacity="0.6"/><circle cx="90" cy="20" r="3" fill="#22c55e" opacity="0.6"/><circle cx="20" cy="55" r="3" fill="#f59e0b" opacity="0.8"/><circle cx="95" cy="55" r="3" fill="#ef4444" opacity="0.8"/><line x1="60" y1="40" x2="30" y2="25" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="90" y2="20" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/><line x1="60" y1="40" x2="95" y2="55" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.5"/><rect x="8" y="60" width="50" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><rect x="64" y="60" width="48" height="14" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>
-        <div class="thumb-overlay" style="background:linear-gradient(135deg,rgba(6,13,20,0.7) 0%,transparent 60%)"></div>
-        <div class="card-id">C1</div>
-        <div class="card-format">Desktop · Tema escuro</div>
-        <div class="open-btn">Abrir →</div>
+      <div class="thumb bg-C1 acc-green" style="height:230px">
+        <div class="t-badge">C1</div>
+        <div class="t-fmt">Desktop · Tema escuro</div>
+        <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="360" height="26" fill="rgba(3,7,9,0.95)"/>
+          <rect x="10" y="8" width="60" height="10" rx="2" fill="rgba(34,197,94,0.6)"/>
+          <rect x="290" y="7" width="60" height="12" rx="3" fill="rgba(220,38,38,0.2)" stroke="rgba(220,38,38,0.5)" stroke-width="1"/>
+          <rect x="298" y="11" width="44" height="4" rx="2" fill="rgba(220,38,38,0.8)"/>
+          <rect x="0" y="26" width="360" height="32" fill="rgba(5,12,20,0.9)"/>
+          <rect x="10" y="32" width="60" height="8" rx="2" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+          <rect x="80" y="32" width="60" height="8" rx="2" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+          <rect x="150" y="32" width="60" height="8" rx="2" fill="rgba(249,115,22,0.15)" stroke="rgba(249,115,22,0.3)" stroke-width="1"/>
+          <rect x="220" y="32" width="60" height="8" rx="2" fill="rgba(220,38,38,0.15)" stroke="rgba(220,38,38,0.3)" stroke-width="1"/>
+          <rect x="290" y="32" width="62" height="8" rx="2" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+          <rect x="0" y="58" width="230" height="172" fill="rgba(4,10,16,0.9)"/>
+          <circle cx="115" cy="140" r="16" fill="rgba(34,197,94,0.12)" stroke="#22c55e" stroke-width="2"/>
+          <circle cx="115" cy="140" r="6" fill="#22c55e" opacity="0.9"/>
+          <circle cx="115" cy="140" r="36" fill="none" stroke="rgba(34,197,94,0.12)" stroke-width="1" stroke-dasharray="4,3"/>
+          <circle cx="65" cy="100" r="6" fill="rgba(34,197,94,0.8)"/>
+          <line x1="115" y1="140" x2="65" y2="100" stroke="rgba(34,197,94,0.35)" stroke-width="1.5"/>
+          <circle cx="165" cy="95" r="6" fill="rgba(34,197,94,0.8)"/>
+          <line x1="115" y1="140" x2="165" y2="95" stroke="rgba(34,197,94,0.35)" stroke-width="1.5"/>
+          <circle cx="185" cy="155" r="6" fill="rgba(34,197,94,0.8)"/>
+          <line x1="115" y1="140" x2="185" y2="155" stroke="rgba(34,197,94,0.35)" stroke-width="1.5"/>
+          <circle cx="50" cy="162" r="6" fill="rgba(249,115,22,0.8)"/>
+          <line x1="115" y1="140" x2="50" y2="162" stroke="rgba(249,115,22,0.35)" stroke-width="1.5"/>
+          <circle cx="190" cy="105" r="8" fill="rgba(220,38,38,0.2)" stroke="#dc2626" stroke-width="2"/>
+          <circle cx="190" cy="105" r="3" fill="#dc2626" opacity="0.9"/>
+          <line x1="115" y1="140" x2="190" y2="105" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+          <circle cx="30" cy="85" r="4" fill="rgba(34,197,94,0.5)"/>
+          <line x1="65" y1="100" x2="30" y2="85" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+          <circle cx="205" cy="78" r="4" fill="rgba(34,197,94,0.5)"/>
+          <line x1="165" y1="95" x2="205" y2="78" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+          <rect x="230" y="58" width="130" height="172" fill="rgba(6,14,22,0.95)"/>
+          <rect x="238" y="66" width="90" height="7" rx="2" fill="rgba(220,38,38,0.7)"/>
+          <rect x="238" y="78" width="114" height="50" rx="4" fill="rgba(220,38,38,0.07)" stroke="rgba(220,38,38,0.3)" stroke-width="1"/>
+          <rect x="246" y="85" width="70" height="5" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="246" y="94" width="90" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="246" y="102" width="80" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+          <rect x="238" y="136" width="114" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+          <rect x="238" y="136" width="90" height="6" rx="3" fill="rgba(220,38,38,0.7)"/>
+          <rect x="238" y="158" width="4" height="4" rx="1" fill="#dc2626"/>
+          <rect x="246" y="158" width="90" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="238" y="168" width="4" height="4" rx="1" fill="#f59e0b"/>
+          <rect x="246" y="168" width="80" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="238" y="178" width="4" height="4" rx="1" fill="#22c55e"/>
+          <rect x="246" y="178" width="70" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="238" y="194" width="114" height="26" rx="4" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+          <rect x="246" y="200" width="50" height="4" rx="2" fill="rgba(34,197,94,0.6)"/>
+          <rect x="246" y="208" width="80" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+        </svg>
       </div>
       <div class="card-body">
-        <div class="card-name">Painel SOC — Centro de Operações</div>
-        <div class="card-desc">Tema escuro. Topologia de rede 24/7, investigação de incidente de spear-phishing em curso, métricas de segurança e turno activo.</div>
-        <div class="card-footer">
-          <span class="card-tag tag-dark">Retaguarda 24/7</span>
-          <span class="card-tag tag-dark">Competência MIREX</span>
+        <div class="card-name">Painel SOC — Centro de Operações de Segurança</div>
+        <div class="card-desc">Tema escuro. Topologia de rede 24/7, investigação de spear-phishing em curso, métricas de segurança e turno activo.</div>
+        <div class="tags">
+          <span class="tag tag-n">Retaguarda 24/7</span>
+          <span class="tag tag-n">Competência MIREX</span>
         </div>
+      </div>
+      <div class="card-btn">
+        Abrir página
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
 
-  </div>
-
-  <!-- Instructions -->
-  <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-top:8px">
-    <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px">Instruções de pré-visualização</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-      <div>
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Para ver em 1920×1080 (apresentação real)</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.8">
-          1. Abrir a tela num tab novo<br>
-          2. Chrome/Edge: <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">F12</kbd> → ícone de dispositivo <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">Ctrl+Shift+M</kbd><br>
-          3. Definir dimensão: <strong>1920 × 1080</strong> e escala 1×<br>
-          4. Para captura: <strong>Ctrl+Shift+P</strong> → "Capture full size screenshot"
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Para exportar PNG 4K (3840×2160)</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.8">
-          1. Abrir DevTools → <kbd style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:11px">Ctrl+Shift+P</kbd><br>
-          2. Escrever "device pixel" → definir <strong>Device Pixel Ratio = 2</strong><br>
-          3. Definir viewport para <strong>1920×1080</strong><br>
-          4. Capturar → resultado: PNG 3840×2160
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
