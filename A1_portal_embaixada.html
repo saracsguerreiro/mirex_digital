@@ -2,396 +2,695 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>A1 · Portal Público — Embaixada de Angola em Lisboa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Público · Embaixada de Angola em Lisboa · MIREX Digital</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy: #16263D;
-  --navy700: #23405F;
-  --surface: #F5F8FB;
-  --card: #FFFFFF;
+  --navy2: #23405F;
   --gold: #D9A21B;
+  --gold2: #f0c030;
+  --surface: #F5F7FA;
+  --card: #fff;
   --ink: #1A2433;
   --muted: #5A6B80;
   --line: #D7E1EC;
-  --verde: #2E7D4F;
-  --ambar: #C77D0A;
+  --green: #2E7D4F;
   --red: #B5121B;
+  --amber: #C77D0A;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family:'Inter',sans-serif; background:var(--surface); color:var(--ink); }
 
-/* ── LAYOUT CANVAS ── */
-.canvas { width: 1920px; height: 1080px; display: flex; flex-direction: column; overflow: hidden; }
-
-/* ── INSTITUTIONAL HEADER ── */
-.inst-hdr {
-  background: var(--navy); height: 56px; flex-shrink: 0;
-  display: flex; align-items: center; padding: 0 40px; gap: 20px;
+/* ── NAV ── */
+.nav {
+  background: var(--navy);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
-.inst-hdr-center {
-  margin-left: auto; margin-right: auto;
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 40px; height: 60px;
   display: flex; align-items: center; gap: 32px;
 }
-.hdr-nav-item {
-  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.70);
-  padding: 6px 0; cursor: pointer; border-bottom: 2px solid transparent;
+.nav-logo { height: 36px; flex-shrink:0; }
+.nav-links { display:flex; gap:4px; margin-left: 16px; }
+.nav-link {
+  font-size:13px; font-weight:500; color:rgba(255,255,255,0.6);
+  padding:6px 12px; border-radius:6px; cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition: color .15s, background .15s;
+  text-decoration:none;
 }
-.hdr-nav-item.on {
-  color: #fff; font-weight: 700; border-bottom-color: var(--gold);
+.nav-link:hover { color:#fff; background:rgba(255,255,255,0.08); }
+.nav-link.active { color:#fff; font-weight:700; border-bottom-color:var(--gold); }
+.nav-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.lang { font-size:12px; color:rgba(255,255,255,0.4); display:flex; gap:5px; }
+.lang span.on { color:var(--gold); font-weight:700; cursor:pointer; }
+.lang span { cursor:pointer; }
+.lang span:hover { color:rgba(255,255,255,0.7); }
+.btn-agenda {
+  background:var(--gold); color:var(--navy);
+  font-size:13px; font-weight:700; padding:9px 20px;
+  border-radius:9999px; cursor:pointer; border:none;
+  white-space:nowrap; transition:background .15s;
 }
-.inst-hdr-r { margin-left: auto; display: flex; align-items: center; gap: 14px; }
-.lang-sel { display: flex; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.45); }
-.lang-sel .on { color: var(--gold); font-weight: 700; }
-.search-btn {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.20);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.appt-btn {
-  background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 700;
-  padding: 8px 20px; border-radius: 9999px; cursor: pointer; white-space: nowrap;
-}
+.btn-agenda:hover { background:var(--gold2); }
 
-/* ── HERO BANNER ── */
+/* ── HERO ── */
 .hero {
-  height: 360px; flex-shrink: 0; position: relative; overflow: hidden;
-  background: var(--navy);
+  background:var(--navy);
+  min-height: 440px;
+  position:relative; overflow:hidden;
+  display:flex; align-items:center;
 }
-.hero-img {
-  position: absolute; inset: 0;
+.hero-bg {
+  position:absolute; inset:0;
   background: url('imagem_banner.png') center/cover no-repeat;
 }
 .hero-fade {
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(22,38,61,0.88) 0%, rgba(22,38,61,0.55) 40%, rgba(22,38,61,0.05) 65%, transparent 100%);
+  position:absolute; inset:0;
+  background:linear-gradient(to right, rgba(22,38,61,0.92) 0%, rgba(22,38,61,0.7) 45%, rgba(22,38,61,0.1) 75%, transparent 100%);
 }
 .hero-content {
-  position: relative; z-index: 2;
-  padding: 48px 80px; max-width: 680px; height: 100%;
-  display: flex; flex-direction: column; justify-content: center;
+  position:relative; z-index:2;
+  max-width:1280px; margin:0 auto; width:100%;
+  padding:60px 40px;
 }
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(217,162,27,0.18); border: 1px solid rgba(217,162,27,0.35);
-  border-radius: 9999px; padding: 5px 14px;
-  font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.8px;
-  text-transform: uppercase; margin-bottom: 18px; width: fit-content;
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(217,162,27,0.18); border:1px solid rgba(217,162,27,0.35);
+  border-radius:9999px; padding:5px 14px;
+  font-size:11px; font-weight:700; color:var(--gold);
+  letter-spacing:.8px; text-transform:uppercase; margin-bottom:20px;
 }
 .hero-title {
-  font-size: 38px; font-weight: 800; color: #fff; line-height: 1.2;
-  margin-bottom: 12px; letter-spacing: -0.5px;
+  font-size:42px; font-weight:800; color:#fff;
+  line-height:1.15; letter-spacing:-.5px; margin-bottom:14px;
 }
 .hero-sub {
-  font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.65;
-  margin-bottom: 28px; max-width: 520px;
+  font-size:16px; color:rgba(255,255,255,0.68);
+  line-height:1.65; max-width:520px; margin-bottom:32px;
 }
-.hero-actions { display: flex; gap: 12px; align-items: center; }
-.btn-gold {
-  background: var(--gold); color: var(--navy);
-  font-size: 14px; font-weight: 700; padding: 13px 28px; border-radius: 9999px;
-  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--gold); color:var(--navy);
+  font-size:14px; font-weight:700; padding:13px 28px;
+  border-radius:9999px; cursor:pointer; border:none;
+  transition:background .15s, transform .15s;
 }
-.btn-ghost-w {
-  background: transparent; color: #fff;
-  font-size: 14px; font-weight: 600; padding: 13px 24px; border-radius: 9999px;
-  border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px;
+.btn-primary:hover { background:var(--gold2); transform:translateY(-1px); }
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  background:transparent; color:#fff;
+  font-size:14px; font-weight:600; padding:13px 24px;
+  border-radius:9999px; cursor:pointer;
+  border:1.5px solid rgba(255,255,255,0.35);
+  transition:border-color .15s, background .15s;
 }
-.hero-status {
-  position: absolute; bottom: 22px; right: 40px; z-index: 2;
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.12); backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.22); border-radius: 9999px;
-  padding: 7px 16px; font-size: 12px; color: #fff; font-weight: 500;
+.btn-outline:hover { border-color:rgba(255,255,255,0.65); background:rgba(255,255,255,0.06); }
+.hero-pill {
+  position:absolute; bottom:24px; right:40px; z-index:2;
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.10); backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.2); border-radius:9999px;
+  padding:7px 16px; font-size:12px; color:#fff; font-weight:500;
 }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6adc96; flex-shrink: 0; }
+.live-dot {
+  width:7px; height:7px; border-radius:50%; background:#4ade80; flex-shrink:0;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.3)} }
 
-/* ── CAROUSEL STRIP ── */
-.carousel-strip {
-  background: var(--card); border-bottom: 1px solid var(--line); flex-shrink: 0; padding: 22px 0 18px;
+/* ── SERVIÇOS STRIP ── */
+.services-strip {
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  padding:28px 0 20px;
 }
-.carousel-top {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 72px; margin-bottom: 16px;
+.strip-inner { max-width:1280px; margin:0 auto; padding:0 40px; }
+.strip-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:18px;
 }
-.strip-label {
-  font-size: 11px; font-weight: 700; color: var(--muted);
-  letter-spacing: 1px; text-transform: uppercase;
+.strip-title { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+.car-arrows { display:flex; gap:8px; }
+.car-btn {
+  width:34px; height:34px; border-radius:50%;
+  border:1px solid var(--line); background:var(--surface);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .12s, border-color .12s;
 }
-.car-arrows { display: flex; gap: 8px; }
-.car-arrow {
-  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line);
-  background: var(--surface); color: var(--muted);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-}
+.car-btn:hover { background:var(--navy); border-color:var(--navy); }
+.car-btn:hover svg path { stroke:#fff; }
+
+.carousel-viewport { overflow:hidden; }
 .carousel-track {
-  display: flex; gap: 14px; padding: 0 72px; overflow: hidden;
+  display:flex; gap:14px;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
 }
-.car-card {
-  flex-shrink: 0; width: 284px; border-radius: 16px; padding: 24px 26px;
-  background: var(--navy); border: 1px solid transparent;
-  display: flex; flex-direction: column; gap: 12px; cursor: pointer;
-  transition: background .15s, border-color .15s;
+.service-card {
+  flex-shrink:0; width:220px;
+  background:var(--navy); border-radius:14px;
+  padding:22px 20px; cursor:pointer;
+  border:2px solid transparent;
+  transition:background .2s, border-color .2s, transform .2s;
+  display:flex; flex-direction:column; gap:10px;
 }
-.car-card.active {
-  background: var(--gold); border-color: transparent;
+.service-card:hover { transform:translateY(-3px); border-color:rgba(255,255,255,0.15); }
+.service-card.active { background:var(--gold); }
+.sc-ico {
+  width:40px; height:40px; border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  display:flex; align-items:center; justify-content:center;
 }
-.car-ico {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center;
+.service-card.active .sc-ico { background:rgba(22,38,61,0.18); }
+.sc-name { font-size:17px; font-weight:800; color:#fff; line-height:1.2; }
+.service-card.active .sc-name { color:var(--navy); }
+.sc-sub { font-size:11px; color:rgba(255,255,255,0.5); }
+.service-card.active .sc-sub { color:rgba(22,38,61,0.6); }
+.sc-link {
+  display:inline-flex; align-items:center; gap:5px; margin-top:auto;
+  font-size:11px; font-weight:700; color:rgba(255,255,255,0.5);
 }
-.car-card.active .car-ico { background: rgba(22,38,61,0.16); }
-.car-title { font-size: 18px; font-weight: 800; color: rgba(255,255,255,0.92); line-height: 1.2; }
-.car-card.active .car-title { color: var(--navy); }
-.car-sub { font-size: 12px; color: rgba(255,255,255,0.50); font-weight: 500; }
-.car-card.active .car-sub { color: rgba(22,38,61,0.65); }
-.car-cta {
-  display: inline-flex; align-items: center; gap: 5px; margin-top: auto;
-  font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.55);
-}
-.car-card.active .car-cta { color: var(--navy); }
-.car-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
-.car-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
-.car-dot.on { background: var(--navy); width: 20px; border-radius: 3px; }
+.service-card.active .sc-link { color:var(--navy); }
 
-/* ── CONTENT ROW ── */
-.content-row {
-  flex: 1; display: flex; overflow: hidden;
-  padding: 24px 80px 20px; gap: 24px; background: var(--surface);
-}
+.car-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; }
+.dot { width:6px; height:6px; border-radius:50%; background:var(--line); cursor:pointer; transition:all .2s; }
+.dot.on { background:var(--navy); width:20px; border-radius:3px; }
 
-/* ── NEWS ── */
-.news-col { flex: 1; min-width: 0; }
-.col-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
-.news-list { display: flex; flex-direction: column; gap: 10px; }
+/* ── MAIN CONTENT ── */
+.main { max-width:1280px; margin:0 auto; padding:36px 40px 60px; }
+.main-grid { display:grid; grid-template-columns:1fr 380px; gap:28px; }
+
+/* NEWS */
+.section-title { font-size:17px; font-weight:700; color:var(--ink); margin-bottom:16px; }
+.news-list { display:flex; flex-direction:column; gap:12px; }
 .news-card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start;
-  cursor: pointer; transition: box-shadow .12s;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px; display:flex; gap:14px;
+  cursor:pointer; transition:box-shadow .15s, transform .15s;
 }
-.news-card:hover { box-shadow: 0 4px 14px rgba(22,38,61,0.08); }
+.news-card:hover { box-shadow:0 6px 20px rgba(22,38,61,0.1); transform:translateY(-2px); }
 .news-date {
-  background: var(--navy); border-radius: 8px;
-  padding: 8px 10px; text-align: center; flex-shrink: 0;
+  flex-shrink:0; background:var(--navy); border-radius:8px;
+  padding:8px 10px; text-align:center; align-self:flex-start;
 }
-.news-day { font-size: 20px; font-weight: 800; color: var(--gold); display: block; line-height: 1; }
-.news-mon { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.55); text-transform: uppercase; }
-.news-cat { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
-.news-title { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 3px; }
-.news-excerpt { font-size: 12px; color: var(--muted); line-height: 1.45; }
+.nd-day { font-size:22px; font-weight:800; color:var(--gold); line-height:1; display:block; }
+.nd-mon { font-size:10px; font-weight:600; color:rgba(255,255,255,0.5); text-transform:uppercase; }
+.news-cat { font-size:10px; font-weight:700; color:var(--navy); letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
+.news-title { font-size:14px; font-weight:700; color:var(--ink); line-height:1.4; margin-bottom:4px; }
+.news-excerpt { font-size:12px; color:var(--muted); line-height:1.5; }
+.news-more { display:none; font-size:12px; color:var(--muted); line-height:1.6; margin-top:6px; padding-top:6px; border-top:1px solid var(--line); }
+.news-card.open .news-more { display:block; }
 
-/* ── SIDE PANELS ── */
-.side-col { width: 420px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px; }
-
-.info-card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  overflow: hidden;
-}
+/* SIDE */
+.side-col { display:flex; flex-direction:column; gap:16px; }
+.info-card { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
 .ic-head {
-  background: var(--navy); padding: 14px 20px;
-  display: flex; align-items: center; gap: 10px;
+  background:var(--navy); padding:14px 18px;
+  display:flex; align-items:center; gap:10px;
 }
-.ic-head-title { font-size: 14px; font-weight: 700; color: #fff; }
-.ic-head-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top:1px; }
-.ic-body { padding: 16px 20px; }
+.ic-head-title { font-size:14px; font-weight:700; color:#fff; }
+.ic-head-sub { font-size:11px; color:rgba(255,255,255,0.45); margin-top:1px; }
+.ic-body { padding:14px 18px; }
+.info-row {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:10px 0; border-bottom:1px solid var(--line);
+}
+.info-row:last-child { border-bottom:none; padding-bottom:0; }
+.info-ico {
+  width:32px; height:32px; border-radius:8px;
+  background:rgba(22,38,61,0.05);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.info-lbl { font-size:11px; color:var(--muted); }
+.info-val { font-size:13px; font-weight:700; color:var(--ink); margin-top:2px; }
+.info-val.red { color:var(--red); }
 
-.sched-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 0; border-bottom: 1px solid var(--line);
-}
-.sched-row:last-child { border-bottom: none; }
-.sched-ico {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: rgba(22,38,61,0.05); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.sched-lbl { font-size: 11px; color: var(--muted); }
-.sched-val { font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 2px; }
-
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .stat-box {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-  padding: 13px 14px; text-align: center;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:12px 14px; text-align:center;
 }
-.stat-num { font-size: 26px; font-weight: 800; color: var(--navy); }
-.stat-lbl { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+.stat-num { font-size:24px; font-weight:800; color:var(--navy); }
+.stat-lbl { font-size:11px; color:var(--muted); margin-top:2px; }
+
+/* agenda quick-widget */
+.agenda-widget {
+  background:var(--navy); border-radius:14px;
+  padding:20px; overflow:hidden;
+}
+.aw-title { font-size:14px; font-weight:700; color:#fff; margin-bottom:4px; }
+.aw-sub { font-size:11px; color:rgba(255,255,255,0.45); margin-bottom:16px; }
+.aw-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.aw-chip {
+  font-size:11px; font-weight:600; padding:5px 11px;
+  border-radius:9999px; border:1px solid rgba(255,255,255,0.18);
+  color:rgba(255,255,255,0.7); cursor:pointer; background:transparent;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.aw-chip:hover, .aw-chip.on { background:var(--gold); border-color:var(--gold); color:var(--navy); }
+.aw-btn {
+  width:100%; padding:12px; border-radius:10px;
+  background:var(--gold); color:var(--navy);
+  font-size:13px; font-weight:700; border:none; cursor:pointer;
+  transition:background .15s;
+}
+.aw-btn:hover { background:var(--gold2); }
+
+/* ── MAP SECTION ── */
+.map-section { background:var(--card); border-top:1px solid var(--line); padding:40px 0; }
+.map-inner { max-width:1280px; margin:0 auto; padding:0 40px; display:grid; grid-template-columns:1fr 400px; gap:40px; align-items:center; }
+.map-embed {
+  border-radius:16px; overflow:hidden; height:260px;
+  border:1px solid var(--line);
+  background:#e0e8f0;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.map-placeholder {
+  background:linear-gradient(135deg, #e0e8f4 0%, #c8d8e8 100%);
+  inset:0; position:absolute;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+}
+.map-pin { font-size:40px; }
+.map-addr { font-size:13px; color:var(--muted); text-align:center; }
+.map-info { display:flex; flex-direction:column; gap:16px; }
+.mi-title { font-size:22px; font-weight:800; color:var(--ink); }
+.mi-body { font-size:14px; color:var(--muted); line-height:1.7; }
+.mi-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.mi-tag { font-size:11px; font-weight:600; padding:4px 10px; border-radius:9999px; background:rgba(22,38,61,0.07); color:var(--navy); }
+.btn-dir {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--navy); color:#fff;
+  font-size:13px; font-weight:700; padding:11px 22px;
+  border-radius:9999px; cursor:pointer; border:none; margin-top:4px;
+  transition:background .15s; width:fit-content;
+}
+.btn-dir:hover { background:var(--navy2); }
 
 /* ── FOOTER ── */
-.portal-footer {
-  background: var(--navy); flex-shrink: 0;
-  padding: 16px 80px; display: flex; align-items: center; gap: 40px;
+footer {
+  background:var(--navy); padding:28px 40px;
 }
-.footer-item { display: flex; gap: 10px; align-items: flex-start; }
-.footer-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.40); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; }
-.footer-val { font-size: 12px; color: rgba(255,255,255,0.70); line-height: 1.6; }
-.footer-div { width: 1px; height: 36px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
-.footer-r { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.footer-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6adc96; font-weight: 600; }
-.footer-copy { font-size: 11px; color: rgba(255,255,255,0.30); }
-</style>
-<style>
-html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
-body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
-#_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
-#_back{position:fixed!important;bottom:22px!important;right:22px!important;z-index:9999!important;display:flex!important;align-items:center!important;gap:7px!important;background:rgba(22,38,61,0.92)!important;border:1px solid rgba(255,255,255,0.14)!important;border-radius:9999px!important;padding:9px 18px!important;text-decoration:none!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-size:13px!important;font-weight:600!important;box-shadow:0 4px 20px rgba(0,0,0,.35)!important}
+.footer-inner {
+  max-width:1280px; margin:0 auto;
+  display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+}
+.footer-logo { height:28px; opacity:.8; }
+.footer-sep { width:1px; height:32px; background:rgba(255,255,255,0.12); }
+.footer-item { }
+.fi-label { font-size:10px; font-weight:700; color:rgba(255,255,255,0.38); text-transform:uppercase; letter-spacing:.6px; margin-bottom:3px; }
+.fi-val { font-size:12px; color:rgba(255,255,255,0.65); line-height:1.5; }
+.footer-right { margin-left:auto; text-align:right; }
+.fr-status { font-size:12px; color:#4ade80; font-weight:600; display:flex; align-items:center; gap:6px; justify-content:flex-end; }
+.fr-copy { font-size:11px; color:rgba(255,255,255,0.28); margin-top:4px; }
+
+/* back btn */
+.back-btn {
+  position:fixed; bottom:24px; right:24px; z-index:200;
+  display:flex; align-items:center; gap:7px;
+  background:rgba(22,38,61,0.92); border:1px solid rgba(255,255,255,0.14);
+  border-radius:9999px; padding:9px 18px;
+  color:#fff; font-size:13px; font-weight:600;
+  text-decoration:none; box-shadow:0 4px 20px rgba(0,0,0,.35);
+  transition:background .15s;
+}
+.back-btn:hover { background:var(--navy2); }
+
+/* ══════════════════════════
+   MODAL DE AGENDAMENTO
+══════════════════════════ */
+.modal-backdrop {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(10,20,35,0.7); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.modal-backdrop.open { opacity:1; pointer-events:all; }
+
+.modal {
+  background:#fff; border-radius:20px;
+  width:100%; max-width:560px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+  overflow:hidden;
+  transform:translateY(20px); transition:transform .25s;
+}
+.modal-backdrop.open .modal { transform:translateY(0); }
+
+.modal-head {
+  background:var(--navy); padding:22px 28px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.mh-title { font-size:16px; font-weight:700; color:#fff; }
+.mh-close {
+  width:32px; height:32px; border-radius:50%;
+  background:rgba(255,255,255,0.12); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.7); font-size:18px; line-height:1;
+  transition:background .12s;
+}
+.mh-close:hover { background:rgba(255,255,255,0.22); color:#fff; }
+
+/* steps progress */
+.modal-steps {
+  display:flex; align-items:center;
+  padding:16px 28px 0; gap:0;
+  background:#fff;
+}
+.ms-step {
+  display:flex; flex-direction:column; align-items:center; flex:1;
+  position:relative;
+}
+.ms-step::after {
+  content:''; position:absolute;
+  top:14px; left:50%; width:100%; height:2px;
+  background:var(--line);
+}
+.ms-step:last-child::after { display:none; }
+.ms-step.done::after, .ms-step.active::after { background:var(--gold); }
+.ms-circle {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--line); color:var(--muted);
+  font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  z-index:1; transition:background .2s, color .2s;
+}
+.ms-step.active .ms-circle { background:var(--gold); color:var(--navy); }
+.ms-step.done .ms-circle { background:var(--navy); color:#fff; }
+.ms-label { font-size:9px; font-weight:600; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+.ms-step.active .ms-label { color:var(--navy); font-weight:700; }
+.ms-step.done .ms-label { color:var(--navy); }
+
+/* step content */
+.modal-body { padding:24px 28px 28px; }
+.step-pane { display:none; }
+.step-pane.active { display:block; }
+
+/* STEP 1 — serviço */
+.s1-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+.s1-card {
+  border:2px solid var(--line); border-radius:12px; padding:14px;
+  cursor:pointer; transition:border-color .15s, background .15s;
+  display:flex; flex-direction:column; gap:6px;
+}
+.s1-card:hover { border-color:var(--navy); }
+.s1-card.on { border-color:var(--gold); background:rgba(217,162,27,0.05); }
+.s1-ico { font-size:22px; }
+.s1-name { font-size:13px; font-weight:700; color:var(--ink); }
+.s1-sub { font-size:11px; color:var(--muted); }
+
+/* STEP 2 — calendário */
+.cal-month { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.cal-month-label { font-size:14px; font-weight:700; color:var(--ink); }
+.cal-nav { width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:var(--surface); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .12s; }
+.cal-nav:hover { background:var(--navy); }
+.cal-nav:hover path { stroke:#fff; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+.cal-day-hdr { font-size:10px; font-weight:700; color:var(--muted); text-align:center; padding:4px 0; text-transform:uppercase; }
+.cal-day {
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-radius:8px; font-size:13px; font-weight:500; color:var(--ink);
+  cursor:pointer; transition:background .12s, color .12s;
+}
+.cal-day:hover:not(.empty):not(.past) { background:rgba(22,38,61,0.08); }
+.cal-day.empty { cursor:default; }
+.cal-day.past { color:var(--line); cursor:default; }
+.cal-day.today { font-weight:800; color:var(--navy); }
+.cal-day.avail { color:var(--green); font-weight:700; }
+.cal-day.selected { background:var(--gold) !important; color:var(--navy) !important; font-weight:800; }
+
+/* STEP 3 — hora */
+.time-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:4px; }
+.time-slot {
+  padding:10px 6px; border-radius:10px;
+  border:1.5px solid var(--line); text-align:center;
+  font-size:13px; font-weight:600; color:var(--ink);
+  cursor:pointer; transition:border-color .15s, background .15s, color .15s;
+}
+.time-slot:hover { border-color:var(--navy); }
+.time-slot.busy { color:var(--line); cursor:default; text-decoration:line-through; }
+.time-slot.on { background:var(--navy); border-color:var(--navy); color:#fff; }
+.time-info { font-size:11px; color:var(--muted); margin-top:12px; display:flex; align-items:center; gap:6px; }
+
+/* STEP 4 — dados */
+.form-group { margin-bottom:14px; }
+.form-label { font-size:12px; font-weight:600; color:var(--ink); margin-bottom:5px; display:block; }
+.form-input {
+  width:100%; padding:10px 14px;
+  border:1.5px solid var(--line); border-radius:10px;
+  font-size:13px; color:var(--ink); font-family:inherit;
+  background:#fff; outline:none;
+  transition:border-color .15s;
+}
+.form-input:focus { border-color:var(--gold); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+/* STEP 5 — confirmação */
+.confirm-box {
+  background:linear-gradient(135deg, var(--navy) 0%, #1d3a5c 100%);
+  border-radius:14px; padding:28px; text-align:center; margin-bottom:16px;
+}
+.confirm-check {
+  width:56px; height:56px; border-radius:50%;
+  background:rgba(74,222,128,0.15); border:2px solid #4ade80;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 14px;
+}
+.confirm-num { font-size:22px; font-weight:800; color:var(--gold); margin:6px 0 4px; }
+.confirm-sub { font-size:12px; color:rgba(255,255,255,0.5); }
+.qr-box {
+  width:110px; height:110px; margin:16px auto 0;
+  background:#fff; border-radius:8px; padding:8px;
+  display:flex; align-items:center; justify-content:center;
+}
+.confirm-detail {
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:12px; padding:16px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.cd-row { display:flex; justify-content:space-between; align-items:center; }
+.cd-label { font-size:12px; color:var(--muted); }
+.cd-value { font-size:13px; font-weight:700; color:var(--ink); }
+.cd-sep { height:1px; background:var(--line); }
+
+/* modal footer */
+.modal-foot {
+  padding:0 28px 24px;
+  display:flex; gap:10px;
+}
+.btn-back {
+  flex:1; padding:13px; border-radius:10px;
+  border:1.5px solid var(--line); background:#fff;
+  font-size:13px; font-weight:700; color:var(--muted);
+  cursor:pointer; transition:border-color .15s, color .15s;
+}
+.btn-back:hover { border-color:var(--navy); color:var(--navy); }
+.btn-next {
+  flex:2; padding:13px; border-radius:10px;
+  background:var(--navy); color:#fff;
+  font-size:13px; font-weight:700; border:none;
+  cursor:pointer; transition:background .15s;
+}
+.btn-next:hover { background:var(--navy2); }
+.btn-next:disabled { background:var(--line); color:var(--muted); cursor:not-allowed; }
+.btn-done {
+  flex:1; padding:13px; border-radius:10px;
+  background:var(--gold); color:var(--navy);
+  font-size:13px; font-weight:700; border:none;
+  cursor:pointer; transition:background .15s;
+}
+.btn-done:hover { background:var(--gold2); }
+
+/* step title */
+.step-heading { font-size:14px; font-weight:700; color:var(--ink); margin-bottom:14px; }
+
+@media(max-width:768px){
+  .nav-links { display:none; }
+  .hero-title { font-size:30px; }
+  .main-grid { grid-template-columns:1fr; }
+  .map-inner { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .time-grid { grid-template-columns:repeat(3,1fr); }
+}
 </style>
 </head>
-<body><div id="_vp">
-<div class="canvas">
+<body>
 
-  <!-- ── INSTITUTIONAL HEADER ── -->
-  <header class="inst-hdr">
-    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="36" style="display:block;flex-shrink:0">
-    <div class="inst-hdr-center">
-      <span class="hdr-nav-item on">Serviços Consulares</span>
-      <span class="hdr-nav-item">Vistos</span>
-      <span class="hdr-nav-item">Passaportes</span>
-      <span class="hdr-nav-item">Registo Civil</span>
-      <span class="hdr-nav-item">Notícias</span>
-      <span class="hdr-nav-item">Contactos</span>
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" class="nav-logo">
+    <div class="nav-links">
+      <a class="nav-link active" href="#servicos">Serviços Consulares</a>
+      <a class="nav-link" href="#noticias">Notícias</a>
+      <a class="nav-link" href="#contactos">Contactos</a>
+      <a class="nav-link" href="#localizacao">Localização</a>
     </div>
-    <div class="inst-hdr-r">
-      <div class="lang-sel">
-        <span class="on">PT</span><span>·</span><span>EN</span><span>·</span><span>FR</span>
-      </div>
-      <div class="search-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </div>
-      <div class="appt-btn">Marcar Atendimento</div>
-    </div>
-  </header>
-
-  <!-- ── HERO BANNER ── -->
-  <div class="hero">
-    <div class="hero-img"></div>
-    <div class="hero-fade"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="var(--gold)" opacity="0.8"/></svg>
-        Portal Oficial · Serviços Consulares
-      </div>
-      <div class="hero-title">Embaixada de Angola<br>em Lisboa</div>
-      <div class="hero-sub">Atendimento consular, vistos e registo de cidadãos angolanos residentes em Portugal e Espanha.</div>
-      <div class="hero-actions">
-        <div class="btn-gold">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.8"/><line x1="16" y1="2" x2="16" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="var(--navy)" stroke-width="1.8"/></svg>
-          Agendar atendimento online
-        </div>
-        <div class="btn-ghost-w">Verificar processo</div>
-      </div>
-    </div>
-    <div class="hero-status">
-      <div class="status-dot"></div>
-      Sistemas operacionais · Espera actual: 3 dias úteis
+    <div class="nav-right">
+      <div class="lang"><span class="on">PT</span><span>·</span><span>EN</span><span>·</span><span>FR</span></div>
+      <button class="btn-agenda" onclick="openModal()">Marcar Atendimento</button>
     </div>
   </div>
+</nav>
 
-  <!-- ── CAROUSEL STRIP ── -->
-  <div class="carousel-strip">
-    <div class="carousel-top">
-      <div class="strip-label">Serviços disponíveis</div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="8" height="8"><circle cx="4" cy="4" r="4" fill="var(--gold)"/></svg>
+      Portal Oficial · Serviços Consulares
+    </div>
+    <h1 class="hero-title">Embaixada de Angola<br>em Lisboa</h1>
+    <p class="hero-sub">Atendimento consular, vistos e registo de cidadãos angolanos residentes em Portugal e Espanha.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.8"/><line x1="16" y1="2" x2="16" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="var(--navy)" stroke-width="1.8"/></svg>
+        Agendar atendimento online
+      </button>
+      <button class="btn-outline">Verificar processo</button>
+    </div>
+  </div>
+  <div class="hero-pill">
+    <div class="live-dot"></div>
+    Sistemas operacionais · Espera actual: 3 dias úteis
+  </div>
+</section>
+
+<!-- ── SERVIÇOS ── -->
+<section class="services-strip" id="servicos">
+  <div class="strip-inner">
+    <div class="strip-header">
+      <span class="strip-title">Serviços disponíveis</span>
       <div class="car-arrows">
-        <div class="car-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="car-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <button class="car-btn" id="carPrev" onclick="carMove(-1)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="car-btn" id="carNext" onclick="carMove(1)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
-    <div class="carousel-track">
-
-      <div class="car-card active">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="var(--navy)" stroke-width="1.8"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="car-title">Passaportes.</div>
-        <div class="car-sub">Emissão · Renovação · 2.ª via</div>
-        <div class="car-cta">Agendar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carTrack">
+        <div class="service-card active" onclick="selectService(this,'Passaporte')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="var(--navy)" stroke-width="1.8"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="sc-name">Passaportes.</div>
+          <div class="sc-sub">Emissão · Renovação · 2.ª via</div>
+          <div class="sc-link">Agendar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Visto')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/></svg></div>
+          <div class="sc-name">Vistos.</div>
+          <div class="sc-sub">Turístico · Trabalho · Estudo</div>
+          <div class="sc-link">Requerer <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Registo Civil')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="sc-name">Registo Civil.</div>
+          <div class="sc-sub">Nascimento · Casamento · Óbito</div>
+          <div class="sc-link">Solicitar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Procuração')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M7 7h10M7 10.5h8M7 14h5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="sc-name">Procurações.</div>
+          <div class="sc-sub">Autenticação · Reconhecimento</div>
+          <div class="sc-link">Saber mais <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Legalização')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="sc-name">Legalizações.</div>
+          <div class="sc-sub">Apostilha · Tradução</div>
+          <div class="sc-link">Iniciar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'Assistência')">
+          <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="sc-name">Assistência.</div>
+          <div class="sc-sub">Apoio consular 24h</div>
+          <div class="sc-link">Contactar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        </div>
       </div>
-
-      <div class="car-card">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/></svg></div>
-        <div class="car-title">Vistos.</div>
-        <div class="car-sub">Turístico · Trabalho · Estudo</div>
-        <div class="car-cta">Requerer <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      </div>
-
-      <div class="car-card">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="car-title">Registo Civil.</div>
-        <div class="car-sub">Nascimento · Casamento · Óbito</div>
-        <div class="car-cta">Solicitar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      </div>
-
-      <div class="car-card">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><circle cx="12" cy="15" r="2" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/><path d="M7 7h10M7 10.5h8" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="car-title">Procurações.</div>
-        <div class="car-sub">Autenticação · Reconhecimento</div>
-        <div class="car-cta">Saber mais <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      </div>
-
-      <div class="car-card">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="car-title">Legalizações.</div>
-        <div class="car-sub">Apostilha · Tradução</div>
-        <div class="car-cta">Iniciar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      </div>
-
-      <div class="car-card" style="opacity:.6">
-        <div class="car-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="rgba(255,255,255,0.75)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div class="car-title">Assistência.</div>
-        <div class="car-sub">Apoio consular 24h</div>
-        <div class="car-cta">Contactar <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3.5L9 6l-2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      </div>
-
     </div>
-    <div class="car-dots">
-      <div class="car-dot on"></div>
-      <div class="car-dot"></div>
-      <div class="car-dot"></div>
-      <div class="car-dot"></div>
-      <div class="car-dot"></div>
-      <div class="car-dot"></div>
-    </div>
+    <div class="car-dots" id="carDots"></div>
   </div>
+</section>
 
-  <!-- ── CONTENT ROW ── -->
-  <div class="content-row">
+<!-- ── MAIN ── -->
+<main class="main">
+  <div class="main-grid">
 
-    <!-- News -->
-    <div class="news-col">
-      <div class="col-title">Notícias e Avisos</div>
+    <!-- Notícias -->
+    <div id="noticias">
+      <div class="section-title">Notícias e Avisos</div>
       <div class="news-list">
 
-        <div class="news-card">
-          <div class="news-date"><span class="news-day">07</span><span class="news-mon">Jul</span></div>
-          <div>
+        <div class="news-card" onclick="toggleNews(this)">
+          <div class="news-date"><span class="nd-day">07</span><span class="nd-mon">Jul</span></div>
+          <div style="flex:1">
             <div class="news-cat">Aviso Consular</div>
             <div class="news-title">Alteração do horário de atendimento durante o período de verão</div>
-            <div class="news-excerpt">De 15 de Julho a 31 de Agosto, o atendimento ao público decorrerá das 09h00 às 13h00. O sistema de agendamento online mantém-se disponível 24 horas.</div>
+            <div class="news-excerpt">De 15 de Julho a 31 de Agosto, o atendimento ao público decorrerá das 09h00 às 13h00.</div>
+            <div class="news-more">O sistema de agendamento online mantém-se disponível 24 horas por dia. Os cidadãos que já possuam agendamentos confirmados não necessitam de efectuar nova marcação. Em caso de dúvidas, contacte o consulado pelo endereço de correio electrónico ou linha geral.</div>
           </div>
         </div>
 
-        <div class="news-card">
-          <div class="news-date"><span class="news-day">02</span><span class="news-mon">Jul</span></div>
-          <div>
+        <div class="news-card" onclick="toggleNews(this)">
+          <div class="news-date"><span class="nd-day">02</span><span class="nd-mon">Jul</span></div>
+          <div style="flex:1">
             <div class="news-cat">Nota Informativa</div>
             <div class="news-title">Renovação de passaporte disponível integralmente online a partir de Agosto</div>
-            <div class="news-excerpt">A partir de 1 de Agosto de 2026, toda a submissão do processo de renovação pode ser iniciada no portal, sem deslocação presencial prévia.</div>
+            <div class="news-excerpt">A partir de 1 de Agosto de 2026, toda a submissão do processo de renovação pode ser iniciada no portal.</div>
+            <div class="news-more">Os requerentes deverão digitalizar os documentos necessários (passaporte atual, comprovativo de residência e fotografia) e submetê-los através do portal MIREX Digital. Após validação, será agendada apenas a deslocação para recolha biométrica, reduzindo o número total de visitas presenciais necessárias.</div>
           </div>
         </div>
 
-        <div class="news-card">
-          <div class="news-date"><span class="news-day">25</span><span class="news-mon">Jun</span></div>
-          <div>
+        <div class="news-card" onclick="toggleNews(this)">
+          <div class="news-date"><span class="nd-day">25</span><span class="nd-mon">Jun</span></div>
+          <div style="flex:1">
             <div class="news-cat">Comunicado</div>
             <div class="news-title">Lançamento da plataforma MIREX Digital — novo portal de serviços consulares</div>
-            <div class="news-excerpt">A plataforma MIREX Digital entra em operação em todas as embaixadas e consulados. O acesso é feito pelo portal oficial em mirex.gov.ao.</div>
+            <div class="news-excerpt">A plataforma MIREX Digital entra em operação em todas as embaixadas e consulados.</div>
+            <div class="news-more">O portal centraliza todos os serviços consulares, permite agendamento online, acompanhamento de processos em tempo real e verificação de documentos por QR. O acesso é feito em mirex.gov.ao. A implementação abrange 52 postos diplomáticos em todo o mundo, cobrindo mais de 800 efectivos.</div>
+          </div>
+        </div>
+
+        <div class="news-card" onclick="toggleNews(this)">
+          <div class="news-date"><span class="nd-day">18</span><span class="nd-mon">Jun</span></div>
+          <div style="flex:1">
+            <div class="news-cat">Aviso</div>
+            <div class="news-title">Prazo limite para regularização de documentos de identificação angolanos</div>
+            <div class="news-excerpt">Cidadãos com documentos expirados antes de Dezembro de 2025 dispõem de prazo alargado até 30 de Setembro.</div>
+            <div class="news-more">Ao abrigo de despacho ministerial, os cidadãos angolanos residentes no exterior com documentos vencidos até 31/12/2025 poderão regularizar a sua situação até 30 de Setembro de 2026 sem incidência de coimas. O processo é efectuado presencialmente, mediante agendamento prévio no portal.</div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Side panels -->
-    <div class="side-col">
+    <!-- Sidebar -->
+    <div class="side-col" id="contactos">
 
-      <!-- Horários e contactos -->
+      <!-- Agenda rápida -->
+      <div class="agenda-widget">
+        <div class="aw-title">Agendar atendimento</div>
+        <div class="aw-sub">Escolha o serviço e marque online</div>
+        <div class="aw-chips">
+          <span class="aw-chip on" onclick="chipSel(this,'Passaporte')">Passaporte</span>
+          <span class="aw-chip" onclick="chipSel(this,'Visto')">Visto</span>
+          <span class="aw-chip" onclick="chipSel(this,'Registo Civil')">Registo Civil</span>
+          <span class="aw-chip" onclick="chipSel(this,'Procuração')">Procuração</span>
+          <span class="aw-chip" onclick="chipSel(this,'Legalização')">Legalização</span>
+        </div>
+        <button class="aw-btn" onclick="openModalWithService()">Marcar agora →</button>
+      </div>
+
+      <!-- Horários -->
       <div class="info-card">
         <div class="ic-head">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="1.8"/><polyline points="12 6 12 12 16 14" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -401,21 +700,21 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
           </div>
         </div>
         <div class="ic-body">
-          <div class="sched-row">
-            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.6"/><line x1="3" y1="9" x2="21" y2="9" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
-            <div><div class="sched-lbl">Atendimento ao público</div><div class="sched-val">09h00 – 16h00 · Segunda a Sexta</div></div>
+          <div class="info-row">
+            <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--navy)" stroke-width="1.6"/><line x1="3" y1="9" x2="21" y2="9" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
+            <div><div class="info-lbl">Atendimento ao público</div><div class="info-val">09h00 – 16h00 · Seg a Sex</div></div>
           </div>
-          <div class="sched-row">
-            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <div><div class="sched-lbl">Linha consular geral</div><div class="sched-val">+351 21 797 8840</div></div>
+          <div class="info-row">
+            <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
+            <div><div class="info-lbl">Linha consular geral</div><div class="info-val">+351 21 797 8840</div></div>
           </div>
-          <div class="sched-row">
-            <div class="sched-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="var(--navy)" stroke-width="1.6"/><polyline points="22,6 12,13 2,6" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
-            <div><div class="sched-lbl">Correio electrónico</div><div class="sched-val">consulado.lisboa@mirex.gov.ao</div></div>
+          <div class="info-row">
+            <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="var(--navy)" stroke-width="1.6"/><polyline points="22,6 12,13 2,6" stroke="var(--navy)" stroke-width="1.6"/></svg></div>
+            <div><div class="info-lbl">Correio electrónico</div><div class="info-val">consulado.lisboa@mirex.gov.ao</div></div>
           </div>
-          <div class="sched-row" style="border:none">
-            <div class="sched-ico" style="background:rgba(181,18,27,0.06)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--red)" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="13" stroke="var(--red)" stroke-width="1.6"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="var(--red)" stroke-width="1.8"/></svg></div>
-            <div><div class="sched-lbl">Urgências consulares 24h</div><div class="sched-val" style="color:var(--red)">+351 91 234 5678</div></div>
+          <div class="info-row">
+            <div class="info-ico" style="background:rgba(181,18,27,0.06)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--red)" stroke-width="1.6"/><line x1="12" y1="9" x2="12" y2="13" stroke="var(--red)" stroke-width="1.6"/></svg></div>
+            <div><div class="info-lbl">Urgências consulares 24h</div><div class="info-val red">+351 91 234 5678</div></div>
           </div>
         </div>
       </div>
@@ -423,7 +722,7 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
       <!-- Stats -->
       <div class="info-card">
         <div class="ic-head">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17 6 23 6 23 12" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div>
             <div class="ic-head-title">Indicadores do Posto</div>
             <div class="ic-head-sub">Acumulado · 2026</div>
@@ -431,56 +730,479 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
         </div>
         <div class="ic-body">
           <div class="stat-grid">
-            <div class="stat-box"><div class="stat-num" style="color:var(--verde)">8.420</div><div class="stat-lbl">Vistos emitidos</div></div>
+            <div class="stat-box"><div class="stat-num" style="color:var(--green)">8.420</div><div class="stat-lbl">Vistos emitidos</div></div>
             <div class="stat-box"><div class="stat-num">3.210</div><div class="stat-lbl">Passaportes</div></div>
             <div class="stat-box"><div class="stat-num">5.170</div><div class="stat-lbl">Registo civil</div></div>
-            <div class="stat-box"><div class="stat-num" style="color:var(--ambar)">3 dias</div><div class="stat-lbl">Tempo médio SLA</div></div>
+            <div class="stat-box"><div class="stat-num" style="color:var(--amber)">3 dias</div><div class="stat-lbl">Tempo médio SLA</div></div>
           </div>
         </div>
       </div>
 
     </div>
   </div>
+</main>
 
-  <!-- ── FOOTER ── -->
-  <footer class="portal-footer">
-    <img src="mirex_logo_branco_amarelo.png" alt="MIREX" height="30" style="display:block;flex-shrink:0;opacity:.85">
-    <div class="footer-div"></div>
-    <div class="footer-item">
-      <div>
-        <div class="footer-label">Morada</div>
-        <div class="footer-val">Avenida de Berna, 33 · 1050-037 Lisboa</div>
+<!-- ── LOCALIZAÇÃO ── -->
+<section class="map-section" id="localizacao">
+  <div class="map-inner">
+    <div class="map-embed">
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+        <div class="map-addr">Avenida de Berna, 33<br>1050-037 Lisboa, Portugal</div>
       </div>
     </div>
-    <div class="footer-div"></div>
-    <div class="footer-item">
-      <div>
-        <div class="footer-label">Próximo encerramento</div>
-        <div class="footer-val">15 Jul 2026 · Dia Nacional de Angola</div>
+    <div class="map-info">
+      <div class="mi-title">Como chegar à Embaixada</div>
+      <div class="mi-body">A Embaixada de Angola em Lisboa está localizada na Avenida de Berna, próximo do Jardim das Laranjeiras. Facilmente acessível por metro (linha Amarela, Est. Entre Campos) e autocarros públicos.</div>
+      <div class="mi-tags">
+        <span class="mi-tag">🚇 Metro: Entre Campos</span>
+        <span class="mi-tag">🚌 Autocarro: 31, 55, 736</span>
+        <span class="mi-tag">🚗 Parque público próximo</span>
       </div>
+      <button class="btn-dir">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12l19-9-9 19-2-8-8-2z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Ver no Google Maps
+      </button>
     </div>
-    <div class="footer-div"></div>
-    <div class="footer-item">
-      <div>
-        <div class="footer-label">Cobertura consular</div>
-        <div class="footer-val">Portugal · Espanha · Andorra</div>
-      </div>
-    </div>
-    <div class="footer-r">
-      <div class="footer-status"><div class="status-dot"></div>Sistemas operacionais</div>
-      <div class="footer-copy">Protótipo conceptual · TIS · 2026 · MIREX Digital</div>
-    </div>
-  </footer>
+  </div>
+</section>
 
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <img src="mirex_logo_branco_amarelo.png" alt="MIREX" class="footer-logo">
+    <div class="footer-sep"></div>
+    <div class="footer-item">
+      <div class="fi-label">Morada</div>
+      <div class="fi-val">Av. de Berna, 33 · 1050-037 Lisboa</div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-item">
+      <div class="fi-label">Próximo encerramento</div>
+      <div class="fi-val">15 Jul 2026 · Dia Nacional de Angola</div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-item">
+      <div class="fi-label">Cobertura consular</div>
+      <div class="fi-val">Portugal · Espanha · Andorra</div>
+    </div>
+    <div class="footer-right">
+      <div class="fr-status"><div class="live-dot"></div>Sistemas operacionais</div>
+      <div class="fr-copy">Protótipo · TIS · 2026 · MIREX Digital</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── BACK BTN ── -->
+<a href="index.html" class="back-btn">
+  <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Voltar ao índice
+</a>
+
+<!-- ══════════════════════════
+     MODAL AGENDAMENTO
+══════════════════════════ -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)">
+  <div class="modal">
+
+    <div class="modal-head">
+      <div class="mh-title">Marcar Atendimento Consular</div>
+      <button class="mh-close" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Progress steps -->
+    <div class="modal-steps">
+      <div class="ms-step active" id="ms1"><div class="ms-circle">1</div><div class="ms-label">Serviço</div></div>
+      <div class="ms-step" id="ms2"><div class="ms-circle">2</div><div class="ms-label">Data</div></div>
+      <div class="ms-step" id="ms3"><div class="ms-circle">3</div><div class="ms-label">Hora</div></div>
+      <div class="ms-step" id="ms4"><div class="ms-circle">4</div><div class="ms-label">Dados</div></div>
+      <div class="ms-step" id="ms5"><div class="ms-circle">✓</div><div class="ms-label">Confirmação</div></div>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- PASSO 1 — escolher serviço -->
+      <div class="step-pane active" id="pane1">
+        <div class="step-heading">Qual o serviço pretendido?</div>
+        <div class="s1-grid">
+          <div class="s1-card on" onclick="pickService(this,'Passaporte')">
+            <div class="s1-ico">🛂</div>
+            <div class="s1-name">Passaporte</div>
+            <div class="s1-sub">Emissão · Renovação · 2.ª via</div>
+          </div>
+          <div class="s1-card" onclick="pickService(this,'Visto')">
+            <div class="s1-ico">🌍</div>
+            <div class="s1-name">Visto</div>
+            <div class="s1-sub">Turístico · Trabalho · Estudo</div>
+          </div>
+          <div class="s1-card" onclick="pickService(this,'Registo Civil')">
+            <div class="s1-ico">📋</div>
+            <div class="s1-name">Registo Civil</div>
+            <div class="s1-sub">Nascimento · Casamento · Óbito</div>
+          </div>
+          <div class="s1-card" onclick="pickService(this,'Procuração')">
+            <div class="s1-ico">📜</div>
+            <div class="s1-name">Procuração</div>
+            <div class="s1-sub">Autenticação · Reconhecimento</div>
+          </div>
+          <div class="s1-card" onclick="pickService(this,'Legalização')">
+            <div class="s1-ico">🔏</div>
+            <div class="s1-name">Legalização</div>
+            <div class="s1-sub">Apostilha · Tradução</div>
+          </div>
+          <div class="s1-card" onclick="pickService(this,'Assistência')">
+            <div class="s1-ico">📞</div>
+            <div class="s1-name">Assistência</div>
+            <div class="s1-sub">Apoio consular urgente</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 2 — calendário -->
+      <div class="step-pane" id="pane2">
+        <div class="step-heading">Escolha a data de atendimento</div>
+        <div class="cal-month">
+          <button class="cal-nav" onclick="calNav(-1)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="cal-month-label" id="calLabel"></span>
+          <button class="cal-nav" onclick="calNav(1)">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+
+      <!-- PASSO 3 — hora -->
+      <div class="step-pane" id="pane3">
+        <div class="step-heading">Escolha o horário disponível</div>
+        <div class="time-grid" id="timeGrid"></div>
+        <div class="time-info">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--muted)" stroke-width="1.6"/><line x1="12" y1="8" x2="12" y2="12" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="0.5" fill="var(--muted)" stroke="var(--muted)" stroke-width="1"/></svg>
+          Cada sessão tem a duração de 30 minutos. Chegue 5 min antes.
+        </div>
+      </div>
+
+      <!-- PASSO 4 — dados pessoais -->
+      <div class="step-pane" id="pane4">
+        <div class="step-heading">Os seus dados</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome próprio</label>
+            <input class="form-input" type="text" placeholder="Ex: Maria" id="f-nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apelido</label>
+            <input class="form-input" type="text" placeholder="Ex: Silva" id="f-apelido">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Número do BI / Passaporte angolano</label>
+          <input class="form-input" type="text" placeholder="Ex: 005342871LA041" id="f-bi">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Contacto telefónico</label>
+            <input class="form-input" type="tel" placeholder="+351 9X XXX XXXX" id="f-tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Correio electrónico</label>
+            <input class="form-input" type="email" placeholder="email@exemplo.com" id="f-email">
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 5 — confirmação -->
+      <div class="step-pane" id="pane5">
+        <div class="confirm-box">
+          <div class="confirm-check">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 14l6 6 10-10" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;">Agendamento confirmado</div>
+          <div class="confirm-num" id="confirmNum">AG-2026-04871</div>
+          <div class="confirm-sub">Guarde este número de referência</div>
+          <div class="qr-box">
+            <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+              <rect x="4" y="4" width="30" height="30" rx="3" fill="none" stroke="#16263D" stroke-width="2.5"/>
+              <rect x="10" y="10" width="18" height="18" rx="1" fill="#16263D"/>
+              <rect x="56" y="4" width="30" height="30" rx="3" fill="none" stroke="#16263D" stroke-width="2.5"/>
+              <rect x="62" y="10" width="18" height="18" rx="1" fill="#16263D"/>
+              <rect x="4" y="56" width="30" height="30" rx="3" fill="none" stroke="#16263D" stroke-width="2.5"/>
+              <rect x="10" y="62" width="18" height="18" rx="1" fill="#16263D"/>
+              <rect x="44" y="44" width="6" height="6" fill="#16263D"/>
+              <rect x="54" y="44" width="6" height="6" fill="#16263D"/>
+              <rect x="64" y="44" width="6" height="6" fill="#16263D"/>
+              <rect x="74" y="44" width="12" height="6" fill="#16263D"/>
+              <rect x="44" y="54" width="6" height="6" fill="#16263D"/>
+              <rect x="54" y="54" width="6" height="6" fill="#16263D"/>
+              <rect x="74" y="54" width="12" height="6" fill="#16263D"/>
+              <rect x="44" y="64" width="6" height="6" fill="#16263D"/>
+              <rect x="64" y="64" width="6" height="6" fill="#16263D"/>
+              <rect x="44" y="74" width="6" height="6" fill="#16263D"/>
+              <rect x="54" y="74" width="6" height="6" fill="#16263D"/>
+              <rect x="64" y="74" width="6" height="6" fill="#16263D"/>
+              <rect x="74" y="74" width="12" height="6" fill="#16263D"/>
+            </svg>
+          </div>
+        </div>
+        <div class="confirm-detail" id="confirmDetail"></div>
+      </div>
+
+    </div><!-- /modal-body -->
+
+    <div class="modal-foot" id="modalFoot">
+      <button class="btn-back" id="btnBack" onclick="stepBack()">← Anterior</button>
+      <button class="btn-next" id="btnNext" onclick="stepNext()">Continuar →</button>
+    </div>
+
+  </div>
 </div>
-</div>
-<a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
+
 <script>
-!function(){
-  var vp=document.getElementById('_vp');
-  function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')';}
-  fit(); window.addEventListener('resize',fit);
-}();
+/* ─── CAROUSEL ─── */
+const CARD_W = 220 + 14; // width + gap
+let carPos = 0;
+const track = document.getElementById('carTrack');
+const cards = track.querySelectorAll('.service-card');
+const dotsEl = document.getElementById('carDots');
+const visible = 5;
+const maxPos = Math.max(0, cards.length - visible);
+
+// build dots
+cards.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i===0?' on':'');
+  d.onclick = () => carGoTo(i);
+  dotsEl.appendChild(d);
+});
+
+function carGoTo(i){
+  carPos = Math.min(i, maxPos);
+  track.style.transform = `translateX(-${carPos * CARD_W}px)`;
+  document.querySelectorAll('.dot').forEach((d,j) => d.classList.toggle('on', j===carPos));
+}
+function carMove(dir){ carGoTo(Math.max(0, Math.min(carPos + dir, maxPos))); }
+
+function selectService(el, name){
+  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelector('.aw-chips .on')?.classList.remove('on');
+  document.querySelectorAll('.aw-chip').forEach(c => { if(c.textContent===name) c.classList.add('on'); });
+  selectedService = name;
+}
+
+/* ─── AGENDA WIDGET ─── */
+let selectedService = 'Passaporte';
+function chipSel(el, name){
+  document.querySelectorAll('.aw-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  selectedService = name;
+  // sync carousel
+  document.querySelectorAll('.service-card').forEach(c => {
+    const match = c.querySelector('.sc-name').textContent.replace('.','').trim() === name;
+    c.classList.toggle('active', match);
+  });
+}
+function openModalWithService(){ openModal(); }
+
+/* ─── NEWS TOGGLE ─── */
+function toggleNews(el){ el.classList.toggle('open'); }
+
+/* ─── MODAL STATE ─── */
+let step = 1;
+let pickedDate = null;
+let pickedTime = null;
+let calYear, calMonth;
+
+function openModal(){
+  step = 1;
+  pickedDate = null; pickedTime = null;
+  updateStepUI();
+  const today = new Date();
+  calYear = today.getFullYear(); calMonth = today.getMonth();
+  renderCal();
+  renderTimes();
+  // pre-select service from widget
+  document.querySelectorAll('#pane1 .s1-card').forEach(c => {
+    const match = c.querySelector('.s1-name').textContent === selectedService;
+    c.classList.toggle('on', match);
+  });
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalBackdrop').classList.remove('open'); }
+function backdropClose(e){ if(e.target===document.getElementById('modalBackdrop')) closeModal(); }
+
+/* ─── STEP NAVIGATION ─── */
+function updateStepUI(){
+  for(let i=1;i<=5;i++){
+    document.getElementById('pane'+i).classList.toggle('active', i===step);
+    const ms = document.getElementById('ms'+i);
+    ms.classList.remove('active','done');
+    if(i===step) ms.classList.add('active');
+    if(i<step) ms.classList.add('done');
+  }
+  const foot = document.getElementById('modalFoot');
+  const back = document.getElementById('btnBack');
+  const next = document.getElementById('btnNext');
+  if(step===5){
+    foot.innerHTML = '<button class="btn-done" onclick="closeModal(); showToast()">Fechar e guardar</button>';
+  } else {
+    foot.innerHTML = `
+      <button class="btn-back" onclick="stepBack()" style="display:${step===1?'none':'block'}">← Anterior</button>
+      <button class="btn-next" onclick="stepNext()">${step===4?'Confirmar agendamento →':'Continuar →'}</button>`;
+  }
+}
+
+function stepNext(){
+  if(step===1){
+    const chosen = document.querySelector('#pane1 .s1-card.on');
+    if(!chosen){ shake('#pane1'); return; }
+    selectedService = chosen.querySelector('.s1-name').textContent;
+  }
+  if(step===2 && !pickedDate){ shake('#pane2'); return; }
+  if(step===3 && !pickedTime){ shake('#pane3'); return; }
+  if(step===4){
+    const nome = document.getElementById('f-nome').value.trim();
+    const apelido = document.getElementById('f-apelido').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    if(!nome || !apelido || !email){ shake('#pane4'); return; }
+    buildConfirmation(nome, apelido);
+  }
+  if(step<5){ step++; updateStepUI(); }
+}
+function stepBack(){ if(step>1){ step--; updateStepUI(); } }
+
+function shake(sel){
+  const el = document.querySelector(sel);
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'shake .3s ease';
+}
+
+function pickService(el, name){
+  document.querySelectorAll('#pane1 .s1-card').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+}
+
+/* ─── CALENDÁRIO ─── */
+const MONTHS_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DAYS_PT   = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const AVAIL_DAYS = [1,2,3,4]; // Mon-Thu available (indexes)
+
+function calNav(dir){
+  calMonth += dir;
+  if(calMonth < 0){ calMonth=11; calYear--; }
+  if(calMonth > 11){ calMonth=0; calYear++; }
+  renderCal();
+}
+
+function renderCal(){
+  document.getElementById('calLabel').textContent = MONTHS_PT[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  DAYS_PT.forEach(d => { const h=document.createElement('div'); h.className='cal-day-hdr'; h.textContent=d; grid.appendChild(h); });
+
+  const first = new Date(calYear, calMonth, 1).getDay();
+  const total = new Date(calYear, calMonth+1, 0).getDate();
+  const today = new Date();
+  const todayStr = today.toDateString();
+
+  for(let i=0;i<first;i++){ const e=document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+  for(let d=1;d<=total;d++){
+    const date = new Date(calYear, calMonth, d);
+    const dow = date.getDay();
+    const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const isWeekend = dow === 0 || dow === 6;
+    const isAvail = !isPast && !isWeekend;
+    const el = document.createElement('div');
+    el.className = 'cal-day' + (isPast||isWeekend?' past':'') + (isAvail?' avail':'') + (date.toDateString()===todayStr?' today':'');
+    el.textContent = d;
+    if(isAvail){
+      el.onclick = () => {
+        document.querySelectorAll('.cal-day').forEach(c=>c.classList.remove('selected'));
+        el.classList.add('selected');
+        pickedDate = `${d} de ${MONTHS_PT[calMonth]} de ${calYear}`;
+        pickedTime = null;
+        renderTimes();
+      };
+    }
+    grid.appendChild(el);
+  }
+}
+
+/* ─── HORÁRIOS ─── */
+function renderTimes(){
+  const grid = document.getElementById('timeGrid');
+  grid.innerHTML = '';
+  const slots = ['09:00','09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+  const busy = ['09:30','10:30','11:30','15:00','16:00'];
+  slots.forEach(t => {
+    const el = document.createElement('div');
+    const isBusy = busy.includes(t);
+    el.className = 'time-slot' + (isBusy?' busy':'');
+    el.textContent = t;
+    if(!isBusy){
+      el.onclick = () => {
+        document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('on'));
+        el.classList.add('on');
+        pickedTime = t;
+      };
+    }
+    grid.appendChild(el);
+  });
+}
+
+/* ─── CONFIRMAÇÃO ─── */
+function buildConfirmation(nome, apelido){
+  const ref = 'AG-2026-0' + Math.floor(Math.random()*9000+1000);
+  document.getElementById('confirmNum').textContent = ref;
+  document.getElementById('confirmDetail').innerHTML = `
+    <div class="cd-row"><span class="cd-label">Serviço</span><span class="cd-value">${selectedService}</span></div>
+    <div class="cd-sep"></div>
+    <div class="cd-row"><span class="cd-label">Data</span><span class="cd-value">${pickedDate}</span></div>
+    <div class="cd-sep"></div>
+    <div class="cd-row"><span class="cd-label">Hora</span><span class="cd-value">${pickedTime}</span></div>
+    <div class="cd-sep"></div>
+    <div class="cd-row"><span class="cd-label">Nome</span><span class="cd-value">${nome} ${apelido}</span></div>
+    <div class="cd-sep"></div>
+    <div class="cd-row"><span class="cd-label">Local</span><span class="cd-value">Embaixada de Angola em Lisboa</span></div>
+  `;
+}
+
+function showToast(){
+  const t = document.createElement('div');
+  t.style.cssText='position:fixed;bottom:80px;right:24px;z-index:9999;background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.25);animation:slideUp .3s ease';
+  t.textContent='✓ Agendamento guardado com sucesso';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+}
+
+/* ─── NAV ACTIVE on scroll ─── */
+const sections = ['servicos','noticias','contactos','localizacao'];
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 80;
+  let cur = sections[0];
+  sections.forEach(id => { const el=document.getElementById(id); if(el && el.offsetTop <= y) cur=id; });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href')==='#'+cur);
+  });
+});
+
+/* ─── SHAKE ANIM ─── */
+const styleEl = document.createElement('style');
+styleEl.textContent = `
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+@keyframes slideUp {
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}`;
+document.head.appendChild(styleEl);
 </script>
 </body>
 </html>
