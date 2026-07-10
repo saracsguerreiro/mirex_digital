@@ -2,499 +2,757 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>A2 · Agendamento com Assistente — MIREX Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistente MIREX · Agendamento · MIREX Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy-900: #16263D;
-  --navy-700: #23405F;
-  --surface: #F5F8FB;
-  --card: #FFFFFF;
-  --gold-500: #D9A21B;
-  --red-700: #B5121B;
+  --navy: #16263D;
+  --navy2: #23405F;
+  --gold: #D9A21B;
+  --gold2: #f0c030;
+  --surface: #F5F7FA;
+  --card: #fff;
   --ink: #1A2433;
   --muted: #5A6B80;
   --line: #D7E1EC;
-  --verde: #2E7D4F;
-  --ambar: #C77D0A;
+  --green: #2E7D4F;
+  --red: #B5121B;
+  --amber: #C77D0A;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: #0d1117; }
-.canvas {
-  width: 1920px; height: 1080px;
-  display: flex; flex-direction: column; overflow: hidden;
-  background: var(--surface);
-}
-/* HEADER */
-.inst-header {
-  background: var(--navy-900); height: 56px;
-  display: flex; align-items: center; padding: 0 32px; gap: 14px; flex-shrink: 0;
-}
-.emblem { width: 34px; height: 34px; border-radius: 50%; background: var(--gold-500); display: flex; align-items: center; justify-content: center; }
-.header-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
-.header-module { font-size: 17px; font-weight: 600; color: #fff; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; }
+body { font-family:'Inter',sans-serif; background:var(--surface); color:var(--ink); display:flex; flex-direction:column; }
 
-/* CONTENT */
-.content {
-  flex: 1; display: flex; padding: 0; overflow: hidden;
+/* ── TOP BAR ── */
+.topbar {
+  background:var(--navy); height:56px; flex-shrink:0;
+  display:flex; align-items:center; padding:0 28px; gap:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.22);
+}
+.topbar-logo { height:36px; flex-shrink:0; }
+.tb-sep { width:1px; height:28px; background:rgba(255,255,255,0.14); flex-shrink:0; }
+.tb-title { font-size:14px; font-weight:700; color:#fff; }
+.tb-sub   { font-size:11px; color:rgba(255,255,255,0.45); margin-top:1px; }
+.tb-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.tb-posto { font-size:12px; color:rgba(255,255,255,0.45); }
+.back-link {
+  display:flex; align-items:center; gap:6px;
+  font-size:12px; font-weight:600; color:rgba(255,255,255,0.65);
+  text-decoration:none; padding:7px 14px; border-radius:9999px;
+  border:1px solid rgba(255,255,255,0.18); transition:border-color .15s, color .15s;
+}
+.back-link:hover { border-color:rgba(255,255,255,0.4); color:#fff; }
+
+/* ── LAYOUT ── */
+.workspace {
+  flex:1; display:flex; overflow:hidden;
+  min-height:0;
 }
 
-/* LEFT COLUMN — chat */
-.chat-col {
-  width: 900px; display: flex; flex-direction: column;
-  border-right: 1px solid var(--line);
+/* ── CHAT PANEL ── */
+.chat-panel {
+  display:flex; flex-direction:column;
+  width:58%; border-right:1px solid var(--line);
+  background:var(--card); min-width:0;
 }
 .chat-topbar {
-  padding: 16px 28px; border-bottom: 1px solid var(--line);
-  background: var(--card); flex-shrink: 0;
-  display: flex; align-items: center; gap: 12px;
+  padding:14px 24px; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:12px; flex-shrink:0;
 }
-.assistant-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--navy-900); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+.bot-avatar {
+  width:40px; height:40px; border-radius:50%;
+  background:var(--navy); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; position:relative;
 }
-.assistant-name { font-size: 15px; font-weight: 600; color: var(--ink); }
-.assistant-status { font-size: 12px; color: var(--verde); display: flex; align-items: center; gap: 4px; }
+.bot-online {
+  position:absolute; bottom:1px; right:1px;
+  width:10px; height:10px; border-radius:50%; background:#4ade80;
+  border:2px solid var(--card);
+}
+.bot-name { font-size:14px; font-weight:700; color:var(--ink); }
+.bot-status { font-size:11px; color:var(--green); display:flex; align-items:center; gap:5px; margin-top:1px; }
 .badge-official {
-  margin-left: auto; display: flex; align-items: center; gap: 6px;
-  background: rgba(22,38,61,0.06); border: 1px solid var(--line); border-radius: 20px;
-  padding: 5px 12px; font-size: 11px; color: var(--muted);
+  margin-left:auto; display:flex; align-items:center; gap:6px;
+  background:rgba(46,125,79,0.07); border:1px solid rgba(46,125,79,0.18); border-radius:9999px;
+  padding:5px 12px; font-size:11px; color:var(--green); font-weight:600;
 }
-.badge-official strong { color: var(--ink); }
 
 /* Messages */
-.chat-messages { flex: 1; overflow: hidden; padding: 28px; display: flex; flex-direction: column; gap: 20px; }
-.msg { display: flex; gap: 12px; align-items: flex-start; }
-.msg.user { flex-direction: row-reverse; }
-.msg-avatar { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
-.msg-avatar.bot { background: var(--navy-900); }
-.msg-avatar.user-av { background: var(--gold-500); color: var(--navy-900); }
-.bubble { max-width: 680px; padding: 14px 18px; border-radius: 12px; font-size: 14px; line-height: 1.55; }
-.bubble.bot { background: var(--card); border: 1px solid var(--line); color: var(--ink); border-radius: 4px 12px 12px 12px; box-shadow: 0 1px 4px rgba(22,38,61,0.05); }
-.bubble.user { background: var(--navy-900); color: #fff; border-radius: 12px 4px 12px 12px; }
-.bubble-meta { font-size: 11px; color: var(--muted); margin-top: 4px; text-align: right; }
-.bubble.user .bubble-meta { color: rgba(255,255,255,0.5); }
-.bubble-meta.bot-meta { text-align: left; }
+.chat-messages {
+  flex:1; overflow-y:auto; padding:24px;
+  display:flex; flex-direction:column; gap:18px;
+  scroll-behavior:smooth;
+}
+.msg { display:flex; gap:10px; align-items:flex-start; max-width:88%; }
+.msg.user { flex-direction:row-reverse; margin-left:auto; }
 
-/* Requirement list in bubble */
-.req-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-.req-item { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--ink); }
-.req-num { width: 20px; height: 20px; border-radius: 50%; background: rgba(22,38,61,0.08); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--navy-900); flex-shrink: 0; margin-top: 1px; }
+.msg-avatar {
+  width:32px; height:32px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700;
+}
+.msg-avatar.bot { background:var(--navy); }
+.msg-avatar.user-av { background:var(--gold); color:var(--navy); }
+
+.bubble {
+  padding:12px 16px; border-radius:12px;
+  font-size:14px; line-height:1.6;
+}
+.bubble.bot {
+  background:var(--surface); border:1px solid var(--line);
+  color:var(--ink); border-radius:4px 12px 12px 12px;
+  box-shadow:0 1px 4px rgba(22,38,61,0.06);
+}
+.bubble.user {
+  background:var(--navy); color:#fff;
+  border-radius:12px 4px 12px 12px;
+}
+.bubble-meta { font-size:10px; color:var(--muted); margin-top:5px; }
+.bubble-meta.right { text-align:right; }
+
+/* Doc list in bubble */
+.req-list { margin-top:10px; display:flex; flex-direction:column; gap:7px; }
+.req-item { display:flex; gap:9px; align-items:flex-start; font-size:13px; color:var(--ink); }
+.req-num {
+  width:20px; height:20px; border-radius:50%;
+  background:rgba(22,38,61,0.08); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:var(--navy); margin-top:1px;
+}
 
 /* Time slots */
-.slots { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+.slots { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
 .slot {
-  background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px;
-  padding: 10px 16px; cursor: pointer;
+  background:var(--card); border:1.5px solid var(--line); border-radius:10px;
+  padding:10px 14px; cursor:pointer; transition:border-color .15s, background .15s, transform .12s;
 }
-.slot.selected { border-color: var(--gold-500); background: rgba(217,162,27,0.06); }
-.slot-date { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
-.slot-time { font-size: 14px; font-weight: 700; color: var(--ink); }
-.slot-posto { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.slot:hover:not(.busy) { border-color:var(--navy); transform:translateY(-1px); }
+.slot.selected { border-color:var(--gold); background:rgba(217,162,27,0.06); }
+.slot.busy { opacity:.45; cursor:not-allowed; }
+.slot-date { font-size:10px; color:var(--muted); margin-bottom:2px; }
+.slot-time { font-size:14px; font-weight:800; color:var(--ink); }
+.slot-loc  { font-size:10px; color:var(--muted); margin-top:2px; }
 
-/* Suggestion bubble CTA */
 .cta-confirm {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
-  background: var(--gold-500); color: var(--navy-900);
-  font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 6px;
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:14px; background:var(--gold); color:var(--navy);
+  font-size:13px; font-weight:700; padding:10px 18px; border-radius:8px;
+  cursor:pointer; border:none; transition:background .15s;
 }
+.cta-confirm:hover { background:var(--gold2); }
+.cta-confirm:disabled { background:var(--line); color:var(--muted); cursor:not-allowed; }
 
-/* Input bar */
+/* Quick replies */
+.quick-replies { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.qr-chip {
+  font-size:12px; font-weight:600; padding:7px 14px; border-radius:9999px;
+  border:1.5px solid var(--line); background:var(--card); color:var(--navy);
+  cursor:pointer; transition:all .14s;
+}
+.qr-chip:hover { border-color:var(--navy); background:var(--navy); color:#fff; }
+
+/* Typing indicator */
+.typing-bubble {
+  display:flex; align-items:center; gap:5px; padding:13px 16px;
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:4px 12px 12px 12px; width:fit-content;
+}
+.typing-dot { width:7px; height:7px; border-radius:50%; background:var(--muted); animation:blink 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay:.2s; }
+.typing-dot:nth-child(3) { animation-delay:.4s; }
+@keyframes blink { 0%,80%,100%{opacity:.3;transform:scale(.8)} 40%{opacity:1;transform:scale(1)} }
+
+/* Input */
 .chat-input {
-  border-top: 1px solid var(--line); padding: 16px 28px;
-  background: var(--card); display: flex; gap: 12px; align-items: center; flex-shrink: 0;
+  border-top:1px solid var(--line); padding:14px 20px;
+  background:var(--card); display:flex; gap:10px; align-items:center; flex-shrink:0;
 }
-.chat-input-field {
-  flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
-  padding: 12px 20px; font-size: 14px; color: var(--muted); font-family: inherit;
+.input-field {
+  flex:1; background:var(--surface); border:1.5px solid var(--line); border-radius:9999px;
+  padding:11px 20px; font-size:14px; color:var(--ink); font-family:inherit;
+  outline:none; transition:border-color .15s;
 }
-.chat-send {
-  width: 40px; height: 40px; border-radius: 50%; background: var(--navy-900);
-  display: flex; align-items: center; justify-content: center;
+.input-field:focus { border-color:var(--navy); }
+.input-field::placeholder { color:var(--muted); }
+.input-field:disabled { opacity:.5; cursor:not-allowed; }
+.btn-mic {
+  width:38px; height:38px; border-radius:50%; border:1.5px solid var(--line);
+  background:var(--surface); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; flex-shrink:0; transition:border-color .14s;
+}
+.btn-mic:hover { border-color:var(--navy); }
+.btn-send {
+  width:40px; height:40px; border-radius:50%; background:var(--navy);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border:none; flex-shrink:0; transition:background .14s;
+}
+.btn-send:hover { background:var(--navy2); }
+
+/* ── SUMMARY PANEL ── */
+.summary-panel {
+  flex:1; display:flex; flex-direction:column;
+  background:var(--surface); min-width:0; overflow:hidden;
+}
+.summary-head {
+  background:var(--navy); padding:16px 24px; flex-shrink:0;
+}
+.sh-title { font-size:16px; font-weight:700; color:#fff; }
+.sh-sub   { font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px; }
+
+.summary-body { flex:1; overflow-y:auto; padding:20px 24px; display:flex; flex-direction:column; gap:16px; }
+
+/* Empty state */
+.empty-state {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px; padding:60px 0; text-align:center;
+}
+.empty-icon { width:56px; height:56px; border-radius:16px; background:rgba(22,38,61,0.06); display:flex; align-items:center; justify-content:center; }
+.empty-title { font-size:15px; font-weight:700; color:var(--ink); }
+.empty-sub   { font-size:13px; color:var(--muted); max-width:220px; line-height:1.5; }
+
+/* Booking detail */
+.detail-card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.dc-head { background:rgba(22,38,61,0.04); padding:10px 16px; border-bottom:1px solid var(--line); }
+.dc-head-label { font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; }
+.dc-row { display:flex; justify-content:space-between; align-items:flex-start; padding:10px 16px; border-bottom:1px solid var(--line); }
+.dc-row:last-child { border-bottom:none; }
+.dc-label { font-size:11px; color:var(--muted); margin-top:1px; }
+.dc-value { font-size:13px; font-weight:700; color:var(--ink); text-align:right; max-width:220px; line-height:1.4; }
+.dc-value.highlight { color:var(--navy); }
+.dc-value.ref { font-family:monospace; letter-spacing:1px; color:var(--navy); font-size:12px; }
+
+/* Doc checklist */
+.doc-list { display:flex; flex-direction:column; gap:8px; }
+.doc-item {
+  display:flex; gap:10px; align-items:flex-start;
+  background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px;
+}
+.doc-check {
+  width:20px; height:20px; border-radius:50%; flex-shrink:0; margin-top:1px;
+  display:flex; align-items:center; justify-content:center;
+}
+.doc-check.ok  { background:rgba(46,125,79,0.10); }
+.doc-check.warn { background:rgba(199,125,10,0.12); }
+.doc-label { font-size:12px; font-weight:600; color:var(--ink); }
+.doc-note  { font-size:11px; color:var(--muted); margin-top:2px; }
+
+/* QR box */
+.qr-box {
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px; display:flex; gap:16px; align-items:flex-start;
+}
+.qr-img { width:90px; height:90px; flex-shrink:0; background:#fff; border-radius:6px; border:1px solid var(--line); padding:6px; }
+.qr-title  { font-size:13px; font-weight:700; color:var(--ink); margin-bottom:3px; }
+.qr-ref    { font-size:11px; color:var(--muted); font-family:monospace; letter-spacing:1px; margin-bottom:8px; }
+.qr-remind { font-size:11px; color:var(--ink); background:rgba(217,162,27,0.08); border:1px solid rgba(217,162,27,0.22); border-radius:6px; padding:7px 10px; line-height:1.5; }
+
+/* Status badge */
+.status-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; padding:4px 10px; border-radius:9999px;
+}
+.status-badge.pending { background:rgba(199,125,10,0.1); color:var(--amber); border:1px solid rgba(199,125,10,0.25); }
+.status-badge.confirmed { background:rgba(46,125,79,0.1); color:var(--green); border:1px solid rgba(46,125,79,0.25); }
+
+/* Reminders strip */
+.reminder-strip {
+  display:flex; gap:10px; align-items:flex-start;
+  background:rgba(217,162,27,0.06); border:1px solid rgba(217,162,27,0.22);
+  border-radius:10px; padding:12px 14px; font-size:12px; color:var(--ink); line-height:1.5;
 }
 
-/* RIGHT COLUMN — booking summary */
-.booking-col {
-  flex: 1; display: flex; flex-direction: column; background: var(--card); overflow: hidden;
+/* Summary footer */
+.summary-foot {
+  border-top:1px solid var(--line); padding:12px 24px; flex-shrink:0;
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--card);
 }
-.booking-header {
-  padding: 20px 28px 16px; border-bottom: 1px solid var(--line);
-  background: var(--navy-900);
-}
-.booking-header-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-.booking-header-sub { font-size: 13px; color: rgba(255,255,255,0.55); }
-.booking-body { flex: 1; overflow: hidden; padding: 24px 28px; display: flex; flex-direction: column; gap: 20px; }
-
-/* Booking detail card */
-.booking-detail {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
-  overflow: hidden;
-}
-.booking-detail-header {
-  background: rgba(22,38,61,0.03); padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-  font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px;
-}
-.booking-row {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 11px 16px; border-bottom: 1px solid var(--line);
-}
-.booking-row:last-child { border-bottom: none; }
-.booking-row-label { font-size: 12px; color: var(--muted); }
-.booking-row-value { font-size: 13px; font-weight: 600; color: var(--ink); text-align: right; max-width: 260px; }
-.booking-highlight { color: var(--navy-900); }
-
-/* Document checklist */
-.doc-list { display: flex; flex-direction: column; gap: 8px; }
-.doc-item { display: flex; gap: 10px; align-items: center; padding: 10px 12px; background: var(--surface); border-radius: 6px; border: 1px solid var(--line); }
-.doc-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(46,125,79,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.doc-check-icon { color: var(--verde); font-size: 12px; font-weight: 700; }
-.doc-label { font-size: 13px; color: var(--ink); flex: 1; }
-.doc-note { font-size: 11px; color: var(--muted); }
-
-/* QR Section */
-.qr-section {
-  display: flex; gap: 20px; align-items: flex-start;
-  padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
-}
-.qr-placeholder {
-  width: 96px; height: 96px; flex-shrink: 0;
-  background: var(--card); border: 1px solid var(--line); border-radius: 6px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  padding: 8px;
-}
-.qr-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.5px; width: 72px; height: 72px; }
-.qr-cell { border-radius: 1px; }
-.qr-info { flex: 1; }
-.qr-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-.qr-code { font-size: 12px; color: var(--muted); font-family: monospace; margin-bottom: 8px; letter-spacing: 1px; }
-.qr-reminder {
-  font-size: 12px; color: var(--muted); display: flex; align-items: flex-start; gap: 6px;
-  background: rgba(22,38,61,0.04); padding: 8px 10px; border-radius: 5px; line-height: 1.4;
-}
-
-/* Reminders */
-.reminder-row {
-  display: flex; gap: 10px; align-items: center;
-  padding: 10px 12px; background: rgba(217,162,27,0.06); border: 1px solid rgba(217,162,27,0.2); border-radius: 6px;
-}
-.reminder-text { font-size: 12px; color: var(--ink); }
-</style>
-<style>
-html{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important}
-body{overflow:hidden!important;width:100vw!important;height:100vh!important;margin:0!important;padding:0!important;position:relative!important}
-#_vp{position:absolute!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;overflow:hidden!important;transform-origin:top left!important}
-#_back{position:fixed!important;bottom:22px!important;right:22px!important;z-index:9999!important;display:flex!important;align-items:center!important;gap:7px!important;background:rgba(22,38,61,0.92)!important;border:1px solid rgba(255,255,255,0.14)!important;border-radius:24px!important;padding:9px 16px!important;text-decoration:none!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-size:12px!important;font-weight:600!important;backdrop-filter:blur(8px)!important;box-shadow:0 4px 20px rgba(0,0,0,0.4)!important}
+.sf-label { font-size:11px; color:var(--muted); }
 </style>
 </head>
-<body><div id="_vp">
-<div class="canvas">
+<body>
 
-  <!-- HEADER -->
-  <header class="inst-header">
-    <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" height="42" style="display:block;flex-shrink:0">
-    <div style="width:1px;height:30px;background:rgba(255,255,255,0.15);flex-shrink:0"></div>
-    <div>
-      <div class="header-sub">República de Angola · MIREX</div>
-      <div class="header-module">Agendamento · Assistente Virtual</div>
-    </div>
-    <div class="header-right">
-      <span style="font-size:12px;color:rgba(255,255,255,0.5)">Embaixada de Angola em Lisboa</span>
-    </div>
-  </header>
+<!-- ── TOP BAR ── -->
+<header class="topbar">
+  <img src="mirex_logo_branco_amarelo.png" alt="MIREX Digital" class="topbar-logo">
+  <div class="tb-sep"></div>
+  <div>
+    <div class="tb-title">Assistente Virtual · Agendamento</div>
+    <div class="tb-sub">A2 · Serviços Consulares</div>
+  </div>
+  <div class="tb-right">
+    <span class="tb-posto">Embaixada de Angola em Lisboa</span>
+    <a href="index.html" class="back-link">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Voltar ao índice
+    </a>
+  </div>
+</header>
 
-  <!-- MAIN CONTENT -->
-  <div class="content">
+<!-- ── WORKSPACE ── -->
+<div class="workspace">
 
-    <!-- LEFT: CHAT -->
-    <div class="chat-col">
-      <div class="chat-topbar">
-        <div class="assistant-avatar">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.8)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div>
-          <div class="assistant-name">Assistente MIREX</div>
-          <div class="assistant-status"><span style="width:6px;height:6px;border-radius:50%;background:var(--verde);display:inline-block"></span> Disponível · Escala para operador humano</div>
-        </div>
-        <div class="badge-official">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1 3.5h3.5L7.8 6.5 9 10 6 8 3 10l1.2-3.5L1.5 4.5H5z" fill="#2E7D4F"/></svg>
-          <strong>Baseado em conteúdo oficial MIREX</strong> · Respostas verificadas
+  <!-- ── CHAT ── -->
+  <div class="chat-panel">
+
+    <!-- chat topbar -->
+    <div class="chat-topbar">
+      <div class="bot-avatar">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.85)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="bot-online"></div>
+      </div>
+      <div>
+        <div class="bot-name">Assistente MIREX</div>
+        <div class="bot-status">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>
+          Disponível · Escala para operador humano
         </div>
       </div>
-
-      <div class="chat-messages">
-
-        <!-- Bot greeting -->
-        <div class="msg">
-          <div class="msg-avatar bot">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.8)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <div class="bubble bot">
-              Bom dia! Sou o Assistente MIREX. Posso ajudá-lo(a) a agendar o seu atendimento, esclarecer dúvidas sobre os serviços consulares e verificar os documentos necessários.<br><br>
-              Em que posso ajudá-lo(a) hoje?
-            </div>
-            <div class="bubble-meta bot-meta">09:14</div>
-          </div>
-        </div>
-
-        <!-- User question -->
-        <div class="msg user">
-          <div class="msg-avatar user-av">L</div>
-          <div>
-            <div class="bubble user">
-              Que documentos preciso para renovar o passaporte do meu filho menor de idade?
-            </div>
-            <div class="bubble-meta">09:15</div>
-          </div>
-        </div>
-
-        <!-- Bot answer with document list -->
-        <div class="msg">
-          <div class="msg-avatar bot">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.8)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <div class="bubble bot">
-              Para renovação de passaporte de menor, são necessários os seguintes documentos:<br><br>
-              <div class="req-list">
-                <div class="req-item"><div class="req-num">1</div>Passaporte anterior do menor (original + fotocópia da página de dados)</div>
-                <div class="req-item"><div class="req-num">2</div>Certidão de nascimento do menor (original ou certidão de registo civil)</div>
-                <div class="req-item"><div class="req-num">3</div>Bilhete de identidade ou passaporte dos pais/tutores legais (original + fotocópia)</div>
-                <div class="req-item"><div class="req-num">4</div>2 fotografias tipo passe recentes (fundo branco, 3,5×4,5 cm)</div>
-                <div class="req-item"><div class="req-num">5</div>Comprovativo de pagamento da taxa consular (€ 55,00)</div>
-                <div class="req-item"><div class="req-num">6</div>Se pais divorciados: autorização por escrito do progenitor ausente, reconhecida notarialmente</div>
-              </div>
-              <br>
-              Deseja que marque um atendimento? Tenho disponibilidade nos seguintes horários:
-              <div class="slots">
-                <div class="slot">
-                  <div class="slot-date">Terça, 15 Jul 2026</div>
-                  <div class="slot-time">09h30</div>
-                  <div class="slot-posto">Emb. Lisboa · Balcão 3</div>
-                </div>
-                <div class="slot selected">
-                  <div class="slot-date">Terça, 15 Jul 2026</div>
-                  <div class="slot-time">11h00</div>
-                  <div class="slot-posto">Emb. Lisboa · Balcão 3</div>
-                </div>
-                <div class="slot">
-                  <div class="slot-date">Quarta, 16 Jul 2026</div>
-                  <div class="slot-time">14h30</div>
-                  <div class="slot-posto">Emb. Lisboa · Balcão 5</div>
-                </div>
-              </div>
-              <div class="cta-confirm">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1" stroke="#16263D" stroke-width="1.5"/><path d="M1 5h12" stroke="#16263D" stroke-width="1.5"/></svg>
-                Confirmar horário das 11h00 · 15 Jul
-              </div>
-            </div>
-            <div class="bubble-meta bot-meta">09:16 · Informação verificada · actualizada em Jun 2026</div>
-          </div>
-        </div>
-
-        <!-- User confirmation -->
-        <div class="msg user">
-          <div class="msg-avatar user-av">L</div>
-          <div>
-            <div class="bubble user">
-              Perfeito, prefiro o horário das 11h00 do dia 15.
-            </div>
-            <div class="bubble-meta">09:17</div>
-          </div>
-        </div>
-
-        <!-- Bot confirmation -->
-        <div class="msg">
-          <div class="msg-avatar bot">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.8)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <div class="bubble bot">
-              <span style="color:var(--verde);font-weight:700">✓ Marcação confirmada.</span> O resumo completo e o QR da senha estão visíveis à direita.<br><br>
-              Receberá lembretes automáticos <strong>72 horas</strong> e <strong>24 horas</strong> antes do atendimento, por e-mail e SMS.<br><br>
-              Mais alguma questão?
-            </div>
-            <div class="bubble-meta bot-meta">09:17</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Input bar -->
-      <div class="chat-input">
-        <div class="chat-input-field">Escreva a sua pergunta…</div>
-        <div style="display:flex;gap:8px">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5v2A4.5 4.5 0 0 0 8 12.5a4.5 4.5 0 0 0 4.5-4.5V6A4.5 4.5 0 0 0 8 1.5z" stroke="#5A6B80" stroke-width="1.2"/><path d="M2 8c0 3.31 2.69 6 6 6s6-2.69 6-6" stroke="#5A6B80" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </div>
-          <div class="chat-send">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l12-6-6 12-2-5-4-1z" fill="white"/></svg>
-          </div>
-        </div>
+      <div class="badge-official">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.5 3H11L8.5 6l1 3L6 7.5 3.5 9l1-3L2 4.5h3.5z" fill="var(--green)"/></svg>
+        Conteúdo oficial MIREX · Verificado
       </div>
     </div>
 
-    <!-- RIGHT: BOOKING SUMMARY -->
-    <div class="booking-col">
-      <div class="booking-header">
-        <div class="booking-header-title">Resumo da Marcação</div>
-        <div class="booking-header-sub">Gerado automaticamente · aguarda confirmação do cidadão</div>
+    <!-- messages -->
+    <div class="chat-messages" id="messages"></div>
+
+    <!-- input -->
+    <div class="chat-input">
+      <button class="btn-mic" title="Microfone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="var(--muted)" stroke-width="1.6"/><path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/><line x1="12" y1="19" x2="12" y2="23" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <input class="input-field" id="inputField" type="text" placeholder="Escreva a sua pergunta…" autocomplete="off">
+      <button class="btn-send" id="sendBtn" onclick="sendMessage()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 12L22 2l-4 20-5.5-8.5L2 12z" fill="#fff"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── SUMMARY PANEL ── -->
+  <div class="summary-panel">
+    <div class="summary-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="sh-title">Resumo da Marcação</div>
+        <span class="status-badge pending" id="statusBadge" style="display:none"></span>
       </div>
-
-      <div class="booking-body">
-
-        <!-- Booking Details -->
-        <div class="booking-detail">
-          <div class="booking-detail-header">Detalhe do Atendimento</div>
-          <div class="booking-row">
-            <div class="booking-row-label">Posto consular</div>
-            <div class="booking-row-value booking-highlight">Embaixada de Angola em Lisboa</div>
-          </div>
-          <div class="booking-row">
-            <div class="booking-row-label">Serviço</div>
-            <div class="booking-row-value">Renovação de Passaporte — Menor de Idade</div>
-          </div>
-          <div class="booking-row">
-            <div class="booking-row-label">Data e hora</div>
-            <div class="booking-row-value booking-highlight">Terça, 15 de Julho de 2026 · 11h00</div>
-          </div>
-          <div class="booking-row">
-            <div class="booking-row-label">Balcão</div>
-            <div class="booking-row-value">Balcão 3 — Documentação de Menores</div>
-          </div>
-          <div class="booking-row">
-            <div class="booking-row-label">Requerente</div>
-            <div class="booking-row-value">Luena Francisco da Silva</div>
-          </div>
-          <div class="booking-row">
-            <div class="booking-row-label">Referência</div>
-            <div class="booking-row-value" style="font-family:monospace;letter-spacing:1px;color:var(--navy-900);font-weight:700">LIS-2026-07-0938</div>
-          </div>
+      <div class="sh-sub" id="summarySubtitle">Aguarda interacção com o assistente</div>
+    </div>
+    <div class="summary-body" id="summaryBody">
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="var(--muted)" stroke-width="1.6"/><line x1="16" y1="2" x2="16" y2="6" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="var(--muted)" stroke-width="1.6"/></svg>
         </div>
-
-        <!-- Document checklist -->
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Documentos pré-validados</div>
-          <div class="doc-list">
-            <div class="doc-item">
-              <div class="doc-check"><span class="doc-check-icon">✓</span></div>
-              <div>
-                <div class="doc-label">Passaporte anterior do menor</div>
-                <div class="doc-note">Original + fotocópia da página de dados</div>
-              </div>
-            </div>
-            <div class="doc-item">
-              <div class="doc-check"><span class="doc-check-icon">✓</span></div>
-              <div>
-                <div class="doc-label">Certidão de nascimento</div>
-                <div class="doc-note">Original ou registo civil actualizado</div>
-              </div>
-            </div>
-            <div class="doc-item">
-              <div class="doc-check"><span class="doc-check-icon">✓</span></div>
-              <div>
-                <div class="doc-label">Documentos de identificação dos pais</div>
-                <div class="doc-note">BI ou passaporte — original + fotocópia</div>
-              </div>
-            </div>
-            <div class="doc-item">
-              <div class="doc-check"><span class="doc-check-icon">✓</span></div>
-              <div>
-                <div class="doc-label">2 fotografias tipo passe</div>
-                <div class="doc-note">Fundo branco · 3,5 × 4,5 cm · recentes</div>
-              </div>
-            </div>
-            <div class="doc-item">
-              <div class="doc-check"><span class="doc-check-icon">✓</span></div>
-              <div>
-                <div class="doc-label">Comprovativo de pagamento — € 55,00</div>
-                <div class="doc-note">IBAN: AO06 0006 0000 …3412 · Ref. LIS-07-0938</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- QR Code -->
-        <div class="qr-section">
-          <div class="qr-placeholder">
-            <svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
-              <!-- QR code pattern placeholder -->
-              <rect width="72" height="72" fill="white"/>
-              <!-- Top-left finder -->
-              <rect x="4" y="4" width="20" height="20" rx="2" fill="#1A2433"/>
-              <rect x="7" y="7" width="14" height="14" rx="1" fill="white"/>
-              <rect x="10" y="10" width="8" height="8" fill="#1A2433"/>
-              <!-- Top-right finder -->
-              <rect x="48" y="4" width="20" height="20" rx="2" fill="#1A2433"/>
-              <rect x="51" y="7" width="14" height="14" rx="1" fill="white"/>
-              <rect x="54" y="10" width="8" height="8" fill="#1A2433"/>
-              <!-- Bottom-left finder -->
-              <rect x="4" y="48" width="20" height="20" rx="2" fill="#1A2433"/>
-              <rect x="7" y="51" width="14" height="14" rx="1" fill="white"/>
-              <rect x="10" y="54" width="8" height="8" fill="#1A2433"/>
-              <!-- Data modules (abstract) -->
-              <g fill="#1A2433">
-                <rect x="28" y="4" width="4" height="4"/><rect x="34" y="4" width="4" height="4"/><rect x="40" y="4" width="4" height="4"/>
-                <rect x="28" y="10" width="4" height="4"/><rect x="40" y="10" width="4" height="4"/>
-                <rect x="28" y="16" width="4" height="4"/><rect x="34" y="16" width="4" height="4"/>
-                <rect x="4" y="28" width="4" height="4"/><rect x="10" y="28" width="4" height="4"/><rect x="22" y="28" width="4" height="4"/>
-                <rect x="28" y="28" width="4" height="4"/><rect x="40" y="28" width="4" height="4"/><rect x="52" y="28" width="4" height="4"/>
-                <rect x="4" y="34" width="4" height="4"/><rect x="16" y="34" width="4" height="4"/><rect x="34" y="34" width="4" height="4"/>
-                <rect x="46" y="34" width="4" height="4"/><rect x="58" y="34" width="4" height="4"/><rect x="64" y="34" width="4" height="4"/>
-                <rect x="4" y="40" width="4" height="4"/><rect x="22" y="40" width="4" height="4"/><rect x="28" y="40" width="4" height="4"/>
-                <rect x="40" y="40" width="4" height="4"/><rect x="52" y="40" width="4" height="4"/>
-                <rect x="28" y="46" width="4" height="4"/><rect x="34" y="46" width="4" height="4"/><rect x="46" y="46" width="4" height="4"/><rect x="58" y="46" width="4" height="4"/>
-                <rect x="28" y="52" width="4" height="4"/><rect x="40" y="52" width="4" height="4"/><rect x="52" y="52" width="4" height="4"/><rect x="64" y="52" width="4" height="4"/>
-                <rect x="28" y="58" width="4" height="4"/><rect x="46" y="58" width="4" height="4"/>
-                <rect x="28" y="64" width="4" height="4"/><rect x="34" y="64" width="4" height="4"/><rect x="52" y="64" width="4" height="4"/><rect x="64" y="64" width="4" height="4"/>
-              </g>
-            </svg>
-          </div>
-          <div class="qr-info">
-            <div class="qr-title">QR da senha · Ref. LIS-2026-07-0938</div>
-            <div class="qr-code">Apresentar à entrada · Balcão 3</div>
-            <div class="qr-reminder">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="5.5" stroke="#C77D0A" stroke-width="1.2"/><path d="M7 4.5v3" stroke="#C77D0A" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="9.5" r="0.75" fill="#C77D0A"/></svg>
-              <span><strong style="color:var(--ink)">Lembretes automáticos:</strong> será notificado(a) por e-mail e SMS 72 horas e 24 horas antes do atendimento.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Reminder strip -->
-        <div class="reminder-row">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.52 1.5 3.5 3.52 3.5 6v4l-1.5 2h12l-1.5-2V6c0-2.48-2.02-4.5-4.5-4.5z" stroke="#D9A21B" stroke-width="1.2"/><path d="M6 12c0 1.1.9 2 2 2s2-.9 2-2" stroke="#D9A21B" stroke-width="1.2"/></svg>
-          <div class="reminder-text">
-            <strong>Lembretes activos:</strong> 12 Jul 2026 (11h00) · 14 Jul 2026 (11h00) — via e-mail e SMS para luena.f@correio.pt · +351 91 ·····678
-          </div>
-        </div>
-
+        <div class="empty-title">Nenhuma marcação activa</div>
+        <div class="empty-sub">Inicie a conversa para marcar um atendimento consular</div>
       </div>
-
-      <!-- Footer of booking col -->
-      <div style="padding:12px 28px;border-top:1px solid var(--line);background:var(--surface);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
-        <span style="font-size:11px;color:var(--muted)">Protótipo conceptual · TIS · 2026</span>
-        <span style="font-size:11px;color:var(--muted)">MIREX Digital · Sistema de Agendamento</span>
-      </div>
-
+    </div>
+    <div class="summary-foot">
+      <span class="sf-label">MIREX Digital · Protótipo A2</span>
+      <span class="sf-label">TIS · 2026</span>
     </div>
   </div>
 
 </div>
-</div>
-<a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
+
 <script>
-!function(){
-  var vp=document.getElementById('_vp');
-  function fit(){
-    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
-    vp.style.transform='scale('+s+')';
+/* ══════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════ */
+const USER_INIT = 'L';
+let chatState = 'idle'; // idle | service_shown | slot_selected | confirmed
+let selectedService = null;
+let selectedSlot = null;
+let chosenSlotEl = null;
+
+const SERVICES = {
+  passaporte: {
+    label: 'Renovação de Passaporte',
+    icon: '🛂',
+    docs: [
+      ['Passaporte anterior do menor', 'Original + fotocópia da página de dados'],
+      ['Certidão de nascimento', 'Original ou registo civil actualizado'],
+      ['Documentos de identificação dos pais/tutores', 'BI ou passaporte — original + fotocópia'],
+      ['2 fotografias tipo passe recentes', 'Fundo branco · 3,5 × 4,5 cm'],
+      ['Comprovativo de pagamento da taxa consular', '€ 55,00 — IBAN indicado na confirmação'],
+      ['Se pais divorciados: autorização do progenitor ausente', 'Reconhecida notarialmente']
+    ],
+    slots: [
+      {date:'Terça, 15 Jul 2026', time:'09h30', loc:'Balcão 3', busy:false},
+      {date:'Terça, 15 Jul 2026', time:'11h00', loc:'Balcão 3', busy:false},
+      {date:'Quarta, 16 Jul 2026', time:'14h30', loc:'Balcão 5', busy:false},
+      {date:'Quinta, 17 Jul 2026', time:'10h00', loc:'Balcão 2', busy:true},
+    ],
+    reply: (q) => `Para <strong>renovação de passaporte${q.includes('menor') || q.includes('filho') ? ' de menor' : ''}</strong>, são necessários os seguintes documentos:`
+  },
+  visto: {
+    label: 'Pedido de Visto',
+    icon: '🌍',
+    docs: [
+      ['Passaporte válido por mais de 6 meses', 'Original + 2 fotocópias das páginas de dados'],
+      ['Formulário de pedido de visto preenchido', 'Disponível no portal MIREX Digital'],
+      ['2 fotografias tipo passe recentes', 'Fundo branco · 3,5 × 4,5 cm'],
+      ['Comprovativo de meios de subsistência', 'Extracto bancário dos últimos 3 meses'],
+      ['Bilhete de regresso confirmado', 'Ou reserva de passagem aérea'],
+      ['Seguro de viagem', 'Cobertura mínima de € 30.000,00']
+    ],
+    slots: [
+      {date:'Segunda, 14 Jul 2026', time:'09h00', loc:'Balcão 1', busy:false},
+      {date:'Segunda, 14 Jul 2026', time:'14h00', loc:'Balcão 1', busy:false},
+      {date:'Terça, 15 Jul 2026', time:'16h00', loc:'Balcão 4', busy:false},
+      {date:'Quarta, 16 Jul 2026', time:'11h30', loc:'Balcão 4', busy:true},
+    ],
+    reply: () => `Para <strong>pedido de visto</strong> para Angola, são necessários os seguintes documentos:`
+  },
+  registo: {
+    label: 'Registo Civil',
+    icon: '📋',
+    docs: [
+      ['Certidão de nascimento emitida em Portugal', 'Original + 2 fotocópias'],
+      ['Bilhete de Identidade angolano dos pais', 'Original + fotocópia'],
+      ['Passaporte dos pais', 'Original + fotocópia das páginas de dados'],
+      ['Casados em Portugal: certidão de casamento', 'Tradução jurada para português se emitida no estrangeiro'],
+      ['Comprovativo de residência em Portugal', 'Documento actualizado, nos últimos 3 meses']
+    ],
+    slots: [
+      {date:'Terça, 15 Jul 2026', time:'10h00', loc:'Balcão 6', busy:false},
+      {date:'Quinta, 17 Jul 2026', time:'09h30', loc:'Balcão 6', busy:false},
+      {date:'Quinta, 17 Jul 2026', time:'11h00', loc:'Balcão 6', busy:true},
+    ],
+    reply: () => `Para <strong>registo civil</strong> (nascimento, casamento ou óbito), são necessários:`
+  },
+  procuracao: {
+    label: 'Procuração / Autenticação',
+    icon: '📜',
+    docs: [
+      ['Bilhete de Identidade angolano do outorgante', 'Válido e original'],
+      ['Passaporte do outorgante', 'Original'],
+      ['Minuta da procuração redigida', 'Pode ser entregue no acto do atendimento'],
+      ['Identificação do procurador (pessoa que receberá poderes)', 'Cópia do BI ou passaporte'],
+      ['Comprovativo de pagamento', 'Taxa consular: € 25,00 por documento']
+    ],
+    slots: [
+      {date:'Segunda, 14 Jul 2026', time:'10h30', loc:'Balcão 2', busy:false},
+      {date:'Terça, 15 Jul 2026', time:'15h00', loc:'Balcão 2', busy:false},
+      {date:'Quarta, 16 Jul 2026', time:'09h00', loc:'Balcão 2', busy:false},
+    ],
+    reply: () => `Para <strong>procuração ou autenticação de documentos</strong>, são necessários:`
   }
-  fit();
-  window.addEventListener('resize',fit);
-}();
+};
+
+/* ══════════════════════════════════════════════════
+   CHAT ENGINE
+══════════════════════════════════════════════════ */
+const msgList = document.getElementById('messages');
+const inputField = document.getElementById('inputField');
+let typingEl = null;
+
+function now() {
+  const d = new Date();
+  return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+}
+
+function appendMsg(role, html, meta='') {
+  const isBot = role === 'bot';
+  const wrap = document.createElement('div');
+  wrap.className = 'msg' + (isBot ? '' : ' user');
+  wrap.innerHTML = `
+    <div class="msg-avatar ${isBot?'bot':'user-av'}">${isBot?`<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.85)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round"/></svg>`:USER_INIT}</div>
+    <div>
+      <div class="bubble ${isBot?'bot':'user'}">${html}</div>
+      <div class="bubble-meta${isBot?'':' right'}">${meta || now()}</div>
+    </div>`;
+  msgList.appendChild(wrap);
+  msgList.scrollTop = msgList.scrollHeight;
+  return wrap;
+}
+
+function showTyping() {
+  removeTyping();
+  const wrap = document.createElement('div');
+  wrap.className = 'msg';
+  wrap.innerHTML = `
+    <div class="msg-avatar bot"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="4" fill="rgba(255,255,255,0.85)"/><path d="M3 18c0-3.86 3.13-7 7-7s7 3.14 7 7" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  msgList.appendChild(wrap);
+  typingEl = wrap;
+  msgList.scrollTop = msgList.scrollHeight;
+}
+function removeTyping() { if(typingEl){ typingEl.remove(); typingEl=null; } }
+
+function botReply(html, delay=900) {
+  showTyping();
+  inputField.disabled = true;
+  return new Promise(res => setTimeout(() => {
+    removeTyping();
+    inputField.disabled = false;
+    inputField.focus();
+    appendMsg('bot', html);
+    res();
+  }, delay));
+}
+
+/* ── Detect intent ── */
+function detectIntent(text) {
+  const t = text.toLowerCase();
+  if (/passaporte|renovar|renovação|bilhete|travel/.test(t))   return 'passaporte';
+  if (/visto|visa|entrada|turístico|trabalho|estudo/.test(t))  return 'visto';
+  if (/registo|civil|nascimento|casamento|óbito/.test(t))      return 'registo';
+  if (/procura[cç]|autentic|notar|assinar/.test(t))            return 'procuracao';
+  if (/operador|humano|pessoa|atendente|falar/.test(t))        return 'human';
+  if (/obrigad|obg|thanks|tks/.test(t))                        return 'thanks';
+  if (/olá|ola|bom dia|boa tarde|boa noite|hello|hi/.test(t)) return 'greet';
+  if (/hora|slot|agendar|marcar|atendimento/.test(t))         return 'agenda';
+  return 'unknown';
+}
+
+/* ── Handle send ── */
+async function sendMessage() {
+  const text = inputField.value.trim();
+  if(!text) return;
+  inputField.value = '';
+  appendMsg('user', text);
+
+  const intent = detectIntent(text);
+
+  if(chatState === 'idle' || intent !== 'unknown') {
+    if(intent === 'greet') {
+      await botReply('Bom dia! Como posso ajudá-lo(a)?<br><br>'+quickChips(), 600);
+    } else if(intent === 'thanks') {
+      await botReply('De nada! Estou sempre disponível caso precise de mais ajuda. Bom dia! 🙂', 700);
+    } else if(intent === 'human') {
+      await botReply('Compreendo. Vou escalar para um operador humano — aguarde um momento.<br><br><span style="color:var(--amber);font-weight:600">⏳ A conectar… tempo de espera estimado: 3 min</span>', 800);
+    } else if(intent === 'agenda' && chatState === 'idle') {
+      await botReply('Qual o serviço que pretende agendar?<br><br>'+quickChips(), 700);
+    } else if(SERVICES[intent]) {
+      await showServiceFlow(intent);
+    } else {
+      await botReply('Desculpe, não compreendi totalmente a sua questão. Pode indicar o serviço pretendido?<br><br>'+quickChips(), 800);
+    }
+  } else if(chatState === 'service_shown') {
+    await botReply('Por favor seleccione um dos horários disponíveis acima, ou escolha outro serviço:<br><br>'+quickChips(), 700);
+  } else if(chatState === 'slot_selected') {
+    if(/confirm|sim|ok|quero|concordo|esse|este/.test(text.toLowerCase())) {
+      await confirmBooking();
+    } else {
+      await botReply('Para confirmar o horário seleccionado, clique em <strong>"Confirmar atendimento"</strong> abaixo da lista de horários, ou escreva "confirmar". 😊', 700);
+    }
+  } else if(chatState === 'confirmed') {
+    await botReply('O seu atendimento está confirmado. Precisa de mais alguma coisa?<br><br>'+quickChips(), 600);
+  }
+}
+
+function quickChips() {
+  return `<div class="quick-replies">
+    <span class="qr-chip" onclick="chipClick('Renovar passaporte')">🛂 Passaporte</span>
+    <span class="qr-chip" onclick="chipClick('Pedir visto')">🌍 Visto</span>
+    <span class="qr-chip" onclick="chipClick('Registo civil')">📋 Registo civil</span>
+    <span class="qr-chip" onclick="chipClick('Procuração')">📜 Procuração</span>
+    <span class="qr-chip" onclick="chipClick('Falar com operador humano')">👤 Operador</span>
+  </div>`;
+}
+
+function chipClick(text) {
+  inputField.value = text;
+  sendMessage();
+}
+
+/* ── Service flow ── */
+async function showServiceFlow(intent) {
+  const svc = SERVICES[intent];
+  selectedService = intent;
+  chatState = 'service_shown';
+
+  const docItems = svc.docs.map((d,i) =>
+    `<div class="req-item"><div class="req-num">${i+1}</div><div><strong>${d[0]}</strong><br><span style="font-size:12px;color:var(--muted)">${d[1]}</span></div></div>`
+  ).join('');
+
+  const slotItems = svc.slots.map((s,i) =>
+    `<div class="slot${s.busy?' busy':''}" id="slot${i}" onclick="${s.busy?'':`pickSlot(${i},'${s.date}','${s.time}','${s.loc}','${svc.label}')`}">`+
+    `<div class="slot-date">${s.date}</div>`+
+    `<div class="slot-time">${s.time}${s.busy?' <span style="font-size:10px;color:var(--muted);font-weight:400">· ocupado</span>':''}</div>`+
+    `<div class="slot-loc">${s.loc}</div></div>`
+  ).join('');
+
+  const replyIntro = svc.reply(inputField.value || '');
+  await botReply(`${replyIntro}<br><br>
+    <div class="req-list">${docItems}</div><br>
+    Tenho os seguintes horários disponíveis — escolha o que preferir:
+    <div class="slots">${slotItems}</div>
+    <button class="cta-confirm" id="confirmBtn" onclick="confirmBooking()" disabled>Confirmar atendimento</button>
+  `, 1100);
+
+  // update right panel to "service selected"
+  updateSummaryService(svc);
+}
+
+function pickSlot(idx, date, time, loc, svcLabel) {
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  const el = document.getElementById('slot'+idx);
+  if(el) el.classList.add('selected');
+  const btn = document.getElementById('confirmBtn');
+  if(btn) btn.disabled = false;
+  selectedSlot = {date, time, loc, svcLabel};
+  chatState = 'slot_selected';
+  updateSummarySlot(selectedSlot);
+}
+
+async function confirmBooking() {
+  if(!selectedSlot) return;
+  chatState = 'confirmed';
+  const ref = 'LIS-2026-07-' + Math.floor(Math.random()*8000+1000);
+  selectedSlot.ref = ref;
+  await botReply(`<span style="color:var(--green);font-weight:700;font-size:15px">✓ Marcação confirmada!</span><br><br>
+    Referência: <strong style="font-family:monospace;letter-spacing:1px">${ref}</strong><br><br>
+    O resumo completo e o QR da senha estão visíveis no painel à direita.<br><br>
+    Receberá lembretes automáticos <strong>72h</strong> e <strong>24h</strong> antes do atendimento, por e-mail e SMS.<br><br>
+    Mais alguma questão?`, 900);
+  updateSummaryConfirmed(selectedSlot);
+}
+
+/* ══════════════════════════════════════════════════
+   SUMMARY PANEL UPDATES
+══════════════════════════════════════════════════ */
+const summaryBody = document.getElementById('summaryBody');
+const statusBadge = document.getElementById('statusBadge');
+const summarySubtitle = document.getElementById('summarySubtitle');
+
+function updateSummaryService(svc) {
+  statusBadge.style.display = 'inline-flex';
+  statusBadge.className = 'status-badge pending';
+  statusBadge.textContent = 'Aguarda selecção de horário';
+  summarySubtitle.textContent = svc.label + ' · Escolha um horário';
+
+  const docItems = svc.docs.map(d => `
+    <div class="doc-item">
+      <div class="doc-check ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3.5 3.5L10 3" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="doc-label">${d[0]}</div><div class="doc-note">${d[1]}</div></div>
+    </div>`).join('');
+
+  summaryBody.innerHTML = `
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Serviço seleccionado</div>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+        <div style="font-size:28px">${svc.icon}</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--ink)">${svc.label}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Embaixada de Angola em Lisboa</div></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Documentos necessários</div>
+      <div class="doc-list">${docItems}</div>
+    </div>`;
+}
+
+function updateSummarySlot(slot) {
+  statusBadge.textContent = 'Aguarda confirmação';
+  summarySubtitle.textContent = slot.svcLabel + ' · ' + slot.date + ' · ' + slot.time;
+
+  const svc = SERVICES[selectedService];
+  const docItems = svc.docs.map(d => `
+    <div class="doc-item">
+      <div class="doc-check ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3.5 3.5L10 3" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="doc-label">${d[0]}</div><div class="doc-note">${d[1]}</div></div>
+    </div>`).join('');
+
+  summaryBody.innerHTML = `
+    <div class="detail-card">
+      <div class="dc-head"><div class="dc-head-label">Detalhe do Atendimento</div></div>
+      <div class="dc-row"><div class="dc-label">Serviço</div><div class="dc-value">${slot.svcLabel}</div></div>
+      <div class="dc-row"><div class="dc-label">Data e hora</div><div class="dc-value highlight">${slot.date} · ${slot.time}</div></div>
+      <div class="dc-row"><div class="dc-label">Local</div><div class="dc-value">Embaixada de Angola em Lisboa</div></div>
+      <div class="dc-row"><div class="dc-label">Balcão</div><div class="dc-value">${slot.loc}</div></div>
+      <div class="dc-row"><div class="dc-label">Estado</div><div class="dc-value"><span style="color:var(--amber);font-weight:700">Aguarda confirmação</span></div></div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Documentos pré-validados</div>
+      <div class="doc-list">${docItems}</div>
+    </div>`;
+}
+
+function updateSummaryConfirmed(slot) {
+  statusBadge.className = 'status-badge confirmed';
+  statusBadge.textContent = 'Confirmado';
+  summarySubtitle.textContent = 'Ref. ' + slot.ref;
+
+  const svc = SERVICES[selectedService];
+  const docItems = svc.docs.map(d => `
+    <div class="doc-item">
+      <div class="doc-check ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3.5 3.5L10 3" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="doc-label">${d[0]}</div><div class="doc-note">${d[1]}</div></div>
+    </div>`).join('');
+
+  summaryBody.innerHTML = `
+    <div class="detail-card">
+      <div class="dc-head"><div class="dc-head-label">Detalhe do Atendimento</div></div>
+      <div class="dc-row"><div class="dc-label">Posto consular</div><div class="dc-value highlight">Embaixada de Angola em Lisboa</div></div>
+      <div class="dc-row"><div class="dc-label">Serviço</div><div class="dc-value">${slot.svcLabel}</div></div>
+      <div class="dc-row"><div class="dc-label">Data e hora</div><div class="dc-value highlight">${slot.date} · ${slot.time}</div></div>
+      <div class="dc-row"><div class="dc-label">Balcão</div><div class="dc-value">${slot.loc}</div></div>
+      <div class="dc-row"><div class="dc-label">Referência</div><div class="dc-value ref">${slot.ref}</div></div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Documentos pré-validados</div>
+      <div class="doc-list">${docItems}</div>
+    </div>
+    <div class="qr-box">
+      <div class="qr-img">
+        <svg width="78" height="78" viewBox="0 0 78 78" fill="none">
+          <rect x="4" y="4" width="22" height="22" rx="2" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <rect x="9" y="9" width="12" height="12" rx="1" fill="var(--ink)"/>
+          <rect x="52" y="4" width="22" height="22" rx="2" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <rect x="57" y="9" width="12" height="12" rx="1" fill="var(--ink)"/>
+          <rect x="4" y="52" width="22" height="22" rx="2" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <rect x="9" y="57" width="12" height="12" rx="1" fill="var(--ink)"/>
+          <rect x="32" y="4" width="5" height="5" fill="var(--ink)"/><rect x="40" y="4" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="12" width="5" height="5" fill="var(--ink)"/><rect x="48" y="12" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="20" width="5" height="5" fill="var(--ink)"/><rect x="40" y="20" width="5" height="5" fill="var(--ink)"/>
+          <rect x="4" y="32" width="5" height="5" fill="var(--ink)"/><rect x="12" y="32" width="5" height="5" fill="var(--ink)"/>
+          <rect x="24" y="32" width="5" height="5" fill="var(--ink)"/><rect x="32" y="32" width="5" height="5" fill="var(--ink)"/>
+          <rect x="44" y="32" width="5" height="5" fill="var(--ink)"/><rect x="56" y="32" width="5" height="5" fill="var(--ink)"/>
+          <rect x="69" y="32" width="5" height="5" fill="var(--ink)"/>
+          <rect x="4" y="40" width="5" height="5" fill="var(--ink)"/><rect x="20" y="40" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="40" width="5" height="5" fill="var(--ink)"/><rect x="44" y="40" width="5" height="5" fill="var(--ink)"/>
+          <rect x="56" y="40" width="5" height="5" fill="var(--ink)"/><rect x="69" y="40" width="5" height="5" fill="var(--ink)"/>
+          <rect x="4" y="48" width="5" height="5" fill="var(--ink)"/><rect x="24" y="48" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="56" width="5" height="5" fill="var(--ink)"/><rect x="44" y="56" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="64" width="5" height="5" fill="var(--ink)"/><rect x="56" y="64" width="5" height="5" fill="var(--ink)"/>
+          <rect x="69" y="64" width="5" height="5" fill="var(--ink)"/>
+          <rect x="32" y="69" width="5" height="5" fill="var(--ink)"/><rect x="44" y="69" width="5" height="5" fill="var(--ink)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="qr-title">Senha de atendimento</div>
+        <div class="qr-ref">Ref: ${slot.ref} · ${slot.loc}</div>
+        <div class="qr-remind">
+          <strong>Lembretes automáticos:</strong> será notificado(a) por e-mail e SMS 72h e 24h antes do atendimento. Apresente este QR à entrada.
+        </div>
+      </div>
+    </div>
+    <div class="reminder-strip">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="var(--amber)" stroke-width="1.6" stroke-linecap="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="var(--amber)" stroke-width="1.6"/></svg>
+      <div><strong>Próximos lembretes:</strong> ${getRemDates(slot.date)} — via e-mail e SMS</div>
+    </div>`;
+}
+
+function getRemDates(dateStr) {
+  // approximate lembrete dates based on slot date string
+  return '72h e 24h antes do atendimento';
+}
+
+/* ══════════════════════════════════════════════════
+   KEYBOARD + INIT
+══════════════════════════════════════════════════ */
+inputField.addEventListener('keydown', e => { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }});
+
+// Initial bot greeting
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    appendMsg('bot', `Bom dia! Sou o <strong>Assistente MIREX</strong>. Posso ajudá-lo(a) a agendar atendimento, esclarecer dúvidas sobre os serviços consulares e verificar os documentos necessários.<br><br>
+      Em que posso ajudá-lo(a) hoje?<br><br>${quickChips()}`,
+      `${now()} · Assistente MIREX`);
+  }, 400);
+});
 </script>
 </body>
 </html>
