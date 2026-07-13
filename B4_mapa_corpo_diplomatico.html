@@ -138,7 +138,7 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </div>
   <div class="hdr-div"></div>
   <div class="hdr-info"><div class="hdr-title">Corpo Diplomático</div><div class="hdr-sub">842 efectivos · 52 postos · 5 continentes</div></div>
-  <div class="hdr-nav"><div class="nt on">Visão Geral</div><div class="nt">Por Posto</div><div class="nt">Mandatos</div><div class="nt">Formação</div></div>
+  <div class="hdr-nav" id="hdr-nav"><div class="nt on" onclick="switchTabB4(this,'geral')">Visão Geral</div><div class="nt" onclick="switchTabB4(this,'porPosto')">Por Posto</div><div class="nt" onclick="switchTabB4(this,'mandatos')">Mandatos</div><div class="nt" onclick="switchTabB4(this,'formacao')">Formação</div></div>
   <div class="hdr-r">
     <div class="ib"><div class="notif-dot"></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="ib"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
     <div class="uchip"><div class="av">PV</div><div><div class="un">Dr. Pedro Valente</div><div class="us">Director de RH</div></div></div>
@@ -146,7 +146,13 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </header>
 <div class="cnt">
 <div class="kcard"><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="klbl">Total de Efectivos</div><div class="kbig">842</div><div class="kdiff" style="color:var(--verde)">↑ 18 contratações Q2</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="klbl">Mandatos a Expirar (90d)</div><div class="kbig">3</div><div class="kdiff" style="color:var(--ambar)">Buenos Aires·Paris·Seul</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="klbl">Postos com Efectivo Completo</div><div class="kbig">41/52</div><div class="kdiff" style="color:var(--muted)">11 com vagas em aberto</div></div><div class="ki"><div class="ki-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="klbl">Média de Mandato</div><div class="kbig">3,4a</div><div class="kdiff" style="color:var(--muted)">Rotação padrão: 4 anos</div></div></div>
-<div class="brow">
+<div class="brow" id="b4-brow-alt" style="display:none">
+  <div class="gc" style="flex:1;overflow:hidden">
+    <div class="gh"><div class="gt">Postos Diplomáticos</div><span style="font-size:12px;color:var(--muted)">31 missões activas</span></div>
+    <div id="por-posto-table" style="overflow-y:auto;flex:1;padding:0 4px"></div>
+  </div>
+</div>
+<div class="brow" id="b4-brow-main">
   <div class="gc" style="flex:1">
     <div class="gh">
       <div><div class="gt">Rede Diplomática — Corpo Diplomático</div><div class="gs">31 missões · 842 efectivos · dados SIGEP-MIREX</div></div>
@@ -241,7 +247,8 @@ let _b4Zoom,_b4Svg;
         tip.style.left=(event.clientX-rect.left+10)+'px';
         tip.style.top=(event.clientY-rect.top-42)+'px';
         tip.innerHTML='<span style="font-weight:700">'+m.loc+'</span><br><span style="opacity:.65;font-size:11px">'+m.cont+'</span>';
-      }).on('mouseleave',()=>tip.style.display='none');
+      }).on('mouseleave',()=>tip.style.display='none')
+        .on('click',()=>selectDiplomat(m.id));
     });
   }).catch(()=>{
     mapG.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
@@ -259,29 +266,14 @@ function b4ZoomReset(){ _b4Svg.transition().duration(300).call(_b4Zoom.transform
     <div class="gc" style="flex-shrink:0">
       <div class="gh"><div class="gt">Mandatos a Expirar</div><span class="chip ca">3 nos próx. 90 dias</span></div>
       <div style="padding:0 18px">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Buenos Aires</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. Carlos Freitas · 3 efectivos</div></div><span class="chip cr">62 dias</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Paris</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. Maria Conceição Baptista · 16 efectivos</div></div><span class="chip ca">78 dias</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Seul</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. António Sebastião · 7 efectivos</div></div><span class="chip ci">88 dias</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .1s;border-radius:8px;padding:13px 8px" onmouseenter="this.style.background='rgba(22,38,61,0.04)'" onmouseleave="this.style.background=''" onclick="selectDiplomat('M015')"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Buenos Aires</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. Carlos Freitas · 3 efectivos</div></div><span class="chip cr">62 dias</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .1s;border-radius:8px;padding:13px 8px" onmouseenter="this.style.background='rgba(22,38,61,0.04)'" onmouseleave="this.style.background=''" onclick="selectDiplomat('M002')"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Paris</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. Maria Conceição Baptista · 16 efectivos</div></div><span class="chip ca">78 dias</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 0;cursor:pointer;transition:background .1s;border-radius:8px;padding:13px 8px" onmouseenter="this.style.background='rgba(22,38,61,0.04)'" onmouseleave="this.style.background=''" onclick="selectDiplomat('M020')"><div><div style="font-size:13px;font-weight:700;color:var(--ink)">Seul</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Emb. António Sebastião · 7 efectivos</div></div><span class="chip ci">88 dias</span></div>
       </div>
     </div>
     <div class="gc" style="flex:1">
-      <div class="gh"><div class="gt">Perfil Seleccionado</div><span class="chip cg">Em funções</span></div>
-      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;gap:14px;align-items:center">
-          <div style="width:54px;height:54px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:var(--gold);flex-shrink:0">MB</div>
-          <div><div style="font-size:16px;font-weight:700;color:var(--ink)">Dra. Maria C. Baptista</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Embaixadora — Paris · Desde Jan 2022</div><div style="display:flex;gap:6px;margin-top:7px"><span class="chip cg">Activa</span><span class="chip cn">Carreira diplomática</span></div></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Posto</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">Embaixada — Paris</div></div>
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Mandato</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ambar)">Expira em 78 dias</div></div>
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Categoria</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">Embaixadora</div></div>
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Historial</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">Lisboa · Brasília · Paris</div></div>
-        </div>
-        <div>
-          <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Competências</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="chip cn">Direito Internacional</span><span class="chip cn">Negociação Multilateral</span><span class="chip cn">FR · EN · PT</span><span class="chip cg">Membro ONU 2024</span></div>
-        </div>
-      </div>
+      <div class="gh"><div class="gt">Perfil Seleccionado</div><span class="chip cg" id="profile-status">Em funções</span></div>
+      <div id="profile-panel" style="padding:18px 20px;display:flex;flex-direction:column;gap:14px;overflow:auto;flex:1"></div>
     </div>
   </div>
 </div>
@@ -289,6 +281,104 @@ function b4ZoomReset(){ _b4Svg.transition().duration(300).call(_b4Zoom.transform
 <div class="ft">Protótipo conceptual · TIS · 2026</div>
 </div>
 </div><a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
+<script>
+const DIPLOMATS={
+  'HQ':{initials:'JF',name:'Min. João Fernandes',cargo:'Ministro das Relações Exteriores',posto:'Sede — Luanda',desde:'Jan 2022',status:'Activo',categoria:'Ministro',mandato:null,hist:'Adis Abeba · Brasília · Luanda (sede)',comp:['Política Externa','Liderança Estratégica','PT · FR · EN · ES']},
+  'M001':{initials:'CF',name:'Emb. Carlos Freitas',cargo:'Embaixador — Lisboa',posto:'Embaixada de Lisboa',desde:'Mar 2023',status:'Activo',categoria:'Embaixador',mandato:{dias:62,cor:'var(--red)'},hist:'Brasília · Paris · Lisboa',comp:['Direito Internacional','Relações Luso-Angolanas','PT · FR · EN']},
+  'M002':{initials:'MB',name:'Dra. Maria C. Baptista',cargo:'Embaixadora — Paris',posto:'Consulado de Paris',desde:'Jan 2022',status:'Activo',categoria:'Embaixadora',mandato:{dias:78,cor:'var(--ambar)'},hist:'Lisboa · Brasília · Paris',comp:['Negociação Multilateral','FR · EN · PT','Membro ONU 2024']},
+  'M003':{initials:'AR',name:'Emb. António Ramos',cargo:'Embaixador — Brasília',posto:'Embaixada de Brasília',desde:'Jun 2021',status:'Activo',categoria:'Embaixador',mandato:{dias:120,cor:'var(--muted)'},hist:'Lagos · Lisboa · Brasília',comp:['Cooperação Sul-Sul','PT · EN · ES']},
+  'M004':{initials:'LN',name:'Emb. Luísa Neto',cargo:'Embaixadora — Pequim',posto:'Embaixada de Pequim',desde:'Sep 2022',status:'Activo',categoria:'Embaixadora',mandato:null,hist:'Tóquio · Nova Delhi · Pequim',comp:['Política Asiática','ZH · EN · PT']},
+  'M005':{initials:'PB',name:'Emb. Pedro Bettencourt',cargo:'Embaixador — Washington',posto:'Embaixada de Washington',desde:'Feb 2023',status:'Activo',categoria:'Embaixador',mandato:null,hist:'Nova York · Londres · Washington',comp:['Relações EUA-Angola','EN · PT · FR']},
+  'M006':{initials:'SF',name:'Emb. Sofia Ferreira',cargo:'Embaixadora — Moscovo',posto:'Embaixada de Moscovo',desde:'Jul 2021',status:'Alerta',categoria:'Embaixadora',mandato:null,hist:'Berlim · Varsóvia · Moscovo',comp:['Europa Oriental','RU · DE · PT · EN']},
+  'M007':{initials:'MM',name:'Côns. Manuel Mota',cargo:'Cônsul-Geral — Joanesburgo',posto:'Consulado de Joanesburgo',desde:'Jan 2023',status:'Activo',categoria:'Cônsul-Geral',mandato:null,hist:'Nairóbi · Acra · Joanesburgo',comp:['Direito Consular','EN · PT · ZU']},
+  'M008':{initials:'FG',name:'Emb. Filomena Gaspar',cargo:'Embaixadora — Londres',posto:'Embaixada de Londres',desde:'Apr 2022',status:'Activo',categoria:'Embaixadora',mandato:null,hist:'Bruxelas · Paris · Londres',comp:['Direito Internacional','EN · FR · PT']},
+  'M009':{initials:'RC',name:'Emb. Rui Carvalho',cargo:'Embaixador — Berlim',posto:'Embaixada de Berlim',desde:'Aug 2021',status:'Alerta',categoria:'Embaixador',mandato:null,hist:'Viena · Amesterdão · Berlim',comp:['União Europeia','DE · EN · PT']},
+  'M010':{initials:'IC',name:'Emb. Isabel Campos',cargo:'Embaixadora — Madrid',posto:'Embaixada de Madrid',desde:'Mar 2022',status:'Activo',categoria:'Embaixadora',mandato:null,hist:'Lisboa · Barcelona · Madrid',comp:['Ibero-América','ES · PT · EN']},
+  'M015':{initials:'CF',name:'Emb. Carlos Freitas',cargo:'Embaixador — Buenos Aires',posto:'Embaixada de Buenos Aires',desde:'Apr 2022',status:'Activo',categoria:'Embaixador',mandato:{dias:62,cor:'var(--red)'},hist:'São Paulo · Lima · Buenos Aires',comp:['América Latina','ES · PT · EN']},
+  'M016':{initials:'PN',name:'Emb. Paulo Neto',cargo:'Embaixador — Nairóbi',posto:'Embaixada de Nairóbi',desde:'Jun 2022',status:'Activo',categoria:'Embaixador',mandato:null,hist:'Acra · Abidjan · Nairóbi',comp:['África Oriental','EN · SW · PT']},
+  'M020':{initials:'AS',name:'Emb. António Sebastião',cargo:'Embaixador — Seul',posto:'Embaixada de Seul',desde:'Oct 2022',status:'Activo',categoria:'Embaixador',mandato:{dias:88,cor:'#8a6500'},hist:'Tóquio · Banguecoque · Seul',comp:['Ásia Oriental','KO · EN · PT']},
+  'M026':{initials:'JM',name:'Emb. José Menezes',cargo:'Embaixador — Roma',posto:'Embaixada de Roma',desde:'May 2021',status:'Alerta',categoria:'Embaixador',mandato:null,hist:'Bruxelas · Genebra · Roma',comp:['Organizações Int.','IT · FR · EN · PT']}
+};
+
+function selectDiplomat(id){
+  const d=DIPLOMATS[id];
+  const panel=document.getElementById('profile-panel');
+  const status=document.getElementById('profile-status');
+  if(!d){
+    panel.innerHTML='<div style="color:var(--muted);font-size:13px;padding:8px">Clique num posto para ver o perfil</div>';
+    return;
+  }
+  status.textContent=d.status;
+  status.className='chip '+(d.status==='Activo'?'cg':d.status==='Alerta'?'ca':'cn');
+  const mandHtml=d.mandato?`<div style="font-size:13px;font-weight:600;margin-top:3px;color:${d.mandato.cor}">Expira em ${d.mandato.dias} dias</div>`:`<div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--verde)">Activo</div>`;
+  panel.innerHTML=`
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:54px;height:54px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:var(--gold);flex-shrink:0">${d.initials}</div>
+      <div>
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">${d.name}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">${d.cargo} · Desde ${d.desde}</div>
+        <div style="display:flex;gap:6px;margin-top:7px"><span class="chip ${d.status==='Activo'?'cg':d.status==='Alerta'?'ca':'cn'}">${d.status}</span><span class="chip cn">Carreira diplomática</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Posto</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">${d.posto}</div></div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Mandato</div>${mandHtml}</div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Categoria</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">${d.categoria}</div></div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">Historial</div><div style="font-size:13px;font-weight:600;margin-top:3px;color:var(--ink)">${d.hist}</div></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Competências</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${d.comp.map(c=>`<span class="chip cn">${c}</span>`).join('')}</div>
+    </div>`;
+}
+
+const POR_POSTO_DATA=[
+  {id:'M001',loc:'Lisboa',cont:'Europa',efect:12,status:'warning',chef:'Emb. Carlos Freitas'},
+  {id:'M002',loc:'Paris',cont:'Europa',efect:16,status:'warning',chef:'Emb. M. C. Baptista'},
+  {id:'M003',loc:'Brasília',cont:'Am. Sul',efect:9,status:'critical',chef:'Emb. António Ramos'},
+  {id:'M004',loc:'Pequim',cont:'Ásia',efect:11,status:'warning',chef:'Emb. Luísa Neto'},
+  {id:'M005',loc:'Washington',cont:'Am. Norte',efect:14,status:'warning',chef:'Emb. Pedro Bettencourt'},
+  {id:'M006',loc:'Moscovo',cont:'Europa',efect:8,status:'critical',chef:'Emb. Sofia Ferreira'},
+  {id:'M007',loc:'Joanesburgo',cont:'África',efect:7,status:'normal',chef:'Côns. Manuel Mota'},
+  {id:'M008',loc:'Londres',cont:'Europa',efect:13,status:'normal',chef:'Emb. Filomena Gaspar'},
+  {id:'M009',loc:'Berlim',cont:'Europa',efect:10,status:'critical',chef:'Emb. Rui Carvalho'},
+  {id:'M010',loc:'Madrid',cont:'Europa',efect:9,status:'normal',chef:'Emb. Isabel Campos'},
+  {id:'M016',loc:'Nairóbi',cont:'África',efect:6,status:'normal',chef:'Emb. Paulo Neto'},
+  {id:'M020',loc:'Seul',cont:'Ásia',efect:7,status:'normal',chef:'Emb. António Sebastião'},
+  {id:'M026',loc:'Roma',cont:'Europa',efect:11,status:'critical',chef:'Emb. José Menezes'},
+];
+
+function switchTabB4(el,tab){
+  document.querySelectorAll('#hdr-nav .nt').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  const brow=document.getElementById('b4-brow-main');
+  const alt=document.getElementById('b4-brow-alt');
+  if(tab==='porPosto'){
+    brow.style.display='none'; alt.style.display='flex';
+    renderPorPosto();
+  } else {
+    brow.style.display='flex'; alt.style.display='none';
+    if(tab==='mandatos') selectDiplomat('M015');
+  }
+}
+
+function renderPorPosto(){
+  const cont=document.getElementById('por-posto-table');
+  const stMap={normal:'<span style="display:inline-flex;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:rgba(46,125,79,0.10);color:var(--verde)">Normal</span>',warning:'<span style="display:inline-flex;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:rgba(199,125,10,0.10);color:var(--ambar)">Alerta</span>',critical:'<span style="display:inline-flex;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:rgba(181,18,27,0.10);color:var(--red)">Crítico</span>'};
+  cont.innerHTML=`<table class="tbl" style="width:100%">
+    <thead><tr><th>Posto</th><th>Continente</th><th>Chefe de Missão</th><th>Efectivos</th><th>Estado</th></tr></thead>
+    <tbody>${POR_POSTO_DATA.map(p=>`<tr style="cursor:pointer" onclick="selectDiplomat('${p.id}')" onmouseenter="this.style.background='rgba(22,38,61,0.03)'" onmouseleave="this.style.background=''">
+      <td style="font-weight:700">${p.loc}</td>
+      <td style="color:var(--muted)">${p.cont}</td>
+      <td>${p.chef}</td>
+      <td>${p.efect}</td>
+      <td>${stMap[p.status]}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+selectDiplomat('M002');
+</script>
 <script>
 !function(){var vp=document.getElementById('_vp');function fit(){var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);vp.style.transform='scale('+s+')'}fit();window.addEventListener('resize',fit)}();
 </script>
