@@ -159,7 +159,7 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
         <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1"/><path d="M5.5 3v2.5l1.5 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
         Turno actual: Equipa MIREX · Retaguarda 24/7 activa
       </div>
-      <span class="hdr-ts">09 Jul 2026 · 02:38 WAT</span>
+      <span class="hdr-ts" id="hdr-clock">09 Jul 2026 · 02:38 WAT</span>
       <div class="user-chip">
         <div class="user-av">FA</div>
         <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.75)">Figueiredo A. · Analista SOC</span>
@@ -276,8 +276,9 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
                 tip.style.left=(event.clientX-rect.left+10)+'px';
                 tip.style.top=(event.clientY-rect.top-40)+'px';
                 const sl=m.status==='ok'?'<span style="color:#22c55e">● Operacional</span>':m.status==='warn'?'<span style="color:#f59e0b">● Atenção</span>':m.status==='incident'?'<span style="color:#ef4444">● Incidente activo</span>':'<span style="color:#D9A21B">● HQ</span>';
-                tip.innerHTML='<span style="font-weight:700">'+m.loc+'</span><br>'+sl;
-              }).on('mouseleave',()=>tip.style.display='none');
+                tip.innerHTML='<span style="font-weight:700">'+m.loc+'</span><br>'+sl+(m.status!=='ok'&&m.status!=='hq'?' <span style="opacity:.6;font-size:10px">· clique para detalhes</span>':'');
+              }).on('mouseleave',()=>tip.style.display='none')
+                .on('click',()=>{ if(m.status==='incident'||m.status==='warn') selectAlert(m.id); });
             });
           }).catch(()=>{
             mapG.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
@@ -327,95 +328,39 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 
     <!-- MIDDLE: Alert investigation -->
     <div class="panel" style="flex:0 0 420px;border-right:1px solid var(--soc-border)">
-      <div class="panel-header">
+      <div class="panel-header" id="inc-header">
         <div>
-          <div class="panel-title">
+          <div class="panel-title" id="inc-panel-title">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L1 3.5v4c0 3 2 5 5 5.5 3-.5 5-2.5 5-5.5v-4L6 1z" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="0.8"/></svg>
             Investigação de Incidente
           </div>
-          <div class="panel-sub">INC-2026-0092 · Prioridade alta</div>
+          <div class="panel-sub" id="inc-panel-sub">INC-2026-0092 · Prioridade alta</div>
         </div>
-        <div style="font-size:10px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:var(--soc-red);padding:2px 8px;border-radius:10px;font-weight:600">Em investigação</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div id="inc-status-badge" style="font-size:10px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:var(--soc-red);padding:2px 8px;border-radius:10px;font-weight:600">Em investigação</div>
+        </div>
       </div>
 
       <div class="alert-section">
-        <div class="alert-incident">
-          <div class="inc-badge">● Alerta de segurança — Nível 2</div>
-          <div class="inc-title">Tentativa de spear-phishing detectada — Posto de Moscovo</div>
-          <div class="inc-sub">Correio electrónico malicioso com anexo armadilhado enviado para dois endereços institucionais do posto. Bloqueado automaticamente pela camada de filtragem MIREX. Nenhum utilizador afectado.</div>
+        <div class="alert-incident" id="inc-detail">
+          <div class="inc-badge" id="inc-badge">● Alerta de segurança — Nível 2</div>
+          <div class="inc-title" id="inc-title">Tentativa de spear-phishing detectada — Posto de Moscovo</div>
+          <div class="inc-sub" id="inc-sub">Correio electrónico malicioso com anexo armadilhado enviado para dois endereços institucionais do posto. Bloqueado automaticamente pela camada de filtragem MIREX. Nenhum utilizador afectado.</div>
           <div class="inc-meta">
-            <span>Detectado: <strong>02:14 WAT</strong></span>
-            <span>Origem: <strong>IP externo</strong></span>
-            <span>Alvos: <strong>2 contas</strong></span>
+            <span>Detectado: <strong id="inc-detected">02:14 WAT</strong></span>
+            <span>Origem: <strong id="inc-origin">IP externo</strong></span>
+            <span>Alvos: <strong id="inc-targets">2 contas</strong></span>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <div onclick="acaoIncidente('reconhecer')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.25);color:var(--soc-blue);transition:opacity .12s" onmouseenter="this.style.opacity='.75'" onmouseleave="this.style.opacity='1'">✓ Reconhecer</div>
+            <div onclick="acaoIncidente('avancar')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:var(--soc-amber);transition:opacity .12s" onmouseenter="this.style.opacity='.75'" onmouseleave="this.style.opacity='1'">▶ Avançar etapa</div>
+            <div onclick="acaoIncidente('resolver')" style="display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:var(--soc-green);transition:opacity .12s" onmouseenter="this.style.opacity='.75'" onmouseleave="this.style.opacity='1'">● Resolver</div>
           </div>
         </div>
 
         <div class="alert-tl">
           <div class="atl-label">Linha temporal da investigação</div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot green"></div>
-              <div class="atl-line done"></div>
-            </div>
-            <div class="atl-content">
-              <div class="atl-ts">02:14 · 09 Jul 2026</div>
-              <div class="atl-title">Alerta gerado automaticamente</div>
-              <div class="atl-desc">Motor de correlação SIEM detectou padrão de phishing. Regra: SPH-ATT-003.</div>
-            </div>
-          </div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot green"></div>
-              <div class="atl-line done"></div>
-            </div>
-            <div class="atl-content">
-              <div class="atl-ts">02:15 · 09 Jul 2026</div>
-              <div class="atl-title">Bloqueio automático activado</div>
-              <div class="atl-desc">Anexo quarentenado. Endereço de envio bloqueado na gateway de correio.</div>
-            </div>
-          </div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot green"></div>
-              <div class="atl-line done"></div>
-            </div>
-            <div class="atl-content">
-              <div class="atl-ts">02:19 · 09 Jul 2026</div>
-              <div class="atl-title">Analista notificado — Turno A</div>
-              <div class="atl-desc">Analista Figueiredo A. assumiu o caso. Confirmação de bloqueio efectivo.</div>
-            </div>
-          </div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot amber"></div>
-              <div class="atl-line done"></div>
-            </div>
-            <div class="atl-content">
-              <div class="atl-ts">02:38 · 09 Jul 2026</div>
-              <div class="atl-title" style="color:var(--soc-amber)">Em curso: análise do payload</div>
-              <div class="atl-desc">Extracção de indicadores de comprometimento (IoC). Sandbox isolada activa.</div>
-            </div>
-          </div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot muted"></div>
-              <div class="atl-line pending"></div>
-            </div>
-            <div class="atl-content">
-              <div class="atl-ts">Pendente</div>
-              <div class="atl-title" style="color:var(--soc-muted)">Relatório de incidente e partilha de IoC</div>
-              <div class="atl-desc" style="color:rgba(255,255,255,0.2)">Partilha com rede de cibersegurança nacional.</div>
-            </div>
-          </div>
-          <div class="atl-item">
-            <div class="atl-indicator">
-              <div class="atl-dot muted"></div>
-            </div>
-            <div class="atl-content" style="padding-bottom:0">
-              <div class="atl-ts">Pendente</div>
-              <div class="atl-title" style="color:var(--soc-muted)">Encerramento e lições aprendidas</div>
-            </div>
-          </div>
+          <div id="inc-timeline"></div>
         </div>
       </div>
     </div>
@@ -427,18 +372,18 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
         <div class="panel-sub">Actualizado em tempo real</div>
       </div>
       <div class="conn-section">
-        <div class="conn-list">
-          <div class="conn-item">
+        <div class="conn-list" id="conn-list">
+          <div class="conn-item" id="conn-M006" onclick="selectAlert('M006')" style="cursor:pointer;transition:background .1s" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
             <div class="conn-status-dot" style="background:var(--soc-red);box-shadow:0 0 5px rgba(239,68,68,0.5)"></div>
             <div><div class="conn-name">Moscovo</div><div class="conn-detail">INC-2026-0092 · Em investigação</div></div>
             <div class="conn-latency warn">!!</div>
           </div>
-          <div class="conn-item">
+          <div class="conn-item" id="conn-M004" onclick="selectAlert('M004')" style="cursor:pointer;transition:background .1s" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
             <div class="conn-status-dot" style="background:var(--soc-amber)"></div>
             <div><div class="conn-name">Pequim</div><div class="conn-detail">Latência elevada · SLA em risco</div></div>
             <div class="conn-latency warn">248ms</div>
           </div>
-          <div class="conn-item">
+          <div class="conn-item" id="conn-M028" onclick="selectAlert('M028')" style="cursor:pointer;transition:background .1s" onmouseenter="this.style.background='rgba(255,255,255,0.03)'" onmouseleave="this.style.background=''">
             <div class="conn-status-dot" style="background:var(--soc-amber)"></div>
             <div><div class="conn-name">Jacarta</div><div class="conn-detail">Ligação intermitente</div></div>
             <div class="conn-latency warn">382ms</div>
@@ -552,6 +497,175 @@ body{overflow:hidden!important;width:100vw!important;height:100vh!important;marg
 </div>
 </div>
 <a href="index.html" id="_back"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L3.5 6.5l5 5" stroke="#D9A21B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Voltar</a>
+<script>
+// ── LIVE CLOCK ──
+(function liveClock(){
+  const el=document.getElementById('hdr-clock');
+  if(!el) return;
+  const BASE=new Date('2026-07-09T02:38:00');
+  const OFFSET=Date.now();
+  function tick(){
+    const now=new Date(BASE.getTime()+(Date.now()-OFFSET));
+    const d=now.toLocaleDateString('pt-PT',{day:'2-digit',month:'short',year:'numeric'}).replace(/\./g,'').replace(/ de /g,' ');
+    const t=now.toTimeString().slice(0,5);
+    el.textContent=`09 Jul 2026 · ${t} WAT`;
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+// ── ALERT DATA ──
+const SOC_ALERTS={
+  'M006':{
+    incId:'INC-2026-0092', priority:'alta', statusLabel:'Em investigação', statusBg:'rgba(239,68,68,0.1)', statusBorder:'rgba(239,68,68,0.25)', statusClr:'var(--soc-red)',
+    badge:'● Alerta de segurança — Nível 2',
+    title:'Tentativa de spear-phishing detectada — Posto de Moscovo',
+    desc:'Correio electrónico malicioso com anexo armadilhado enviado para dois endereços institucionais do posto. Bloqueado automaticamente pela camada de filtragem MIREX. Nenhum utilizador afectado.',
+    detected:'02:14 WAT', origin:'IP externo', targets:'2 contas',
+    steps:[
+      {ts:'02:14 · 09 Jul',title:'Alerta gerado automaticamente',desc:'Motor de correlação SIEM detectou padrão de phishing. Regra: SPH-ATT-003.',state:'done'},
+      {ts:'02:15 · 09 Jul',title:'Bloqueio automático activado',desc:'Anexo quarentenado. Endereço bloqueado na gateway de correio.',state:'done'},
+      {ts:'02:19 · 09 Jul',title:'Analista notificado — Turno A',desc:'Analista Figueiredo A. assumiu o caso. Bloqueio confirmado.',state:'done'},
+      {ts:'02:38 · 09 Jul',title:'Em curso: análise do payload',desc:'Extracção de IoC. Sandbox isolada activa.',state:'current'},
+      {ts:'Pendente',title:'Relatório e partilha de IoC',desc:'Partilha com rede de cibersegurança nacional.',state:'pending'},
+      {ts:'Pendente',title:'Encerramento e lições aprendidas',desc:'',state:'pending'}
+    ]
+  },
+  'M004':{
+    incId:'ALT-2026-0187', priority:'média', statusLabel:'Em triagem', statusBg:'rgba(245,158,11,0.1)', statusBorder:'rgba(245,158,11,0.25)', statusClr:'var(--soc-amber)',
+    badge:'● Alerta de rede — Nível 1',
+    title:'Latência elevada detectada — Ligação Pequim',
+    desc:'Latência de rede acima do limiar SLA (200ms). Valor actual: 248ms. Possível congestionamento ou rota alternativa activa. Sem impacto em operações críticas.',
+    detected:'02:02 WAT', origin:'Monitor de rede', targets:'Canal principal',
+    steps:[
+      {ts:'02:02 · 09 Jul',title:'Alerta de SLA gerado',desc:'Latência superou limiar de 200ms. Alerta automático gerado.',state:'done'},
+      {ts:'02:05 · 09 Jul',title:'Rota alternativa activada',desc:'Sistema de balanceamento activou rota de backup. Operações mantidas.',state:'done'},
+      {ts:'02:38 · 09 Jul',title:'Em curso: monitorização activa',desc:'A aguardar normalização da ligação principal. SLA em risco.',state:'current'},
+      {ts:'Pendente',title:'Restauro do canal principal',desc:'',state:'pending'}
+    ]
+  },
+  'M028':{
+    incId:'ALT-2026-0184', priority:'média', statusLabel:'Em triagem', statusBg:'rgba(245,158,11,0.1)', statusBorder:'rgba(245,158,11,0.25)', statusClr:'var(--soc-amber)',
+    badge:'● Alerta de rede — Nível 1',
+    title:'Ligação intermitente — Posto de Jacarta',
+    desc:'Perda intermitente de conectividade nos últimos 45 minutos. Causa provável: instabilidade do fornecedor de internet local. Dados sincronizados em modo offline.',
+    detected:'01:53 WAT', origin:'Monitor de rede', targets:'Canal VPN',
+    steps:[
+      {ts:'01:53 · 09 Jul',title:'Perda de conectividade detectada',desc:'Monitor de rede registou primeira queda de ligação.',state:'done'},
+      {ts:'01:58 · 09 Jul',title:'Modo offline sincronizado activado',desc:'Posto operacional em modo offline. Dados em fila para sincronização.',state:'done'},
+      {ts:'02:10 · 09 Jul',title:'Contacto com posto estabelecido',desc:'Analista confirmou operação normal no posto. Problema no ISP local.',state:'done'},
+      {ts:'02:38 · 09 Jul',title:'Em curso: aguardar resolução ISP',desc:'ISP local informado. Estimativa de resolução: 3h.',state:'current'},
+      {ts:'Pendente',title:'Restauro e verificação de integridade',desc:'',state:'pending'}
+    ]
+  }
+};
+
+let curAlertId='M006';
+const alertStepProgress={};
+
+function renderTimeline(steps){
+  return steps.map((s,i)=>{
+    const isLast=i===steps.length-1;
+    const dotClr=s.state==='done'?'green':s.state==='current'?'amber':'muted';
+    const lineHtml=!isLast?`<div class="atl-line ${s.state==='pending'?'pending':'done'}"></div>`:'';
+    const titleStyle=s.state==='current'?'color:var(--soc-amber)':s.state==='pending'?'color:var(--soc-muted)':'';
+    const descStyle=s.state==='pending'?'color:rgba(255,255,255,0.2)':'';
+    return `<div class="atl-item">
+      <div class="atl-indicator">
+        <div class="atl-dot ${dotClr}"></div>
+        ${lineHtml}
+      </div>
+      <div class="atl-content" ${isLast?'style="padding-bottom:0"':''}>
+        <div class="atl-ts">${s.ts}</div>
+        <div class="atl-title" ${titleStyle?`style="${titleStyle}"`:''}>${s.title}</div>
+        ${s.desc?`<div class="atl-desc" ${descStyle?`style="${descStyle}"`:''}>${s.desc}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectAlert(id){
+  const a=SOC_ALERTS[id]; if(!a) return;
+  curAlertId=id;
+
+  // highlight active conn item
+  ['M006','M004','M028'].forEach(mid=>{
+    const el=document.getElementById('conn-'+mid);
+    if(el) el.style.background=mid===id?'rgba(255,255,255,0.06)':'';
+  });
+
+  // update panel header
+  document.getElementById('inc-panel-sub').textContent=a.incId+' · Prioridade '+a.priority;
+  const badge=document.getElementById('inc-status-badge');
+  badge.textContent=a.statusLabel;
+  badge.style.background=a.statusBg; badge.style.borderColor=a.statusBorder; badge.style.color=a.statusClr;
+
+  // update incident detail
+  document.getElementById('inc-badge').textContent=a.badge;
+  document.getElementById('inc-title').textContent=a.title;
+  document.getElementById('inc-sub').textContent=a.desc;
+  document.getElementById('inc-detected').textContent=a.detected;
+  document.getElementById('inc-origin').textContent=a.origin;
+  document.getElementById('inc-targets').textContent=a.targets;
+
+  // update timeline
+  const steps=alertStepProgress[id]||a.steps;
+  document.getElementById('inc-timeline').innerHTML=renderTimeline(steps);
+}
+
+function acaoIncidente(acao){
+  const a=SOC_ALERTS[curAlertId]; if(!a) return;
+  const steps=JSON.parse(JSON.stringify(alertStepProgress[curAlertId]||a.steps));
+
+  if(acao==='resolver'){
+    steps.forEach(s=>s.state='done');
+    alertStepProgress[curAlertId]=steps;
+    const badge=document.getElementById('inc-status-badge');
+    badge.textContent='Resolvido'; badge.style.background='rgba(34,197,94,0.1)';
+    badge.style.borderColor='rgba(34,197,94,0.25)'; badge.style.color='var(--soc-green)';
+    document.getElementById('inc-timeline').innerHTML=renderTimeline(steps);
+    showToast('✓ Incidente '+SOC_ALERTS[curAlertId].incId+' marcado como resolvido');
+    return;
+  }
+
+  if(acao==='avancar'){
+    const curIdx=steps.findIndex(s=>s.state==='current');
+    if(curIdx>=0&&curIdx<steps.length-1){
+      steps[curIdx].state='done';
+      steps[curIdx+1].state='current';
+      if(steps[curIdx].ts==='Pendente'||steps[curIdx].ts.startsWith('Pend')){
+        const now=new Date();
+        steps[curIdx].ts=now.toTimeString().slice(0,5)+' · 09 Jul';
+      }
+      alertStepProgress[curAlertId]=steps;
+      document.getElementById('inc-timeline').innerHTML=renderTimeline(steps);
+      showToast('▶ Etapa avançada — '+steps[curIdx+1].title.slice(0,40)+'…');
+    } else {
+      showToast('Sem etapas pendentes para avançar');
+    }
+    return;
+  }
+
+  if(acao==='reconhecer'){
+    showToast('✓ Incidente reconhecido por Figueiredo A.');
+  }
+}
+
+function showToast(msg){
+  let t=document.getElementById('soc-toast');
+  if(!t){
+    t=document.createElement('div');
+    t.id='soc-toast';
+    t.style.cssText='position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#1e3a52;border:1px solid rgba(96,165,250,0.3);color:rgba(255,255,255,0.9);border-radius:8px;padding:9px 20px;font-size:12px;font-weight:600;font-family:Inter,sans-serif;z-index:9999;display:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.5)';
+    document.getElementById('_vp').appendChild(t);
+  }
+  t.textContent=msg; t.style.display='block';
+  clearTimeout(t._tid);
+  t._tid=setTimeout(()=>t.style.display='none',2600);
+}
+
+// init
+selectAlert('M006');
+</script>
 <script>
 !function(){
   var vp=document.getElementById('_vp');
